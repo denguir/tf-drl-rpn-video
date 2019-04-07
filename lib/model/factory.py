@@ -144,7 +144,7 @@ def init_rl_variables(sess):
     try:
       sess.run(var)
     except tf.errors.FailedPreconditionError:
-      print var
+      print(var)
       uninitialized_vars.append(var)
   if len(uninitialized_vars) == 0:
     print("\nNo variables needed initialization (all were instead loaded!)\n")
@@ -217,10 +217,10 @@ def do_hist_update(rl_input, cls_probs_uptonow, pred_bboxes_uptonow, keeps,
     for curr_bin_assignment in range(nms_prod):
       ctr_height = curr_bin_assignment % cfg.DRL_RPN.H_HIST
       ctr_width = curr_bin_assignment / cfg.DRL_RPN.W_HIST
-      rl_hist_hstart = ctr_height * rl_in_upsamp_height
-      rl_hist_hend = min((ctr_height + 1) * rl_in_upsamp_height, height)
-      rl_hist_wstart = ctr_width * rl_in_upsamp_width
-      rl_hist_wend = min((ctr_width + 1) * rl_in_upsamp_width, width)
+      rl_hist_hstart = int(ctr_height * rl_in_upsamp_height)
+      rl_hist_hend = int(min((ctr_height + 1) * rl_in_upsamp_height, height))
+      rl_hist_wstart = int(ctr_width * rl_in_upsamp_width)
+      rl_hist_wend = int(min((ctr_width + 1) * rl_in_upsamp_width, width))
       curr_cls_prob_vec = cls_history[curr_bin_assignment, :]\
                             [np.newaxis, np.newaxis, np.newaxis, :]
       rl_input_copy[:, rl_hist_hstart:rl_hist_hend,
@@ -737,7 +737,7 @@ def save_visualization(im_blob, im_shape, im_idx, obs_canvas, cls_probs,
   if show_all_steps:
     save_ctr = 0
     im_name = 'im' + str(im_idx + 1) + '_' + str(save_ctr) + '.jpg' 
-    plt.savefig(im_name)
+    plt.savefig('img-out/' + im_name)
 
   # Draw all fixation rectangles
   for i in range(obs_canvas.shape[2]):
@@ -769,7 +769,7 @@ def save_visualization(im_blob, im_shape, im_idx, obs_canvas, cls_probs,
     if show_all_steps:
       save_ctr += 1
       im_name = 'im' + str(im_idx + 1) + '_' + str(save_ctr) + '.jpg' 
-      plt.savefig(im_name)
+      plt.savefig('img-out/' + im_name)
 
     # Draw all detection boxes
     for j in range(len(names_and_coords)):
@@ -801,12 +801,12 @@ def save_visualization(im_blob, im_shape, im_idx, obs_canvas, cls_probs,
     if show_all_steps:
       save_ctr += 1
       im_name = 'im' + str(im_idx + 1) + '_' + str(save_ctr) + '.jpg' 
-      plt.savefig(im_name)
+      plt.savefig('img-out/' + im_name)
 
   # Final save / close of figure
   if ~show_all_steps:
     im_name = 'im' + str(im_idx + 1) + '.jpg' 
-    plt.savefig(im_name)
+    plt.savefig('img-out/' + im_name)
   plt.close()
 
   # Display success message

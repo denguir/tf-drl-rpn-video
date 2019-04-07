@@ -96,7 +96,12 @@ def test_net(sess, net, imdb, weights_filename, max_per_image=100, thresh=0.00):
     if gt_roidb is None:
       nbr_gts = None
     else:
-      nbr_gts = gt_roidb[i]['boxes'].shape[0]
+      try:
+        nbr_gts = gt_roidb[i]['boxes'].shape[0]
+      except:
+        # if pickle transforms pascal voc keys in bytes
+        nbr_gts = gt_roidb[i][b'boxes'].shape[0]
+
 
     # Detect!
     im = cv2.imread(imdb.image_path_at(i))

@@ -1,0 +1,23 @@
++ echo Logging output to experiments/logs/test/vgg16_paris_train_paris_val_.txt.2019-04-05_21-58-05
+Logging output to experiments/logs/test/vgg16_paris_train_paris_val_.txt.2019-04-05_21-58-05
++ case ${DATASET} in
++ WEIGHTS_PATH=/home/vador/Documents/project/AI/drl-rpn-tf/output-weights/drl-rpn-paris/output/vgg16_drl_rpn/paris_train/vgg16_drl_rpn_iter_1000.ckpt
++ [[ ! -z '' ]]
++ CUDA_VISIBLE_DEVICES=0
++ time python ./tools/test_net.py --imdb paris_val --model /home/vador/Documents/project/AI/drl-rpn-tf/output-weights/drl-rpn-paris/output/vgg16_drl_rpn/paris_train/vgg16_drl_rpn_iter_1000.ckpt --cfg experiments/cfgs/drl-rpn-vgg16.yml --net vgg16 --use_hist 1 --use_post 0 --nbr_fix 0 --set NBR_CLASSES 21 ANCHOR_SCALES '[4,8,16]' ANCHOR_RATIOS '[0.5,1,2]'
+Called with args:
+Namespace(cfg_file='experiments/cfgs/drl-rpn-vgg16.yml', comp_mode=False, imdb_name='paris_val', max_per_image=100, model='/home/vador/Documents/project/AI/drl-rpn-tf/output-weights/drl-rpn-paris/output/vgg16_drl_rpn/paris_train/vgg16_drl_rpn_iter_1000.ckpt', nbr_fix=0, net='vgg16', set_cfgs=['NBR_CLASSES', '21', 'ANCHOR_SCALES', '[4,8,16]', 'ANCHOR_RATIOS', '[0.5,1,2]'], tag='', use_hist=1, use_post=0)
+Error under config key: DRL_RPN_TEST
+Traceback (most recent call last):
+  File "./tools/test_net.py", line 75, in <module>
+    cfg_from_file(args.cfg_file)
+  File "/home/vador/Documents/project/AI/drl-rpn-tf/tools/../lib/model/config.py", line 443, in cfg_from_file
+    _merge_a_into_b(yaml_cfg, __C)
+  File "/home/vador/Documents/project/AI/drl-rpn-tf/tools/../lib/model/config.py", line 429, in _merge_a_into_b
+    _merge_a_into_b(a[k], b[k])
+  File "/home/vador/Documents/project/AI/drl-rpn-tf/tools/../lib/model/config.py", line 424, in _merge_a_into_b
+    type(v), k))
+ValueError: Type mismatch (<class 'int'> vs. <class 'float'>) for config key: BETA
+Command exited with non-zero status 1
+2.12user 0.37system 0:02.31elapsed 107%CPU (0avgtext+0avgdata 326856maxresident)k
+0inputs+24outputs (0major+93265minor)pagefaults 0swaps

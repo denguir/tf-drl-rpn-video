@@ -1,0 +1,884 @@
++ echo Logging output to experiments/logs/test/vgg16_paris_train_paris_val_.txt.2019-04-05_22-21-53
+Logging output to experiments/logs/test/vgg16_paris_train_paris_val_.txt.2019-04-05_22-21-53
++ case ${DATASET} in
++ WEIGHTS_PATH=/home/vador/Documents/project/AI/drl-rpn-tf/output-weights/drl-rpn-paris/output/vgg16_drl_rpn/paris_train/vgg16_drl_rpn_iter_1000.ckpt
++ [[ ! -z '' ]]
++ CUDA_VISIBLE_DEVICES=0
++ time python ./tools/test_net.py --imdb paris_val --model /home/vador/Documents/project/AI/drl-rpn-tf/output-weights/drl-rpn-paris/output/vgg16_drl_rpn/paris_train/vgg16_drl_rpn_iter_1000.ckpt --cfg experiments/cfgs/drl-rpn-vgg16.yml --net vgg16 --use_hist 1 --use_post 0 --nbr_fix 0 --set NBR_CLASSES 21 ANCHOR_SCALES '[4,8,16]' ANCHOR_RATIOS '[0.5,1,2]'
+Called with args:
+Namespace(cfg_file='experiments/cfgs/drl-rpn-vgg16.yml', comp_mode=False, imdb_name='paris_val', max_per_image=100, model='/home/vador/Documents/project/AI/drl-rpn-tf/output-weights/drl-rpn-paris/output/vgg16_drl_rpn/paris_train/vgg16_drl_rpn_iter_1000.ckpt', nbr_fix=0, net='vgg16', set_cfgs=['NBR_CLASSES', '21', 'ANCHOR_SCALES', '[4,8,16]', 'ANCHOR_RATIOS', '[0.5,1,2]'], tag='', use_hist=1, use_post=0)
+Using config:
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [4, 8, 16],
+ 'CLASS_NAMES': [],
+ 'COCO_TO_PASCAL': [0,
+                    5,
+                    2,
+                    15,
+                    9,
+                    40,
+                    6,
+                    3,
+                    16,
+                    57,
+                    20,
+                    61,
+                    17,
+                    18,
+                    4,
+                    1,
+                    59,
+                    19,
+                    58,
+                    7,
+                    63],
+ 'DATA_DIR': '/home/vador/Documents/project/AI/drl-rpn-tf/data',
+ 'DIMS_AUX': 39,
+ 'DIMS_BASE': 512,
+ 'DIMS_NONHIST': 530,
+ 'DIMS_TOT': 551,
+ 'DRL_RPN': {'H_FIXRECT': 0.25,
+             'H_HIST': 3,
+             'H_SCALE': 0.5,
+             'MAX_ITER_TRAJ': 13,
+             'MAX_ITER_TRAJ_FLT': 13.0,
+             'TOPK_OBJNESS': 0,
+             'USE_AGNO': False,
+             'USE_HIST': True,
+             'USE_POST': False,
+             'W_FIXRECT': 0.25,
+             'W_HIST': 3,
+             'W_SCALE': 0.5},
+ 'DRL_RPN_TEST': {'BETA': 0.05,
+                  'DO_VISUALIZE': False,
+                  'NBR_FIX': 0,
+                  'RANDOM_DONE': False,
+                  'RANDOM_FIX': False},
+ 'DRL_RPN_TRAIN': {'BATCH_SIZE': 50,
+                   'BETAS': [-1, 0.7],
+                   'DET_START': -1,
+                   'DISPLAY': 50,
+                   'GAMMA': 0.2,
+                   'IMG_START_IDX': -1,
+                   'IOU_THRESH': 0.5,
+                   'LEARNING_RATE': 2e-05,
+                   'MA_WEIGHT': 0.0005,
+                   'POST_BETAS': [0.05, 0.35],
+                   'POST_LR': 0.001,
+                   'POST_SS': [80000],
+                   'STEPSIZE': 90000,
+                   'USE_BL': True,
+                   'USE_FLIPPED': True,
+                   'USE_POST': 0},
+ 'EXP_DIR': 'vgg16_drl_rpn',
+ 'MATLAB': 'matlab',
+ 'MEANS_BBOX': array([0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]),
+ 'NBR_ANCHORS': 9,
+ 'NBR_CLASSES': 21,
+ 'PIXEL_MEANS': array([[[102.9801, 115.9465, 122.7717]]]),
+ 'POOLING_MODE': 'crop',
+ 'POOLING_SIZE': 7,
+ 'RNG_SEED': 3,
+ 'ROOT_DIR': '/home/vador/Documents/project/AI/drl-rpn-tf',
+ 'RPN_CHANNELS': 512,
+ 'STDS_BBOX': array([0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1,
+       0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1, 0.1,
+       0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2,
+       0.2, 0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2,
+       0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1,
+       0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1, 0.1,
+       0.2, 0.2, 0.1, 0.1, 0.2, 0.2]),
+ 'TEST': {'BBOX_REG': True,
+          'HAS_RPN': True,
+          'MAX_SIZE': 1000,
+          'MODE': 'nms',
+          'NMS': 0.3,
+          'PROPOSAL_METHOD': 'gt',
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000,
+          'RPN_TOP_N': 5000,
+          'SCALES': [600],
+          'SVM': False},
+ 'TRAIN': {'ASPECT_GROUPING': False,
+           'BATCH_SIZE': 128,
+           'BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'BBOX_NORMALIZE_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZE_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_NORMALIZE_TARGETS': True,
+           'BBOX_NORMALIZE_TARGETS_PRECOMPUTED': True,
+           'BBOX_REG': True,
+           'BBOX_THRESH': 0.5,
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'BIAS_DECAY': False,
+           'DISPLAY': 50,
+           'DOUBLE_BIAS': False,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'GAMMA': 0.1,
+           'HAS_RPN': True,
+           'IMS_PER_BATCH': 1,
+           'LEARNING_RATE': 0.00025,
+           'MAX_SIZE': 1000,
+           'MOMENTUM': 0.9,
+           'PROPOSAL_METHOD': 'gt',
+           'RPN_BATCHSIZE': 128,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000,
+           'SCALES': [600],
+           'SNAPSHOT_ITERS': 5000,
+           'SNAPSHOT_KEPT': 3,
+           'SNAPSHOT_PREFIX': 'vgg16_drl_rpn',
+           'STEPSIZE': [80000],
+           'SUMMARY_INTERVAL': 180,
+           'TRUNCATED': False,
+           'USE_ALL_GT': True,
+           'USE_FLIPPED': True,
+           'USE_GT': False,
+           'WEIGHT_DECAY': 0.0001},
+ 'USE_GPU_NMS': True,
+ 'VIS_DIR': '/home/vador/Documents/project/AI/drl-rpn-tf/img-out'}
+paris_val
+2019-04-05 22:22:04.662155: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcuda.so.1
+2019-04-05 22:22:04.791490: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:1009] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2019-04-05 22:22:04.812157: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x56509ad2b8c0 executing computations on platform CUDA. Devices:
+2019-04-05 22:22:04.812194: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): GeForce RTX 2070, Compute Capability 7.5
+2019-04-05 22:22:04.837160: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 3392290000 Hz
+2019-04-05 22:22:04.837568: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x56509ade1340 executing computations on platform Host. Devices:
+2019-04-05 22:22:04.837615: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): <undefined>, <undefined>
+2019-04-05 22:22:04.838661: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1551] Found device 0 with properties: 
+name: GeForce RTX 2070 major: 7 minor: 5 memoryClockRate(GHz): 1.62
+pciBusID: 0000:01:00.0
+totalMemory: 7.76GiB freeMemory: 7.14GiB
+2019-04-05 22:22:04.838696: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1674] Adding visible gpu devices: 0
+2019-04-05 22:22:04.838791: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcudart.so.10.0
+2019-04-05 22:22:04.840381: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1082] Device interconnect StreamExecutor with strength 1 edge matrix:
+2019-04-05 22:22:04.840405: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1088]      0 
+2019-04-05 22:22:04.840416: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1101] 0:   N 
+2019-04-05 22:22:04.841068: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1222] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 7155 MB memory) -> physical GPU (device: 0, name: GeForce RTX 2070, pci bus id: 0000:01:00.0, compute capability: 7.5)
+WARNING: Logging before flag parsing goes to stderr.
+W0405 22:22:05.058134 139728618698560 deprecation.py:323] From /home/vador/Documents/project/AI/drl-rpn-tf/tools/../lib/nets/network.py:222: to_int32 (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use `tf.cast` instead.
+W0405 22:22:05.062565 139728618698560 deprecation.py:323] From /home/vador/Documents/project/AI/drl-rpn-tf/tools/../lib/nets/network.py:231: py_func (from tensorflow.python.ops.script_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+tf.py_func is deprecated in TF V2. Instead, there are two
+    options available in V2.
+    - tf.py_function takes a python function which manipulates tf eager
+    tensors instead of numpy arrays. It's easy to convert a tf eager tensor to
+    an ndarray (just call tensor.numpy()) but having access to eager tensors
+    means `tf.py_function`s can use accelerators such as GPUs as well as
+    being differentiable using a gradient tape.
+    - tf.numpy_function maintains the semantics of the deprecated tf.py_func
+    (it is not differentiable, and manipulates numpy arrays). It drops the
+    stateful argument making all functions stateful.
+    
+W0405 22:22:05.141801 139728618698560 deprecation.py:323] From /home/vador/Documents/project/AI/drl-rpn-tf/tools/../lib/nets/network.py:128: to_float (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use `tf.cast` instead.
+W0405 22:22:05.157766 139728618698560 deprecation.py:506] From /home/vador/Documents/project/AI/drl-rpn-tf/tools/../lib/nets/network.py:141: calling crop_and_resize_v1 (from tensorflow.python.ops.image_ops_impl) with box_ind is deprecated and will be removed in a future version.
+Instructions for updating:
+box_ind is deprecated, use box_indices instead
+W0405 22:22:05.160830 139728618698560 deprecation.py:323] From /home/vador/anaconda3/envs/tf10/lib/python3.6/site-packages/tensorflow/contrib/layers/python/layers/layers.py:1624: flatten (from tensorflow.python.layers.core) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use keras.layers.flatten instead.
+Loading model check point from /home/vador/Documents/project/AI/drl-rpn-tf/output-weights/drl-rpn-paris/output/vgg16_drl_rpn/paris_train/vgg16_drl_rpn_iter_1000.ckpt
+W0405 22:22:05.513303 139728618698560 deprecation.py:323] From /home/vador/anaconda3/envs/tf10/lib/python3.6/site-packages/tensorflow/python/training/saver.py:1276: checkpoint_exists (from tensorflow.python.training.checkpoint_management) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use standard file APIs to check for files with this prefix.
+Loaded.
+paris_val gt roidb loaded from /home/vador/Documents/project/AI/drl-rpn-tf/data/cache/paris_val_gt_roidb.pkl
+2019-04-05 22:22:06.741211: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcudnn.so.7
+2019-04-05 22:22:08.156866: E tensorflow/stream_executor/cuda/cuda_driver.cc:835] failed to allocate 3.86G (4147013120 bytes) from device: CUDA_ERROR_OUT_OF_MEMORY: out of memory
+2019-04-05 22:22:09.172205: E tensorflow/core/grappler/optimizers/dependency_optimizer.cc:697] Iteration = 0, topological sort failed with message: The graph couldn't be sorted in topological order.
+2019-04-05 22:22:09.173296: E tensorflow/core/grappler/optimizers/dependency_optimizer.cc:697] Iteration = 1, topological sort failed with message: The graph couldn't be sorted in topological order.
+2019-04-05 22:22:09.201867: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcublas.so.10.0
+Mean #fix/img (tot, MA):    (11.000000, 0.005500)
+Mean exploration (tot, MA): (0.504211, 0.000252)
+
+im_detect: 1/150 3.411s 0.132s
+Mean #fix/img (tot, MA):    (10.000000, 0.009997)
+Mean exploration (tot, MA): (0.462105, 0.000462)
+
+im_detect: 2/150 1.947s 0.115s
+Mean #fix/img (tot, MA):    (10.000000, 0.014992)
+Mean exploration (tot, MA): (0.460000, 0.000690)
+
+im_detect: 3/150 1.469s 0.113s
+Mean #fix/img (tot, MA):    (10.000000, 0.019985)
+Mean exploration (tot, MA): (0.468421, 0.000936)
+
+im_detect: 4/150 1.238s 0.115s
+Mean #fix/img (tot, MA):    (9.800000, 0.024475)
+Mean exploration (tot, MA): (0.465474, 0.001163)
+
+im_detect: 5/150 1.090s 0.114s
+Mean #fix/img (tot, MA):    (9.833334, 0.029463)
+Mean exploration (tot, MA): (0.467719, 0.001401)
+
+im_detect: 6/150 0.996s 0.114s
+Mean #fix/img (tot, MA):    (9.571429, 0.033448)
+Mean exploration (tot, MA): (0.452180, 0.001580)
+
+im_detect: 7/150 0.913s 0.109s
+Mean #fix/img (tot, MA):    (9.500001, 0.037931)
+Mean exploration (tot, MA): (0.449342, 0.001794)
+
+im_detect: 8/150 0.858s 0.108s
+Mean #fix/img (tot, MA):    (9.333334, 0.041912)
+Mean exploration (tot, MA): (0.441053, 0.001981)
+
+im_detect: 9/150 0.809s 0.105s
+Mean #fix/img (tot, MA):    (9.400001, 0.046891)
+Mean exploration (tot, MA): (0.444421, 0.002217)
+
+im_detect: 10/150 0.781s 0.107s
+Mean #fix/img (tot, MA):    (9.545455, 0.052368)
+Mean exploration (tot, MA): (0.450048, 0.002469)
+
+im_detect: 11/150 0.761s 0.109s
+Mean #fix/img (tot, MA):    (9.333334, 0.055842)
+Mean exploration (tot, MA): (0.445175, 0.002664)
+
+im_detect: 12/150 0.733s 0.108s
+Mean #fix/img (tot, MA):    (9.307693, 0.060314)
+Mean exploration (tot, MA): (0.444292, 0.002879)
+
+im_detect: 13/150 0.714s 0.108s
+Mean #fix/img (tot, MA):    (9.357143, 0.065283)
+Mean exploration (tot, MA): (0.441654, 0.003081)
+
+im_detect: 14/150 0.696s 0.107s
+Mean #fix/img (tot, MA):    (9.400001, 0.070251)
+Mean exploration (tot, MA): (0.438526, 0.003277)
+
+im_detect: 15/150 0.680s 0.106s
+Mean #fix/img (tot, MA):    (9.437501, 0.075216)
+Mean exploration (tot, MA): (0.435789, 0.003473)
+
+im_detect: 16/150 0.665s 0.105s
+Mean #fix/img (tot, MA):    (9.411766, 0.079678)
+Mean exploration (tot, MA): (0.436037, 0.003691)
+
+im_detect: 17/150 0.655s 0.105s
+Mean #fix/img (tot, MA):    (9.388890, 0.084138)
+Mean exploration (tot, MA): (0.437076, 0.003917)
+
+im_detect: 18/150 0.647s 0.106s
+Mean #fix/img (tot, MA):    (9.421054, 0.089096)
+Mean exploration (tot, MA): (0.440554, 0.004166)
+
+im_detect: 19/150 0.642s 0.107s
+Mean #fix/img (tot, MA):    (9.450001, 0.094052)
+Mean exploration (tot, MA): (0.442579, 0.004405)
+
+im_detect: 20/150 0.636s 0.108s
+Mean #fix/img (tot, MA):    (9.571429, 0.100005)
+Mean exploration (tot, MA): (0.443208, 0.004630)
+
+im_detect: 21/150 0.631s 0.108s
+Mean #fix/img (tot, MA):    (9.590910, 0.104955)
+Mean exploration (tot, MA): (0.444354, 0.004862)
+
+im_detect: 22/150 0.627s 0.109s
+Mean #fix/img (tot, MA):    (9.608697, 0.109902)
+Mean exploration (tot, MA): (0.447368, 0.005117)
+
+im_detect: 23/150 0.624s 0.110s
+Mean #fix/img (tot, MA):    (9.666668, 0.115347)
+Mean exploration (tot, MA): (0.450833, 0.005379)
+
+im_detect: 24/150 0.622s 0.111s
+Mean #fix/img (tot, MA):    (9.720001, 0.120789)
+Mean exploration (tot, MA): (0.453642, 0.005637)
+
+im_detect: 25/150 0.620s 0.112s
+Mean #fix/img (tot, MA):    (9.769232, 0.126229)
+Mean exploration (tot, MA): (0.455425, 0.005884)
+
+im_detect: 26/150 0.617s 0.113s
+Mean #fix/img (tot, MA):    (9.777779, 0.131166)
+Mean exploration (tot, MA): (0.457037, 0.006131)
+
+im_detect: 27/150 0.615s 0.114s
+Mean #fix/img (tot, MA):    (9.821429, 0.136600)
+Mean exploration (tot, MA): (0.458797, 0.006381)
+
+im_detect: 28/150 0.614s 0.114s
+Mean #fix/img (tot, MA):    (9.896552, 0.142532)
+Mean exploration (tot, MA): (0.461089, 0.006641)
+
+im_detect: 29/150 0.613s 0.115s
+Mean #fix/img (tot, MA):    (9.966667, 0.148461)
+Mean exploration (tot, MA): (0.463579, 0.006905)
+
+im_detect: 30/150 0.612s 0.116s
+Mean #fix/img (tot, MA):    (10.000001, 0.153887)
+Mean exploration (tot, MA): (0.465433, 0.007162)
+
+im_detect: 31/150 0.611s 0.117s
+Mean #fix/img (tot, MA):    (10.000001, 0.158810)
+Mean exploration (tot, MA): (0.463289, 0.007357)
+
+im_detect: 32/150 0.606s 0.116s
+Mean #fix/img (tot, MA):    (10.060607, 0.164730)
+Mean exploration (tot, MA): (0.465933, 0.007629)
+
+im_detect: 33/150 0.606s 0.117s
+Mean #fix/img (tot, MA):    (10.058825, 0.169648)
+Mean exploration (tot, MA): (0.467183, 0.007879)
+
+im_detect: 34/150 0.605s 0.118s
+Mean #fix/img (tot, MA):    (10.028572, 0.174063)
+Mean exploration (tot, MA): (0.467489, 0.008114)
+
+im_detect: 35/150 0.602s 0.118s
+Mean #fix/img (tot, MA):    (10.083334, 0.179976)
+Mean exploration (tot, MA): (0.468333, 0.008359)
+
+im_detect: 36/150 0.601s 0.118s
+Mean #fix/img (tot, MA):    (10.108109, 0.185386)
+Mean exploration (tot, MA): (0.467937, 0.008582)
+
+im_detect: 37/150 0.599s 0.118s
+Mean #fix/img (tot, MA):    (10.078948, 0.189793)
+Mean exploration (tot, MA): (0.466288, 0.008780)
+
+im_detect: 38/150 0.596s 0.117s
+Mean #fix/img (tot, MA):    (10.076923, 0.194698)
+Mean exploration (tot, MA): (0.466397, 0.009011)
+
+im_detect: 39/150 0.594s 0.117s
+Mean #fix/img (tot, MA):    (10.050000, 0.199101)
+Mean exploration (tot, MA): (0.464921, 0.009210)
+
+im_detect: 40/150 0.591s 0.117s
+Mean #fix/img (tot, MA):    (10.073171, 0.204502)
+Mean exploration (tot, MA): (0.466444, 0.009469)
+
+im_detect: 41/150 0.591s 0.117s
+Mean #fix/img (tot, MA):    (10.047619, 0.208899)
+Mean exploration (tot, MA): (0.465739, 0.009683)
+
+im_detect: 42/150 0.588s 0.117s
+Mean #fix/img (tot, MA):    (10.023255, 0.213295)
+Mean exploration (tot, MA): (0.465900, 0.009914)
+
+im_detect: 43/150 0.587s 0.117s
+Mean #fix/img (tot, MA):    (10.045454, 0.218688)
+Mean exploration (tot, MA): (0.467321, 0.010173)
+
+im_detect: 44/150 0.587s 0.117s
+Mean #fix/img (tot, MA):    (10.022222, 0.223079)
+Mean exploration (tot, MA): (0.466316, 0.010379)
+
+im_detect: 45/150 0.584s 0.117s
+Mean #fix/img (tot, MA):    (10.021738, 0.227967)
+Mean exploration (tot, MA): (0.467025, 0.010624)
+
+im_detect: 46/150 0.583s 0.117s
+Mean #fix/img (tot, MA):    (9.999999, 0.232353)
+Mean exploration (tot, MA): (0.466473, 0.010839)
+
+im_detect: 47/150 0.582s 0.117s
+Mean #fix/img (tot, MA):    (9.999999, 0.237237)
+Mean exploration (tot, MA): (0.467193, 0.011084)
+
+im_detect: 48/150 0.581s 0.117s
+Mean #fix/img (tot, MA):    (9.979591, 0.241619)
+Mean exploration (tot, MA): (0.466531, 0.011296)
+
+im_detect: 49/150 0.579s 0.117s
+Mean #fix/img (tot, MA):    (10.000000, 0.246998)
+Mean exploration (tot, MA): (0.467453, 0.011547)
+
+im_detect: 50/150 0.579s 0.117s
+Mean #fix/img (tot, MA):    (10.019608, 0.252374)
+Mean exploration (tot, MA): (0.468504, 0.011801)
+
+im_detect: 51/150 0.579s 0.118s
+Mean #fix/img (tot, MA):    (10.019231, 0.257248)
+Mean exploration (tot, MA): (0.469211, 0.012048)
+
+im_detect: 52/150 0.578s 0.118s
+Mean #fix/img (tot, MA):    (10.018868, 0.262119)
+Mean exploration (tot, MA): (0.469851, 0.012294)
+
+im_detect: 53/150 0.578s 0.118s
+Mean #fix/img (tot, MA):    (10.037038, 0.267488)
+Mean exploration (tot, MA): (0.470058, 0.012528)
+
+im_detect: 54/150 0.577s 0.118s
+Mean #fix/img (tot, MA):    (10.054546, 0.272855)
+Mean exploration (tot, MA): (0.471388, 0.012793)
+
+im_detect: 55/150 0.578s 0.119s
+Mean #fix/img (tot, MA):    (10.053573, 0.277718)
+Mean exploration (tot, MA): (0.472143, 0.013044)
+
+im_detect: 56/150 0.577s 0.119s
+Mean #fix/img (tot, MA):    (10.070177, 0.283079)
+Mean exploration (tot, MA): (0.472188, 0.013275)
+
+im_detect: 57/150 0.577s 0.119s
+Mean #fix/img (tot, MA):    (10.068967, 0.287938)
+Mean exploration (tot, MA): (0.471289, 0.013478)
+
+im_detect: 58/150 0.575s 0.119s
+Mean #fix/img (tot, MA):    (10.067798, 0.292794)
+Mean exploration (tot, MA): (0.472043, 0.013729)
+
+im_detect: 59/150 0.575s 0.119s
+Mean #fix/img (tot, MA):    (10.066668, 0.297647)
+Mean exploration (tot, MA): (0.472632, 0.013976)
+
+im_detect: 60/150 0.575s 0.119s
+Mean #fix/img (tot, MA):    (10.065575, 0.302499)
+Mean exploration (tot, MA): (0.472563, 0.014203)
+
+im_detect: 61/150 0.574s 0.119s
+Mean #fix/img (tot, MA):    (10.064517, 0.307347)
+Mean exploration (tot, MA): (0.472496, 0.014430)
+
+im_detect: 62/150 0.573s 0.119s
+Mean #fix/img (tot, MA):    (10.063493, 0.312194)
+Mean exploration (tot, MA): (0.472331, 0.014654)
+
+im_detect: 63/150 0.572s 0.119s
+Mean #fix/img (tot, MA):    (10.062501, 0.317038)
+Mean exploration (tot, MA): (0.472401, 0.014885)
+
+im_detect: 64/150 0.572s 0.119s
+Mean #fix/img (tot, MA):    (10.061540, 0.321879)
+Mean exploration (tot, MA): (0.473036, 0.015135)
+
+im_detect: 65/150 0.572s 0.120s
+Mean #fix/img (tot, MA):    (10.060607, 0.326718)
+Mean exploration (tot, MA): (0.473461, 0.015377)
+
+im_detect: 66/150 0.572s 0.120s
+Mean #fix/img (tot, MA):    (10.059702, 0.331555)
+Mean exploration (tot, MA): (0.473873, 0.015620)
+
+im_detect: 67/150 0.571s 0.120s
+Mean #fix/img (tot, MA):    (10.073530, 0.336889)
+Mean exploration (tot, MA): (0.474474, 0.015870)
+
+im_detect: 68/150 0.571s 0.120s
+Mean #fix/img (tot, MA):    (10.057972, 0.341221)
+Mean exploration (tot, MA): (0.474172, 0.016089)
+
+im_detect: 69/150 0.570s 0.120s
+Mean #fix/img (tot, MA):    (10.057144, 0.346050)
+Mean exploration (tot, MA): (0.474211, 0.016319)
+
+im_detect: 70/150 0.570s 0.120s
+Mean #fix/img (tot, MA):    (10.056339, 0.350877)
+Mean exploration (tot, MA): (0.474010, 0.016541)
+
+im_detect: 71/150 0.569s 0.120s
+Mean #fix/img (tot, MA):    (10.055557, 0.355701)
+Mean exploration (tot, MA): (0.474561, 0.016790)
+
+im_detect: 72/150 0.569s 0.120s
+Mean #fix/img (tot, MA):    (10.068495, 0.361024)
+Mean exploration (tot, MA): (0.475415, 0.017050)
+
+im_detect: 73/150 0.569s 0.120s
+Mean #fix/img (tot, MA):    (10.081082, 0.366343)
+Mean exploration (tot, MA): (0.475946, 0.017298)
+
+im_detect: 74/150 0.569s 0.121s
+Mean #fix/img (tot, MA):    (10.093334, 0.371660)
+Mean exploration (tot, MA): (0.475649, 0.017517)
+
+im_detect: 75/150 0.569s 0.120s
+Mean #fix/img (tot, MA):    (10.092106, 0.376474)
+Mean exploration (tot, MA): (0.476150, 0.017765)
+
+im_detect: 76/150 0.568s 0.121s
+Mean #fix/img (tot, MA):    (10.103897, 0.381786)
+Mean exploration (tot, MA): (0.476965, 0.018025)
+
+im_detect: 77/150 0.569s 0.121s
+Mean #fix/img (tot, MA):    (10.089745, 0.386095)
+Mean exploration (tot, MA): (0.476397, 0.018233)
+
+im_detect: 78/150 0.568s 0.121s
+Mean #fix/img (tot, MA):    (10.101267, 0.391402)
+Mean exploration (tot, MA): (0.477015, 0.018486)
+
+im_detect: 79/150 0.568s 0.121s
+Mean #fix/img (tot, MA):    (10.100001, 0.396206)
+Mean exploration (tot, MA): (0.477395, 0.018731)
+
+im_detect: 80/150 0.568s 0.121s
+Mean #fix/img (tot, MA):    (10.086421, 0.400508)
+Mean exploration (tot, MA): (0.477037, 0.018945)
+
+im_detect: 81/150 0.567s 0.121s
+Mean #fix/img (tot, MA):    (10.000001, 0.401808)
+Mean exploration (tot, MA): (0.473273, 0.019020)
+
+im_detect: 82/150 0.563s 0.120s
+Mean #fix/img (tot, MA):    (9.987953, 0.406107)
+Mean exploration (tot, MA): (0.473202, 0.019244)
+
+im_detect: 83/150 0.562s 0.120s
+Mean #fix/img (tot, MA):    (9.988096, 0.410904)
+Mean exploration (tot, MA): (0.473659, 0.019491)
+
+im_detect: 84/150 0.562s 0.120s
+Mean #fix/img (tot, MA):    (9.952942, 0.414198)
+Mean exploration (tot, MA): (0.471975, 0.019646)
+
+im_detect: 85/150 0.560s 0.120s
+Mean #fix/img (tot, MA):    (9.930233, 0.417991)
+Mean exploration (tot, MA): (0.471603, 0.019856)
+
+im_detect: 86/150 0.560s 0.119s
+Mean #fix/img (tot, MA):    (9.942529, 0.423282)
+Mean exploration (tot, MA): (0.471821, 0.020092)
+
+im_detect: 87/150 0.559s 0.119s
+Mean #fix/img (tot, MA):    (9.943182, 0.428071)
+Mean exploration (tot, MA): (0.471962, 0.020324)
+
+im_detect: 88/150 0.559s 0.119s
+Mean #fix/img (tot, MA):    (9.932585, 0.432357)
+Mean exploration (tot, MA): (0.471685, 0.020537)
+
+im_detect: 89/150 0.559s 0.119s
+Mean #fix/img (tot, MA):    (9.933333, 0.437141)
+Mean exploration (tot, MA): (0.472526, 0.020801)
+
+im_detect: 90/150 0.559s 0.120s
+Mean #fix/img (tot, MA):    (9.923077, 0.441422)
+Mean exploration (tot, MA): (0.472481, 0.021024)
+
+im_detect: 91/150 0.559s 0.120s
+Mean #fix/img (tot, MA):    (9.934782, 0.446701)
+Mean exploration (tot, MA): (0.473307, 0.021288)
+
+im_detect: 92/150 0.559s 0.120s
+Mean #fix/img (tot, MA):    (9.935483, 0.451478)
+Mean exploration (tot, MA): (0.473560, 0.021526)
+
+im_detect: 93/150 0.559s 0.120s
+Mean #fix/img (tot, MA):    (9.946808, 0.456752)
+Mean exploration (tot, MA): (0.473796, 0.021763)
+
+im_detect: 94/150 0.559s 0.120s
+Mean #fix/img (tot, MA):    (9.968420, 0.462524)
+Mean exploration (tot, MA): (0.474726, 0.022033)
+
+im_detect: 95/150 0.560s 0.121s
+Mean #fix/img (tot, MA):    (9.958332, 0.466793)
+Mean exploration (tot, MA): (0.474419, 0.022245)
+
+im_detect: 96/150 0.559s 0.120s
+Mean #fix/img (tot, MA):    (9.948452, 0.471059)
+Mean exploration (tot, MA): (0.474411, 0.022470)
+
+im_detect: 97/150 0.559s 0.120s
+Mean #fix/img (tot, MA):    (9.938774, 0.475324)
+Mean exploration (tot, MA): (0.474232, 0.022688)
+
+im_detect: 98/150 0.558s 0.120s
+Mean #fix/img (tot, MA):    (9.929292, 0.479586)
+Mean exploration (tot, MA): (0.474056, 0.022905)
+
+im_detect: 99/150 0.558s 0.120s
+Mean #fix/img (tot, MA):    (9.929998, 0.484346)
+Mean exploration (tot, MA): (0.473926, 0.023124)
+
+im_detect: 100/150 0.557s 0.120s
+Mean #fix/img (tot, MA):    (9.930692, 0.489104)
+Mean exploration (tot, MA): (0.474070, 0.023356)
+
+im_detect: 101/150 0.557s 0.120s
+Mean #fix/img (tot, MA):    (9.921567, 0.493359)
+Mean exploration (tot, MA): (0.473808, 0.023568)
+
+im_detect: 102/150 0.556s 0.120s
+Mean #fix/img (tot, MA):    (9.912620, 0.497613)
+Mean exploration (tot, MA): (0.473562, 0.023781)
+
+im_detect: 103/150 0.556s 0.120s
+Mean #fix/img (tot, MA):    (9.913460, 0.502364)
+Mean exploration (tot, MA): (0.474028, 0.024030)
+
+im_detect: 104/150 0.556s 0.120s
+Mean #fix/img (tot, MA):    (9.904760, 0.506613)
+Mean exploration (tot, MA): (0.473985, 0.024253)
+
+im_detect: 105/150 0.556s 0.120s
+Mean #fix/img (tot, MA):    (9.886791, 0.510359)
+Mean exploration (tot, MA): (0.473029, 0.024427)
+
+im_detect: 106/150 0.555s 0.120s
+Mean #fix/img (tot, MA):    (9.887849, 0.515104)
+Mean exploration (tot, MA): (0.473556, 0.024679)
+
+im_detect: 107/150 0.555s 0.120s
+Mean #fix/img (tot, MA):    (9.879628, 0.519347)
+Mean exploration (tot, MA): (0.473275, 0.024889)
+
+im_detect: 108/150 0.554s 0.120s
+Mean #fix/img (tot, MA):    (9.871558, 0.523587)
+Mean exploration (tot, MA): (0.473337, 0.025116)
+
+im_detect: 109/150 0.554s 0.120s
+Mean #fix/img (tot, MA):    (9.863635, 0.527825)
+Mean exploration (tot, MA): (0.473263, 0.025336)
+
+im_detect: 110/150 0.554s 0.120s
+Mean #fix/img (tot, MA):    (9.855855, 0.532061)
+Mean exploration (tot, MA): (0.473106, 0.025552)
+
+im_detect: 111/150 0.553s 0.120s
+Mean #fix/img (tot, MA):    (9.848213, 0.536295)
+Mean exploration (tot, MA): (0.472791, 0.025758)
+
+im_detect: 112/150 0.553s 0.120s
+Mean #fix/img (tot, MA):    (9.849556, 0.541027)
+Mean exploration (tot, MA): (0.472809, 0.025982)
+
+im_detect: 113/150 0.553s 0.120s
+Mean #fix/img (tot, MA):    (9.842104, 0.545257)
+Mean exploration (tot, MA): (0.472862, 0.026209)
+
+im_detect: 114/150 0.552s 0.120s
+Mean #fix/img (tot, MA):    (9.834782, 0.549484)
+Mean exploration (tot, MA): (0.472686, 0.026422)
+
+im_detect: 115/150 0.552s 0.120s
+Mean #fix/img (tot, MA):    (9.827585, 0.553709)
+Mean exploration (tot, MA): (0.472160, 0.026615)
+
+im_detect: 116/150 0.551s 0.119s
+Mean #fix/img (tot, MA):    (9.820512, 0.557932)
+Mean exploration (tot, MA): (0.471975, 0.026826)
+
+im_detect: 117/150 0.551s 0.119s
+Mean #fix/img (tot, MA):    (9.822033, 0.562653)
+Mean exploration (tot, MA): (0.471989, 0.027050)
+
+im_detect: 118/150 0.551s 0.119s
+Mean #fix/img (tot, MA):    (9.823528, 0.567372)
+Mean exploration (tot, MA): (0.471924, 0.027268)
+
+im_detect: 119/150 0.550s 0.119s
+Mean #fix/img (tot, MA):    (9.816666, 0.571588)
+Mean exploration (tot, MA): (0.471965, 0.027493)
+
+im_detect: 120/150 0.550s 0.119s
+Mean #fix/img (tot, MA):    (9.818181, 0.576303)
+Mean exploration (tot, MA): (0.472144, 0.027726)
+
+im_detect: 121/150 0.550s 0.119s
+Mean #fix/img (tot, MA):    (9.819672, 0.581014)
+Mean exploration (tot, MA): (0.472157, 0.027949)
+
+im_detect: 122/150 0.550s 0.119s
+Mean #fix/img (tot, MA):    (9.804877, 0.584724)
+Mean exploration (tot, MA): (0.471502, 0.028131)
+
+im_detect: 123/150 0.549s 0.119s
+Mean #fix/img (tot, MA):    (9.806451, 0.589432)
+Mean exploration (tot, MA): (0.471392, 0.028346)
+
+im_detect: 124/150 0.549s 0.119s
+Mean #fix/img (tot, MA):    (9.808000, 0.594137)
+Mean exploration (tot, MA): (0.471326, 0.028563)
+
+im_detect: 125/150 0.549s 0.119s
+Mean #fix/img (tot, MA):    (9.801587, 0.598340)
+Mean exploration (tot, MA): (0.471145, 0.028773)
+
+im_detect: 126/150 0.548s 0.119s
+Mean #fix/img (tot, MA):    (9.795276, 0.602541)
+Mean exploration (tot, MA): (0.471090, 0.028991)
+
+im_detect: 127/150 0.548s 0.119s
+Mean #fix/img (tot, MA):    (9.789062, 0.606739)
+Mean exploration (tot, MA): (0.471053, 0.029210)
+
+im_detect: 128/150 0.548s 0.119s
+Mean #fix/img (tot, MA):    (9.775194, 0.610436)
+Mean exploration (tot, MA): (0.470673, 0.029406)
+
+im_detect: 129/150 0.547s 0.119s
+Mean #fix/img (tot, MA):    (9.769231, 0.614631)
+Mean exploration (tot, MA): (0.470826, 0.029637)
+
+im_detect: 130/150 0.547s 0.119s
+Mean #fix/img (tot, MA):    (9.763359, 0.618823)
+Mean exploration (tot, MA): (0.470896, 0.029862)
+
+im_detect: 131/150 0.547s 0.119s
+Mean #fix/img (tot, MA):    (9.757576, 0.623014)
+Mean exploration (tot, MA): (0.470638, 0.030065)
+
+im_detect: 132/150 0.547s 0.119s
+Mean #fix/img (tot, MA):    (9.759398, 0.627703)
+Mean exploration (tot, MA): (0.470613, 0.030284)
+
+im_detect: 133/150 0.547s 0.119s
+Mean #fix/img (tot, MA):    (9.746268, 0.631389)
+Mean exploration (tot, MA): (0.470267, 0.030481)
+
+im_detect: 134/150 0.546s 0.119s
+Mean #fix/img (tot, MA):    (9.733333, 0.635073)
+Mean exploration (tot, MA): (0.470043, 0.030686)
+
+im_detect: 135/150 0.546s 0.119s
+Mean #fix/img (tot, MA):    (9.727941, 0.639255)
+Mean exploration (tot, MA): (0.470139, 0.030912)
+
+im_detect: 136/150 0.545s 0.119s
+Mean #fix/img (tot, MA):    (9.722627, 0.643436)
+Mean exploration (tot, MA): (0.470127, 0.031131)
+
+im_detect: 137/150 0.545s 0.119s
+Mean #fix/img (tot, MA):    (9.731883, 0.648614)
+Mean exploration (tot, MA): (0.470618, 0.031384)
+
+im_detect: 138/150 0.546s 0.119s
+Mean #fix/img (tot, MA):    (9.719423, 0.652290)
+Mean exploration (tot, MA): (0.470231, 0.031577)
+
+im_detect: 139/150 0.545s 0.119s
+Mean #fix/img (tot, MA):    (9.714285, 0.656464)
+Mean exploration (tot, MA): (0.470241, 0.031797)
+
+im_detect: 140/150 0.545s 0.119s
+Mean #fix/img (tot, MA):    (9.709219, 0.660635)
+Mean exploration (tot, MA): (0.470250, 0.032017)
+
+im_detect: 141/150 0.545s 0.119s
+Mean #fix/img (tot, MA):    (9.711267, 0.665305)
+Mean exploration (tot, MA): (0.470133, 0.032228)
+
+im_detect: 142/150 0.544s 0.119s
+Mean #fix/img (tot, MA):    (9.713285, 0.669972)
+Mean exploration (tot, MA): (0.470276, 0.032457)
+
+im_detect: 143/150 0.544s 0.119s
+Mean #fix/img (tot, MA):    (9.715277, 0.674637)
+Mean exploration (tot, MA): (0.470241, 0.032673)
+
+im_detect: 144/150 0.544s 0.119s
+Mean #fix/img (tot, MA):    (9.710343, 0.678800)
+Mean exploration (tot, MA): (0.470279, 0.032895)
+
+im_detect: 145/150 0.544s 0.119s
+Mean #fix/img (tot, MA):    (9.712327, 0.683461)
+Mean exploration (tot, MA): (0.470339, 0.033118)
+
+im_detect: 146/150 0.544s 0.119s
+Mean #fix/img (tot, MA):    (9.714284, 0.688119)
+Mean exploration (tot, MA): (0.470426, 0.033343)
+
+im_detect: 147/150 0.544s 0.119s
+Mean #fix/img (tot, MA):    (9.709457, 0.692275)
+Mean exploration (tot, MA): (0.470306, 0.033552)
+
+im_detect: 148/150 0.544s 0.119s
+Mean #fix/img (tot, MA):    (9.711408, 0.696929)
+Mean exploration (tot, MA): (0.470385, 0.033777)
+
+im_detect: 149/150 0.544s 0.119s
+Mean #fix/img (tot, MA):    (9.699998, 0.700580)
+Mean exploration (tot, MA): (0.470211, 0.033982)
+
+im_detect: 150/150 0.543s 0.119s
+Evaluating detections
+Writing aeroplane Paris results file
+Writing bicycle Paris results file
+Writing bird Paris results file
+Writing boat Paris results file
+Writing bottle Paris results file
+Writing bus Paris results file
+Writing car Paris results file
+Writing cat Paris results file
+Writing chair Paris results file
+Writing cow Paris results file
+Writing diningtable Paris results file
+Writing dog Paris results file
+Writing horse Paris results file
+Writing motorbike Paris results file
+Writing person Paris results file
+Writing pottedplant Paris results file
+Writing sheep Paris results file
+Writing sofa Paris results file
+Writing train Paris results file
+Writing tvmonitor Paris results file
+AP for aeroplane = 0.0000
+AP for bicycle = 0.0000
+AP for bird = 0.0000
+AP for boat = 0.0000
+/home/vador/Documents/project/AI/drl-rpn-tf/tools/../lib/datasets/paris_eval.py:221: RuntimeWarning: invalid value encountered in true_divide
+  rec = tp / float(npos)
+AP for bottle = nan
+AP for bus = nan
+AP for car = nan
+AP for cat = nan
+AP for chair = nan
+AP for cow = nan
+AP for diningtable = 0.0000
+AP for dog = 0.0000
+AP for horse = 0.0000
+AP for motorbike = 0.0000
+AP for person = 0.2041
+AP for pottedplant = 0.0000
+AP for sheep = 0.0000
+AP for sofa = 0.0000
+AP for train = nan
+AP for tvmonitor = nan
+Mean AP = nan
+~~~~~~~~
+Results:
+0.000
+0.000
+0.000
+0.000
+nan
+nan
+nan
+nan
+nan
+nan
+0.000
+0.000
+0.000
+0.000
+0.204
+0.000
+0.000
+0.000
+nan
+nan
+nan
+~~~~~~~~
+
+--------------------------------------------------------------
+Results computed with the **unofficial** Python eval code.
+Results should be very close to the official MATLAB eval code.
+Recompute with `./tools/reval.py --matlab ...` for your paper.
+-- Thanks, The Management
+--------------------------------------------------------------
+87.85user 21.43system 1:55.40elapsed 94%CPU (0avgtext+0avgdata 3790852maxresident)k
+145768inputs+2544outputs (34major+866444minor)pagefaults 0swaps

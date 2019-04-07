@@ -1,0 +1,877 @@
++ echo Logging output to experiments/logs/train/vgg16_paris_train_.txt.2019-04-05_22-06-13
+Logging output to experiments/logs/train/vgg16_paris_train_.txt.2019-04-05_22-06-13
++ case ${DATASET} in
++ SAVE_PATH=/home/vador/Documents/project/AI/drl-rpn-tf/output-weights/drl-rpn-paris/
++ case ${USE_POST} in
++ WEIGHTS_PATH=/home/vador/Documents/project/AI/drl-rpn-tf/data/pre-trained/drl-rpn-voc2007-2012-trainval/vgg16_drl_rpn_iter_110000.ckpt
++ '[' '!' -f .index ']'
++ [[ ! -z '' ]]
++ CUDA_VISIBLE_DEVICES=0
++ time python ./tools/trainval_net.py --weight /home/vador/Documents/project/AI/drl-rpn-tf/data/pre-trained/drl-rpn-voc2007-2012-trainval/vgg16_drl_rpn_iter_110000.ckpt --save /home/vador/Documents/project/AI/drl-rpn-tf/output-weights/drl-rpn-paris/ --imdb paris_train --imdbval paris_val --iters 1000 --cfg experiments/cfgs/drl-rpn-vgg16.yml --net vgg16 --use_hist 1 --det_start 300 --use_post 0 --set ANCHOR_SCALES '[4,8,16]' ANCHOR_RATIOS '[0.5,1,2]' NBR_CLASSES 21 TRAIN.STEPSIZE '[700]' DRL_RPN_TRAIN.STEPSIZE 800
+Called with args:
+Namespace(cfg_file='experiments/cfgs/drl-rpn-vgg16.yml', det_start=300, imdb_name='paris_train', imdbval_name='paris_val', max_iters=1000, net='vgg16', save_path='/home/vador/Documents/project/AI/drl-rpn-tf/output-weights/drl-rpn-paris/', set_cfgs=['ANCHOR_SCALES', '[4,8,16]', 'ANCHOR_RATIOS', '[0.5,1,2]', 'NBR_CLASSES', '21', 'TRAIN.STEPSIZE', '[700]', 'DRL_RPN_TRAIN.STEPSIZE', '800'], tag=None, use_hist=1, use_post=0, weight='/home/vador/Documents/project/AI/drl-rpn-tf/data/pre-trained/drl-rpn-voc2007-2012-trainval/vgg16_drl_rpn_iter_110000.ckpt')
+Using config:
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [4, 8, 16],
+ 'CLASS_NAMES': [],
+ 'COCO_TO_PASCAL': [0,
+                    5,
+                    2,
+                    15,
+                    9,
+                    40,
+                    6,
+                    3,
+                    16,
+                    57,
+                    20,
+                    61,
+                    17,
+                    18,
+                    4,
+                    1,
+                    59,
+                    19,
+                    58,
+                    7,
+                    63],
+ 'DATA_DIR': '/home/vador/Documents/project/AI/drl-rpn-tf/data',
+ 'DIMS_AUX': 39,
+ 'DIMS_BASE': 512,
+ 'DIMS_NONHIST': 530,
+ 'DIMS_TOT': 551,
+ 'DRL_RPN': {'H_FIXRECT': 0.25,
+             'H_HIST': 3,
+             'H_SCALE': 0.5,
+             'MAX_ITER_TRAJ': 13,
+             'MAX_ITER_TRAJ_FLT': 13.0,
+             'TOPK_OBJNESS': 0,
+             'USE_AGNO': False,
+             'USE_HIST': True,
+             'USE_POST': False,
+             'W_FIXRECT': 0.25,
+             'W_HIST': 3,
+             'W_SCALE': 0.5},
+ 'DRL_RPN_TEST': {'BETA': 0.05,
+                  'DO_VISUALIZE': False,
+                  'NBR_FIX': 0,
+                  'RANDOM_DONE': False,
+                  'RANDOM_FIX': False},
+ 'DRL_RPN_TRAIN': {'BATCH_SIZE': 50,
+                   'BETAS': [-1, 0.7],
+                   'DET_START': -1,
+                   'DISPLAY': 50,
+                   'GAMMA': 0.2,
+                   'IMG_START_IDX': -1,
+                   'IOU_THRESH': 0.5,
+                   'LEARNING_RATE': 2e-05,
+                   'MA_WEIGHT': 0.0005,
+                   'POST_BETAS': [0.05, 0.35],
+                   'POST_LR': 0.001,
+                   'POST_SS': [80000],
+                   'STEPSIZE': 800,
+                   'USE_BL': True,
+                   'USE_FLIPPED': True,
+                   'USE_POST': 0},
+ 'EXP_DIR': 'vgg16_drl_rpn',
+ 'MATLAB': 'matlab',
+ 'MEANS_BBOX': array([0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]),
+ 'NBR_ANCHORS': 9,
+ 'NBR_CLASSES': 21,
+ 'PIXEL_MEANS': array([[[102.9801, 115.9465, 122.7717]]]),
+ 'POOLING_MODE': 'crop',
+ 'POOLING_SIZE': 7,
+ 'RNG_SEED': 3,
+ 'ROOT_DIR': '/home/vador/Documents/project/AI/drl-rpn-tf',
+ 'RPN_CHANNELS': 512,
+ 'STDS_BBOX': array([0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1,
+       0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1, 0.1,
+       0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2,
+       0.2, 0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2,
+       0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1,
+       0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1, 0.1,
+       0.2, 0.2, 0.1, 0.1, 0.2, 0.2]),
+ 'TEST': {'BBOX_REG': True,
+          'HAS_RPN': True,
+          'MAX_SIZE': 1000,
+          'MODE': 'nms',
+          'NMS': 0.3,
+          'PROPOSAL_METHOD': 'gt',
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000,
+          'RPN_TOP_N': 5000,
+          'SCALES': [600],
+          'SVM': False},
+ 'TRAIN': {'ASPECT_GROUPING': False,
+           'BATCH_SIZE': 128,
+           'BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'BBOX_NORMALIZE_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZE_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_NORMALIZE_TARGETS': True,
+           'BBOX_NORMALIZE_TARGETS_PRECOMPUTED': True,
+           'BBOX_REG': True,
+           'BBOX_THRESH': 0.5,
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'BIAS_DECAY': False,
+           'DISPLAY': 50,
+           'DOUBLE_BIAS': False,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'GAMMA': 0.1,
+           'HAS_RPN': True,
+           'IMS_PER_BATCH': 1,
+           'LEARNING_RATE': 0.00025,
+           'MAX_SIZE': 1000,
+           'MOMENTUM': 0.9,
+           'PROPOSAL_METHOD': 'gt',
+           'RPN_BATCHSIZE': 128,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000,
+           'SCALES': [600],
+           'SNAPSHOT_ITERS': 5000,
+           'SNAPSHOT_KEPT': 3,
+           'SNAPSHOT_PREFIX': 'vgg16_drl_rpn',
+           'STEPSIZE': [700],
+           'SUMMARY_INTERVAL': 180,
+           'TRUNCATED': False,
+           'USE_ALL_GT': True,
+           'USE_FLIPPED': True,
+           'USE_GT': False,
+           'WEIGHT_DECAY': 0.0001},
+ 'USE_GPU_NMS': True,
+ 'VIS_DIR': '/home/vador/Documents/project/AI/drl-rpn-tf/img-out'}
+Loaded dataset `paris_train` for training
+Set proposal method: gt
+Appending horizontally-flipped training examples...
+paris_train gt roidb loaded from /home/vador/Documents/project/AI/drl-rpn-tf/data/cache/paris_train_gt_roidb.pkl
+done
+Preparing training data...
+done
+2102 roidb entries
+/home/vador/Documents/project/AI/drl-rpn-tf/output-weights/drl-rpn-paris/output/vgg16_drl_rpn/paris_train
+Output will be saved to `/home/vador/Documents/project/AI/drl-rpn-tf/output-weights/drl-rpn-paris/output/vgg16_drl_rpn/paris_train`
+Loaded dataset `paris_val` for training
+Set proposal method: gt
+Preparing training data...
+paris_val gt roidb loaded from /home/vador/Documents/project/AI/drl-rpn-tf/data/cache/paris_val_gt_roidb.pkl
+done
+150 validation roidb entries
+Filtered 0 roidb entries: 2102 -> 2102
+Filtered 0 roidb entries: 150 -> 150
+2019-04-05 22:06:18.393360: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcuda.so.1
+2019-04-05 22:06:18.508309: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:1009] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2019-04-05 22:06:18.509310: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x55b53b6a6d90 executing computations on platform CUDA. Devices:
+2019-04-05 22:06:18.509338: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): GeForce RTX 2070, Compute Capability 7.5
+2019-04-05 22:06:18.529090: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 3392290000 Hz
+2019-04-05 22:06:18.529436: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x55b53b9d39f0 executing computations on platform Host. Devices:
+2019-04-05 22:06:18.529460: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): <undefined>, <undefined>
+2019-04-05 22:06:18.530185: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1551] Found device 0 with properties: 
+name: GeForce RTX 2070 major: 7 minor: 5 memoryClockRate(GHz): 1.62
+pciBusID: 0000:01:00.0
+totalMemory: 7.76GiB freeMemory: 7.14GiB
+2019-04-05 22:06:18.530211: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1674] Adding visible gpu devices: 0
+2019-04-05 22:06:18.530278: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcudart.so.10.0
+2019-04-05 22:06:18.531721: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1082] Device interconnect StreamExecutor with strength 1 edge matrix:
+2019-04-05 22:06:18.531748: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1088]      0 
+2019-04-05 22:06:18.531760: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1101] 0:   N 
+2019-04-05 22:06:18.532338: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1222] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 6360 MB memory) -> physical GPU (device: 0, name: GeForce RTX 2070, pci bus id: 0000:01:00.0, compute capability: 7.5)
+Solving...
+WARNING: Logging before flag parsing goes to stderr.
+W0405 22:06:18.752511 140618292811584 deprecation.py:323] From /home/vador/Documents/project/AI/drl-rpn-tf/tools/../lib/nets/network.py:222: to_int32 (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use `tf.cast` instead.
+W0405 22:06:18.756951 140618292811584 deprecation.py:323] From /home/vador/Documents/project/AI/drl-rpn-tf/tools/../lib/nets/network.py:231: py_func (from tensorflow.python.ops.script_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+tf.py_func is deprecated in TF V2. Instead, there are two
+    options available in V2.
+    - tf.py_function takes a python function which manipulates tf eager
+    tensors instead of numpy arrays. It's easy to convert a tf eager tensor to
+    an ndarray (just call tensor.numpy()) but having access to eager tensors
+    means `tf.py_function`s can use accelerators such as GPUs as well as
+    being differentiable using a gradient tape.
+    - tf.numpy_function maintains the semantics of the deprecated tf.py_func
+    (it is not differentiable, and manipulates numpy arrays). It drops the
+    stateful argument making all functions stateful.
+    
+W0405 22:06:18.838346 140618292811584 deprecation.py:323] From /home/vador/Documents/project/AI/drl-rpn-tf/tools/../lib/nets/network.py:128: to_float (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use `tf.cast` instead.
+W0405 22:06:18.854185 140618292811584 deprecation.py:506] From /home/vador/Documents/project/AI/drl-rpn-tf/tools/../lib/nets/network.py:141: calling crop_and_resize_v1 (from tensorflow.python.ops.image_ops_impl) with box_ind is deprecated and will be removed in a future version.
+Instructions for updating:
+box_ind is deprecated, use box_indices instead
+W0405 22:06:18.857268 140618292811584 deprecation.py:323] From /home/vador/anaconda3/envs/tf10/lib/python3.6/site-packages/tensorflow/contrib/layers/python/layers/layers.py:1624: flatten (from tensorflow.python.layers.core) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use keras.layers.flatten instead.
+W0405 22:06:19.285998 140618292811584 deprecation.py:506] From /home/vador/anaconda3/envs/tf10/lib/python3.6/site-packages/tensorflow/python/training/slot_creator.py:187: calling Zeros.__init__ (from tensorflow.python.ops.init_ops) with dtype is deprecated and will be removed in a future version.
+Instructions for updating:
+Call initializer instance with the dtype argument instead of passing it to the constructor
+Loading initial model weights from /home/vador/Documents/project/AI/drl-rpn-tf/data/pre-trained/drl-rpn-voc2007-2012-trainval/vgg16_drl_rpn_iter_110000.ckpt
+Variables restored: vgg_16/conv1/conv1_1/biases:0
+Variables restored: vgg_16/conv1/conv1_2/weights:0
+Variables restored: vgg_16/conv1/conv1_2/biases:0
+Variables restored: vgg_16/conv2/conv2_1/weights:0
+Variables restored: vgg_16/conv2/conv2_1/biases:0
+Variables restored: vgg_16/conv2/conv2_2/weights:0
+Variables restored: vgg_16/conv2/conv2_2/biases:0
+Variables restored: vgg_16/conv3/conv3_1/weights:0
+Variables restored: vgg_16/conv3/conv3_1/biases:0
+Variables restored: vgg_16/conv3/conv3_2/weights:0
+Variables restored: vgg_16/conv3/conv3_2/biases:0
+Variables restored: vgg_16/conv3/conv3_3/weights:0
+Variables restored: vgg_16/conv3/conv3_3/biases:0
+Variables restored: vgg_16/conv4/conv4_1/weights:0
+Variables restored: vgg_16/conv4/conv4_1/biases:0
+Variables restored: vgg_16/conv4/conv4_2/weights:0
+Variables restored: vgg_16/conv4/conv4_2/biases:0
+Variables restored: vgg_16/conv4/conv4_3/weights:0
+Variables restored: vgg_16/conv4/conv4_3/biases:0
+Variables restored: vgg_16/conv5/conv5_1/weights:0
+Variables restored: vgg_16/conv5/conv5_1/biases:0
+Variables restored: vgg_16/conv5/conv5_2/weights:0
+Variables restored: vgg_16/conv5/conv5_2/biases:0
+Variables restored: vgg_16/conv5/conv5_3/weights:0
+Variables restored: vgg_16/conv5/conv5_3/biases:0
+Variables restored: vgg_16/rpn_conv/3x3/weights:0
+Variables restored: vgg_16/rpn_conv/3x3/biases:0
+Variables restored: vgg_16/rpn_cls_score/weights:0
+Variables restored: vgg_16/rpn_cls_score/biases:0
+Variables restored: vgg_16/rpn_bbox_pred/weights:0
+Variables restored: vgg_16/rpn_bbox_pred/biases:0
+Variables restored: vgg_16/fc6/biases:0
+Variables restored: vgg_16/fc7/biases:0
+Variables restored: vgg_16/cls_score/weights:0
+Variables restored: vgg_16/cls_score/biases:0
+Variables restored: vgg_16/bbox_pred/weights:0
+Variables restored: vgg_16/bbox_pred/biases:0
+Variables restored: post_hist/vgg_16/fc6/weights:0
+Variables restored: post_hist/vgg_16/fc6/biases:0
+Variables restored: post_hist/vgg_16/fc7/weights:0
+Variables restored: post_hist/vgg_16/fc7/biases:0
+Variables restored: post_hist/hist_tanh_cls/weights:0
+Variables restored: post_hist/hist_tanh_cls/biases:0
+Variables restored: post_hist/cls_score_hist/weights:0
+Variables restored: post_hist/cls_score_hist/biases:0
+Variables restored: Variable:0
+Variables restored: vgg_16/fc6/weights/Momentum:0
+Variables restored: vgg_16/fc6/biases/Momentum:0
+Variables restored: vgg_16/fc7/weights/Momentum:0
+Variables restored: vgg_16/fc7/biases/Momentum:0
+Variables restored: vgg_16/cls_score/weights/Momentum:0
+Variables restored: vgg_16/cls_score/biases/Momentum:0
+Variables restored: vgg_16/bbox_pred/weights/Momentum:0
+Variables restored: vgg_16/bbox_pred/biases/Momentum:0
+Variables restored: post_hist/vgg_16/fc6/weights/Momentum:0
+Variables restored: post_hist/vgg_16/fc7/weights/Momentum:0
+Variables restored: post_hist/hist_tanh_cls/weights/Momentum:0
+Variables restored: post_hist/cls_score_hist/weights/Momentum:0
+Variables restored: Variable_1:0
+Variables restored: post_hist/vgg_16/fc6/weights/Momentum_1:0
+Variables restored: post_hist/vgg_16/fc6/biases/Momentum:0
+Variables restored: post_hist/vgg_16/fc7/weights/Momentum_1:0
+Variables restored: post_hist/vgg_16/fc7/biases/Momentum:0
+Variables restored: post_hist/hist_tanh_cls/weights/Momentum_1:0
+Variables restored: post_hist/hist_tanh_cls/biases/Momentum:0
+Variables restored: post_hist/cls_score_hist/weights/Momentum_1:0
+Variables restored: post_hist/cls_score_hist/biases/Momentum:0
+Variables restored: xr_weights_base:0
+Variables restored: xr_weights_aux:0
+Variables restored: xh_weights_base:0
+Variables restored: xh_weights_aux:0
+Variables restored: xz_weights_base:0
+Variables restored: xz_weights_aux:0
+Variables restored: hr_weights:0
+Variables restored: hh_weights:0
+Variables restored: hz_weights:0
+Variables restored: h_relu_weights:0
+Variables restored: r_bias:0
+Variables restored: h_bias:0
+Variables restored: z_bias:0
+Variables restored: relu_bias:0
+Variables restored: additional_weights:0
+Variables restored: additional_bias:0
+Variables restored: done_weights:0
+W0405 22:06:24.432994 140618292811584 deprecation.py:323] From /home/vador/anaconda3/envs/tf10/lib/python3.6/site-packages/tensorflow/python/training/saver.py:1276: checkpoint_exists (from tensorflow.python.training.checkpoint_management) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use standard file APIs to check for files with this prefix.
+Loaded.
+Fix VGG16 layers..
+OBS: NOT REVERSING RGB CHANNELS -- set do_reverse=True if reversing is desired!
+W0405 22:06:49.563297 140618292811584 deprecation.py:506] From /home/vador/anaconda3/envs/tf10/lib/python3.6/site-packages/tensorflow/python/ops/init_ops.py:1257: calling VarianceScaling.__init__ (from tensorflow.python.ops.init_ops) with dtype is deprecated and will be removed in a future version.
+Instructions for updating:
+Call initializer instance with the dtype argument instead of passing it to the constructor
+Fixed.
+2019-04-05 22:06:57.365450: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcudnn.so.7
+2019-04-05 22:07:02.591908: W tensorflow/core/common_runtime/bfc_allocator.cc:230] Allocator (GPU_0_bfc) ran out of memory trying to allocate 3.09GiB. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
+2019-04-05 22:07:02.591953: W tensorflow/core/common_runtime/bfc_allocator.cc:230] Allocator (GPU_0_bfc) ran out of memory trying to allocate 3.09GiB. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
+2019-04-05 22:07:03.544103: E tensorflow/core/grappler/optimizers/dependency_optimizer.cc:697] Iteration = 0, topological sort failed with message: The graph couldn't be sorted in topological order.
+2019-04-05 22:07:03.545160: E tensorflow/core/grappler/optimizers/dependency_optimizer.cc:697] Iteration = 1, topological sort failed with message: The graph couldn't be sorted in topological order.
+2019-04-05 22:07:03.587697: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcublas.so.10.0
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 50 / 1000
+lr-rl: 0.000020
+2019-04-05 22:07:35.317963: E tensorflow/core/grappler/optimizers/dependency_optimizer.cc:697] Iteration = 0, topological sort failed with message: The graph couldn't be sorted in topological order.
+2019-04-05 22:07:35.323012: E tensorflow/core/grappler/optimizers/dependency_optimizer.cc:697] Iteration = 1, topological sort failed with message: The graph couldn't be sorted in topological order.
+Mean loss (tot, MA):      (-2.184215, -0.001092)
+Mean reward (tot, MA):         (-0.389205, -0.009380)
+Mean rew-done (tot, MA):       (-3.629999, -0.089438)
+Mean traj-len (tot, MA):       (11.420000, 0.282057)
+Mean frac-area (tot, MA):      (0.508021, 0.012545)
+Mean gt >= 0.5 frac (tot, MA): (0.361132, 0.008918)
+Mean gt-IoU-frac (tot, MA):    (0.228959, 0.005654)
+Traj-len vs. # gt-instances:
+['0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '12.00', '11.41']
+['0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.30', '8.16']
+Traj-len vs. betas:
+['-1.000: 11.42', '0.700: 0.00']
+['-1.000: 8.25', '0.700: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.7402
+train-drl-rpn: 5.0380
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 100 / 1000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (1.019072, 0.001020)
+Mean reward (tot, MA):         (-7.130861, -0.351606)
+Mean rew-done (tot, MA):       (-9.625004, -0.472854)
+Mean traj-len (tot, MA):       (7.670002, 0.371895)
+Mean frac-area (tot, MA):      (0.363326, 0.017635)
+Mean gt >= 0.5 frac (tot, MA): (0.269183, 0.013078)
+Mean gt-IoU-frac (tot, MA):    (0.171356, 0.008326)
+Traj-len vs. # gt-instances:
+['0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '7.50', '7.67']
+['0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.37', '5.15']
+Traj-len vs. betas:
+['-1.000: 11.42', '0.700: 3.92']
+['-1.000: 8.25', '0.700: 2.79']
+TIMINGS:
+runnn-drl-rpn: 0.5066
+train-drl-rpn: 3.6214
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 150 / 1000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.116066, 0.000174)
+Mean reward (tot, MA):         (-3.969615, -0.284750)
+Mean rew-done (tot, MA):       (-6.646668, -0.478171)
+Mean traj-len (tot, MA):       (9.106671, 0.658576)
+Mean frac-area (tot, MA):      (0.416337, 0.030100)
+Mean gt >= 0.5 frac (tot, MA): (0.288714, 0.020853)
+Mean gt-IoU-frac (tot, MA):    (0.183262, 0.013235)
+Traj-len vs. # gt-instances:
+['0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '7.50', '9.13']
+['0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.37', '10.06']
+Traj-len vs. betas:
+['-1.000: 11.70', '0.700: 3.92']
+['-1.000: 10.93', '0.700: 2.79']
+TIMINGS:
+runnn-drl-rpn: 0.5418
+train-drl-rpn: 3.9723
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 200 / 1000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (1.173658, 0.002347)
+Mean reward (tot, MA):         (-6.239659, -0.600109)
+Mean rew-done (tot, MA):       (-8.620003, -0.825642)
+Mean traj-len (tot, MA):       (7.620005, 0.720405)
+Mean frac-area (tot, MA):      (0.355858, 0.033667)
+Mean gt >= 0.5 frac (tot, MA): (0.256997, 0.024341)
+Mean gt-IoU-frac (tot, MA):    (0.163307, 0.015467)
+Traj-len vs. # gt-instances:
+['0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '4.80', '7.69']
+['0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.56', '5.34']
+Traj-len vs. betas:
+['-1.000: 11.70', '0.700: 3.54']
+['-1.000: 10.93', '0.700: 3.13']
+TIMINGS:
+runnn-drl-rpn: 0.4635
+train-drl-rpn: 3.4676
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 250 / 1000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.531778, 0.001328)
+Mean reward (tot, MA):         (-4.707145, -0.550013)
+Mean rew-done (tot, MA):       (-7.282001, -0.852759)
+Mean traj-len (tot, MA):       (8.460003, 0.994551)
+Mean frac-area (tot, MA):      (0.389023, 0.045719)
+Mean gt >= 0.5 frac (tot, MA): (0.272768, 0.032032)
+Mean gt-IoU-frac (tot, MA):    (0.174186, 0.020459)
+Traj-len vs. # gt-instances:
+['0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '4.80', '8.53']
+['0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.56', '10.03']
+Traj-len vs. betas:
+['-1.000: 11.74', '0.700: 3.54']
+['-1.000: 11.61', '0.700: 3.13']
+TIMINGS:
+runnn-drl-rpn: 0.4936
+train-drl-rpn: 3.6906
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 300 / 1000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.889927, 0.002668)
+Mean reward (tot, MA):         (-6.185063, -0.871614)
+Mean rew-done (tot, MA):       (-8.511664, -1.193674)
+Mean traj-len (tot, MA):       (7.473335, 1.032658)
+Mean frac-area (tot, MA):      (0.347537, 0.048047)
+Mean gt >= 0.5 frac (tot, MA): (0.247183, 0.034187)
+Mean gt-IoU-frac (tot, MA):    (0.157833, 0.021833)
+Traj-len vs. # gt-instances:
+['0.00', '4.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '4.80', '7.53']
+['0.00', '0.10', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.56', '4.61']
+Traj-len vs. betas:
+['-1.000: 11.74', '0.700: 3.21']
+['-1.000: 11.61', '0.700: 2.63']
+TIMINGS:
+runnn-drl-rpn: 0.4436
+train-drl-rpn: 3.3722
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 350 / 1000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.517798, 0.001809)
+Mean reward (tot, MA):         (-5.126421, -0.819883)
+Mean rew-done (tot, MA):       (-7.622855, -1.220782)
+Mean traj-len (tot, MA):       (8.025715, 1.287164)
+Mean frac-area (tot, MA):      (0.369807, 0.059292)
+Mean gt >= 0.5 frac (tot, MA): (0.267883, 0.043019)
+Mean gt-IoU-frac (tot, MA):    (0.170264, 0.027337)
+Traj-len vs. # gt-instances:
+['0.00', '4.00', '0.00', '0.00', '0.00', '0.00', '0.00', '12.00', '6.00', '8.06']
+['0.00', '0.10', '0.00', '0.00', '0.00', '0.00', '0.00', '0.30', '0.85', '9.25']
+Traj-len vs. betas:
+['-1.000: 11.64', '0.700: 3.21']
+['-1.000: 11.33', '0.700: 2.63']
+TIMINGS:
+runnn-drl-rpn: 0.4683
+train-drl-rpn: 3.5303
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+iter: 350 / 1000, total loss: 0.429956
+ >>> loss_cls (detector): 0.168918
+ >>> loss_box (detector): 0.179197
+ >>> lr: 0.000250
+speed: 0.041s / iter
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 400 / 1000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.867171, 0.003465)
+Mean reward (tot, MA):         (-6.257591, -1.149751)
+Mean rew-done (tot, MA):       (-8.607498, -1.573450)
+Mean traj-len (tot, MA):       (7.397502, 1.329471)
+Mean frac-area (tot, MA):      (0.343821, 0.061827)
+Mean gt >= 0.5 frac (tot, MA): (0.252427, 0.045517)
+Mean gt-IoU-frac (tot, MA):    (0.160175, 0.028872)
+Traj-len vs. # gt-instances:
+['0.00', '4.00', '0.00', '0.00', '0.00', '0.00', '0.00', '12.00', '6.00', '7.42']
+['0.00', '0.10', '0.00', '0.00', '0.00', '0.00', '0.00', '0.30', '0.85', '4.78']
+Traj-len vs. betas:
+['-1.000: 11.64', '0.700: 3.15']
+['-1.000: 11.33', '0.700: 2.92']
+TIMINGS:
+runnn-drl-rpn: 0.4371
+train-drl-rpn: 3.3274
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+iter: 400 / 1000, total loss: 0.799139
+ >>> loss_cls (detector): 0.381876
+ >>> loss_box (detector): 0.335423
+ >>> lr: 0.000250
+speed: 0.040s / iter
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 450 / 1000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.649983, 0.002919)
+Mean reward (tot, MA):         (-5.232750, -1.048146)
+Mean rew-done (tot, MA):       (-7.730000, -1.552166)
+Mean traj-len (tot, MA):       (7.888891, 1.588513)
+Mean frac-area (tot, MA):      (0.364767, 0.073446)
+Mean gt >= 0.5 frac (tot, MA): (0.266897, 0.053848)
+Mean gt-IoU-frac (tot, MA):    (0.168889, 0.034054)
+Traj-len vs. # gt-instances:
+['0.00', '4.00', '0.00', '0.00', '0.00', '0.00', '0.00', '12.00', '6.86', '7.90']
+['0.00', '0.10', '0.00', '0.00', '0.00', '0.00', '0.00', '0.30', '1.12', '9.73']
+Traj-len vs. betas:
+['-1.000: 11.68', '0.700: 3.15']
+['-1.000: 11.63', '0.700: 2.92']
+TIMINGS:
+runnn-drl-rpn: 0.4596
+train-drl-rpn: 3.4638
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+iter: 450 / 1000, total loss: 0.212359
+ >>> loss_cls (detector): 0.089331
+ >>> loss_box (detector): 0.041189
+ >>> lr: 0.000250
+speed: 0.039s / iter
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 500 / 1000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.871330, 0.004349)
+Mean reward (tot, MA):         (-6.157764, -1.379934)
+Mean rew-done (tot, MA):       (-8.514998, -1.898605)
+Mean traj-len (tot, MA):       (7.322003, 1.604156)
+Mean frac-area (tot, MA):      (0.340408, 0.074627)
+Mean gt >= 0.5 frac (tot, MA): (0.251750, 0.055368)
+Mean gt-IoU-frac (tot, MA):    (0.159240, 0.035001)
+Traj-len vs. # gt-instances:
+['0.00', '4.00', '0.00', '0.00', '0.00', '0.00', '0.00', '12.00', '6.86', '7.33']
+['0.00', '0.10', '0.00', '0.00', '0.00', '0.00', '0.00', '0.30', '1.12', '4.40']
+Traj-len vs. betas:
+['-1.000: 11.68', '0.700: 2.97']
+['-1.000: 11.63', '0.700: 2.47']
+TIMINGS:
+runnn-drl-rpn: 0.4312
+train-drl-rpn: 3.2859
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+iter: 500 / 1000, total loss: 0.277297
+ >>> loss_cls (detector): 0.104190
+ >>> loss_box (detector): 0.091271
+ >>> lr: 0.000250
+speed: 0.039s / iter
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 550 / 1000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.709728, 0.003894)
+Mean reward (tot, MA):         (-5.332790, -1.273888)
+Mean rew-done (tot, MA):       (-7.845456, -1.880140)
+Mean traj-len (tot, MA):       (7.721821, 1.853912)
+Mean frac-area (tot, MA):      (0.354922, 0.085130)
+Mean gt >= 0.5 frac (tot, MA): (0.269733, 0.065101)
+Mean gt-IoU-frac (tot, MA):    (0.170396, 0.041098)
+Traj-len vs. # gt-instances:
+['0.00', '4.00', '0.00', '0.00', '0.00', '0.00', '0.00', '12.00', '8.40', '7.71']
+['0.00', '0.10', '0.00', '0.00', '0.00', '0.00', '0.00', '0.30', '1.92', '9.37']
+Traj-len vs. betas:
+['-1.000: 11.68', '0.700: 2.97']
+['-1.000: 11.58', '0.700: 2.47']
+TIMINGS:
+runnn-drl-rpn: 0.4476
+train-drl-rpn: 3.4069
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+iter: 550 / 1000, total loss: 0.323891
+ >>> loss_cls (detector): 0.212242
+ >>> loss_box (detector): 0.029814
+ >>> lr: 0.000250
+speed: 0.039s / iter
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 600 / 1000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.845719, 0.005063)
+Mean reward (tot, MA):         (-6.108891, -1.604065)
+Mean rew-done (tot, MA):       (-8.498336, -2.220920)
+Mean traj-len (tot, MA):       (7.226671, 1.852074)
+Mean frac-area (tot, MA):      (0.333814, 0.085537)
+Mean gt >= 0.5 frac (tot, MA): (0.256275, 0.066170)
+Mean gt-IoU-frac (tot, MA):    (0.161770, 0.041737)
+Traj-len vs. # gt-instances:
+['0.00', '4.00', '0.00', '0.00', '0.00', '0.00', '0.00', '12.00', '8.40', '7.20']
+['0.00', '0.10', '0.00', '0.00', '0.00', '0.00', '0.00', '0.30', '1.92', '3.89']
+Traj-len vs. betas:
+['-1.000: 11.68', '0.700: 2.77']
+['-1.000: 11.58', '0.700: 1.95']
+TIMINGS:
+runnn-drl-rpn: 0.4232
+train-drl-rpn: 3.2548
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+iter: 600 / 1000, total loss: 0.567505
+ >>> loss_cls (detector): 0.207294
+ >>> loss_box (detector): 0.278378
+ >>> lr: 0.000250
+speed: 0.039s / iter
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 650 / 1000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.541855, 0.003508)
+Mean reward (tot, MA):         (-5.462067, -1.507708)
+Mean rew-done (tot, MA):       (-7.953084, -2.200978)
+Mean traj-len (tot, MA):       (7.575389, 2.096724)
+Mean frac-area (tot, MA):      (0.347626, 0.096101)
+Mean gt >= 0.5 frac (tot, MA): (0.266278, 0.074077)
+Mean gt-IoU-frac (tot, MA):    (0.167871, 0.046661)
+Traj-len vs. # gt-instances:
+['0.00', '4.00', '0.00', '0.00', '0.00', '0.00', '0.00', '12.00', '8.40', '7.56']
+['0.00', '0.10', '0.00', '0.00', '0.00', '0.00', '0.00', '0.30', '1.92', '9.49']
+Traj-len vs. betas:
+['-1.000: 11.69', '0.700: 2.77']
+['-1.000: 11.65', '0.700: 1.95']
+TIMINGS:
+runnn-drl-rpn: 0.4380
+train-drl-rpn: 3.3614
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+iter: 650 / 1000, total loss: 0.282494
+ >>> loss_cls (detector): 0.133888
+ >>> loss_box (detector): 0.066774
+ >>> lr: 0.000250
+speed: 0.038s / iter
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 700 / 1000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.540468, 0.003768)
+Mean reward (tot, MA):         (-6.141882, -1.840531)
+Mean rew-done (tot, MA):       (-8.499291, -2.531981)
+Mean traj-len (tot, MA):       (7.117148, 2.073591)
+Mean frac-area (tot, MA):      (0.327376, 0.095311)
+Mean gt >= 0.5 frac (tot, MA): (0.251885, 0.073845)
+Mean gt-IoU-frac (tot, MA):    (0.158869, 0.046540)
+Traj-len vs. # gt-instances:
+['0.00', '4.00', '0.00', '0.00', '0.00', '0.00', '0.00', '12.00', '8.40', '7.10']
+['0.00', '0.10', '0.00', '0.00', '0.00', '0.00', '0.00', '0.30', '1.92', '3.51']
+Traj-len vs. betas:
+['-1.000: 11.69', '0.700: 2.54']
+['-1.000: 11.65', '0.700: 1.38']
+TIMINGS:
+runnn-drl-rpn: 0.4151
+train-drl-rpn: 3.2228
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+iter: 700 / 1000, total loss: 0.899717
+ >>> loss_cls (detector): 0.306794
+ >>> loss_box (detector): 0.511094
+ >>> lr: 0.000025
+speed: 0.038s / iter
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 750 / 1000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.402966, 0.003005)
+Mean reward (tot, MA):         (-5.548022, -1.726628)
+Mean rew-done (tot, MA):       (-7.978667, -2.486451)
+Mean traj-len (tot, MA):       (7.434671, 2.315798)
+Mean frac-area (tot, MA):      (0.339523, 0.105543)
+Mean gt >= 0.5 frac (tot, MA): (0.260749, 0.081532)
+Mean gt-IoU-frac (tot, MA):    (0.164289, 0.051327)
+Traj-len vs. # gt-instances:
+['0.00', '4.00', '0.00', '0.00', '0.00', '0.00', '0.00', '12.00', '8.40', '7.42']
+['0.00', '0.10', '0.00', '0.00', '0.00', '0.00', '0.00', '0.30', '1.92', '9.55']
+Traj-len vs. betas:
+['-1.000: 11.72', '0.700: 2.54']
+['-1.000: 11.85', '0.700: 1.38']
+TIMINGS:
+runnn-drl-rpn: 0.4276
+train-drl-rpn: 3.3155
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+iter: 750 / 1000, total loss: 0.264890
+ >>> loss_cls (detector): 0.060043
+ >>> loss_box (detector): 0.123017
+ >>> lr: 0.000025
+speed: 0.038s / iter
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 800 / 1000
+lr-rl: 0.000004
+Mean loss (tot, MA):      (0.378757, 0.003011)
+Mean reward (tot, MA):         (-6.160772, -2.063027)
+Mean rew-done (tot, MA):       (-8.475002, -2.818116)
+Mean traj-len (tot, MA):       (7.038754, 2.285770)
+Mean frac-area (tot, MA):      (0.322266, 0.104502)
+Mean gt >= 0.5 frac (tot, MA): (0.248178, 0.080991)
+Mean gt-IoU-frac (tot, MA):    (0.156356, 0.050983)
+Traj-len vs. # gt-instances:
+['0.00', '4.00', '0.00', '0.00', '0.00', '0.00', '0.00', '12.00', '7.73', '7.03']
+['0.00', '0.10', '0.00', '0.00', '0.00', '0.00', '0.00', '0.30', '1.90', '3.54']
+Traj-len vs. betas:
+['-1.000: 11.72', '0.700: 2.36']
+['-1.000: 11.85', '0.700: 1.18']
+TIMINGS:
+runnn-drl-rpn: 0.4081
+train-drl-rpn: 3.1939
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+iter: 800 / 1000, total loss: 0.257634
+ >>> loss_cls (detector): 0.080290
+ >>> loss_box (detector): 0.095513
+ >>> lr: 0.000025
+speed: 0.038s / iter
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 850 / 1000
+lr-rl: 0.000004
+Mean loss (tot, MA):      (0.218846, 0.001840)
+Mean reward (tot, MA):         (-5.724426, -1.980925)
+Mean rew-done (tot, MA):       (-8.114121, -2.806240)
+Mean traj-len (tot, MA):       (7.280004, 2.504445)
+Mean frac-area (tot, MA):      (0.331755, 0.113865)
+Mean gt >= 0.5 frac (tot, MA): (0.257383, 0.088986)
+Mean gt-IoU-frac (tot, MA):    (0.162038, 0.055971)
+Traj-len vs. # gt-instances:
+['0.00', '4.00', '0.00', '0.00', '0.00', '0.00', '0.00', '12.00', '8.08', '7.27']
+['0.00', '0.10', '0.00', '0.00', '0.00', '0.00', '0.00', '0.30', '2.15', '8.94']
+Traj-len vs. betas:
+['-1.000: 11.65', '0.700: 2.36']
+['-1.000: 11.36', '0.700: 1.18']
+TIMINGS:
+runnn-drl-rpn: 0.4181
+train-drl-rpn: 3.2621
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+iter: 850 / 1000, total loss: 0.159094
+ >>> loss_cls (detector): 0.053423
+ >>> loss_box (detector): 0.023841
+ >>> lr: 0.000025
+speed: 0.038s / iter
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 900 / 1000
+lr-rl: 0.000004
+Mean loss (tot, MA):      (0.175523, 0.001558)
+Mean reward (tot, MA):         (-6.276008, -2.318677)
+Mean rew-done (tot, MA):       (-8.557780, -3.134668)
+Mean traj-len (tot, MA):       (6.932226, 2.467789)
+Mean frac-area (tot, MA):      (0.316526, 0.112476)
+Mean gt >= 0.5 frac (tot, MA): (0.245390, 0.087815)
+Mean gt-IoU-frac (tot, MA):    (0.154508, 0.055244)
+Traj-len vs. # gt-instances:
+['0.00', '4.00', '0.00', '0.00', '0.00', '0.00', '0.00', '12.00', '8.08', '6.91']
+['0.00', '0.10', '0.00', '0.00', '0.00', '0.00', '0.00', '0.30', '2.15', '3.26']
+Traj-len vs. betas:
+['-1.000: 11.65', '0.700: 2.21']
+['-1.000: 11.36', '0.700: 1.07']
+TIMINGS:
+runnn-drl-rpn: 0.4010
+train-drl-rpn: 3.1554
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+iter: 900 / 1000, total loss: 0.446477
+ >>> loss_cls (detector): 0.135255
+ >>> loss_box (detector): 0.229393
+ >>> lr: 0.000025
+speed: 0.038s / iter
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 950 / 1000
+lr-rl: 0.000004
+Mean loss (tot, MA):      (0.007194, 0.000046)
+Mean reward (tot, MA):         (-5.854542, -2.218600)
+Mean rew-done (tot, MA):       (-8.195795, -3.098735)
+Mean traj-len (tot, MA):       (7.183162, 2.695808)
+Mean frac-area (tot, MA):      (0.326517, 0.122204)
+Mean gt >= 0.5 frac (tot, MA): (0.252222, 0.094918)
+Mean gt-IoU-frac (tot, MA):    (0.158680, 0.059656)
+Traj-len vs. # gt-instances:
+['0.00', '4.00', '0.00', '0.00', '0.00', '0.00', '0.00', '12.00', '8.38', '7.16']
+['0.00', '0.10', '0.00', '0.00', '0.00', '0.00', '0.00', '0.30', '2.40', '9.29']
+Traj-len vs. betas:
+['-1.000: 11.66', '0.700: 2.21']
+['-1.000: 11.64', '0.700: 1.07']
+TIMINGS:
+runnn-drl-rpn: 0.4117
+train-drl-rpn: 3.2385
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+iter: 950 / 1000, total loss: 0.291996
+ >>> loss_cls (detector): 0.145846
+ >>> loss_box (detector): 0.064320
+ >>> lr: 0.000025
+speed: 0.038s / iter
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 1000 / 1000
+lr-rl: 0.000004
+Mean loss (tot, MA):      (0.033441, 0.000312)
+Mean reward (tot, MA):         (-6.329280, -2.542895)
+Mean rew-done (tot, MA):       (-8.582006, -3.415389)
+Mean traj-len (tot, MA):       (6.875002, 2.654432)
+Mean frac-area (tot, MA):      (0.313126, 0.120636)
+Mean gt >= 0.5 frac (tot, MA): (0.242472, 0.093987)
+Mean gt-IoU-frac (tot, MA):    (0.152617, 0.059107)
+Traj-len vs. # gt-instances:
+['0.00', '4.00', '0.00', '0.00', '0.00', '0.00', '0.00', '12.00', '8.38', '6.85']
+['0.00', '0.10', '0.00', '0.00', '0.00', '0.00', '0.00', '0.30', '2.40', '3.37']
+Traj-len vs. betas:
+['-1.000: 11.66', '0.700: 2.09']
+['-1.000: 11.64', '0.700: 1.05']
+TIMINGS:
+runnn-drl-rpn: 0.3969
+train-drl-rpn: 3.1435
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+iter: 1000 / 1000, total loss: 0.783853
+ >>> loss_cls (detector): 0.173396
+ >>> loss_box (detector): 0.528627
+ >>> lr: 0.000025
+speed: 0.038s / iter
+Wrote snapshot to: /home/vador/Documents/project/AI/drl-rpn-tf/output-weights/drl-rpn-paris/output/vgg16_drl_rpn/paris_train/vgg16_drl_rpn_iter_1000.ckpt
+done solving
+612.03user 156.38system 14:00.34elapsed 91%CPU (0avgtext+0avgdata 9109352maxresident)k
+5298552inputs+5799600outputs (1033major+4917959minor)pagefaults 0swaps

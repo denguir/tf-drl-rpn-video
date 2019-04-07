@@ -138,7 +138,10 @@ def voc_eval(detpath,
   class_recs = {}
   npos = 0
   for imagename in imagenames:
-    R = [obj for obj in recs[imagename] if obj['name'] == classname]
+    try:
+      R = [obj for obj in recs[imagename] if obj['name'] == classname]
+    except:
+      continue
     bbox = np.array([x['bbox'] for x in R])
     if use_diff:
       difficult = np.array([False for x in R]).astype(np.bool)

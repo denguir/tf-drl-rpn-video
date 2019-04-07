@@ -71,6 +71,7 @@ class vgg16(Network):
       if v.name.split(':')[0] in var_keep_dic:
         print('Variables restored: %s' % v.name)
         variables_to_restore.append(v)
+        
     return variables_to_restore
 
   def fix_variables(self, sess, pretrained_model, do_reverse=False):

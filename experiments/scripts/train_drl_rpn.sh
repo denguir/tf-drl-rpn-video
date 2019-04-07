@@ -20,8 +20,8 @@ NET=vgg16
 
 case ${DATASET} in
   pascal_voc)
-    TRAIN_IMDB="voc_2007_trainval"
-    TEST_IMDB="voc_2007_test"
+    TRAIN_IMDB="voc_2007_train"
+    TEST_IMDB="voc_2007_val"
     STEPSIZE="[50000]"
     DRL_RPN_STEPSIZE="90000"
     NBR_CLASSES="21"
@@ -55,35 +55,59 @@ case ${DATASET} in
     ANCHORS="[4,8,16,32]"
     RATIOS="[0.5,1,2]"
     ;;
+  paris)
+    TRAIN_IMDB="paris_train"
+    TEST_IMDB="paris_val"
+    STEPSIZE="[700]"
+    DRL_RPN_STEPSIZE="800"
+    NBR_CLASSES="21"
+    ANCHORS="[4,8,16]"
+    RATIOS="[0.5,1,2]"
+    ;;
   *)
     echo "No dataset given"
     exit
     ;;
 esac
 
+LOG="experiments/logs/train/${NET}_${TRAIN_IMDB}_${EXTRA_ARGS_SLUG}.txt.`date +'%Y-%m-%d_%H-%M-%S'`"
+exec &> >(tee -a "$LOG")
+echo Logging output to "$LOG"
+
 # Set up paths according to your own system
 # Below SAVE_PATH is used when saving trained weights, whereas WEIGHTS_PATH
 # is used for loading existing weights
 case ${DATASET} in
   pascal_voc_0712_test)
-    SAVE_PATH=/media/aleksis/B872DFD372DF950A/phd/drl-rpn/output-weights/drl-rpn-voc2007-2012-trainval+2007test/
+    SAVE_PATH=/home/vador/Documents/project/AI/drl-rpn-tf/output-weights/drl-rpn-voc2007-2012-trainval+2007test/
     case ${USE_POST} in
       0)
-        WEIGHTS_PATH=/media/aleksis/B872DFD372DF950A/phd/drl-rpn/fr-rcnn-voc2007-2012-trainval+2007test/vgg16_2012_faster_rcnn_iter_180000.ckpt
+        WEIGHTS_PATH=/home/vador/Documents/project/AI/drl-rpn-tf/data/drl-rpn-voc2007-2012-trainval/fr-rcnn-voc2007-2012-trainval+2007test/vgg16_2012_faster_rcnn_iter_180000.ckpt
         ;;
       *)
-        WEIGHTS_PATH=/media/aleksis/B872DFD372DF950A/phd/drl-rpn/drl-rpn-voc2007-2012-trainval+2007test/vgg16_2012_drl_rpn_iter_110000.ckpt
+        WEIGHTS_PATH=/home/vador/Documents/project/AI/drl-rpn-tf/data/drl-rpn-voc2007-2012-trainval+2007test/vgg16_2012_drl_rpn_iter_110000.ckpt
+        ;;
+    esac
+    ;;
+  paris)
+    SAVE_PATH=/home/vador/Documents/project/AI/drl-rpn-tf/output-weights/drl-rpn-paris/
+    case ${USE_POST} in
+      0)
+        WEIGHTS_PATH=/home/vador/Documents/project/AI/drl-rpn-tf/data/pre-trained/drl-rpn-voc2007-2012-trainval/vgg16_drl_rpn_iter_110000.ckpt
+        ;;
+      *)
+        WEIGHTS_PATH=/home/vador/Documents/project/AI/drl-rpn-tf/data/pre-trained/drl-rpn-voc2007-2012-trainval/vgg16_drl_rpn_iter_110000.ckpt
         ;;
     esac
     ;;
   *)
-    SAVE_PATH=/media/aleksis/B872DFD372DF950A/phd/drl-rpn/output-weights/drl-rpn-voc2007-2012-trainval/
+    SAVE_PATH=/home/vador/Documents/project/AI/drl-rpn-tf/output-weights/drl-rpn-voc2007-2012-trainval/
     case ${USE_POST} in
       0)
-        WEIGHTS_PATH=/media/aleksis/B872DFD372DF950A/phd/drl-rpn/fr-rcnn-voc2007-2012-trainval/vgg16_faster_rcnn_iter_180000.ckpt
+        WEIGHTS_PATH=/home/vador/Documents/project/AI/drl-rpn-tf/data/fr-rcnn-voc2007-2012-trainval/vgg16_faster_rcnn_iter_180000.ckpt
         ;;
       *)
-        WEIGHTS_PATH=/media/aleksis/B872DFD372DF950A/phd/drl-rpn/drl-rpn-voc2007-2012-trainval/vgg16_drl_rpn_iter_110000.ckpt
+        WEIGHTS_PATH=/home/vador/Documents/project/AI/drl-rpn-tf/data/drl-rpn-voc2007-2012-trainval/vgg16_drl_rpn_iter_110000.ckpt
         ;;
     esac
     ;;

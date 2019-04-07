@@ -293,7 +293,7 @@ class SolverWrapper(object):
     # We will handle the snapshots ourselves
     self.saver = tf.train.Saver(max_to_keep=100000)
 
-    # Initialize
+    # Initialize optimizee, RL loss and gradients
     self.net.init_rl_train(sess)
 
     # Setup initial learning rates
@@ -357,7 +357,7 @@ class SolverWrapper(object):
           print('iter: %d / %d' % (iter + 1, max_iters))
           print('lr-rl: %f' % lr_rl)
           timers['train-drl-rpn'].tic()
-          self.net.train_drl_rpn(sess, lr_rl, sc, stats)
+          self.net.train_drl_rpn(sess, lr_rl, sc, stats) # apply grad
           timers['train-drl-rpn'].toc()
           sc.print_stats()
           print('TIMINGS:')
@@ -497,7 +497,10 @@ def train_net(network, imdb, roidb, valroidb, output_dir,
   valroidb = filter_roidb(valroidb)
 
   tfconfig = tf.ConfigProto(allow_soft_placement=True)
+  # added because cudnn & cublas fail:
   tfconfig.gpu_options.allow_growth = True
+  tfconfig.gpu_options.allocator_type = 'BFC'
+  tfconfig.gpu_options.per_process_gpu_memory_fraction = 0.8 
 
   with tf.Session(config=tfconfig) as sess:
     sw = SolverWrapper(sess, network, imdb, roidb, valroidb, output_dir,

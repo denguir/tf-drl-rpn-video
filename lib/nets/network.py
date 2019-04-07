@@ -544,7 +544,7 @@ class Network(object):
 
     # Return RL-trainable variables (thus skip detector parameters here;
     # they are treated separately).
-    tvars = tf.trainable_variables()[-17:]
+    tvars = tf.trainable_variables()[-17:] # all weights of drl-rpn
     self._batch_grad = [tf.placeholder(tf.float32,
                                        name='drl_rpn_grad_' + str(idx))\
                                        for idx in range(len(tvars))]

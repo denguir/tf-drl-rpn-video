@@ -13,35 +13,21 @@ from __future__ import print_function
 __sets = {}
 from datasets.pascal_voc import pascal_voc
 from datasets.coco import coco
+from datasets.paris import paris
+from datasets.pennfudanped import pennfudanped
 
 import numpy as np
 
 # Set up voc_<year>_<split> 
-for year in ['2007', '2012', '2012_test']:
+for year in ['2007', '2012']:
   for split in ['train', 'val', 'trainval', 'test']:
     name = 'voc_{}_{}'.format(year, split)
     __sets[name] = (lambda split=split, year=year: pascal_voc(split, year))
 
-for year in ['2007', '2012', '2012_test']:
+for year in ['2007', '2012']:
   for split in ['train', 'val', 'trainval', 'test']:
     name = 'voc_{}_{}_diff'.format(year, split)
-    __sets[name] = (lambda split=split, year=year: pascal_voc(split, year,
-                                                              use_diff=True))
-
-# Set up voc_<year>_<split> 
-for year in ['2007', '2012', '2012_test']:
-  for split in ['train', 'val', 'trainval', 'test']:
-    name = 'voc_{}_{}_frege'.format(year, split)
-    __sets[name] = (lambda split=split, year=year: pascal_voc(split, year,
-                                                              use_diff=False,
-                                                              extra_string='_frege'))
-
-for year in ['2007', '2012', '2012_test']:
-  for split in ['train', 'val', 'trainval', 'test']:
-    name = 'voc_{}_{}_diff_frege'.format(year, split)
-    __sets[name] = (lambda split=split, year=year: pascal_voc(split, year,
-                                                              use_diff=True,
-                                                              extra_string='_frege'))
+    __sets[name] = (lambda split=split, year=year: pascal_voc(split, year, use_diff=True))
 
 # Set up coco_2014_<split>
 for year in ['2014']:
@@ -55,19 +41,15 @@ for year in ['2015']:
     name = 'coco_{}_{}'.format(year, split)
     __sets[name] = (lambda split=split, year=year: coco(split, year))
 
-# Set up coco_2014_<split>
-for year in ['2014']:
-  for split in ['train', 'val', 'minival', 'valminusminival', 'trainval']:
-    name = 'coco_{}_{}_frege'.format(year, split)
-    __sets[name] = (lambda split=split, year=year: coco(split, year,
-                                                        extra_string='_frege'))
+# Set up paris
+for split in ['train', 'val', 'test']:
+  name = 'paris_{}'.format(split)
+  __sets[name] = (lambda split=split: paris(split))
 
-# Set up coco_2015_<split>
-for year in ['2015']:
-  for split in ['test', 'test-dev']:
-    name = 'coco_{}_{}_frege'.format(year, split)
-    __sets[name] = (lambda split=split, year=year: coco(split, year,
-                                                        extra_string='_frege'))
+# Set up pennfudanped (only for testing)
+for split in ['test']:
+  names = 'pennfudanped_{}'.format(split)
+  __sets[name] = (lambda split=split: pennfudanped(split))
 
 
 def get_imdb(name):

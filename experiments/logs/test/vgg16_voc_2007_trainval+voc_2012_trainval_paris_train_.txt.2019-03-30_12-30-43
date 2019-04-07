@@ -1,0 +1,283 @@
++ echo Logging output to experiments/logs/test/vgg16_voc_2007_trainval+voc_2012_trainval_paris_train_.txt.2019-03-30_12-30-43
+Logging output to experiments/logs/test/vgg16_voc_2007_trainval+voc_2012_trainval_paris_train_.txt.2019-03-30_12-30-43
++ case ${DATASET} in
++ WEIGHTS_PATH=/home/vador/Documents/project/AI/drl-rpn-tf/data/pre-trained/drl-rpn-voc2007-2012-trainval/vgg16_drl_rpn_iter_110000.ckpt
++ [[ ! -z '' ]]
++ CUDA_VISIBLE_DEVICES=0
++ time python ./tools/test_net.py --imdb paris_train --model /home/vador/Documents/project/AI/drl-rpn-tf/data/pre-trained/drl-rpn-voc2007-2012-trainval/vgg16_drl_rpn_iter_110000.ckpt --cfg experiments/cfgs/drl-rpn-vgg16.yml --net vgg16 --use_hist 1 --use_post 1 --nbr_fix 0 --set NBR_CLASSES 21 ANCHOR_SCALES '[4,8,16]' ANCHOR_RATIOS '[0.5,1,2]'
+Called with args:
+Namespace(cfg_file='experiments/cfgs/drl-rpn-vgg16.yml', comp_mode=False, imdb_name='paris_train', max_per_image=100, model='/home/vador/Documents/project/AI/drl-rpn-tf/data/pre-trained/drl-rpn-voc2007-2012-trainval/vgg16_drl_rpn_iter_110000.ckpt', nbr_fix=0, net='vgg16', set_cfgs=['NBR_CLASSES', '21', 'ANCHOR_SCALES', '[4,8,16]', 'ANCHOR_RATIOS', '[0.5,1,2]'], tag='', use_hist=1, use_post=1)
+Using config:
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [4, 8, 16],
+ 'CLASS_NAMES': [],
+ 'COCO_TO_PASCAL': [0,
+                    5,
+                    2,
+                    15,
+                    9,
+                    40,
+                    6,
+                    3,
+                    16,
+                    57,
+                    20,
+                    61,
+                    17,
+                    18,
+                    4,
+                    1,
+                    59,
+                    19,
+                    58,
+                    7,
+                    63],
+ 'DATA_DIR': '/home/vador/Documents/project/AI/drl-rpn-tf/data',
+ 'DIMS_AUX': 39,
+ 'DIMS_BASE': 512,
+ 'DIMS_NONHIST': 530,
+ 'DIMS_TOT': 551,
+ 'DRL_RPN': {'H_FIXRECT': 0.25,
+             'H_HIST': 3,
+             'H_SCALE': 0.5,
+             'MAX_ITER_TRAJ': 13,
+             'MAX_ITER_TRAJ_FLT': 13.0,
+             'TOPK_OBJNESS': 0,
+             'USE_AGNO': False,
+             'USE_HIST': True,
+             'USE_POST': False,
+             'W_FIXRECT': 0.25,
+             'W_HIST': 3,
+             'W_SCALE': 0.5},
+ 'DRL_RPN_TEST': {'BETA': 0.05,
+                  'DO_VISUALIZE': False,
+                  'NBR_FIX': 0,
+                  'RANDOM_DONE': False,
+                  'RANDOM_FIX': False},
+ 'DRL_RPN_TRAIN': {'BATCH_SIZE': 50,
+                   'BETAS': [0.05, 0.35],
+                   'DET_START': -1,
+                   'DISPLAY': 50,
+                   'GAMMA': 0.2,
+                   'IMG_START_IDX': -1,
+                   'IOU_THRESH': 0.5,
+                   'LEARNING_RATE': 2e-05,
+                   'MA_WEIGHT': 0.0005,
+                   'POST_BETAS': [0.05, 0.35],
+                   'POST_LR': 0.001,
+                   'POST_SS': [80000],
+                   'STEPSIZE': 90000,
+                   'USE_BL': True,
+                   'USE_FLIPPED': True,
+                   'USE_POST': 0},
+ 'EXP_DIR': 'vgg16_drl_rpn',
+ 'MATLAB': 'matlab',
+ 'MEANS_BBOX': array([0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]),
+ 'NBR_ANCHORS': 9,
+ 'NBR_CLASSES': 21,
+ 'PIXEL_MEANS': array([[[102.9801, 115.9465, 122.7717]]]),
+ 'POOLING_MODE': 'crop',
+ 'POOLING_SIZE': 7,
+ 'RNG_SEED': 3,
+ 'ROOT_DIR': '/home/vador/Documents/project/AI/drl-rpn-tf',
+ 'RPN_CHANNELS': 512,
+ 'STDS_BBOX': array([0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1,
+       0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1, 0.1,
+       0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2,
+       0.2, 0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2,
+       0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1,
+       0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1, 0.1,
+       0.2, 0.2, 0.1, 0.1, 0.2, 0.2]),
+ 'TEST': {'BBOX_REG': True,
+          'HAS_RPN': True,
+          'MAX_SIZE': 1000,
+          'MODE': 'nms',
+          'NMS': 0.3,
+          'PROPOSAL_METHOD': 'gt',
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000,
+          'RPN_TOP_N': 5000,
+          'SCALES': [600],
+          'SVM': False},
+ 'TRAIN': {'ASPECT_GROUPING': False,
+           'BATCH_SIZE': 128,
+           'BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'BBOX_NORMALIZE_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZE_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_NORMALIZE_TARGETS': True,
+           'BBOX_NORMALIZE_TARGETS_PRECOMPUTED': True,
+           'BBOX_REG': True,
+           'BBOX_THRESH': 0.5,
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'BIAS_DECAY': False,
+           'DISPLAY': 50,
+           'DOUBLE_BIAS': False,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'GAMMA': 0.1,
+           'HAS_RPN': True,
+           'IMS_PER_BATCH': 1,
+           'LEARNING_RATE': 0.00025,
+           'MAX_SIZE': 1000,
+           'MOMENTUM': 0.9,
+           'PROPOSAL_METHOD': 'gt',
+           'RPN_BATCHSIZE': 128,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000,
+           'SCALES': [600],
+           'SNAPSHOT_ITERS': 5000,
+           'SNAPSHOT_KEPT': 3,
+           'SNAPSHOT_PREFIX': 'vgg16_drl_rpn',
+           'STEPSIZE': [80000],
+           'SUMMARY_INTERVAL': 180,
+           'TRUNCATED': False,
+           'USE_ALL_GT': True,
+           'USE_FLIPPED': True,
+           'USE_GT': False,
+           'WEIGHT_DECAY': 0.0001},
+ 'USE_GPU_NMS': True,
+ 'VIS_DIR': '/home/vador/Documents/project/AI/drl-rpn-tf/img-out'}
+paris_train
+2019-03-30 12:30:58.695574: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcuda.so.1
+2019-03-30 12:30:58.821133: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:1009] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2019-03-30 12:30:58.843936: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x559a3c5576c0 executing computations on platform CUDA. Devices:
+2019-03-30 12:30:58.843973: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): GeForce RTX 2070, Compute Capability 7.5
+2019-03-30 12:30:58.864460: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 3400025000 Hz
+2019-03-30 12:30:58.864917: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x559a3c60d2c0 executing computations on platform Host. Devices:
+2019-03-30 12:30:58.864959: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): <undefined>, <undefined>
+2019-03-30 12:30:58.865749: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1551] Found device 0 with properties: 
+name: GeForce RTX 2070 major: 7 minor: 5 memoryClockRate(GHz): 1.62
+pciBusID: 0000:01:00.0
+totalMemory: 7.76GiB freeMemory: 7.13GiB
+2019-03-30 12:30:58.865779: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1674] Adding visible gpu devices: 0
+2019-03-30 12:30:58.865927: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcudart.so.10.0
+2019-03-30 12:30:58.867751: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1082] Device interconnect StreamExecutor with strength 1 edge matrix:
+2019-03-30 12:30:58.867833: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1088]      0 
+2019-03-30 12:30:58.867844: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1101] 0:   N 
+2019-03-30 12:30:58.868684: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1222] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 7155 MB memory) -> physical GPU (device: 0, name: GeForce RTX 2070, pci bus id: 0000:01:00.0, compute capability: 7.5)
+WARNING: Logging before flag parsing goes to stderr.
+W0330 12:30:59.085896 140216223315776 deprecation.py:323] From /home/vador/Documents/project/AI/drl-rpn-tf/tools/../lib/nets/network.py:222: to_int32 (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use `tf.cast` instead.
+W0330 12:30:59.090257 140216223315776 deprecation.py:323] From /home/vador/Documents/project/AI/drl-rpn-tf/tools/../lib/nets/network.py:231: py_func (from tensorflow.python.ops.script_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+tf.py_func is deprecated in TF V2. Instead, there are two
+    options available in V2.
+    - tf.py_function takes a python function which manipulates tf eager
+    tensors instead of numpy arrays. It's easy to convert a tf eager tensor to
+    an ndarray (just call tensor.numpy()) but having access to eager tensors
+    means `tf.py_function`s can use accelerators such as GPUs as well as
+    being differentiable using a gradient tape.
+    - tf.numpy_function maintains the semantics of the deprecated tf.py_func
+    (it is not differentiable, and manipulates numpy arrays). It drops the
+    stateful argument making all functions stateful.
+    
+W0330 12:30:59.169512 140216223315776 deprecation.py:323] From /home/vador/Documents/project/AI/drl-rpn-tf/tools/../lib/nets/network.py:128: to_float (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use `tf.cast` instead.
+W0330 12:30:59.184843 140216223315776 deprecation.py:506] From /home/vador/Documents/project/AI/drl-rpn-tf/tools/../lib/nets/network.py:141: calling crop_and_resize_v1 (from tensorflow.python.ops.image_ops_impl) with box_ind is deprecated and will be removed in a future version.
+Instructions for updating:
+box_ind is deprecated, use box_indices instead
+W0330 12:30:59.188043 140216223315776 deprecation.py:323] From /home/vador/anaconda3/envs/tf10/lib/python3.6/site-packages/tensorflow/contrib/layers/python/layers/layers.py:1624: flatten (from tensorflow.python.layers.core) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use keras.layers.flatten instead.
+Loading model check point from /home/vador/Documents/project/AI/drl-rpn-tf/data/pre-trained/drl-rpn-voc2007-2012-trainval/vgg16_drl_rpn_iter_110000.ckpt
+W0330 12:30:59.637294 140216223315776 deprecation.py:323] From /home/vador/anaconda3/envs/tf10/lib/python3.6/site-packages/tensorflow/python/training/saver.py:1276: checkpoint_exists (from tensorflow.python.training.checkpoint_management) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use standard file APIs to check for files with this prefix.
+Loaded.
+paris_train gt roidb loaded from /home/vador/Documents/project/AI/drl-rpn-tf/data/cache/paris_train_gt_roidb.pkl
+2019-03-30 12:31:15.425781: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcudnn.so.7
+2019-03-30 12:31:17.143542: W tensorflow/core/common_runtime/bfc_allocator.cc:230] Allocator (GPU_0_bfc) ran out of memory trying to allocate 3.09GiB. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
+2019-03-30 12:31:17.143586: W tensorflow/core/common_runtime/bfc_allocator.cc:230] Allocator (GPU_0_bfc) ran out of memory trying to allocate 3.09GiB. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
+2019-03-30 12:31:17.560098: E tensorflow/stream_executor/cuda/cuda_driver.cc:835] failed to allocate 2.86G (3069076992 bytes) from device: CUDA_ERROR_OUT_OF_MEMORY: out of memory
+2019-03-30 12:31:18.133536: E tensorflow/core/grappler/optimizers/dependency_optimizer.cc:697] Iteration = 0, topological sort failed with message: The graph couldn't be sorted in topological order.
+2019-03-30 12:31:18.134570: E tensorflow/core/grappler/optimizers/dependency_optimizer.cc:697] Iteration = 1, topological sort failed with message: The graph couldn't be sorted in topological order.
+2019-03-30 12:31:18.164135: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcublas.so.10.0
+2019-03-30 12:31:18.418743: E tensorflow/stream_executor/cuda/cuda_blas.cc:238] failed to create cublas handle: CUBLAS_STATUS_NOT_INITIALIZED
+2019-03-30 12:31:18.542211: E tensorflow/stream_executor/cuda/cuda_blas.cc:238] failed to create cublas handle: CUBLAS_STATUS_NOT_INITIALIZED
+2019-03-30 12:31:18.542252: W tensorflow/stream_executor/stream.cc:1903] attempting to perform BLAS operation using StreamExecutor without BLAS support
+Traceback (most recent call last):
+  File "/home/vador/anaconda3/envs/tf10/lib/python3.6/site-packages/tensorflow/python/client/session.py", line 1335, in _do_call
+    return fn(*args)
+  File "/home/vador/anaconda3/envs/tf10/lib/python3.6/site-packages/tensorflow/python/client/session.py", line 1320, in _run_fn
+    options, feed_dict, fetch_list, target_list, run_metadata)
+  File "/home/vador/anaconda3/envs/tf10/lib/python3.6/site-packages/tensorflow/python/client/session.py", line 1408, in _call_tf_sessionrun
+    run_metadata)
+tensorflow.python.framework.errors_impl.InternalError: Blas GEMV launch failed:  m=625, n=1
+	 [[{{node while/MatMul}}]]
+	 [[while/Exit_3/_167]]
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "./tools/test_net.py", line 151, in <module>
+    test_net(sess, net, imdb, filename, max_per_image=args.max_per_image)
+  File "/home/vador/Documents/project/AI/drl-rpn-tf/tools/../lib/model/test.py", line 110, in test_net
+    im_idx, nbr_gts)
+  File "/home/vador/Documents/project/AI/drl-rpn-tf/tools/../lib/model/test.py", line 43, in im_detect
+    im_idx, nbr_gts)
+  File "/home/vador/Documents/project/AI/drl-rpn-tf/tools/../lib/model/factory.py", line 536, in run_drl_rpn
+    mode=='train')
+  File "/home/vador/Documents/project/AI/drl-rpn-tf/tools/../lib/nets/network.py", line 1075, in action_pass
+    feed_dict=feed_dict_action)
+  File "/home/vador/anaconda3/envs/tf10/lib/python3.6/site-packages/tensorflow/python/client/session.py", line 930, in run
+    run_metadata_ptr)
+  File "/home/vador/anaconda3/envs/tf10/lib/python3.6/site-packages/tensorflow/python/client/session.py", line 1153, in _run
+    feed_dict_tensor, options, run_metadata)
+  File "/home/vador/anaconda3/envs/tf10/lib/python3.6/site-packages/tensorflow/python/client/session.py", line 1329, in _do_run
+    run_metadata)
+  File "/home/vador/anaconda3/envs/tf10/lib/python3.6/site-packages/tensorflow/python/client/session.py", line 1349, in _do_call
+    raise type(e)(node_def, op, message)
+tensorflow.python.framework.errors_impl.InternalError: Blas GEMV launch failed:  m=625, n=1
+	 [[node while/MatMul (defined at /home/vador/Documents/project/AI/drl-rpn-tf/tools/../lib/nets/network.py:917) ]]
+	 [[while/Exit_3/_167]]
+
+Errors may have originated from an input operation.
+Input Source operations connected to node while/MatMul:
+ while/Reshape (defined at /home/vador/Documents/project/AI/drl-rpn-tf/tools/../lib/nets/network.py:916)
+
+Original stack trace for 'while/MatMul':
+  File "./tools/test_net.py", line 140, in <module>
+    net.build_drl_rpn_network(False)
+  File "/home/vador/Documents/project/AI/drl-rpn-tf/tools/../lib/nets/network.py", line 760, in build_drl_rpn_network
+    self._conv_gru(is_training, tf.contrib.layers.xavier_initializer())
+  File "/home/vador/Documents/project/AI/drl-rpn-tf/tools/../lib/nets/network.py", line 851, in _conv_gru
+    h.get_shape(), tf.TensorShape([None, None, None, None])])
+  File "/home/vador/anaconda3/envs/tf10/lib/python3.6/site-packages/tensorflow/python/ops/control_flow_ops.py", line 3477, in while_loop
+    return_same_structure)
+  File "/home/vador/anaconda3/envs/tf10/lib/python3.6/site-packages/tensorflow/python/ops/control_flow_ops.py", line 2998, in BuildLoop
+    pred, body, original_loop_vars, loop_vars, shape_invariants)
+  File "/home/vador/anaconda3/envs/tf10/lib/python3.6/site-packages/tensorflow/python/ops/control_flow_ops.py", line 2923, in _BuildLoop
+    body_result = body(*packed_vars_for_body)
+  File "/home/vador/Documents/project/AI/drl-rpn-tf/tools/../lib/nets/network.py", line 917, in rollout
+    done_logits = tf.matmul(done_slice_vecd, self.done_weights)
+  File "/home/vador/anaconda3/envs/tf10/lib/python3.6/site-packages/tensorflow/python/ops/math_ops.py", line 2580, in matmul
+    a, b, transpose_a=transpose_a, transpose_b=transpose_b, name=name)
+  File "/home/vador/anaconda3/envs/tf10/lib/python3.6/site-packages/tensorflow/python/ops/gen_math_ops.py", line 5763, in mat_mul
+    name=name)
+  File "/home/vador/anaconda3/envs/tf10/lib/python3.6/site-packages/tensorflow/python/framework/op_def_library.py", line 788, in _apply_op_helper
+    op_def=op_def)
+  File "/home/vador/anaconda3/envs/tf10/lib/python3.6/site-packages/tensorflow/python/util/deprecation.py", line 507, in new_func
+    return func(*args, **kwargs)
+  File "/home/vador/anaconda3/envs/tf10/lib/python3.6/site-packages/tensorflow/python/framework/ops.py", line 3479, in create_op
+    op_def=op_def)
+  File "/home/vador/anaconda3/envs/tf10/lib/python3.6/site-packages/tensorflow/python/framework/ops.py", line 1961, in __init__
+    self._traceback = tf_stack.extract_stack()
+
+Command exited with non-zero status 1
+6.74user 3.05system 0:37.02elapsed 26%CPU (0avgtext+0avgdata 4679384maxresident)k
+2279216inputs+8outputs (493major+1109091minor)pagefaults 0swaps

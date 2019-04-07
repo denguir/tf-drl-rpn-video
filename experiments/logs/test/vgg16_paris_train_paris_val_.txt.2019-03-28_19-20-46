@@ -1,0 +1,16 @@
++ echo Logging output to experiments/logs/test/vgg16_paris_train_paris_val_.txt.2019-03-28_19-20-46
+Logging output to experiments/logs/test/vgg16_paris_train_paris_val_.txt.2019-03-28_19-20-46
++ case ${DATASET} in
++ WEIGHTS_PATH=/home/vador/Documents/project/AI/drl-rpn-tf/output-weights/drl-rpn-paris/output/vgg16_drl_rpn/paris_train/vgg16_drl_rpn_iter_100.ckpt
++ [[ ! -z '' ]]
++ CUDA_VISIBLE_DEVICES=0
++ time python ./tools/test_net.py --imdb paris_val --model /home/vador/Documents/project/AI/drl-rpn-tf/output-weights/drl-rpn-paris/output/vgg16_drl_rpn/paris_train/vgg16_drl_rpn_iter_100.ckpt --cfg experiments/cfgs/drl-rpn-vgg16.yml --net vgg16 --use_hist 1 --use_post 0 --nbr_fix 0 --set NBR_CLASSES 21 ANCHOR_SCALES '[4,8,16]' ANCHOR_RATIOS '[0.5,1,2]'
+Traceback (most recent call last):
+  File "./tools/test_net.py", line 22, in <module>
+    from nets.vgg16 import vgg16
+  File "/home/vador/Documents/project/AI/drl-rpn-tf/tools/../lib/nets/vgg16.py", line 11, in <module>
+    import tensorflow.contrib.slim as slim
+ModuleNotFoundError: No module named 'tensorflow.contrib.slim'
+Command exited with non-zero status 1
+0.97user 0.29system 0:03.26elapsed 38%CPU (0avgtext+0avgdata 108732maxresident)k
+29072inputs+0outputs (234major+21882minor)pagefaults 0swaps

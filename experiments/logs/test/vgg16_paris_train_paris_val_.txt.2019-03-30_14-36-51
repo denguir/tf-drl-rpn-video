@@ -1,0 +1,413 @@
++ echo Logging output to experiments/logs/test/vgg16_paris_train_paris_val_.txt.2019-03-30_14-36-51
+Logging output to experiments/logs/test/vgg16_paris_train_paris_val_.txt.2019-03-30_14-36-51
++ case ${DATASET} in
++ WEIGHTS_PATH=/home/vador/Documents/project/AI/drl-rpn-tf/output-weights/drl-rpn-paris/output/vgg16_drl_rpn/paris_train/vgg16_drl_rpn_iter_100.ckpt
++ [[ ! -z '' ]]
++ CUDA_VISIBLE_DEVICES=0
++ time python ./tools/test_net.py --imdb paris_val --model /home/vador/Documents/project/AI/drl-rpn-tf/output-weights/drl-rpn-paris/output/vgg16_drl_rpn/paris_train/vgg16_drl_rpn_iter_100.ckpt --cfg experiments/cfgs/drl-rpn-vgg16.yml --net vgg16 --use_hist 1 --use_post 0 --nbr_fix 0 --set NBR_CLASSES 21 ANCHOR_SCALES '[4,8,16]' ANCHOR_RATIOS '[0.5,1,2]'
+Called with args:
+Namespace(cfg_file='experiments/cfgs/drl-rpn-vgg16.yml', comp_mode=False, imdb_name='paris_val', max_per_image=100, model='/home/vador/Documents/project/AI/drl-rpn-tf/output-weights/drl-rpn-paris/output/vgg16_drl_rpn/paris_train/vgg16_drl_rpn_iter_100.ckpt', nbr_fix=0, net='vgg16', set_cfgs=['NBR_CLASSES', '21', 'ANCHOR_SCALES', '[4,8,16]', 'ANCHOR_RATIOS', '[0.5,1,2]'], tag='', use_hist=1, use_post=0)
+Using config:
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [4, 8, 16],
+ 'CLASS_NAMES': [],
+ 'COCO_TO_PASCAL': [0,
+                    5,
+                    2,
+                    15,
+                    9,
+                    40,
+                    6,
+                    3,
+                    16,
+                    57,
+                    20,
+                    61,
+                    17,
+                    18,
+                    4,
+                    1,
+                    59,
+                    19,
+                    58,
+                    7,
+                    63],
+ 'DATA_DIR': '/home/vador/Documents/project/AI/drl-rpn-tf/data',
+ 'DIMS_AUX': 39,
+ 'DIMS_BASE': 512,
+ 'DIMS_NONHIST': 530,
+ 'DIMS_TOT': 551,
+ 'DRL_RPN': {'H_FIXRECT': 0.25,
+             'H_HIST': 3,
+             'H_SCALE': 0.5,
+             'MAX_ITER_TRAJ': 13,
+             'MAX_ITER_TRAJ_FLT': 13.0,
+             'TOPK_OBJNESS': 0,
+             'USE_AGNO': False,
+             'USE_HIST': True,
+             'USE_POST': False,
+             'W_FIXRECT': 0.25,
+             'W_HIST': 3,
+             'W_SCALE': 0.5},
+ 'DRL_RPN_TEST': {'BETA': 0.05,
+                  'DO_VISUALIZE': False,
+                  'NBR_FIX': 0,
+                  'RANDOM_DONE': False,
+                  'RANDOM_FIX': False},
+ 'DRL_RPN_TRAIN': {'BATCH_SIZE': 50,
+                   'BETAS': [0.05, 0.35],
+                   'DET_START': -1,
+                   'DISPLAY': 50,
+                   'GAMMA': 0.2,
+                   'IMG_START_IDX': -1,
+                   'IOU_THRESH': 0.5,
+                   'LEARNING_RATE': 2e-05,
+                   'MA_WEIGHT': 0.0005,
+                   'POST_BETAS': [0.05, 0.35],
+                   'POST_LR': 0.001,
+                   'POST_SS': [80000],
+                   'STEPSIZE': 90000,
+                   'USE_BL': True,
+                   'USE_FLIPPED': True,
+                   'USE_POST': 0},
+ 'EXP_DIR': 'vgg16_drl_rpn',
+ 'MATLAB': 'matlab',
+ 'MEANS_BBOX': array([0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]),
+ 'NBR_ANCHORS': 9,
+ 'NBR_CLASSES': 21,
+ 'PIXEL_MEANS': array([[[102.9801, 115.9465, 122.7717]]]),
+ 'POOLING_MODE': 'crop',
+ 'POOLING_SIZE': 7,
+ 'RNG_SEED': 3,
+ 'ROOT_DIR': '/home/vador/Documents/project/AI/drl-rpn-tf',
+ 'RPN_CHANNELS': 512,
+ 'STDS_BBOX': array([0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1,
+       0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1, 0.1,
+       0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2,
+       0.2, 0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2,
+       0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1,
+       0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1, 0.1,
+       0.2, 0.2, 0.1, 0.1, 0.2, 0.2]),
+ 'TEST': {'BBOX_REG': True,
+          'HAS_RPN': True,
+          'MAX_SIZE': 1000,
+          'MODE': 'nms',
+          'NMS': 0.3,
+          'PROPOSAL_METHOD': 'gt',
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000,
+          'RPN_TOP_N': 5000,
+          'SCALES': [600],
+          'SVM': False},
+ 'TRAIN': {'ASPECT_GROUPING': False,
+           'BATCH_SIZE': 128,
+           'BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'BBOX_NORMALIZE_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZE_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_NORMALIZE_TARGETS': True,
+           'BBOX_NORMALIZE_TARGETS_PRECOMPUTED': True,
+           'BBOX_REG': True,
+           'BBOX_THRESH': 0.5,
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'BIAS_DECAY': False,
+           'DISPLAY': 50,
+           'DOUBLE_BIAS': False,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'GAMMA': 0.1,
+           'HAS_RPN': True,
+           'IMS_PER_BATCH': 1,
+           'LEARNING_RATE': 0.00025,
+           'MAX_SIZE': 1000,
+           'MOMENTUM': 0.9,
+           'PROPOSAL_METHOD': 'gt',
+           'RPN_BATCHSIZE': 128,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000,
+           'SCALES': [600],
+           'SNAPSHOT_ITERS': 5000,
+           'SNAPSHOT_KEPT': 3,
+           'SNAPSHOT_PREFIX': 'vgg16_drl_rpn',
+           'STEPSIZE': [80000],
+           'SUMMARY_INTERVAL': 180,
+           'TRUNCATED': False,
+           'USE_ALL_GT': True,
+           'USE_FLIPPED': True,
+           'USE_GT': False,
+           'WEIGHT_DECAY': 0.0001},
+ 'USE_GPU_NMS': True,
+ 'VIS_DIR': '/home/vador/Documents/project/AI/drl-rpn-tf/img-out'}
+paris_val
+2019-03-30 14:36:53.573560: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcuda.so.1
+2019-03-30 14:36:53.673592: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:1009] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2019-03-30 14:36:53.674650: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x55fea1e97ce0 executing computations on platform CUDA. Devices:
+2019-03-30 14:36:53.674676: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): GeForce RTX 2070, Compute Capability 7.5
+2019-03-30 14:36:53.700408: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 3400025000 Hz
+2019-03-30 14:36:53.700750: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x55fea1f4d9d0 executing computations on platform Host. Devices:
+2019-03-30 14:36:53.700783: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): <undefined>, <undefined>
+2019-03-30 14:36:53.701751: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1551] Found device 0 with properties: 
+name: GeForce RTX 2070 major: 7 minor: 5 memoryClockRate(GHz): 1.62
+pciBusID: 0000:01:00.0
+totalMemory: 7.76GiB freeMemory: 7.05GiB
+2019-03-30 14:36:53.701779: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1674] Adding visible gpu devices: 0
+2019-03-30 14:36:53.701865: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcudart.so.10.0
+2019-03-30 14:36:53.703463: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1082] Device interconnect StreamExecutor with strength 1 edge matrix:
+2019-03-30 14:36:53.703486: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1088]      0 
+2019-03-30 14:36:53.703497: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1101] 0:   N 
+2019-03-30 14:36:53.704110: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1222] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 7155 MB memory) -> physical GPU (device: 0, name: GeForce RTX 2070, pci bus id: 0000:01:00.0, compute capability: 7.5)
+WARNING: Logging before flag parsing goes to stderr.
+W0330 14:36:53.947928 140002790217536 deprecation.py:323] From /home/vador/Documents/project/AI/drl-rpn-tf/tools/../lib/nets/network.py:222: to_int32 (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use `tf.cast` instead.
+W0330 14:36:53.952387 140002790217536 deprecation.py:323] From /home/vador/Documents/project/AI/drl-rpn-tf/tools/../lib/nets/network.py:231: py_func (from tensorflow.python.ops.script_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+tf.py_func is deprecated in TF V2. Instead, there are two
+    options available in V2.
+    - tf.py_function takes a python function which manipulates tf eager
+    tensors instead of numpy arrays. It's easy to convert a tf eager tensor to
+    an ndarray (just call tensor.numpy()) but having access to eager tensors
+    means `tf.py_function`s can use accelerators such as GPUs as well as
+    being differentiable using a gradient tape.
+    - tf.numpy_function maintains the semantics of the deprecated tf.py_func
+    (it is not differentiable, and manipulates numpy arrays). It drops the
+    stateful argument making all functions stateful.
+    
+W0330 14:36:54.035018 140002790217536 deprecation.py:323] From /home/vador/Documents/project/AI/drl-rpn-tf/tools/../lib/nets/network.py:128: to_float (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use `tf.cast` instead.
+W0330 14:36:54.052611 140002790217536 deprecation.py:506] From /home/vador/Documents/project/AI/drl-rpn-tf/tools/../lib/nets/network.py:141: calling crop_and_resize_v1 (from tensorflow.python.ops.image_ops_impl) with box_ind is deprecated and will be removed in a future version.
+Instructions for updating:
+box_ind is deprecated, use box_indices instead
+W0330 14:36:54.056173 140002790217536 deprecation.py:323] From /home/vador/anaconda3/envs/tf10/lib/python3.6/site-packages/tensorflow/contrib/layers/python/layers/layers.py:1624: flatten (from tensorflow.python.layers.core) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use keras.layers.flatten instead.
+Loading model check point from /home/vador/Documents/project/AI/drl-rpn-tf/output-weights/drl-rpn-paris/output/vgg16_drl_rpn/paris_train/vgg16_drl_rpn_iter_100.ckpt
+W0330 14:36:54.452960 140002790217536 deprecation.py:323] From /home/vador/anaconda3/envs/tf10/lib/python3.6/site-packages/tensorflow/python/training/saver.py:1276: checkpoint_exists (from tensorflow.python.training.checkpoint_management) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use standard file APIs to check for files with this prefix.
+Loaded.
+paris_val gt roidb loaded from /home/vador/Documents/project/AI/drl-rpn-tf/data/cache/paris_val_gt_roidb.pkl
+2019-03-30 14:37:06.222286: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcudnn.so.7
+2019-03-30 14:37:07.630691: E tensorflow/stream_executor/cuda/cuda_driver.cc:835] failed to allocate 3.92G (4214121984 bytes) from device: CUDA_ERROR_OUT_OF_MEMORY: out of memory
+2019-03-30 14:37:08.654012: E tensorflow/core/grappler/optimizers/dependency_optimizer.cc:697] Iteration = 0, topological sort failed with message: The graph couldn't be sorted in topological order.
+2019-03-30 14:37:08.655238: E tensorflow/core/grappler/optimizers/dependency_optimizer.cc:697] Iteration = 1, topological sort failed with message: The graph couldn't be sorted in topological order.
+2019-03-30 14:37:08.688201: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcublas.so.10.0
+Mean #fix/img (tot, MA):    (9.000000, 0.004500)
+Mean exploration (tot, MA): (0.447368, 0.000224)
+
+im_detect: 1/150 3.369s 0.110s
+Mean #fix/img (tot, MA):    (8.500000, 0.008498)
+Mean exploration (tot, MA): (0.435263, 0.000435)
+
+im_detect: 2/150 1.922s 0.099s
+Mean #fix/img (tot, MA):    (8.666667, 0.012994)
+Mean exploration (tot, MA): (0.449474, 0.000674)
+
+im_detect: 3/150 1.455s 0.101s
+Mean #fix/img (tot, MA):    (8.500000, 0.016987)
+Mean exploration (tot, MA): (0.448158, 0.000896)
+
+im_detect: 4/150 1.213s 0.099s
+Mean #fix/img (tot, MA):    (8.200000, 0.020479)
+Mean exploration (tot, MA): (0.433474, 0.001083)
+
+im_detect: 5/150 1.054s 0.094s
+Mean #fix/img (tot, MA):    (8.000000, 0.023968)
+Mean exploration (tot, MA): (0.428246, 0.001283)
+
+im_detect: 6/150 0.953s 0.092s
+Mean #fix/img (tot, MA):    (7.857143, 0.027456)
+Mean exploration (tot, MA): (0.422406, 0.001476)
+
+im_detect: 7/150 0.878s 0.091s
+Mean #fix/img (tot, MA):    (7.875000, 0.031443)
+Mean exploration (tot, MA): (0.417763, 0.001668)
+
+im_detect: 8/150 0.824s 0.090s
+Mean #fix/img (tot, MA):    (7.888889, 0.035427)
+Mean exploration (tot, MA): (0.415906, 0.001868)
+
+im_detect: 9/150 0.783s 0.089s
+Mean #fix/img (tot, MA):    (7.900000, 0.039409)
+Mean exploration (tot, MA): (0.417684, 0.002084)
+
+im_detect: 10/150 0.753s 0.091s
+Mean #fix/img (tot, MA):    (8.000000, 0.043889)
+Mean exploration (tot, MA): (0.422967, 0.002320)
+
+im_detect: 11/150 0.732s 0.093s
+Mean #fix/img (tot, MA):    (8.000000, 0.047867)
+Mean exploration (tot, MA): (0.425614, 0.002547)
+
+im_detect: 12/150 0.712s 0.093s
+Mean #fix/img (tot, MA):    (7.923077, 0.051344)
+Mean exploration (tot, MA): (0.421377, 0.002731)
+
+im_detect: 13/150 0.689s 0.092s
+Mean #fix/img (tot, MA):    (8.000000, 0.055818)
+Mean exploration (tot, MA): (0.424737, 0.002964)
+
+im_detect: 14/150 0.677s 0.094s
+Mean #fix/img (tot, MA):    (7.933333, 0.059290)
+Mean exploration (tot, MA): (0.420912, 0.003146)
+
+im_detect: 15/150 0.660s 0.093s
+Mean #fix/img (tot, MA):    (7.937500, 0.063260)
+Mean exploration (tot, MA): (0.419145, 0.003340)
+
+im_detect: 16/150 0.647s 0.092s
+Mean #fix/img (tot, MA):    (7.882353, 0.066729)
+Mean exploration (tot, MA): (0.416409, 0.003525)
+
+im_detect: 17/150 0.634s 0.091s
+Mean #fix/img (tot, MA):    (7.833333, 0.070195)
+Mean exploration (tot, MA): (0.413860, 0.003709)
+
+im_detect: 18/150 0.621s 0.090s
+Mean #fix/img (tot, MA):    (7.842105, 0.074160)
+Mean exploration (tot, MA): (0.415789, 0.003932)
+
+im_detect: 19/150 0.615s 0.090s
+Mean #fix/img (tot, MA):    (7.900000, 0.078623)
+Mean exploration (tot, MA): (0.419737, 0.004177)
+out of memory
+invalid argument
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+an illegal memory access was encountered
+
+im_detect: 20/150 0.611s 0.093s
+2019-03-30 14:37:20.259783: E tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:753] failed to record completion event; therefore, failed to create inter-stream dependency
+2019-03-30 14:37:20.259830: I tensorflow/stream_executor/stream.cc:4800] [stream=0x55fea1f82590,impl=0x55fea1f82630] did not memcpy host-to-device; source: 0x55feb0a35f40
+2019-03-30 14:37:20.259844: E tensorflow/stream_executor/stream.cc:331] Error recording event in stream: error recording CUDA event on stream 0x55fea1f82660: CUDA_ERROR_ILLEGAL_ADDRESS: an illegal memory access was encountered; not marking stream as bad, as the Event object may be at fault. Monitor for further errors.
+2019-03-30 14:37:20.259860: E tensorflow/stream_executor/cuda/cuda_event.cc:29] Error polling for event status: failed to query event: CUDA_ERROR_ILLEGAL_ADDRESS: an illegal memory access was encountered
+2019-03-30 14:37:20.259871: F tensorflow/core/common_runtime/gpu/gpu_event_mgr.cc:273] Unexpected Event status: 1
+Command terminated by signal 6
+14.30user 4.65system 0:29.06elapsed 65%CPU (0avgtext+0avgdata 3783156maxresident)k
+1132184inputs+8outputs (0major+850770minor)pagefaults 0swaps

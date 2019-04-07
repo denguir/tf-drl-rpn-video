@@ -1,0 +1,19 @@
++ echo Logging output to experiments/logs/train/vgg16_paris_train_.txt.2019-04-06_10-54-16
+Logging output to experiments/logs/train/vgg16_paris_train_.txt.2019-04-06_10-54-16
++ case ${DATASET} in
++ SAVE_PATH=/home/vador/Documents/project/AI/drl-rpn-tf/output-weights/drl-rpn-paris/
++ case ${USE_POST} in
++ WEIGHTS_PATH=/home/vador/Documents/project/AI/drl-rpn-tf/data/pre-trained/drl-rpn-voc2007-2012-trainval/vgg16_drl_rpn_iter_110000.ckpt
++ '[' '!' -f .index ']'
++ [[ ! -z '' ]]
++ CUDA_VISIBLE_DEVICES=0
++ time python ./tools/trainval_net.py --weight /home/vador/Documents/project/AI/drl-rpn-tf/data/pre-trained/drl-rpn-voc2007-2012-trainval/vgg16_drl_rpn_iter_110000.ckpt --save /home/vador/Documents/project/AI/drl-rpn-tf/output-weights/drl-rpn-paris/ --imdb paris_train --imdbval paris_val --iters 1000 --cfg experiments/cfgs/drl-rpn-vgg16.yml --net vgg16 --use_hist 1 --det_start 300 --use_post 0 --set ANCHOR_SCALES '[4,8,16]' ANCHOR_RATIOS '[0.5,1,2]' NBR_CLASSES 21 TRAIN.STEPSIZE '[700]' DRL_RPN_TRAIN.STEPSIZE 800
+Traceback (most recent call last):
+  File "./tools/trainval_net.py", line 13, in <module>
+    from model.train_val import get_training_roidb, train_net
+  File "/home/vador/Documents/project/AI/drl-rpn-tf/tools/../lib/model/train_val.py", line 24, in <module>
+    from tensorflow.python import pywrap_tensorflow
+ImportError: cannot import name 'pywrap_tensorflow'
+Command exited with non-zero status 1
+0.17user 0.18system 0:00.97elapsed 36%CPU (0avgtext+0avgdata 27344maxresident)k
+19896inputs+0outputs (52major+4076minor)pagefaults 0swaps

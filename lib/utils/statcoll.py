@@ -34,11 +34,11 @@ class StatCollector(object):
     self.bz = cfg.DRL_RPN_TRAIN.BATCH_SIZE
     
     # Initialize arrays of total averages
-    self.mean_losses = np.zeros(nbr_ep / self.bz, dtype=np.float32)
+    self.mean_losses = np.zeros(int(nbr_ep / self.bz), dtype=np.float32)
     self.means_all = np.zeros((self.nbr_stats, nbr_ep), dtype=np.float32)
     
     # Initialize arrays of moving averages
-    self.ma_losses = np.zeros(nbr_ep / self.bz, dtype=np.float32)
+    self.ma_losses = np.zeros(int(nbr_ep / self.bz), dtype=np.float32)
     self.mas_all = np.zeros((self.nbr_stats, nbr_ep), dtype=np.float32)
 
     # Initialize custom stuff (in this case, avg. traj length vs. #gt-instances,
@@ -65,7 +65,7 @@ class StatCollector(object):
     # Tracks the loss
     if (self.ep + 1) % self.bz != 0:
         return
-    batch_idx = (self.ep + 1) / self.bz - 1
+    batch_idx = int((self.ep + 1) / self.bz - 1)
     self.mean_loss = (batch_idx * self.mean_loss + loss) / (batch_idx + 1) 
     self.mean_losses[batch_idx] = self.mean_loss 
     self.ma_loss = (1 - self.ma_weight) * self.ma_loss + self.ma_weight * loss 

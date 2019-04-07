@@ -1,0 +1,5128 @@
++ echo Logging output to experiments/logs/train/vgg16_paris_train_.txt.2019-03-26_19-44-58
+Logging output to experiments/logs/train/vgg16_paris_train_.txt.2019-03-26_19-44-58
++ case ${DATASET} in
++ SAVE_PATH=/home/vador/Documents/project/AI/drl-rpn-tf/output-weights/drl-rpn-paris/
++ case ${USE_POST} in
++ WEIGHTS_PATH=/home/vador/Documents/project/AI/drl-rpn-tf/data/pre-trained/drl-rpn-voc2007-2012-trainval/vgg16_drl_rpn_iter_110000.ckpt
++ '[' '!' -f .index ']'
++ [[ ! -z '' ]]
++ CUDA_VISIBLE_DEVICES=0
++ time python ./tools/trainval_net.py --weight /home/vador/Documents/project/AI/drl-rpn-tf/data/pre-trained/drl-rpn-voc2007-2012-trainval/vgg16_drl_rpn_iter_110000.ckpt --save /home/vador/Documents/project/AI/drl-rpn-tf/output-weights/drl-rpn-paris/ --imdb paris_train --imdbval paris_val --iters 10000 --cfg experiments/cfgs/drl-rpn-vgg16.yml --net vgg16 --use_hist 1 --det_start -1 --use_post 0 --set ANCHOR_SCALES '[4,8,16]' ANCHOR_RATIOS '[0.5,1,2]' NBR_CLASSES 21 TRAIN.STEPSIZE '[10000]' DRL_RPN_TRAIN.STEPSIZE 9000
+Called with args:
+Namespace(cfg_file='experiments/cfgs/drl-rpn-vgg16.yml', det_start=-1, imdb_name='paris_train', imdbval_name='paris_val', max_iters=10000, net='vgg16', save_path='/home/vador/Documents/project/AI/drl-rpn-tf/output-weights/drl-rpn-paris/', set_cfgs=['ANCHOR_SCALES', '[4,8,16]', 'ANCHOR_RATIOS', '[0.5,1,2]', 'NBR_CLASSES', '21', 'TRAIN.STEPSIZE', '[10000]', 'DRL_RPN_TRAIN.STEPSIZE', '9000'], tag=None, use_hist=1, use_post=0, weight='/home/vador/Documents/project/AI/drl-rpn-tf/data/pre-trained/drl-rpn-voc2007-2012-trainval/vgg16_drl_rpn_iter_110000.ckpt')
+Using config:
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [4, 8, 16],
+ 'CLASS_NAMES': [],
+ 'COCO_TO_PASCAL': [0,
+                    5,
+                    2,
+                    15,
+                    9,
+                    40,
+                    6,
+                    3,
+                    16,
+                    57,
+                    20,
+                    61,
+                    17,
+                    18,
+                    4,
+                    1,
+                    59,
+                    19,
+                    58,
+                    7,
+                    63],
+ 'DATA_DIR': '/home/vador/Documents/project/AI/drl-rpn-tf/data',
+ 'DIMS_AUX': 39,
+ 'DIMS_BASE': 512,
+ 'DIMS_NONHIST': 530,
+ 'DIMS_TOT': 551,
+ 'DRL_RPN': {'H_FIXRECT': 0.25,
+             'H_HIST': 3,
+             'H_SCALE': 0.5,
+             'MAX_ITER_TRAJ': 13,
+             'MAX_ITER_TRAJ_FLT': 13.0,
+             'TOPK_OBJNESS': 0,
+             'USE_AGNO': False,
+             'USE_HIST': True,
+             'USE_POST': False,
+             'W_FIXRECT': 0.25,
+             'W_HIST': 3,
+             'W_SCALE': 0.5},
+ 'DRL_RPN_TEST': {'BETA': 0.05,
+                  'DO_VISUALIZE': True,
+                  'NBR_FIX': 0,
+                  'RANDOM_DONE': False,
+                  'RANDOM_FIX': False},
+ 'DRL_RPN_TRAIN': {'BATCH_SIZE': 50,
+                   'BETAS': [0.05, 0.35],
+                   'DET_START': -1,
+                   'DISPLAY': 50,
+                   'GAMMA': 0.2,
+                   'IMG_START_IDX': -1,
+                   'IOU_THRESH': 0.5,
+                   'LEARNING_RATE': 2e-05,
+                   'MA_WEIGHT': 0.0005,
+                   'POST_BETAS': [0.05, 0.35],
+                   'POST_LR': 0.001,
+                   'POST_SS': [80000],
+                   'STEPSIZE': 9000,
+                   'USE_BL': True,
+                   'USE_FLIPPED': True,
+                   'USE_POST': 0},
+ 'EXP_DIR': 'vgg16_drl_rpn',
+ 'MATLAB': 'matlab',
+ 'MEANS_BBOX': array([0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]),
+ 'NBR_ANCHORS': 9,
+ 'NBR_CLASSES': 21,
+ 'PIXEL_MEANS': array([[[102.9801, 115.9465, 122.7717]]]),
+ 'POOLING_MODE': 'crop',
+ 'POOLING_SIZE': 7,
+ 'RNG_SEED': 3,
+ 'ROOT_DIR': '/home/vador/Documents/project/AI/drl-rpn-tf',
+ 'RPN_CHANNELS': 512,
+ 'STDS_BBOX': array([0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1,
+       0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1, 0.1,
+       0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2,
+       0.2, 0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2,
+       0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1,
+       0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.1, 0.1,
+       0.2, 0.2, 0.1, 0.1, 0.2, 0.2]),
+ 'TEST': {'BBOX_REG': True,
+          'HAS_RPN': True,
+          'MAX_SIZE': 1000,
+          'MODE': 'nms',
+          'NMS': 0.3,
+          'PROPOSAL_METHOD': 'gt',
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000,
+          'RPN_TOP_N': 5000,
+          'SCALES': [600],
+          'SVM': False},
+ 'TRAIN': {'ASPECT_GROUPING': False,
+           'BATCH_SIZE': 128,
+           'BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'BBOX_NORMALIZE_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZE_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_NORMALIZE_TARGETS': True,
+           'BBOX_NORMALIZE_TARGETS_PRECOMPUTED': True,
+           'BBOX_REG': True,
+           'BBOX_THRESH': 0.5,
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'BIAS_DECAY': False,
+           'DISPLAY': 50,
+           'DOUBLE_BIAS': False,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'GAMMA': 0.1,
+           'HAS_RPN': True,
+           'IMS_PER_BATCH': 1,
+           'LEARNING_RATE': 0.00025,
+           'MAX_SIZE': 1000,
+           'MOMENTUM': 0.9,
+           'PROPOSAL_METHOD': 'gt',
+           'RPN_BATCHSIZE': 128,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000,
+           'SCALES': [600],
+           'SNAPSHOT_ITERS': 5000,
+           'SNAPSHOT_KEPT': 3,
+           'SNAPSHOT_PREFIX': 'vgg16_drl_rpn',
+           'STEPSIZE': [10000],
+           'SUMMARY_INTERVAL': 180,
+           'TRUNCATED': False,
+           'USE_ALL_GT': True,
+           'USE_FLIPPED': True,
+           'USE_GT': False,
+           'WEIGHT_DECAY': 0.0001},
+ 'USE_GPU_NMS': True,
+ 'VIS_DIR': '/home/vador/Documents/project/AI/drl-rpn-tf/img-out'}
+Loaded dataset `paris_train` for training
+Set proposal method: gt
+Appending horizontally-flipped training examples...
+paris_train gt roidb loaded from /home/vador/Documents/project/AI/drl-rpn-tf/data/cache/paris_train_gt_roidb.pkl
+done
+Preparing training data...
+done
+2102 roidb entries
+/home/vador/Documents/project/AI/drl-rpn-tf/output-weights/drl-rpn-paris/output/vgg16_drl_rpn/paris_train
+Output will be saved to `/home/vador/Documents/project/AI/drl-rpn-tf/output-weights/drl-rpn-paris/output/vgg16_drl_rpn/paris_train`
+Loaded dataset `paris_val` for training
+Set proposal method: gt
+Preparing training data...
+paris_val gt roidb loaded from /home/vador/Documents/project/AI/drl-rpn-tf/data/cache/paris_val_gt_roidb.pkl
+done
+150 validation roidb entries
+Filtered 0 roidb entries: 2102 -> 2102
+Filtered 0 roidb entries: 150 -> 150
+2019-03-26 19:45:02.923108: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcuda.so.1
+2019-03-26 19:45:03.030760: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:1009] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2019-03-26 19:45:03.031937: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x55d43e8843d0 executing computations on platform CUDA. Devices:
+2019-03-26 19:45:03.031972: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): GeForce RTX 2070, Compute Capability 7.5
+2019-03-26 19:45:03.054617: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 3400030000 Hz
+2019-03-26 19:45:03.054930: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x55d43ebb0a80 executing computations on platform Host. Devices:
+2019-03-26 19:45:03.054959: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): <undefined>, <undefined>
+2019-03-26 19:45:03.055615: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1551] Found device 0 with properties: 
+name: GeForce RTX 2070 major: 7 minor: 5 memoryClockRate(GHz): 1.62
+pciBusID: 0000:01:00.0
+totalMemory: 7.76GiB freeMemory: 7.15GiB
+2019-03-26 19:45:03.055641: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1674] Adding visible gpu devices: 0
+2019-03-26 19:45:03.055718: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcudart.so.10.0
+2019-03-26 19:45:03.057829: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1082] Device interconnect StreamExecutor with strength 1 edge matrix:
+2019-03-26 19:45:03.057862: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1088]      0 
+2019-03-26 19:45:03.057876: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1101] 0:   N 
+2019-03-26 19:45:03.058514: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1222] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 6360 MB memory) -> physical GPU (device: 0, name: GeForce RTX 2070, pci bus id: 0000:01:00.0, compute capability: 7.5)
+Solving...
+WARNING: Logging before flag parsing goes to stderr.
+W0326 19:45:03.276382 140567887284032 deprecation.py:323] From /home/vador/Documents/project/AI/drl-rpn-tf/tools/../lib/nets/network.py:222: to_int32 (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use `tf.cast` instead.
+W0326 19:45:03.280826 140567887284032 deprecation.py:323] From /home/vador/Documents/project/AI/drl-rpn-tf/tools/../lib/nets/network.py:231: py_func (from tensorflow.python.ops.script_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+tf.py_func is deprecated in TF V2. Instead, there are two
+    options available in V2.
+    - tf.py_function takes a python function which manipulates tf eager
+    tensors instead of numpy arrays. It's easy to convert a tf eager tensor to
+    an ndarray (just call tensor.numpy()) but having access to eager tensors
+    means `tf.py_function`s can use accelerators such as GPUs as well as
+    being differentiable using a gradient tape.
+    - tf.numpy_function maintains the semantics of the deprecated tf.py_func
+    (it is not differentiable, and manipulates numpy arrays). It drops the
+    stateful argument making all functions stateful.
+    
+W0326 19:45:03.359935 140567887284032 deprecation.py:323] From /home/vador/Documents/project/AI/drl-rpn-tf/tools/../lib/nets/network.py:128: to_float (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use `tf.cast` instead.
+W0326 19:45:03.375645 140567887284032 deprecation.py:506] From /home/vador/Documents/project/AI/drl-rpn-tf/tools/../lib/nets/network.py:141: calling crop_and_resize_v1 (from tensorflow.python.ops.image_ops_impl) with box_ind is deprecated and will be removed in a future version.
+Instructions for updating:
+box_ind is deprecated, use box_indices instead
+W0326 19:45:03.378634 140567887284032 deprecation.py:323] From /home/vador/anaconda3/envs/tf10/lib/python3.6/site-packages/tensorflow/contrib/layers/python/layers/layers.py:1624: flatten (from tensorflow.python.layers.core) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use keras.layers.flatten instead.
+W0326 19:45:03.874690 140567887284032 deprecation.py:506] From /home/vador/anaconda3/envs/tf10/lib/python3.6/site-packages/tensorflow/python/training/slot_creator.py:187: calling Zeros.__init__ (from tensorflow.python.ops.init_ops) with dtype is deprecated and will be removed in a future version.
+Instructions for updating:
+Call initializer instance with the dtype argument instead of passing it to the constructor
+Loading initial model weights from /home/vador/Documents/project/AI/drl-rpn-tf/data/pre-trained/drl-rpn-voc2007-2012-trainval/vgg16_drl_rpn_iter_110000.ckpt
+Variables restored: vgg_16/conv1/conv1_1/biases:0
+Variables restored: vgg_16/conv1/conv1_2/weights:0
+Variables restored: vgg_16/conv1/conv1_2/biases:0
+Variables restored: vgg_16/conv2/conv2_1/weights:0
+Variables restored: vgg_16/conv2/conv2_1/biases:0
+Variables restored: vgg_16/conv2/conv2_2/weights:0
+Variables restored: vgg_16/conv2/conv2_2/biases:0
+Variables restored: vgg_16/conv3/conv3_1/weights:0
+Variables restored: vgg_16/conv3/conv3_1/biases:0
+Variables restored: vgg_16/conv3/conv3_2/weights:0
+Variables restored: vgg_16/conv3/conv3_2/biases:0
+Variables restored: vgg_16/conv3/conv3_3/weights:0
+Variables restored: vgg_16/conv3/conv3_3/biases:0
+Variables restored: vgg_16/conv4/conv4_1/weights:0
+Variables restored: vgg_16/conv4/conv4_1/biases:0
+Variables restored: vgg_16/conv4/conv4_2/weights:0
+Variables restored: vgg_16/conv4/conv4_2/biases:0
+Variables restored: vgg_16/conv4/conv4_3/weights:0
+Variables restored: vgg_16/conv4/conv4_3/biases:0
+Variables restored: vgg_16/conv5/conv5_1/weights:0
+Variables restored: vgg_16/conv5/conv5_1/biases:0
+Variables restored: vgg_16/conv5/conv5_2/weights:0
+Variables restored: vgg_16/conv5/conv5_2/biases:0
+Variables restored: vgg_16/conv5/conv5_3/weights:0
+Variables restored: vgg_16/conv5/conv5_3/biases:0
+Variables restored: vgg_16/rpn_conv/3x3/weights:0
+Variables restored: vgg_16/rpn_conv/3x3/biases:0
+Variables restored: vgg_16/rpn_cls_score/weights:0
+Variables restored: vgg_16/rpn_cls_score/biases:0
+Variables restored: vgg_16/rpn_bbox_pred/weights:0
+Variables restored: vgg_16/rpn_bbox_pred/biases:0
+Variables restored: vgg_16/fc6/biases:0
+Variables restored: vgg_16/fc7/biases:0
+Variables restored: vgg_16/cls_score/weights:0
+Variables restored: vgg_16/cls_score/biases:0
+Variables restored: vgg_16/bbox_pred/weights:0
+Variables restored: vgg_16/bbox_pred/biases:0
+Variables restored: post_hist/vgg_16/fc6/weights:0
+Variables restored: post_hist/vgg_16/fc6/biases:0
+Variables restored: post_hist/vgg_16/fc7/weights:0
+Variables restored: post_hist/vgg_16/fc7/biases:0
+Variables restored: post_hist/hist_tanh_cls/weights:0
+Variables restored: post_hist/hist_tanh_cls/biases:0
+Variables restored: post_hist/cls_score_hist/weights:0
+Variables restored: post_hist/cls_score_hist/biases:0
+Variables restored: Variable:0
+Variables restored: vgg_16/fc6/weights/Momentum:0
+Variables restored: vgg_16/fc6/biases/Momentum:0
+Variables restored: vgg_16/fc7/weights/Momentum:0
+Variables restored: vgg_16/fc7/biases/Momentum:0
+Variables restored: vgg_16/cls_score/weights/Momentum:0
+Variables restored: vgg_16/cls_score/biases/Momentum:0
+Variables restored: vgg_16/bbox_pred/weights/Momentum:0
+Variables restored: vgg_16/bbox_pred/biases/Momentum:0
+Variables restored: post_hist/vgg_16/fc6/weights/Momentum:0
+Variables restored: post_hist/vgg_16/fc7/weights/Momentum:0
+Variables restored: post_hist/hist_tanh_cls/weights/Momentum:0
+Variables restored: post_hist/cls_score_hist/weights/Momentum:0
+Variables restored: Variable_1:0
+Variables restored: post_hist/vgg_16/fc6/weights/Momentum_1:0
+Variables restored: post_hist/vgg_16/fc6/biases/Momentum:0
+Variables restored: post_hist/vgg_16/fc7/weights/Momentum_1:0
+Variables restored: post_hist/vgg_16/fc7/biases/Momentum:0
+Variables restored: post_hist/hist_tanh_cls/weights/Momentum_1:0
+Variables restored: post_hist/hist_tanh_cls/biases/Momentum:0
+Variables restored: post_hist/cls_score_hist/weights/Momentum_1:0
+Variables restored: post_hist/cls_score_hist/biases/Momentum:0
+Variables restored: xr_weights_base:0
+Variables restored: xr_weights_aux:0
+Variables restored: xh_weights_base:0
+Variables restored: xh_weights_aux:0
+Variables restored: xz_weights_base:0
+Variables restored: xz_weights_aux:0
+Variables restored: hr_weights:0
+Variables restored: hh_weights:0
+Variables restored: hz_weights:0
+Variables restored: h_relu_weights:0
+Variables restored: r_bias:0
+Variables restored: h_bias:0
+Variables restored: z_bias:0
+Variables restored: relu_bias:0
+Variables restored: additional_weights:0
+Variables restored: additional_bias:0
+Variables restored: done_weights:0
+W0326 19:45:08.741558 140567887284032 deprecation.py:323] From /home/vador/anaconda3/envs/tf10/lib/python3.6/site-packages/tensorflow/python/training/saver.py:1276: checkpoint_exists (from tensorflow.python.training.checkpoint_management) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use standard file APIs to check for files with this prefix.
+Loaded.
+Fix VGG16 layers..
+OBS: NOT REVERSING RGB CHANNELS -- set do_reverse=True if reversing is desired!
+W0326 19:45:33.181689 140567887284032 deprecation.py:506] From /home/vador/anaconda3/envs/tf10/lib/python3.6/site-packages/tensorflow/python/ops/init_ops.py:1257: calling VarianceScaling.__init__ (from tensorflow.python.ops.init_ops) with dtype is deprecated and will be removed in a future version.
+Instructions for updating:
+Call initializer instance with the dtype argument instead of passing it to the constructor
+Fixed.
+2019-03-26 19:45:40.414259: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcudnn.so.7
+2019-03-26 19:45:41.813359: W tensorflow/core/common_runtime/bfc_allocator.cc:230] Allocator (GPU_0_bfc) ran out of memory trying to allocate 3.09GiB. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
+2019-03-26 19:45:41.837189: W tensorflow/core/common_runtime/bfc_allocator.cc:230] Allocator (GPU_0_bfc) ran out of memory trying to allocate 3.09GiB. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
+2019-03-26 19:45:42.783849: E tensorflow/core/grappler/optimizers/dependency_optimizer.cc:697] Iteration = 0, topological sort failed with message: The graph couldn't be sorted in topological order.
+2019-03-26 19:45:42.784872: E tensorflow/core/grappler/optimizers/dependency_optimizer.cc:697] Iteration = 1, topological sort failed with message: The graph couldn't be sorted in topological order.
+2019-03-26 19:45:42.828835: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcublas.so.10.0
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 50 / 10000
+lr-rl: 0.000020
+2019-03-26 19:46:05.644124: E tensorflow/core/grappler/optimizers/dependency_optimizer.cc:697] Iteration = 0, topological sort failed with message: The graph couldn't be sorted in topological order.
+2019-03-26 19:46:05.649148: E tensorflow/core/grappler/optimizers/dependency_optimizer.cc:697] Iteration = 1, topological sort failed with message: The graph couldn't be sorted in topological order.
+Mean loss (tot, MA):      (4.250365, 0.002125)
+Mean reward (tot, MA):         (-12.110206, -0.299159)
+Mean rew-done (tot, MA):       (-14.860001, -0.367098)
+Mean traj-len (tot, MA):       (7.139999, 0.176348)
+Mean frac-area (tot, MA):      (0.358021, 0.008842)
+Mean gt >= 0.5 frac (tot, MA): (0.295597, 0.007300)
+Mean gt-IoU-frac (tot, MA):    (0.188362, 0.004652)
+Traj-len vs. # gt-instances:
+['0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '5.00', '7.18']
+['0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.12', '5.14']
+Traj-len vs. betas:
+['0.050: 7.14', '0.350: 0.00']
+['0.050: 5.17', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.4818
+train-drl-rpn: 3.8044
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 100 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (3.767700, 0.003767)
+Mean reward (tot, MA):         (-13.091073, -0.639196)
+Mean rew-done (tot, MA):       (-15.239997, -0.743657)
+Mean traj-len (tot, MA):       (5.059999, 0.245603)
+Mean frac-area (tot, MA):      (0.260253, 0.012637)
+Mean gt >= 0.5 frac (tot, MA): (0.223398, 0.010852)
+Mean gt-IoU-frac (tot, MA):    (0.142497, 0.006923)
+Traj-len vs. # gt-instances:
+['0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '4.00', '5.08']
+['0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.20', '3.62']
+Traj-len vs. betas:
+['0.050: 7.14', '0.350: 2.98']
+['0.050: 5.17', '0.350: 2.15']
+TIMINGS:
+runnn-drl-rpn: 0.3494
+train-drl-rpn: 2.8023
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 150 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (3.250283, 0.004872)
+Mean reward (tot, MA):         (-13.198755, -0.954733)
+Mean rew-done (tot, MA):       (-15.279998, -1.104670)
+Mean traj-len (tot, MA):       (5.193332, 0.374421)
+Mean frac-area (tot, MA):      (0.267340, 0.019279)
+Mean gt >= 0.5 frac (tot, MA): (0.217333, 0.015651)
+Mean gt-IoU-frac (tot, MA):    (0.138396, 0.009967)
+Traj-len vs. # gt-instances:
+['0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '4.00', '5.21']
+['0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.20', '5.01']
+Traj-len vs. betas:
+['0.050: 6.30', '0.350: 2.98']
+['0.050: 5.45', '0.350: 2.15']
+TIMINGS:
+runnn-drl-rpn: 0.3467
+train-drl-rpn: 2.7104
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 200 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (3.006904, 0.006008)
+Mean reward (tot, MA):         (-13.326057, -1.269901)
+Mean rew-done (tot, MA):       (-15.094995, -1.436669)
+Mean traj-len (tot, MA):       (4.344999, 0.409617)
+Mean frac-area (tot, MA):      (0.225100, 0.021232)
+Mean gt >= 0.5 frac (tot, MA): (0.186520, 0.017585)
+Mean gt-IoU-frac (tot, MA):    (0.118800, 0.011201)
+Traj-len vs. # gt-instances:
+['0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '2.60', '4.39']
+['0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.30', '2.76']
+Traj-len vs. betas:
+['0.050: 6.30', '0.350: 2.39']
+['0.050: 5.45', '0.350: 1.88']
+TIMINGS:
+runnn-drl-rpn: 0.2978
+train-drl-rpn: 2.4018
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 250 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (2.810741, 0.007018)
+Mean reward (tot, MA):         (-13.381946, -1.574604)
+Mean rew-done (tot, MA):       (-15.175996, -1.784033)
+Mean traj-len (tot, MA):       (4.339998, 0.506168)
+Mean frac-area (tot, MA):      (0.226042, 0.026382)
+Mean gt >= 0.5 frac (tot, MA): (0.189426, 0.022114)
+Mean gt-IoU-frac (tot, MA):    (0.120378, 0.014052)
+Traj-len vs. # gt-instances:
+['0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '2.60', '4.38']
+['0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.30', '3.86']
+Traj-len vs. betas:
+['0.050: 5.64', '0.350: 2.39']
+['0.050: 4.62', '0.350: 1.88']
+TIMINGS:
+runnn-drl-rpn: 0.2956
+train-drl-rpn: 2.3592
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 300 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (2.548062, 0.007632)
+Mean reward (tot, MA):         (-13.497032, -1.883173)
+Mean rew-done (tot, MA):       (-15.089996, -2.101948)
+Mean traj-len (tot, MA):       (3.826666, 0.524785)
+Mean frac-area (tot, MA):      (0.200467, 0.027524)
+Mean gt >= 0.5 frac (tot, MA): (0.168886, 0.023204)
+Mean gt-IoU-frac (tot, MA):    (0.107099, 0.014711)
+Traj-len vs. # gt-instances:
+['0.00', '2.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '2.60', '3.85']
+['0.00', '0.05', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.30', '2.00']
+Traj-len vs. betas:
+['0.050: 5.64', '0.350: 2.01']
+['0.050: 4.62', '0.350: 1.43']
+TIMINGS:
+runnn-drl-rpn: 0.2670
+train-drl-rpn: 2.1893
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 350 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (2.398847, 0.008380)
+Mean reward (tot, MA):         (-13.541857, -2.177906)
+Mean rew-done (tot, MA):       (-15.108567, -2.426059)
+Mean traj-len (tot, MA):       (3.754285, 0.593817)
+Mean frac-area (tot, MA):      (0.197489, 0.031280)
+Mean gt >= 0.5 frac (tot, MA): (0.166328, 0.026358)
+Mean gt-IoU-frac (tot, MA):    (0.105392, 0.016696)
+Traj-len vs. # gt-instances:
+['0.00', '2.00', '0.00', '0.00', '0.00', '0.00', '0.00', '3.00', '2.67', '3.78']
+['0.00', '0.05', '0.00', '0.00', '0.00', '0.00', '0.00', '0.08', '0.37', '2.94']
+Traj-len vs. betas:
+['0.050: 5.06', '0.350: 2.01']
+['0.050: 3.69', '0.350: 1.43']
+TIMINGS:
+runnn-drl-rpn: 0.2622
+train-drl-rpn: 2.1450
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 400 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (2.174710, 0.008679)
+Mean reward (tot, MA):         (-13.730757, -2.495869)
+Mean rew-done (tot, MA):       (-15.157495, -2.748962)
+Mean traj-len (tot, MA):       (3.422500, 0.606317)
+Mean frac-area (tot, MA):      (0.180574, 0.032043)
+Mean gt >= 0.5 frac (tot, MA): (0.151238, 0.026836)
+Mean gt-IoU-frac (tot, MA):    (0.095775, 0.016988)
+Traj-len vs. # gt-instances:
+['0.00', '2.00', '0.00', '0.00', '0.00', '0.00', '0.00', '3.00', '2.67', '3.44']
+['0.00', '0.05', '0.00', '0.00', '0.00', '0.00', '0.00', '0.08', '0.37', '1.62']
+Traj-len vs. betas:
+['0.050: 5.06', '0.350: 1.78']
+['0.050: 3.69', '0.350: 1.20']
+TIMINGS:
+runnn-drl-rpn: 0.2437
+train-drl-rpn: 2.0383
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 450 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (2.190094, 0.009831)
+Mean reward (tot, MA):         (-13.857618, -2.801339)
+Mean rew-done (tot, MA):       (-15.242216, -3.074065)
+Mean traj-len (tot, MA):       (3.315556, 0.652109)
+Mean frac-area (tot, MA):      (0.175771, 0.034645)
+Mean gt >= 0.5 frac (tot, MA): (0.146859, 0.028937)
+Mean gt-IoU-frac (tot, MA):    (0.093056, 0.018331)
+Traj-len vs. # gt-instances:
+['0.00', '2.00', '0.00', '0.00', '0.00', '0.00', '0.00', '3.00', '2.71', '3.33']
+['0.00', '0.05', '0.00', '0.00', '0.00', '0.00', '0.00', '0.08', '0.44', '2.22']
+Traj-len vs. betas:
+['0.050: 4.54', '0.350: 1.78']
+['0.050: 2.82', '0.350: 1.20']
+TIMINGS:
+runnn-drl-rpn: 0.2378
+train-drl-rpn: 1.9966
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 500 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (2.004691, 0.009994)
+Mean reward (tot, MA):         (-13.999020, -3.109295)
+Mean rew-done (tot, MA):       (-15.275993, -3.382919)
+Mean traj-len (tot, MA):       (3.082000, 0.660201)
+Mean frac-area (tot, MA):      (0.163764, 0.035165)
+Mean gt >= 0.5 frac (tot, MA): (0.135655, 0.029084)
+Mean gt-IoU-frac (tot, MA):    (0.085807, 0.018387)
+Traj-len vs. # gt-instances:
+['0.00', '2.00', '0.00', '0.00', '0.00', '0.00', '0.00', '3.00', '2.71', '3.09']
+['0.00', '0.05', '0.00', '0.00', '0.00', '0.00', '0.00', '0.08', '0.44', '1.32']
+Traj-len vs. betas:
+['0.050: 4.54', '0.350: 1.62']
+['0.050: 2.82', '0.350: 1.03']
+TIMINGS:
+runnn-drl-rpn: 0.2248
+train-drl-rpn: 1.9243
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 550 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (1.964025, 0.010768)
+Mean reward (tot, MA):         (-13.997212, -3.377702)
+Mean rew-done (tot, MA):       (-15.249085, -3.669261)
+Mean traj-len (tot, MA):       (2.985454, 0.693783)
+Mean frac-area (tot, MA):      (0.159129, 0.037081)
+Mean gt >= 0.5 frac (tot, MA): (0.132785, 0.030935)
+Mean gt-IoU-frac (tot, MA):    (0.084085, 0.019584)
+Traj-len vs. # gt-instances:
+['0.00', '2.00', '0.00', '0.00', '0.00', '0.00', '0.00', '3.00', '2.40', '3.00']
+['0.00', '0.05', '0.00', '0.00', '0.00', '0.00', '0.00', '0.08', '0.53', '1.82']
+Traj-len vs. betas:
+['0.050: 4.12', '0.350: 1.62']
+['0.050: 2.24', '0.350: 1.03']
+TIMINGS:
+runnn-drl-rpn: 0.2194
+train-drl-rpn: 1.8899
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 600 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (1.834103, 0.010965)
+Mean reward (tot, MA):         (-14.117431, -3.675564)
+Mean rew-done (tot, MA):       (-15.284996, -3.965856)
+Mean traj-len (tot, MA):       (2.816667, 0.700353)
+Mean frac-area (tot, MA):      (0.150300, 0.037478)
+Mean gt >= 0.5 frac (tot, MA): (0.123983, 0.030843)
+Mean gt-IoU-frac (tot, MA):    (0.078443, 0.019505)
+Traj-len vs. # gt-instances:
+['0.00', '2.00', '0.00', '0.00', '0.00', '0.00', '0.00', '3.00', '2.40', '2.82']
+['0.00', '0.05', '0.00', '0.00', '0.00', '0.00', '0.00', '0.08', '0.53', '1.20']
+Traj-len vs. betas:
+['0.050: 4.12', '0.350: 1.51']
+['0.050: 2.24', '0.350: 0.98']
+TIMINGS:
+runnn-drl-rpn: 0.2099
+train-drl-rpn: 1.8354
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 650 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (1.729710, 0.011198)
+Mean reward (tot, MA):         (-14.220893, -3.966713)
+Mean rew-done (tot, MA):       (-15.346153, -4.265091)
+Mean traj-len (tot, MA):       (2.735384, 0.726520)
+Mean frac-area (tot, MA):      (0.145955, 0.038869)
+Mean gt >= 0.5 frac (tot, MA): (0.119469, 0.031694)
+Mean gt-IoU-frac (tot, MA):    (0.075524, 0.020024)
+Traj-len vs. # gt-instances:
+['0.00', '2.00', '0.00', '0.00', '0.00', '0.00', '0.00', '3.00', '2.40', '2.74']
+['0.00', '0.05', '0.00', '0.00', '0.00', '0.00', '0.00', '0.08', '0.53', '1.60']
+Traj-len vs. betas:
+['0.050: 3.78', '0.350: 1.51']
+['0.050: 1.89', '0.350: 0.98']
+TIMINGS:
+runnn-drl-rpn: 0.2051
+train-drl-rpn: 1.8085
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 700 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (1.651765, 0.011512)
+Mean reward (tot, MA):         (-14.291048, -4.244286)
+Mean rew-done (tot, MA):       (-15.364285, -4.545119)
+Mean traj-len (tot, MA):       (2.605714, 0.731304)
+Mean frac-area (tot, MA):      (0.139217, 0.039185)
+Mean gt >= 0.5 frac (tot, MA): (0.113787, 0.031898)
+Mean gt-IoU-frac (tot, MA):    (0.072016, 0.020182)
+Traj-len vs. # gt-instances:
+['0.00', '2.00', '0.00', '0.00', '0.00', '0.00', '0.00', '3.00', '2.40', '2.61']
+['0.00', '0.05', '0.00', '0.00', '0.00', '0.00', '0.00', '0.08', '0.53', '1.12']
+Traj-len vs. betas:
+['0.050: 3.78', '0.350: 1.43']
+['0.050: 1.89', '0.350: 0.94']
+TIMINGS:
+runnn-drl-rpn: 0.1978
+train-drl-rpn: 1.7679
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 750 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (1.598568, 0.011933)
+Mean reward (tot, MA):         (-14.311975, -4.500250)
+Mean rew-done (tot, MA):       (-15.340000, -4.803411)
+Mean traj-len (tot, MA):       (2.514667, 0.743860)
+Mean frac-area (tot, MA):      (0.134393, 0.039867)
+Mean gt >= 0.5 frac (tot, MA): (0.109080, 0.032177)
+Mean gt-IoU-frac (tot, MA):    (0.069000, 0.020345)
+Traj-len vs. # gt-instances:
+['0.00', '2.00', '0.00', '0.00', '0.00', '0.00', '0.00', '3.00', '2.40', '2.52']
+['0.00', '0.05', '0.00', '0.00', '0.00', '0.00', '0.00', '0.08', '0.53', '1.19']
+Traj-len vs. betas:
+['0.050: 3.47', '0.350: 1.43']
+['0.050: 1.41', '0.350: 0.94']
+TIMINGS:
+runnn-drl-rpn: 0.1926
+train-drl-rpn: 1.7387
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 800 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (1.568739, 0.012488)
+Mean reward (tot, MA):         (-14.388315, -4.772621)
+Mean rew-done (tot, MA):       (-15.376248, -5.077858)
+Mean traj-len (tot, MA):       (2.408751, 0.745748)
+Mean frac-area (tot, MA):      (0.128832, 0.040005)
+Mean gt >= 0.5 frac (tot, MA): (0.104524, 0.032277)
+Mean gt-IoU-frac (tot, MA):    (0.066147, 0.020421)
+Traj-len vs. # gt-instances:
+['0.00', '2.00', '0.00', '0.00', '0.00', '0.00', '0.00', '3.00', '2.18', '2.41']
+['0.00', '0.05', '0.00', '0.00', '0.00', '0.00', '0.00', '0.08', '0.51', '0.95']
+Traj-len vs. betas:
+['0.050: 3.47', '0.350: 1.35']
+['0.050: 1.41', '0.350: 0.87']
+TIMINGS:
+runnn-drl-rpn: 0.1867
+train-drl-rpn: 1.7043
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 850 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (1.528350, 0.012922)
+Mean reward (tot, MA):         (-14.405731, -5.017544)
+Mean rew-done (tot, MA):       (-15.362350, -5.326528)
+Mean traj-len (tot, MA):       (2.331766, 0.754501)
+Mean frac-area (tot, MA):      (0.124798, 0.040505)
+Mean gt >= 0.5 frac (tot, MA): (0.101094, 0.032625)
+Mean gt-IoU-frac (tot, MA):    (0.063895, 0.020606)
+Traj-len vs. # gt-instances:
+['0.00', '2.00', '0.00', '0.00', '0.00', '0.00', '0.00', '3.00', '2.08', '2.33']
+['0.00', '0.05', '0.00', '0.00', '0.00', '0.00', '0.00', '0.08', '0.53', '1.06']
+Traj-len vs. betas:
+['0.050: 3.20', '0.350: 1.35']
+['0.050: 1.19', '0.350: 0.87']
+TIMINGS:
+runnn-drl-rpn: 0.1823
+train-drl-rpn: 1.6801
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 900 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (1.489417, 0.013330)
+Mean reward (tot, MA):         (-14.490811, -5.287328)
+Mean rew-done (tot, MA):       (-15.403330, -5.592715)
+Mean traj-len (tot, MA):       (2.234446, 0.750185)
+Mean frac-area (tot, MA):      (0.119584, 0.040269)
+Mean gt >= 0.5 frac (tot, MA): (0.096472, 0.032261)
+Mean gt-IoU-frac (tot, MA):    (0.060966, 0.020374)
+Traj-len vs. # gt-instances:
+['0.00', '2.00', '0.00', '0.00', '0.00', '0.00', '0.00', '3.00', '2.08', '2.24']
+['0.00', '0.05', '0.00', '0.00', '0.00', '0.00', '0.00', '0.08', '0.53', '0.71']
+Traj-len vs. betas:
+['0.050: 3.20', '0.350: 1.27']
+['0.050: 1.19', '0.350: 0.65']
+TIMINGS:
+runnn-drl-rpn: 0.1767
+train-drl-rpn: 1.6494
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 950 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (1.382487, 0.013052)
+Mean reward (tot, MA):         (-14.518148, -5.527502)
+Mean rew-done (tot, MA):       (-15.401050, -5.833973)
+Mean traj-len (tot, MA):       (2.170528, 0.756846)
+Mean frac-area (tot, MA):      (0.116281, 0.040678)
+Mean gt >= 0.5 frac (tot, MA): (0.093427, 0.032416)
+Mean gt-IoU-frac (tot, MA):    (0.059018, 0.020461)
+Traj-len vs. # gt-instances:
+['0.00', '2.00', '0.00', '0.00', '0.00', '0.00', '0.00', '3.00', '2.00', '2.17']
+['0.00', '0.05', '0.00', '0.00', '0.00', '0.00', '0.00', '0.08', '0.54', '0.93']
+Traj-len vs. betas:
+['0.050: 2.98', '0.350: 1.27']
+['0.050: 1.06', '0.350: 0.65']
+TIMINGS:
+runnn-drl-rpn: 0.1731
+train-drl-rpn: 1.6301
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 1000 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (1.340142, 0.013313)
+Mean reward (tot, MA):         (-14.584415, -5.782281)
+Mean rew-done (tot, MA):       (-15.426995, -6.083078)
+Mean traj-len (tot, MA):       (2.070001, 0.742110)
+Mean frac-area (tot, MA):      (0.110892, 0.039883)
+Mean gt >= 0.5 frac (tot, MA): (0.089131, 0.031802)
+Mean gt-IoU-frac (tot, MA):    (0.056306, 0.020074)
+Traj-len vs. # gt-instances:
+['0.00', '2.00', '0.00', '0.00', '0.00', '0.00', '0.00', '3.00', '2.00', '2.07']
+['0.00', '0.05', '0.00', '0.00', '0.00', '0.00', '0.00', '0.08', '0.54', '0.38']
+Traj-len vs. betas:
+['0.050: 2.98', '0.350: 1.16']
+['0.050: 1.06', '0.350: 0.30']
+TIMINGS:
+runnn-drl-rpn: 0.1674
+train-drl-rpn: 1.5994
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 1050 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (1.295184, 0.013505)
+Mean reward (tot, MA):         (-14.596666, -6.006021)
+Mean rew-done (tot, MA):       (-15.422853, -6.311668)
+Mean traj-len (tot, MA):       (2.020002, 0.748970)
+Mean frac-area (tot, MA):      (0.108069, 0.040174)
+Mean gt >= 0.5 frac (tot, MA): (0.087520, 0.032379)
+Mean gt-IoU-frac (tot, MA):    (0.055287, 0.020438)
+Traj-len vs. # gt-instances:
+['0.00', '2.00', '0.00', '0.00', '0.00', '0.00', '0.00', '3.00', '1.87', '2.02']
+['0.00', '0.05', '0.00', '0.00', '0.00', '0.00', '0.00', '0.08', '0.56', '0.83']
+Traj-len vs. betas:
+['0.050: 2.81', '0.350: 1.16']
+['0.050: 1.03', '0.350: 0.30']
+TIMINGS:
+runnn-drl-rpn: 0.1644
+train-drl-rpn: 1.5836
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 1100 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (1.261120, 0.013771)
+Mean reward (tot, MA):         (-14.639948, -6.241477)
+Mean rew-done (tot, MA):       (-15.431815, -6.541334)
+Mean traj-len (tot, MA):       (1.934547, 0.733930)
+Mean frac-area (tot, MA):      (0.103544, 0.039391)
+Mean gt >= 0.5 frac (tot, MA): (0.083961, 0.031807)
+Mean gt-IoU-frac (tot, MA):    (0.053022, 0.020068)
+Traj-len vs. # gt-instances:
+['0.00', '2.00', '0.00', '0.00', '0.00', '0.00', '0.00', '1.50', '1.87', '1.94']
+['0.00', '0.05', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.56', '0.34']
+Traj-len vs. betas:
+['0.050: 2.81', '0.350: 1.06']
+['0.050: 1.03', '0.350: 0.18']
+TIMINGS:
+runnn-drl-rpn: 0.1596
+train-drl-rpn: 1.5582
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 1150 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (1.196770, 0.013654)
+Mean reward (tot, MA):         (-14.665272, -6.463287)
+Mean rew-done (tot, MA):       (-15.436518, -6.763611)
+Mean traj-len (tot, MA):       (1.893915, 0.740501)
+Mean frac-area (tot, MA):      (0.101432, 0.039777)
+Mean gt >= 0.5 frac (tot, MA): (0.081700, 0.031813)
+Mean gt-IoU-frac (tot, MA):    (0.051594, 0.020073)
+Traj-len vs. # gt-instances:
+['0.00', '1.50', '0.00', '0.00', '0.00', '0.00', '0.00', '1.50', '1.76', '1.90']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.58', '0.80']
+Traj-len vs. betas:
+['0.050: 2.66', '0.350: 1.06']
+['0.050: 1.01', '0.350: 0.18']
+TIMINGS:
+runnn-drl-rpn: 0.1573
+train-drl-rpn: 1.5450
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 1200 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (1.118261, 0.013304)
+Mean reward (tot, MA):         (-14.688383, -6.679615)
+Mean rew-done (tot, MA):       (-15.427498, -6.972522)
+Mean traj-len (tot, MA):       (1.816669, 0.723206)
+Mean frac-area (tot, MA):      (0.097311, 0.038857)
+Mean gt >= 0.5 frac (tot, MA): (0.078296, 0.031027)
+Mean gt-IoU-frac (tot, MA):    (0.049445, 0.019577)
+Traj-len vs. # gt-instances:
+['0.00', '1.50', '0.00', '0.00', '0.00', '0.00', '0.00', '1.50', '1.50', '1.82']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.54', '0.28']
+Traj-len vs. betas:
+['0.050: 2.66', '0.350: 0.98']
+['0.050: 1.01', '0.350: 0.09']
+TIMINGS:
+runnn-drl-rpn: 0.1529
+train-drl-rpn: 1.5231
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 1250 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (1.037919, 0.012852)
+Mean reward (tot, MA):         (-14.682627, -6.873871)
+Mean rew-done (tot, MA):       (-15.409601, -7.170283)
+Mean traj-len (tot, MA):       (1.784802, 0.730540)
+Mean frac-area (tot, MA):      (0.095726, 0.039322)
+Mean gt >= 0.5 frac (tot, MA): (0.077178, 0.031504)
+Mean gt-IoU-frac (tot, MA):    (0.048704, 0.019857)
+Traj-len vs. # gt-instances:
+['0.00', '1.50', '0.00', '0.00', '0.00', '0.00', '0.00', '1.50', '1.45', '1.79']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.56', '0.81']
+Traj-len vs. betas:
+['0.050: 2.53', '0.350: 0.98']
+['0.050: 1.02', '0.350: 0.09']
+TIMINGS:
+runnn-drl-rpn: 0.1512
+train-drl-rpn: 1.5128
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 1300 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.977124, 0.012574)
+Mean reward (tot, MA):         (-14.717138, -7.088818)
+Mean rew-done (tot, MA):       (-15.416155, -7.377907)
+Mean traj-len (tot, MA):       (1.716924, 0.712995)
+Mean frac-area (tot, MA):      (0.092077, 0.038372)
+Mean gt >= 0.5 frac (tot, MA): (0.074210, 0.030726)
+Mean gt-IoU-frac (tot, MA):    (0.046830, 0.019366)
+Traj-len vs. # gt-instances:
+['0.00', '1.50', '0.00', '0.00', '0.00', '0.00', '0.00', '1.50', '1.39', '1.72']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.55', '0.25']
+Traj-len vs. betas:
+['0.050: 2.53', '0.350: 0.90']
+['0.050: 1.02', '0.350: 0.04']
+TIMINGS:
+runnn-drl-rpn: 0.1473
+train-drl-rpn: 1.4928
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 1350 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.948922, 0.012676)
+Mean reward (tot, MA):         (-14.750747, -7.299663)
+Mean rew-done (tot, MA):       (-15.437037, -7.590397)
+Mean traj-len (tot, MA):       (1.691854, 0.721066)
+Mean frac-area (tot, MA):      (0.090767, 0.038825)
+Mean gt >= 0.5 frac (tot, MA): (0.072806, 0.030864)
+Mean gt-IoU-frac (tot, MA):    (0.045951, 0.019458)
+Traj-len vs. # gt-instances:
+['0.00', '1.50', '0.00', '0.00', '0.00', '0.00', '0.00', '1.50', '1.38', '1.70']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.56', '0.81']
+Traj-len vs. betas:
+['0.050: 2.42', '0.350: 0.90']
+['0.050: 1.03', '0.350: 0.04']
+TIMINGS:
+runnn-drl-rpn: 0.1459
+train-drl-rpn: 1.4842
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 1400 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.893757, 0.012372)
+Mean reward (tot, MA):         (-14.761790, -7.491255)
+Mean rew-done (tot, MA):       (-15.423572, -7.774810)
+Mean traj-len (tot, MA):       (1.632144, 0.703752)
+Mean frac-area (tot, MA):      (0.087557, 0.037888)
+Mean gt >= 0.5 frac (tot, MA): (0.070206, 0.030102)
+Mean gt-IoU-frac (tot, MA):    (0.044309, 0.018977)
+Traj-len vs. # gt-instances:
+['0.00', '1.50', '0.00', '0.00', '0.00', '0.00', '0.00', '1.50', '1.38', '1.64']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.56', '0.24']
+Traj-len vs. betas:
+['0.050: 2.42', '0.350: 0.84']
+['0.050: 1.03', '0.350: 0.03']
+TIMINGS:
+runnn-drl-rpn: 0.1425
+train-drl-rpn: 1.4666
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 1450 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.879918, 0.012612)
+Mean reward (tot, MA):         (-14.799919, -7.698096)
+Mean rew-done (tot, MA):       (-15.453795, -7.985319)
+Mean traj-len (tot, MA):       (1.608967, 0.710074)
+Mean frac-area (tot, MA):      (0.086398, 0.038285)
+Mean gt >= 0.5 frac (tot, MA): (0.069275, 0.030424)
+Mean gt-IoU-frac (tot, MA):    (0.043700, 0.019166)
+Traj-len vs. # gt-instances:
+['0.00', '1.50', '0.00', '0.00', '0.00', '0.00', '0.00', '1.50', '1.38', '1.61']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.56', '0.75']
+Traj-len vs. betas:
+['0.050: 2.33', '0.350: 0.84']
+['0.050: 0.97', '0.350: 0.03']
+TIMINGS:
+runnn-drl-rpn: 0.1412
+train-drl-rpn: 1.4589
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 1500 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.859405, 0.012738)
+Mean reward (tot, MA):         (-14.829545, -7.895328)
+Mean rew-done (tot, MA):       (-15.461998, -8.175734)
+Mean traj-len (tot, MA):       (1.556001, 0.693026)
+Mean frac-area (tot, MA):      (0.083547, 0.037361)
+Mean gt >= 0.5 frac (tot, MA): (0.067005, 0.029702)
+Mean gt-IoU-frac (tot, MA):    (0.042266, 0.018709)
+Traj-len vs. # gt-instances:
+['0.00', '1.50', '0.00', '0.00', '0.00', '0.00', '0.00', '1.50', '1.32', '1.56']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.55', '0.22']
+Traj-len vs. betas:
+['0.050: 2.33', '0.350: 0.79']
+['0.050: 0.97', '0.350: 0.01']
+TIMINGS:
+runnn-drl-rpn: 0.1382
+train-drl-rpn: 1.4425
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 1550 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.839198, 0.012848)
+Mean reward (tot, MA):         (-14.826189, -8.064118)
+Mean rew-done (tot, MA):       (-15.450321, -8.346858)
+Mean traj-len (tot, MA):       (1.534840, 0.698119)
+Mean frac-area (tot, MA):      (0.082481, 0.037684)
+Mean gt >= 0.5 frac (tot, MA): (0.066138, 0.029960)
+Mean gt-IoU-frac (tot, MA):    (0.041735, 0.018884)
+Traj-len vs. # gt-instances:
+['0.00', '1.50', '0.00', '0.00', '0.00', '0.00', '0.00', '1.50', '1.31', '1.54']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.56', '0.68']
+Traj-len vs. betas:
+['0.050: 2.24', '0.350: 0.79']
+['0.050: 0.90', '0.350: 0.01']
+TIMINGS:
+runnn-drl-rpn: 0.1371
+train-drl-rpn: 1.4367
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 1600 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.812973, 0.012841)
+Mean reward (tot, MA):         (-14.860373, -8.258190)
+Mean rew-done (tot, MA):       (-15.465002, -8.533946)
+Mean traj-len (tot, MA):       (1.486876, 0.680878)
+Mean frac-area (tot, MA):      (0.079903, 0.036753)
+Mean gt >= 0.5 frac (tot, MA): (0.064072, 0.029220)
+Mean gt-IoU-frac (tot, MA):    (0.040431, 0.018418)
+Traj-len vs. # gt-instances:
+['0.00', '1.50', '0.00', '0.00', '0.00', '0.00', '0.00', '1.50', '1.21', '1.49']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.53', '0.20']
+Traj-len vs. betas:
+['0.050: 2.24', '0.350: 0.74']
+['0.050: 0.90', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.1343
+train-drl-rpn: 1.4221
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 1650 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.821790, 0.013387)
+Mean reward (tot, MA):         (-14.882779, -8.439448)
+Mean rew-done (tot, MA):       (-15.475761, -8.713838)
+Mean traj-len (tot, MA):       (1.464849, 0.682826)
+Mean frac-area (tot, MA):      (0.078727, 0.036860)
+Mean gt >= 0.5 frac (tot, MA): (0.062818, 0.029061)
+Mean gt-IoU-frac (tot, MA):    (0.039651, 0.018327)
+Traj-len vs. # gt-instances:
+['0.00', '1.50', '0.00', '0.00', '0.00', '0.00', '0.00', '1.50', '1.21', '1.47']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.54', '0.58']
+Traj-len vs. betas:
+['0.050: 2.15', '0.350: 0.74']
+['0.050: 0.79', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.1331
+train-drl-rpn: 1.4148
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 1700 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.797619, 0.013380)
+Mean reward (tot, MA):         (-14.925639, -8.634576)
+Mean rew-done (tot, MA):       (-15.501180, -8.902188)
+Mean traj-len (tot, MA):       (1.421765, 0.665963)
+Mean frac-area (tot, MA):      (0.076411, 0.035950)
+Mean gt >= 0.5 frac (tot, MA): (0.060970, 0.028343)
+Mean gt-IoU-frac (tot, MA):    (0.038485, 0.017875)
+Traj-len vs. # gt-instances:
+['0.00', '1.50', '0.00', '0.00', '0.00', '0.00', '0.00', '1.50', '1.21', '1.43']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.54', '0.16']
+Traj-len vs. betas:
+['0.050: 2.15', '0.350: 0.69']
+['0.050: 0.79', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.1306
+train-drl-rpn: 1.4017
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 1750 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.817438, 0.014119)
+Mean reward (tot, MA):         (-14.964829, -8.823683)
+Mean rew-done (tot, MA):       (-15.529717, -9.089706)
+Mean traj-len (tot, MA):       (1.398287, 0.664345)
+Mean frac-area (tot, MA):      (0.075185, 0.035890)
+Mean gt >= 0.5 frac (tot, MA): (0.059785, 0.028127)
+Mean gt-IoU-frac (tot, MA):    (0.037737, 0.017738)
+Traj-len vs. # gt-instances:
+['0.00', '1.50', '0.00', '0.00', '0.00', '0.00', '0.00', '1.50', '1.21', '1.40']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.54', '0.49']
+Traj-len vs. betas:
+['0.050: 2.06', '0.350: 0.69']
+['0.050: 0.67', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.1293
+train-drl-rpn: 1.3943
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 1800 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.794732, 0.014112)
+Mean reward (tot, MA):         (-15.003031, -9.009216)
+Mean rew-done (tot, MA):       (-15.552225, -9.268670)
+Mean traj-len (tot, MA):       (1.359445, 0.647938)
+Mean frac-area (tot, MA):      (0.073096, 0.035004)
+Mean gt >= 0.5 frac (tot, MA): (0.058125, 0.027432)
+Mean gt-IoU-frac (tot, MA):    (0.036688, 0.017300)
+Traj-len vs. # gt-instances:
+['0.00', '1.50', '0.00', '0.00', '0.00', '0.00', '0.00', '1.50', '1.17', '1.36']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.53', '0.14']
+Traj-len vs. betas:
+['0.050: 2.06', '0.350: 0.66']
+['0.050: 0.67', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.1271
+train-drl-rpn: 1.3826
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 1850 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.796629, 0.014537)
+Mean reward (tot, MA):         (-15.015156, -9.168287)
+Mean rew-done (tot, MA):       (-15.550814, -9.422520)
+Mean traj-len (tot, MA):       (1.329731, 0.638357)
+Mean frac-area (tot, MA):      (0.071465, 0.034453)
+Mean gt >= 0.5 frac (tot, MA): (0.056707, 0.026894)
+Mean gt-IoU-frac (tot, MA):    (0.035788, 0.016956)
+Traj-len vs. # gt-instances:
+['0.00', '1.50', '0.00', '0.00', '0.00', '0.00', '0.00', '1.50', '1.13', '1.33']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.51', '0.23']
+Traj-len vs. betas:
+['0.050: 1.97', '0.350: 0.66']
+['0.050: 0.38', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.1254
+train-drl-rpn: 1.3737
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 1900 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.775665, 0.014530)
+Mean reward (tot, MA):         (-15.031075, -9.327622)
+Mean rew-done (tot, MA):       (-15.552637, -9.575576)
+Mean traj-len (tot, MA):       (1.294738, 0.622592)
+Mean frac-area (tot, MA):      (0.069584, 0.033602)
+Mean gt >= 0.5 frac (tot, MA): (0.055214, 0.026229)
+Mean gt-IoU-frac (tot, MA):    (0.034847, 0.016537)
+Traj-len vs. # gt-instances:
+['0.00', '1.50', '0.00', '0.00', '0.00', '0.00', '0.00', '1.50', '1.13', '1.30']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.51', '0.07']
+Traj-len vs. betas:
+['0.050: 1.97', '0.350: 0.62']
+['0.050: 0.38', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.1234
+train-drl-rpn: 1.3632
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 1950 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.782723, 0.015048)
+Mean reward (tot, MA):         (-15.045672, -9.482628)
+Mean rew-done (tot, MA):       (-15.557955, -9.728413)
+Mean traj-len (tot, MA):       (1.268207, 0.613647)
+Mean frac-area (tot, MA):      (0.068170, 0.033130)
+Mean gt >= 0.5 frac (tot, MA): (0.054160, 0.025931)
+Mean gt-IoU-frac (tot, MA):    (0.034192, 0.016360)
+Traj-len vs. # gt-instances:
+['0.00', '1.50', '0.00', '0.00', '0.00', '0.00', '0.00', '1.50', '1.13', '1.27']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.51', '0.22']
+Traj-len vs. betas:
+['0.050: 1.88', '0.350: 0.62']
+['0.050: 0.31', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.1219
+train-drl-rpn: 1.3548
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 2000 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.763155, 0.015041)
+Mean reward (tot, MA):         (-15.041528, -9.616098)
+Mean rew-done (tot, MA):       (-15.541004, -9.855817)
+Mean traj-len (tot, MA):       (1.236502, 0.598492)
+Mean frac-area (tot, MA):      (0.066466, 0.032312)
+Mean gt >= 0.5 frac (tot, MA): (0.052806, 0.025290)
+Mean gt-IoU-frac (tot, MA):    (0.033338, 0.015956)
+Traj-len vs. # gt-instances:
+['0.00', '1.50', '0.00', '0.00', '0.00', '0.00', '0.00', '1.50', '1.13', '1.24']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.51', '0.06']
+Traj-len vs. betas:
+['0.050: 1.88', '0.350: 0.59']
+['0.050: 0.31', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.1201
+train-drl-rpn: 1.3455
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 2050 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.760990, 0.015370)
+Mean reward (tot, MA):         (-15.045305, -9.754050)
+Mean rew-done (tot, MA):       (-15.535613, -9.990895)
+Mean traj-len (tot, MA):       (1.210245, 0.587655)
+Mean frac-area (tot, MA):      (0.065052, 0.031723)
+Mean gt >= 0.5 frac (tot, MA): (0.051831, 0.024982)
+Mean gt-IoU-frac (tot, MA):    (0.032718, 0.015758)
+Traj-len vs. # gt-instances:
+['0.00', '1.50', '0.00', '0.00', '0.00', '0.00', '0.00', '1.50', '1.13', '1.21']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.53', '0.10']
+Traj-len vs. betas:
+['0.050: 1.80', '0.350: 0.59']
+['0.050: 0.19', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.1186
+train-drl-rpn: 1.3376
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 2100 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.742871, 0.015363)
+Mean reward (tot, MA):         (-15.035651, -9.874762)
+Mean rew-done (tot, MA):       (-15.514285, -10.105759)
+Mean traj-len (tot, MA):       (1.181430, 0.573142)
+Mean frac-area (tot, MA):      (0.063503, 0.030939)
+Mean gt >= 0.5 frac (tot, MA): (0.050597, 0.024365)
+Mean gt-IoU-frac (tot, MA):    (0.031939, 0.015369)
+Traj-len vs. # gt-instances:
+['0.00', '1.50', '0.00', '0.00', '0.00', '0.00', '0.00', '1.50', '1.06', '1.18']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.50', '0.03']
+Traj-len vs. betas:
+['0.050: 1.80', '0.350: 0.56']
+['0.050: 0.19', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.1170
+train-drl-rpn: 1.3291
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 2150 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.711708, 0.015057)
+Mean reward (tot, MA):         (-15.028776, -9.994934)
+Mean rew-done (tot, MA):       (-15.496278, -10.220227)
+Mean traj-len (tot, MA):       (1.154885, 0.559975)
+Mean frac-area (tot, MA):      (0.062076, 0.030228)
+Mean gt >= 0.5 frac (tot, MA): (0.049420, 0.023764)
+Mean gt-IoU-frac (tot, MA):    (0.031197, 0.014989)
+Traj-len vs. # gt-instances:
+['0.00', '1.50', '0.00', '0.00', '0.00', '0.00', '0.00', '1.50', '1.03', '1.16']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.49', '0.04']
+Traj-len vs. betas:
+['0.050: 1.72', '0.350: 0.56']
+['0.050: 0.08', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.1154
+train-drl-rpn: 1.3209
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 2200 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.677828, 0.014659)
+Mean reward (tot, MA):         (-15.041758, -10.133409)
+Mean rew-done (tot, MA):       (-15.498635, -10.353135)
+Mean traj-len (tot, MA):       (1.129092, 0.546641)
+Mean frac-area (tot, MA):      (0.060691, 0.029510)
+Mean gt >= 0.5 frac (tot, MA): (0.048297, 0.023177)
+Mean gt-IoU-frac (tot, MA):    (0.030488, 0.014619)
+Traj-len vs. # gt-instances:
+['0.00', '1.50', '0.00', '0.00', '0.00', '0.00', '0.00', '1.50', '1.00', '1.13']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.48', '0.03']
+Traj-len vs. betas:
+['0.050: 1.72', '0.350: 0.54']
+['0.050: 0.08', '0.350: 0.02']
+TIMINGS:
+runnn-drl-rpn: 0.1140
+train-drl-rpn: 1.3132
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 2250 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.666246, 0.014730)
+Mean reward (tot, MA):         (-15.054276, -10.268617)
+Mean rew-done (tot, MA):       (-15.501333, -10.483280)
+Mean traj-len (tot, MA):       (1.104889, 0.534135)
+Mean frac-area (tot, MA):      (0.059398, 0.028844)
+Mean gt >= 0.5 frac (tot, MA): (0.047273, 0.022659)
+Mean gt-IoU-frac (tot, MA):    (0.029847, 0.014299)
+Traj-len vs. # gt-instances:
+['0.00', '1.50', '0.00', '0.00', '0.00', '0.00', '0.00', '1.50', '1.00', '1.11']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.48', '0.05']
+Traj-len vs. betas:
+['0.050: 1.65', '0.350: 0.54']
+['0.050: 0.06', '0.350: 0.02']
+TIMINGS:
+runnn-drl-rpn: 0.1126
+train-drl-rpn: 1.3063
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 2300 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.651763, 0.014723)
+Mean reward (tot, MA):         (-15.070924, -10.405689)
+Mean rew-done (tot, MA):       (-15.508262, -10.615047)
+Mean traj-len (tot, MA):       (1.080870, 0.520944)
+Mean frac-area (tot, MA):      (0.058107, 0.028131)
+Mean gt >= 0.5 frac (tot, MA): (0.046246, 0.022100)
+Mean gt-IoU-frac (tot, MA):    (0.029198, 0.013945)
+Traj-len vs. # gt-instances:
+['0.00', '1.50', '0.00', '0.00', '0.00', '0.00', '0.00', '1.50', '0.97', '1.08']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.46', '0.01']
+Traj-len vs. betas:
+['0.050: 1.65', '0.350: 0.51']
+['0.050: 0.06', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.1113
+train-drl-rpn: 1.2991
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 2350 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.647154, 0.014933)
+Mean reward (tot, MA):         (-15.089190, -10.542050)
+Mean rew-done (tot, MA):       (-15.517875, -10.746989)
+Mean traj-len (tot, MA):       (1.058298, 0.508571)
+Mean frac-area (tot, MA):      (0.056898, 0.027468)
+Mean gt >= 0.5 frac (tot, MA): (0.045309, 0.021609)
+Mean gt-IoU-frac (tot, MA):    (0.028613, 0.013643)
+Traj-len vs. # gt-instances:
+['0.00', '1.50', '0.00', '0.00', '0.00', '0.00', '0.00', '1.50', '0.95', '1.06']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.45', '0.02']
+Traj-len vs. betas:
+['0.050: 1.58', '0.350: 0.51']
+['0.050: 0.03', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.1100
+train-drl-rpn: 1.2924
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 2400 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.633672, 0.014926)
+Mean reward (tot, MA):         (-15.104832, -10.672820)
+Mean rew-done (tot, MA):       (-15.524587, -10.872693)
+Mean traj-len (tot, MA):       (1.036250, 0.496011)
+Mean frac-area (tot, MA):      (0.055712, 0.026789)
+Mean gt >= 0.5 frac (tot, MA): (0.044365, 0.021075)
+Mean gt-IoU-frac (tot, MA):    (0.028016, 0.013306)
+Traj-len vs. # gt-instances:
+['0.00', '1.50', '0.00', '0.00', '0.00', '0.00', '0.00', '1.50', '0.92', '1.04']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.44', '0.00']
+Traj-len vs. betas:
+['0.050: 1.58', '0.350: 0.49']
+['0.050: 0.03', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.1087
+train-drl-rpn: 1.2858
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 2450 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.608367, 0.014615)
+Mean reward (tot, MA):         (-15.118611, -10.798987)
+Mean rew-done (tot, MA):       (-15.529801, -10.993925)
+Mean traj-len (tot, MA):       (1.015511, 0.484261)
+Mean frac-area (tot, MA):      (0.054593, 0.026150)
+Mean gt >= 0.5 frac (tot, MA): (0.043460, 0.020554)
+Mean gt-IoU-frac (tot, MA):    (0.027445, 0.012977)
+Traj-len vs. # gt-instances:
+['0.00', '1.50', '0.00', '0.00', '0.00', '0.00', '0.00', '1.50', '0.90', '1.02']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.43', '0.03']
+Traj-len vs. betas:
+['0.050: 1.52', '0.350: 0.49']
+['0.050: 0.03', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.1075
+train-drl-rpn: 1.2793
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 2500 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.580335, 0.014211)
+Mean reward (tot, MA):         (-15.120241, -10.907568)
+Mean rew-done (tot, MA):       (-15.523205, -11.097692)
+Mean traj-len (tot, MA):       (0.995601, 0.472792)
+Mean frac-area (tot, MA):      (0.053514, 0.025520)
+Mean gt >= 0.5 frac (tot, MA): (0.042590, 0.020047)
+Mean gt-IoU-frac (tot, MA):    (0.026896, 0.012657)
+Traj-len vs. # gt-instances:
+['0.00', '1.50', '0.00', '0.00', '0.00', '0.00', '0.00', '1.50', '0.90', '1.00']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.43', '0.02']
+Traj-len vs. betas:
+['0.050: 1.52', '0.350: 0.47']
+['0.050: 0.03', '0.350: 0.01']
+TIMINGS:
+runnn-drl-rpn: 0.1064
+train-drl-rpn: 1.2734
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 2550 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.568955, 0.014204)
+Mean reward (tot, MA):         (-15.137491, -11.033531)
+Mean rew-done (tot, MA):       (-15.532553, -11.218954)
+Mean traj-len (tot, MA):       (0.976079, 0.461116)
+Mean frac-area (tot, MA):      (0.052465, 0.024889)
+Mean gt >= 0.5 frac (tot, MA): (0.041755, 0.019552)
+Mean gt-IoU-frac (tot, MA):    (0.026368, 0.012344)
+Traj-len vs. # gt-instances:
+['0.00', '1.50', '0.00', '0.00', '0.00', '0.00', '0.00', '1.50', '0.88', '0.98']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.42', '0.00']
+Traj-len vs. betas:
+['0.050: 1.46', '0.350: 0.47']
+['0.050: 0.01', '0.350: 0.01']
+TIMINGS:
+runnn-drl-rpn: 0.1053
+train-drl-rpn: 1.2674
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 2600 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.558014, 0.014197)
+Mean reward (tot, MA):         (-15.128694, -11.123474)
+Mean rew-done (tot, MA):       (-15.516159, -11.304317)
+Mean traj-len (tot, MA):       (0.957309, 0.449728)
+Mean frac-area (tot, MA):      (0.051456, 0.024275)
+Mean gt >= 0.5 frac (tot, MA): (0.040952, 0.019069)
+Mean gt-IoU-frac (tot, MA):    (0.025861, 0.012039)
+Traj-len vs. # gt-instances:
+['0.00', '1.50', '0.00', '0.00', '0.00', '0.00', '0.00', '1.50', '0.86', '0.96']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.41', '0.00']
+Traj-len vs. betas:
+['0.050: 1.46', '0.350: 0.46']
+['0.050: 0.01', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.1042
+train-drl-rpn: 1.2616
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 2650 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.545867, 0.014147)
+Mean reward (tot, MA):         (-15.142620, -11.240671)
+Mean rew-done (tot, MA):       (-15.523023, -11.417379)
+Mean traj-len (tot, MA):       (0.940001, 0.439607)
+Mean frac-area (tot, MA):      (0.050530, 0.023734)
+Mean gt >= 0.5 frac (tot, MA): (0.040203, 0.018629)
+Mean gt-IoU-frac (tot, MA):    (0.025389, 0.011763)
+Traj-len vs. # gt-instances:
+['0.00', '1.50', '0.00', '0.00', '0.00', '0.00', '0.00', '1.50', '0.84', '0.94']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.40', '0.03']
+Traj-len vs. betas:
+['0.050: 1.41', '0.350: 0.46']
+['0.050: 0.03', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.1032
+train-drl-rpn: 1.2563
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 2700 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.535758, 0.014140)
+Mean reward (tot, MA):         (-15.150719, -11.347994)
+Mean rew-done (tot, MA):       (-15.524077, -11.520342)
+Mean traj-len (tot, MA):       (0.922594, 0.428751)
+Mean frac-area (tot, MA):      (0.049595, 0.023148)
+Mean gt >= 0.5 frac (tot, MA): (0.039459, 0.018169)
+Mean gt-IoU-frac (tot, MA):    (0.024919, 0.011472)
+Traj-len vs. # gt-instances:
+['0.00', '1.50', '0.00', '0.00', '0.00', '0.00', '0.00', '1.50', '0.80', '0.92']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.38', '0.01']
+Traj-len vs. betas:
+['0.050: 1.41', '0.350: 0.44']
+['0.050: 0.03', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.1022
+train-drl-rpn: 1.2509
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 2750 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.523744, 0.014070)
+Mean reward (tot, MA):         (-15.144547, -11.433377)
+Mean rew-done (tot, MA):       (-15.511644, -11.602173)
+Mean traj-len (tot, MA):       (0.906546, 0.419142)
+Mean frac-area (tot, MA):      (0.048733, 0.022630)
+Mean gt >= 0.5 frac (tot, MA): (0.038780, 0.017772)
+Mean gt-IoU-frac (tot, MA):    (0.024493, 0.011226)
+Traj-len vs. # gt-instances:
+['0.00', '1.50', '0.00', '0.00', '0.00', '0.00', '0.00', '1.50', '0.80', '0.91']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.38', '0.02']
+Traj-len vs. betas:
+['0.050: 1.36', '0.350: 0.44']
+['0.050: 0.03', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.1013
+train-drl-rpn: 1.2458
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 2800 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.514391, 0.014063)
+Mean reward (tot, MA):         (-15.145184, -11.525976)
+Mean rew-done (tot, MA):       (-15.505723, -11.690604)
+Mean traj-len (tot, MA):       (0.890358, 0.408791)
+Mean frac-area (tot, MA):      (0.047862, 0.022071)
+Mean gt >= 0.5 frac (tot, MA): (0.038087, 0.017333)
+Mean gt-IoU-frac (tot, MA):    (0.024056, 0.010949)
+Traj-len vs. # gt-instances:
+['0.00', '1.50', '0.00', '0.00', '0.00', '0.00', '0.00', '1.50', '0.78', '0.89']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.37', '0.01']
+Traj-len vs. betas:
+['0.050: 1.36', '0.350: 0.42']
+['0.050: 0.03', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.1004
+train-drl-rpn: 1.2411
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 2850 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.505367, 0.014056)
+Mean reward (tot, MA):         (-15.148597, -11.620206)
+Mean rew-done (tot, MA):       (-15.502815, -11.780770)
+Mean traj-len (tot, MA):       (0.874737, 0.398695)
+Mean frac-area (tot, MA):      (0.047023, 0.021526)
+Mean gt >= 0.5 frac (tot, MA): (0.037419, 0.016905)
+Mean gt-IoU-frac (tot, MA):    (0.023634, 0.010678)
+Traj-len vs. # gt-instances:
+['0.00', '1.50', '0.00', '0.00', '0.00', '0.00', '0.00', '1.50', '0.77', '0.88']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.36', '0.00']
+Traj-len vs. betas:
+['0.050: 1.31', '0.350: 0.42']
+['0.050: 0.01', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0995
+train-drl-rpn: 1.2364
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 2900 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.496654, 0.014049)
+Mean reward (tot, MA):         (-15.158102, -11.720799)
+Mean rew-done (tot, MA):       (-15.506214, -11.877398)
+Mean traj-len (tot, MA):       (0.859656, 0.388849)
+Mean frac-area (tot, MA):      (0.046212, 0.020995)
+Mean gt >= 0.5 frac (tot, MA): (0.036774, 0.016487)
+Mean gt-IoU-frac (tot, MA):    (0.023227, 0.010415)
+Traj-len vs. # gt-instances:
+['0.00', '1.50', '0.00', '0.00', '0.00', '0.00', '0.00', '1.50', '0.77', '0.86']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.36', '0.00']
+Traj-len vs. betas:
+['0.050: 1.31', '0.350: 0.41']
+['0.050: 0.01', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0987
+train-drl-rpn: 1.2314
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 2950 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.488236, 0.014042)
+Mean reward (tot, MA):         (-15.167966, -11.820099)
+Mean rew-done (tot, MA):       (-15.510180, -11.972830)
+Mean traj-len (tot, MA):       (0.845085, 0.379246)
+Mean frac-area (tot, MA):      (0.045429, 0.020476)
+Mean gt >= 0.5 frac (tot, MA): (0.036150, 0.016080)
+Mean gt-IoU-frac (tot, MA):    (0.022833, 0.010158)
+Traj-len vs. # gt-instances:
+['0.00', '1.50', '0.00', '0.00', '0.00', '0.00', '0.00', '1.50', '0.77', '0.85']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.36', '0.00']
+Traj-len vs. betas:
+['0.050: 1.27', '0.350: 0.41']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0978
+train-drl-rpn: 1.2270
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 3000 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.480099, 0.014035)
+Mean reward (tot, MA):         (-15.167834, -11.902585)
+Mean rew-done (tot, MA):       (-15.504346, -12.051547)
+Mean traj-len (tot, MA):       (0.831001, 0.369880)
+Mean frac-area (tot, MA):      (0.044672, 0.019970)
+Mean gt >= 0.5 frac (tot, MA): (0.035548, 0.015683)
+Mean gt-IoU-frac (tot, MA):    (0.022452, 0.009907)
+Traj-len vs. # gt-instances:
+['0.00', '1.50', '0.00', '0.00', '0.00', '0.00', '0.00', '1.50', '0.72', '0.83']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.33', '0.00']
+Traj-len vs. betas:
+['0.050: 1.27', '0.350: 0.39']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0970
+train-drl-rpn: 1.2227
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 3050 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.460791, 0.013679)
+Mean reward (tot, MA):         (-15.176558, -11.996414)
+Mean rew-done (tot, MA):       (-15.507556, -12.141700)
+Mean traj-len (tot, MA):       (0.817706, 0.361242)
+Mean frac-area (tot, MA):      (0.043950, 0.019493)
+Mean gt >= 0.5 frac (tot, MA): (0.034965, 0.015296)
+Mean gt-IoU-frac (tot, MA):    (0.022084, 0.009662)
+Traj-len vs. # gt-instances:
+['0.00', '1.50', '0.00', '0.00', '0.00', '0.00', '0.00', '1.50', '0.72', '0.82']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.33', '0.02']
+Traj-len vs. betas:
+['0.050: 1.23', '0.350: 0.39']
+['0.050: 0.02', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0963
+train-drl-rpn: 1.2186
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 3100 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.440345, 0.013269)
+Mean reward (tot, MA):         (-15.181451, -12.082440)
+Mean rew-done (tot, MA):       (-15.507111, -12.224135)
+Mean traj-len (tot, MA):       (0.804840, 0.352819)
+Mean frac-area (tot, MA):      (0.043258, 0.019038)
+Mean gt >= 0.5 frac (tot, MA): (0.034401, 0.014918)
+Mean gt-IoU-frac (tot, MA):    (0.021728, 0.009423)
+Traj-len vs. # gt-instances:
+['0.00', '1.50', '0.00', '0.00', '0.00', '0.00', '0.00', '1.50', '0.71', '0.81']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.33', '0.03']
+Traj-len vs. betas:
+['0.050: 1.23', '0.350: 0.38']
+['0.050: 0.02', '0.350: 0.02']
+TIMINGS:
+runnn-drl-rpn: 0.0955
+train-drl-rpn: 1.2148
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 3150 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.433356, 0.013263)
+Mean reward (tot, MA):         (-15.183649, -12.162411)
+Mean rew-done (tot, MA):       (-15.504138, -12.300611)
+Mean traj-len (tot, MA):       (0.792064, 0.344106)
+Mean frac-area (tot, MA):      (0.042571, 0.018568)
+Mean gt >= 0.5 frac (tot, MA): (0.033855, 0.014550)
+Mean gt-IoU-frac (tot, MA):    (0.021383, 0.009191)
+Traj-len vs. # gt-instances:
+['0.00', '1.50', '0.00', '0.00', '0.00', '0.00', '0.00', '1.50', '0.69', '0.79']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.32', '0.01']
+Traj-len vs. betas:
+['0.050: 1.19', '0.350: 0.38']
+['0.050: 0.01', '0.350: 0.02']
+TIMINGS:
+runnn-drl-rpn: 0.0948
+train-drl-rpn: 1.2109
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 3200 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.426585, 0.013256)
+Mean reward (tot, MA):         (-15.195469, -12.255720)
+Mean rew-done (tot, MA):       (-15.510949, -12.390504)
+Mean traj-len (tot, MA):       (0.779688, 0.335608)
+Mean frac-area (tot, MA):      (0.041906, 0.018109)
+Mean gt >= 0.5 frac (tot, MA): (0.033326, 0.014190)
+Mean gt-IoU-frac (tot, MA):    (0.021049, 0.008964)
+Traj-len vs. # gt-instances:
+['0.00', '1.50', '0.00', '0.00', '0.00', '0.00', '0.00', '1.50', '0.69', '0.78']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.32', '0.00']
+Traj-len vs. betas:
+['0.050: 1.19', '0.350: 0.37']
+['0.050: 0.01', '0.350: 0.01']
+TIMINGS:
+runnn-drl-rpn: 0.0941
+train-drl-rpn: 1.2070
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 3250 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.420022, 0.013249)
+Mean reward (tot, MA):         (-15.201077, -12.337483)
+Mean rew-done (tot, MA):       (-15.511702, -12.468938)
+Mean traj-len (tot, MA):       (0.767693, 0.327320)
+Mean frac-area (tot, MA):      (0.041261, 0.017662)
+Mean gt >= 0.5 frac (tot, MA): (0.032813, 0.013840)
+Mean gt-IoU-frac (tot, MA):    (0.020725, 0.008742)
+Traj-len vs. # gt-instances:
+['0.00', '1.50', '0.00', '0.00', '0.00', '0.00', '0.00', '1.50', '0.68', '0.77']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.31', '0.00']
+Traj-len vs. betas:
+['0.050: 1.15', '0.350: 0.37']
+['0.050: 0.00', '0.350: 0.01']
+TIMINGS:
+runnn-drl-rpn: 0.0934
+train-drl-rpn: 1.2031
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 3300 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.413658, 0.013243)
+Mean reward (tot, MA):         (-15.213485, -12.428541)
+Mean rew-done (tot, MA):       (-15.519403, -12.556749)
+Mean traj-len (tot, MA):       (0.756061, 0.319236)
+Mean frac-area (tot, MA):      (0.040636, 0.017226)
+Mean gt >= 0.5 frac (tot, MA): (0.032316, 0.013498)
+Mean gt-IoU-frac (tot, MA):    (0.020411, 0.008526)
+Traj-len vs. # gt-instances:
+['0.00', '1.50', '0.00', '0.00', '0.00', '0.00', '0.00', '1.50', '0.68', '0.76']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.31', '0.00']
+Traj-len vs. betas:
+['0.050: 1.15', '0.350: 0.36']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0928
+train-drl-rpn: 1.1996
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 3350 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.407484, 0.013236)
+Mean reward (tot, MA):         (-15.223433, -12.514011)
+Mean rew-done (tot, MA):       (-15.524786, -12.639050)
+Mean traj-len (tot, MA):       (0.744777, 0.311352)
+Mean frac-area (tot, MA):      (0.040029, 0.016800)
+Mean gt >= 0.5 frac (tot, MA): (0.031834, 0.013165)
+Mean gt-IoU-frac (tot, MA):    (0.020107, 0.008316)
+Traj-len vs. # gt-instances:
+['0.00', '1.50', '0.00', '0.00', '0.00', '0.00', '0.00', '1.50', '0.68', '0.74']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.31', '0.00']
+Traj-len vs. betas:
+['0.050: 1.12', '0.350: 0.36']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0921
+train-drl-rpn: 1.1961
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 3400 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.401491, 0.013229)
+Mean reward (tot, MA):         (-15.221325, -12.577245)
+Mean rew-done (tot, MA):       (-15.518246, -12.699191)
+Mean traj-len (tot, MA):       (0.733824, 0.303663)
+Mean frac-area (tot, MA):      (0.039441, 0.016385)
+Mean gt >= 0.5 frac (tot, MA): (0.031366, 0.012840)
+Mean gt-IoU-frac (tot, MA):    (0.019811, 0.008111)
+Traj-len vs. # gt-instances:
+['0.00', '1.50', '0.00', '0.00', '0.00', '0.00', '0.00', '1.50', '0.63', '0.73']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.28', '0.00']
+Traj-len vs. betas:
+['0.050: 1.12', '0.350: 0.35']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0915
+train-drl-rpn: 1.1926
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 3450 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.395673, 0.013223)
+Mean reward (tot, MA):         (-15.230872, -12.658766)
+Mean rew-done (tot, MA):       (-15.523490, -12.777701)
+Mean traj-len (tot, MA):       (0.723189, 0.296164)
+Mean frac-area (tot, MA):      (0.038869, 0.015981)
+Mean gt >= 0.5 frac (tot, MA): (0.030911, 0.012523)
+Mean gt-IoU-frac (tot, MA):    (0.019524, 0.007910)
+Traj-len vs. # gt-instances:
+['0.00', '1.50', '0.00', '0.00', '0.00', '0.00', '0.00', '1.50', '0.61', '0.72']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.27', '0.00']
+Traj-len vs. betas:
+['0.050: 1.09', '0.350: 0.35']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0909
+train-drl-rpn: 1.1895
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 3500 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.390020, 0.013216)
+Mean reward (tot, MA):         (-15.229002, -12.719217)
+Mean rew-done (tot, MA):       (-15.517439, -12.835214)
+Mean traj-len (tot, MA):       (0.712858, 0.288850)
+Mean frac-area (tot, MA):      (0.038314, 0.015586)
+Mean gt >= 0.5 frac (tot, MA): (0.030470, 0.012213)
+Mean gt-IoU-frac (tot, MA):    (0.019245, 0.007715)
+Traj-len vs. # gt-instances:
+['0.00', '1.50', '0.00', '0.00', '0.00', '0.00', '0.00', '1.50', '0.60', '0.71']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.26', '0.00']
+Traj-len vs. betas:
+['0.050: 1.09', '0.350: 0.34']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0903
+train-drl-rpn: 1.1863
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 3550 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.382059, 0.013122)
+Mean reward (tot, MA):         (-15.232382, -12.787118)
+Mean rew-done (tot, MA):       (-15.517197, -12.901021)
+Mean traj-len (tot, MA):       (0.703381, 0.282699)
+Mean frac-area (tot, MA):      (0.037803, 0.015251)
+Mean gt >= 0.5 frac (tot, MA): (0.030090, 0.011999)
+Mean gt-IoU-frac (tot, MA):    (0.019000, 0.007570)
+Traj-len vs. # gt-instances:
+['0.00', '1.50', '0.00', '0.00', '0.00', '0.00', '0.00', '1.50', '0.58', '0.70']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.25', '0.02']
+Traj-len vs. betas:
+['0.050: 1.06', '0.350: 0.34']
+['0.050: 0.02', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0898
+train-drl-rpn: 1.1838
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 3600 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.376752, 0.013115)
+Mean reward (tot, MA):         (-15.223598, -12.831840)
+Mean rew-done (tot, MA):       (-15.504457, -12.942926)
+Mean traj-len (tot, MA):       (0.693612, 0.275717)
+Mean frac-area (tot, MA):      (0.037278, 0.014874)
+Mean gt >= 0.5 frac (tot, MA): (0.029672, 0.011702)
+Mean gt-IoU-frac (tot, MA):    (0.018736, 0.007383)
+Traj-len vs. # gt-instances:
+['0.00', '1.00', '0.00', '0.00', '0.00', '0.00', '0.00', '1.00', '0.57', '0.70']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.24', '0.01']
+Traj-len vs. betas:
+['0.050: 1.06', '0.350: 0.33']
+['0.050: 0.02', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0892
+train-drl-rpn: 1.1807
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 3650 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.371591, 0.013109)
+Mean reward (tot, MA):         (-15.225190, -12.893701)
+Mean rew-done (tot, MA):       (-15.502207, -13.002045)
+Mean traj-len (tot, MA):       (0.684111, 0.268908)
+Mean frac-area (tot, MA):      (0.036767, 0.014507)
+Mean gt >= 0.5 frac (tot, MA): (0.029266, 0.011413)
+Mean gt-IoU-frac (tot, MA):    (0.018479, 0.007200)
+Traj-len vs. # gt-instances:
+['0.00', '1.00', '0.00', '0.00', '0.00', '0.00', '0.00', '1.00', '0.55', '0.69']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.23', '0.00']
+Traj-len vs. betas:
+['0.050: 1.03', '0.350: 0.33']
+['0.050: 0.01', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0887
+train-drl-rpn: 1.1776
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 3700 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.366570, 0.013102)
+Mean reward (tot, MA):         (-15.235119, -12.969419)
+Mean rew-done (tot, MA):       (-15.508395, -13.075089)
+Mean traj-len (tot, MA):       (0.674866, 0.262267)
+Mean frac-area (tot, MA):      (0.036270, 0.014149)
+Mean gt >= 0.5 frac (tot, MA): (0.028870, 0.011131)
+Mean gt-IoU-frac (tot, MA):    (0.018229, 0.007022)
+Traj-len vs. # gt-instances:
+['0.00', '1.00', '0.00', '0.00', '0.00', '0.00', '0.00', '1.00', '0.55', '0.68']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.23', '0.00']
+Traj-len vs. betas:
+['0.050: 1.03', '0.350: 0.32']
+['0.050: 0.01', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0882
+train-drl-rpn: 1.1748
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 3750 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.361682, 0.013096)
+Mean reward (tot, MA):         (-15.239987, -13.034425)
+Mean rew-done (tot, MA):       (-15.509618, -13.137485)
+Mean traj-len (tot, MA):       (0.665868, 0.255790)
+Mean frac-area (tot, MA):      (0.035787, 0.013799)
+Mean gt >= 0.5 frac (tot, MA): (0.028485, 0.010857)
+Mean gt-IoU-frac (tot, MA):    (0.017986, 0.006849)
+Traj-len vs. # gt-instances:
+['0.00', '1.00', '0.00', '0.00', '0.00', '0.00', '0.00', '1.00', '0.55', '0.67']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.23', '0.00']
+Traj-len vs. betas:
+['0.050: 1.00', '0.350: 0.32']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0876
+train-drl-rpn: 1.1721
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 3800 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.356923, 0.013089)
+Mean reward (tot, MA):         (-15.263141, -13.132380)
+Mean rew-done (tot, MA):       (-15.529230, -13.232897)
+Mean traj-len (tot, MA):       (0.657106, 0.249473)
+Mean frac-area (tot, MA):      (0.035316, 0.013458)
+Mean gt >= 0.5 frac (tot, MA): (0.028111, 0.010588)
+Mean gt-IoU-frac (tot, MA):    (0.017750, 0.006680)
+Traj-len vs. # gt-instances:
+['0.00', '1.00', '0.00', '0.00', '0.00', '0.00', '0.00', '1.00', '0.55', '0.66']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.23', '0.00']
+Traj-len vs. betas:
+['0.050: 1.00', '0.350: 0.31']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0872
+train-drl-rpn: 1.1696
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 3850 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.342587, 0.012709)
+Mean reward (tot, MA):         (-15.264921, -13.188304)
+Mean rew-done (tot, MA):       (-15.527555, -13.286337)
+Mean traj-len (tot, MA):       (0.648832, 0.243810)
+Mean frac-area (tot, MA):      (0.034873, 0.013157)
+Mean gt >= 0.5 frac (tot, MA): (0.027746, 0.010327)
+Mean gt-IoU-frac (tot, MA):    (0.017519, 0.006515)
+Traj-len vs. # gt-instances:
+['0.00', '1.00', '0.00', '0.00', '0.00', '0.00', '0.00', '1.00', '0.55', '0.65']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.23', '0.02']
+Traj-len vs. betas:
+['0.050: 0.98', '0.350: 0.31']
+['0.050: 0.02', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0867
+train-drl-rpn: 1.1672
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 3900 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.338195, 0.012703)
+Mean reward (tot, MA):         (-15.259217, -13.228643)
+Mean rew-done (tot, MA):       (-15.518483, -13.324256)
+Mean traj-len (tot, MA):       (0.640514, 0.237788)
+Mean frac-area (tot, MA):      (0.034426, 0.012832)
+Mean gt >= 0.5 frac (tot, MA): (0.027390, 0.010072)
+Mean gt-IoU-frac (tot, MA):    (0.017295, 0.006354)
+Traj-len vs. # gt-instances:
+['0.00', '0.75', '0.00', '0.00', '0.00', '0.00', '0.00', '1.00', '0.55', '0.64']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.23', '0.01']
+Traj-len vs. betas:
+['0.050: 0.98', '0.350: 0.30']
+['0.050: 0.02', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0862
+train-drl-rpn: 1.1646
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 3950 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.333914, 0.012697)
+Mean reward (tot, MA):         (-15.261761, -13.283748)
+Mean rew-done (tot, MA):       (-15.517744, -13.376995)
+Mean traj-len (tot, MA):       (0.632406, 0.231916)
+Mean frac-area (tot, MA):      (0.033991, 0.012516)
+Mean gt >= 0.5 frac (tot, MA): (0.027043, 0.009823)
+Mean gt-IoU-frac (tot, MA):    (0.017076, 0.006197)
+Traj-len vs. # gt-instances:
+['0.00', '0.75', '0.00', '0.00', '0.00', '0.00', '0.00', '1.00', '0.55', '0.63']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.22', '0.00']
+Traj-len vs. betas:
+['0.050: 0.95', '0.350: 0.30']
+['0.050: 0.01', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0857
+train-drl-rpn: 1.1624
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 4000 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.329740, 0.012690)
+Mean reward (tot, MA):         (-15.256990, -13.323252)
+Mean rew-done (tot, MA):       (-15.509769, -13.414196)
+Mean traj-len (tot, MA):       (0.624501, 0.226189)
+Mean frac-area (tot, MA):      (0.033566, 0.012206)
+Mean gt >= 0.5 frac (tot, MA): (0.026705, 0.009581)
+Mean gt-IoU-frac (tot, MA):    (0.016862, 0.006044)
+Traj-len vs. # gt-instances:
+['0.00', '0.75', '0.00', '0.00', '0.00', '0.00', '0.00', '1.00', '0.53', '0.63']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.21', '0.00']
+Traj-len vs. betas:
+['0.050: 0.95', '0.350: 0.30']
+['0.050: 0.01', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0853
+train-drl-rpn: 1.1602
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 4050 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.325669, 0.012684)
+Mean reward (tot, MA):         (-15.256782, -13.370590)
+Mean rew-done (tot, MA):       (-15.506436, -13.459288)
+Mean traj-len (tot, MA):       (0.616791, 0.220603)
+Mean frac-area (tot, MA):      (0.033151, 0.011905)
+Mean gt >= 0.5 frac (tot, MA): (0.026375, 0.009344)
+Mean gt-IoU-frac (tot, MA):    (0.016654, 0.005895)
+Traj-len vs. # gt-instances:
+['0.00', '0.75', '0.00', '0.00', '0.00', '0.00', '0.00', '1.00', '0.53', '0.62']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.21', '0.00']
+Traj-len vs. betas:
+['0.050: 0.93', '0.350: 0.30']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0849
+train-drl-rpn: 1.1578
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 4100 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.321698, 0.012677)
+Mean reward (tot, MA):         (-15.259994, -13.423630)
+Mean rew-done (tot, MA):       (-15.506600, -13.510136)
+Mean traj-len (tot, MA):       (0.609269, 0.215154)
+Mean frac-area (tot, MA):      (0.032747, 0.011611)
+Mean gt >= 0.5 frac (tot, MA): (0.026054, 0.009113)
+Mean gt-IoU-frac (tot, MA):    (0.016451, 0.005749)
+Traj-len vs. # gt-instances:
+['0.00', '0.75', '0.00', '0.00', '0.00', '0.00', '0.00', '1.00', '0.53', '0.61']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.21', '0.00']
+Traj-len vs. betas:
+['0.050: 0.93', '0.350: 0.29']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0844
+train-drl-rpn: 1.1557
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 4150 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.317822, 0.012671)
+Mean reward (tot, MA):         (-15.267945, -13.485161)
+Mean rew-done (tot, MA):       (-15.511583, -13.569527)
+Mean traj-len (tot, MA):       (0.601929, 0.209841)
+Mean frac-area (tot, MA):      (0.032352, 0.011324)
+Mean gt >= 0.5 frac (tot, MA): (0.025740, 0.008888)
+Mean gt-IoU-frac (tot, MA):    (0.016253, 0.005607)
+Traj-len vs. # gt-instances:
+['0.00', '0.75', '0.00', '0.00', '0.00', '0.00', '0.00', '1.00', '0.53', '0.60']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.21', '0.00']
+Traj-len vs. betas:
+['0.050: 0.91', '0.350: 0.29']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0840
+train-drl-rpn: 1.1535
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 4200 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.314038, 0.012665)
+Mean reward (tot, MA):         (-15.271663, -13.537074)
+Mean rew-done (tot, MA):       (-15.512398, -13.619359)
+Mean traj-len (tot, MA):       (0.594763, 0.204659)
+Mean frac-area (tot, MA):      (0.031967, 0.011045)
+Mean gt >= 0.5 frac (tot, MA): (0.025433, 0.008669)
+Mean gt-IoU-frac (tot, MA):    (0.016059, 0.005469)
+Traj-len vs. # gt-instances:
+['0.00', '0.75', '0.00', '0.00', '0.00', '0.00', '0.00', '0.75', '0.53', '0.60']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.21', '0.00']
+Traj-len vs. betas:
+['0.050: 0.91', '0.350: 0.28']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0836
+train-drl-rpn: 1.1512
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 4250 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.310344, 0.012658)
+Mean reward (tot, MA):         (-15.283052, -13.603832)
+Mean rew-done (tot, MA):       (-15.520960, -13.684088)
+Mean traj-len (tot, MA):       (0.587766, 0.199604)
+Mean frac-area (tot, MA):      (0.031591, 0.010772)
+Mean gt >= 0.5 frac (tot, MA): (0.025134, 0.008455)
+Mean gt-IoU-frac (tot, MA):    (0.015870, 0.005334)
+Traj-len vs. # gt-instances:
+['0.00', '0.75', '0.00', '0.00', '0.00', '0.00', '0.00', '0.75', '0.52', '0.59']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.21', '0.00']
+Traj-len vs. betas:
+['0.050: 0.89', '0.350: 0.28']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0832
+train-drl-rpn: 1.1493
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 4300 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.297196, 0.012242)
+Mean reward (tot, MA):         (-15.293018, -13.666375)
+Mean rew-done (tot, MA):       (-15.528160, -13.744648)
+Mean traj-len (tot, MA):       (0.581164, 0.195175)
+Mean frac-area (tot, MA):      (0.031237, 0.010534)
+Mean gt >= 0.5 frac (tot, MA): (0.024842, 0.008246)
+Mean gt-IoU-frac (tot, MA):    (0.015686, 0.005202)
+Traj-len vs. # gt-instances:
+['0.00', '0.75', '0.00', '0.00', '0.00', '0.00', '0.00', '0.75', '0.52', '0.58']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.21', '0.02']
+Traj-len vs. betas:
+['0.050: 0.89', '0.350: 0.28']
+['0.050: 0.00', '0.350: 0.02']
+TIMINGS:
+runnn-drl-rpn: 0.0828
+train-drl-rpn: 1.1471
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 4350 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.293780, 0.012236)
+Mean reward (tot, MA):         (-15.299074, -13.719571)
+Mean rew-done (tot, MA):       (-15.531515, -13.795912)
+Mean traj-len (tot, MA):       (0.574484, 0.190355)
+Mean frac-area (tot, MA):      (0.030878, 0.010274)
+Mean gt >= 0.5 frac (tot, MA): (0.024556, 0.008042)
+Mean gt-IoU-frac (tot, MA):    (0.015505, 0.005074)
+Traj-len vs. # gt-instances:
+['0.00', '0.75', '0.00', '0.00', '0.00', '0.00', '0.00', '0.75', '0.52', '0.58']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.21', '0.01']
+Traj-len vs. betas:
+['0.050: 0.87', '0.350: 0.28']
+['0.050: 0.00', '0.350: 0.02']
+TIMINGS:
+runnn-drl-rpn: 0.0825
+train-drl-rpn: 1.1450
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 4400 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.290441, 0.012230)
+Mean reward (tot, MA):         (-15.303399, -13.767962)
+Mean rew-done (tot, MA):       (-15.533203, -13.842424)
+Mean traj-len (tot, MA):       (0.567956, 0.185654)
+Mean frac-area (tot, MA):      (0.030527, 0.010020)
+Mean gt >= 0.5 frac (tot, MA): (0.024277, 0.007844)
+Mean gt-IoU-frac (tot, MA):    (0.015329, 0.004948)
+Traj-len vs. # gt-instances:
+['0.00', '0.75', '0.00', '0.00', '0.00', '0.00', '0.00', '0.75', '0.52', '0.57']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.21', '0.00']
+Traj-len vs. betas:
+['0.050: 0.87', '0.350: 0.27']
+['0.050: 0.00', '0.350: 0.01']
+TIMINGS:
+runnn-drl-rpn: 0.0821
+train-drl-rpn: 1.1430
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 4450 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.287178, 0.012224)
+Mean reward (tot, MA):         (-15.308528, -13.817116)
+Mean rew-done (tot, MA):       (-15.535752, -13.889740)
+Mean traj-len (tot, MA):       (0.561574, 0.181069)
+Mean frac-area (tot, MA):      (0.030184, 0.009773)
+Mean gt >= 0.5 frac (tot, MA): (0.024005, 0.007650)
+Mean gt-IoU-frac (tot, MA):    (0.015157, 0.004826)
+Traj-len vs. # gt-instances:
+['0.00', '0.60', '0.00', '0.00', '0.00', '0.00', '0.00', '0.75', '0.52', '0.56']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.21', '0.00']
+Traj-len vs. betas:
+['0.050: 0.85', '0.350: 0.27']
+['0.050: 0.00', '0.350: 0.01']
+TIMINGS:
+runnn-drl-rpn: 0.0817
+train-drl-rpn: 1.1411
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 4500 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.283987, 0.012217)
+Mean reward (tot, MA):         (-15.310211, -13.857754)
+Mean rew-done (tot, MA):       (-15.534913, -13.928579)
+Mean traj-len (tot, MA):       (0.555335, 0.176597)
+Mean frac-area (tot, MA):      (0.029849, 0.009532)
+Mean gt >= 0.5 frac (tot, MA): (0.023738, 0.007461)
+Mean gt-IoU-frac (tot, MA):    (0.014989, 0.004707)
+Traj-len vs. # gt-instances:
+['0.00', '0.60', '0.00', '0.00', '0.00', '0.00', '0.00', '0.75', '0.51', '0.56']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.20', '0.00']
+Traj-len vs. betas:
+['0.050: 0.85', '0.350: 0.26']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0814
+train-drl-rpn: 1.1397
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 4550 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.280866, 0.012211)
+Mean reward (tot, MA):         (-15.311640, -13.896621)
+Mean rew-done (tot, MA):       (-15.533870, -13.965695)
+Mean traj-len (tot, MA):       (0.549232, 0.172236)
+Mean frac-area (tot, MA):      (0.029521, 0.009296)
+Mean gt >= 0.5 frac (tot, MA): (0.023477, 0.007277)
+Mean gt-IoU-frac (tot, MA):    (0.014824, 0.004591)
+Traj-len vs. # gt-instances:
+['0.00', '0.60', '0.00', '0.00', '0.00', '0.00', '0.00', '0.75', '0.50', '0.55']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.19', '0.00']
+Traj-len vs. betas:
+['0.050: 0.83', '0.350: 0.26']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0810
+train-drl-rpn: 1.1380
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 4600 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.277814, 0.012205)
+Mean reward (tot, MA):         (-15.307598, -13.922559)
+Mean rew-done (tot, MA):       (-15.527412, -13.989923)
+Mean traj-len (tot, MA):       (0.543262, 0.167982)
+Mean frac-area (tot, MA):      (0.029200, 0.009067)
+Mean gt >= 0.5 frac (tot, MA): (0.023222, 0.007097)
+Mean gt-IoU-frac (tot, MA):    (0.014663, 0.004477)
+Traj-len vs. # gt-instances:
+['0.00', '0.60', '0.00', '0.00', '0.00', '0.00', '0.00', '0.75', '0.50', '0.54']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.19', '0.00']
+Traj-len vs. betas:
+['0.050: 0.83', '0.350: 0.26']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0807
+train-drl-rpn: 1.1364
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 4650 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.276126, 0.012260)
+Mean reward (tot, MA):         (-15.310629, -13.963713)
+Mean rew-done (tot, MA):       (-15.528193, -14.029669)
+Mean traj-len (tot, MA):       (0.537636, 0.164330)
+Mean frac-area (tot, MA):      (0.028900, 0.008874)
+Mean gt >= 0.5 frac (tot, MA): (0.022986, 0.006953)
+Mean gt-IoU-frac (tot, MA):    (0.014512, 0.004383)
+Traj-len vs. # gt-instances:
+['0.00', '0.60', '0.00', '0.00', '0.00', '0.00', '0.00', '0.75', '0.50', '0.54']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.19', '0.02']
+Traj-len vs. betas:
+['0.050: 0.81', '0.350: 0.26']
+['0.050: 0.02', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0804
+train-drl-rpn: 1.1345
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 4700 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.273188, 0.012253)
+Mean reward (tot, MA):         (-15.314983, -14.007065)
+Mean rew-done (tot, MA):       (-15.530233, -14.071393)
+Mean traj-len (tot, MA):       (0.531916, 0.160272)
+Mean frac-area (tot, MA):      (0.028592, 0.008655)
+Mean gt >= 0.5 frac (tot, MA): (0.022741, 0.006781)
+Mean gt-IoU-frac (tot, MA):    (0.014358, 0.004275)
+Traj-len vs. # gt-instances:
+['0.00', '0.60', '0.00', '0.00', '0.00', '0.00', '0.00', '0.75', '0.49', '0.53']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.18', '0.01']
+Traj-len vs. betas:
+['0.050: 0.81', '0.350: 0.25']
+['0.050: 0.02', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0800
+train-drl-rpn: 1.1328
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 4750 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.270312, 0.012247)
+Mean reward (tot, MA):         (-15.309351, -14.026160)
+Mean rew-done (tot, MA):       (-15.522338, -14.088897)
+Mean traj-len (tot, MA):       (0.526317, 0.156314)
+Mean frac-area (tot, MA):      (0.028291, 0.008441)
+Mean gt >= 0.5 frac (tot, MA): (0.022502, 0.006614)
+Mean gt-IoU-frac (tot, MA):    (0.014207, 0.004169)
+Traj-len vs. # gt-instances:
+['0.00', '0.60', '0.00', '0.00', '0.00', '0.00', '0.00', '0.60', '0.49', '0.53']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.18', '0.00']
+Traj-len vs. betas:
+['0.050: 0.79', '0.350: 0.25']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0797
+train-drl-rpn: 1.1313
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 4800 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.258917, 0.011829)
+Mean reward (tot, MA):         (-15.307378, -14.053182)
+Mean rew-done (tot, MA):       (-15.518148, -14.114365)
+Mean traj-len (tot, MA):       (0.521043, 0.152943)
+Mean frac-area (tot, MA):      (0.028008, 0.008260)
+Mean gt >= 0.5 frac (tot, MA): (0.022267, 0.006450)
+Mean gt-IoU-frac (tot, MA):    (0.014059, 0.004066)
+Traj-len vs. # gt-instances:
+['0.00', '0.60', '0.00', '0.00', '0.00', '0.00', '0.00', '0.60', '0.49', '0.52']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.18', '0.01']
+Traj-len vs. betas:
+['0.050: 0.79', '0.350: 0.25']
+['0.050: 0.00', '0.350: 0.01']
+TIMINGS:
+runnn-drl-rpn: 0.0794
+train-drl-rpn: 1.1296
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 4850 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.256248, 0.011823)
+Mean reward (tot, MA):         (-15.308952, -14.087928)
+Mean rew-done (tot, MA):       (-15.517550, -14.147599)
+Mean traj-len (tot, MA):       (0.515671, 0.149166)
+Mean frac-area (tot, MA):      (0.027720, 0.008056)
+Mean gt >= 0.5 frac (tot, MA): (0.022038, 0.006291)
+Mean gt-IoU-frac (tot, MA):    (0.013914, 0.003966)
+Traj-len vs. # gt-instances:
+['0.00', '0.60', '0.00', '0.00', '0.00', '0.00', '0.00', '0.60', '0.47', '0.52']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.17', '0.00']
+Traj-len vs. betas:
+['0.050: 0.78', '0.350: 0.25']
+['0.050: 0.00', '0.350: 0.01']
+TIMINGS:
+runnn-drl-rpn: 0.0791
+train-drl-rpn: 1.1281
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 4900 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.253633, 0.011818)
+Mean reward (tot, MA):         (-15.317428, -14.138623)
+Mean rew-done (tot, MA):       (-15.523905, -14.196821)
+Mean traj-len (tot, MA):       (0.510409, 0.145482)
+Mean frac-area (tot, MA):      (0.027437, 0.007858)
+Mean gt >= 0.5 frac (tot, MA): (0.021813, 0.006136)
+Mean gt-IoU-frac (tot, MA):    (0.013772, 0.003868)
+Traj-len vs. # gt-instances:
+['0.00', '0.60', '0.00', '0.00', '0.00', '0.00', '0.00', '0.60', '0.47', '0.51']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.17', '0.00']
+Traj-len vs. betas:
+['0.050: 0.78', '0.350: 0.24']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0788
+train-drl-rpn: 1.1263
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 4950 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.251071, 0.011812)
+Mean reward (tot, MA):         (-15.322302, -14.179630)
+Mean rew-done (tot, MA):       (-15.526694, -14.236387)
+Mean traj-len (tot, MA):       (0.505254, 0.141889)
+Mean frac-area (tot, MA):      (0.027160, 0.007663)
+Mean gt >= 0.5 frac (tot, MA): (0.021593, 0.005984)
+Mean gt-IoU-frac (tot, MA):    (0.013633, 0.003772)
+Traj-len vs. # gt-instances:
+['0.00', '0.60', '0.00', '0.00', '0.00', '0.00', '0.00', '0.60', '0.46', '0.51']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.16', '0.00']
+Traj-len vs. betas:
+['0.050: 0.76', '0.350: 0.24']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0785
+train-drl-rpn: 1.1248
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 5000 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.240298, 0.011393)
+Mean reward (tot, MA):         (-15.320681, -14.203958)
+Mean rew-done (tot, MA):       (-15.523030, -14.259311)
+Mean traj-len (tot, MA):       (0.500401, 0.138880)
+Mean frac-area (tot, MA):      (0.026901, 0.007505)
+Mean gt >= 0.5 frac (tot, MA): (0.021377, 0.005836)
+Mean gt-IoU-frac (tot, MA):    (0.013496, 0.003679)
+Traj-len vs. # gt-instances:
+['0.00', '0.60', '0.00', '0.00', '0.00', '0.00', '0.00', '0.60', '0.46', '0.50']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.16', '0.01']
+Traj-len vs. betas:
+['0.050: 0.76', '0.350: 0.24']
+['0.050: 0.00', '0.350: 0.02']
+TIMINGS:
+runnn-drl-rpn: 0.0783
+train-drl-rpn: 1.1234
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+Wrote snapshot to: /home/vador/Documents/project/AI/drl-rpn-tf/output-weights/drl-rpn-paris/output/vgg16_drl_rpn/paris_train/vgg16_drl_rpn_iter_5000.ckpt
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 5050 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.230432, 0.011009)
+Mean reward (tot, MA):         (-15.322063, -14.234950)
+Mean rew-done (tot, MA):       (-15.522406, -14.288933)
+Mean traj-len (tot, MA):       (0.495645, 0.135942)
+Mean frac-area (tot, MA):      (0.026645, 0.007348)
+Mean gt >= 0.5 frac (tot, MA): (0.021165, 0.005692)
+Mean gt-IoU-frac (tot, MA):    (0.013363, 0.003588)
+Traj-len vs. # gt-instances:
+['0.00', '0.60', '0.00', '0.00', '0.00', '0.00', '0.00', '0.60', '0.45', '0.50']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.16', '0.02']
+Traj-len vs. betas:
+['0.050: 0.75', '0.350: 0.24']
+['0.050: 0.01', '0.350: 0.02']
+TIMINGS:
+runnn-drl-rpn: 0.0780
+train-drl-rpn: 1.1215
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 5100 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.228172, 0.011003)
+Mean reward (tot, MA):         (-15.317731, -14.250982)
+Mean rew-done (tot, MA):       (-15.516109, -14.303636)
+Mean traj-len (tot, MA):       (0.490785, 0.132585)
+Mean frac-area (tot, MA):      (0.026384, 0.007167)
+Mean gt >= 0.5 frac (tot, MA): (0.020957, 0.005552)
+Mean gt-IoU-frac (tot, MA):    (0.013232, 0.003500)
+Traj-len vs. # gt-instances:
+['0.00', '0.60', '0.00', '0.00', '0.00', '0.00', '0.00', '0.60', '0.44', '0.49']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.15', '0.00']
+Traj-len vs. betas:
+['0.050: 0.75', '0.350: 0.23']
+['0.050: 0.01', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0777
+train-drl-rpn: 1.1197
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 5150 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.225957, 0.010998)
+Mean reward (tot, MA):         (-15.322413, -14.289289)
+Mean rew-done (tot, MA):       (-15.518867, -14.340643)
+Mean traj-len (tot, MA):       (0.486021, 0.129310)
+Mean frac-area (tot, MA):      (0.026128, 0.006990)
+Mean gt >= 0.5 frac (tot, MA): (0.020754, 0.005414)
+Mean gt-IoU-frac (tot, MA):    (0.013103, 0.003413)
+Traj-len vs. # gt-instances:
+['0.00', '0.60', '0.00', '0.00', '0.00', '0.00', '0.00', '0.60', '0.44', '0.49']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.15', '0.00']
+Traj-len vs. betas:
+['0.050: 0.73', '0.350: 0.23']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0774
+train-drl-rpn: 1.1182
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 5200 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.223785, 0.010992)
+Mean reward (tot, MA):         (-15.323929, -14.318781)
+Mean rew-done (tot, MA):       (-15.518493, -14.368869)
+Mean traj-len (tot, MA):       (0.481347, 0.126117)
+Mean frac-area (tot, MA):      (0.025877, 0.006817)
+Mean gt >= 0.5 frac (tot, MA): (0.020554, 0.005281)
+Mean gt-IoU-frac (tot, MA):    (0.012977, 0.003329)
+Traj-len vs. # gt-instances:
+['0.00', '0.60', '0.00', '0.00', '0.00', '0.00', '0.00', '0.60', '0.43', '0.48']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.14', '0.00']
+Traj-len vs. betas:
+['0.050: 0.73', '0.350: 0.23']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0771
+train-drl-rpn: 1.1163
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 5250 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.221653, 0.010987)
+Mean reward (tot, MA):         (-15.318560, -14.329786)
+Mean rew-done (tot, MA):       (-15.511267, -14.378638)
+Mean traj-len (tot, MA):       (0.476763, 0.123002)
+Mean frac-area (tot, MA):      (0.025630, 0.006649)
+Mean gt >= 0.5 frac (tot, MA): (0.020359, 0.005150)
+Mean gt-IoU-frac (tot, MA):    (0.012854, 0.003247)
+Traj-len vs. # gt-instances:
+['0.00', '0.60', '0.00', '0.00', '0.00', '0.00', '0.00', '0.50', '0.43', '0.48']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.14', '0.00']
+Traj-len vs. betas:
+['0.050: 0.72', '0.350: 0.23']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0769
+train-drl-rpn: 1.1150
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 5300 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.219562, 0.010981)
+Mean reward (tot, MA):         (-15.315742, -14.346912)
+Mean rew-done (tot, MA):       (-15.506630, -14.394550)
+Mean traj-len (tot, MA):       (0.472265, 0.119964)
+Mean frac-area (tot, MA):      (0.025389, 0.006484)
+Mean gt >= 0.5 frac (tot, MA): (0.020167, 0.005023)
+Mean gt-IoU-frac (tot, MA):    (0.012732, 0.003166)
+Traj-len vs. # gt-instances:
+['0.00', '0.60', '0.00', '0.00', '0.00', '0.00', '0.00', '0.50', '0.42', '0.47']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.13', '0.00']
+Traj-len vs. betas:
+['0.050: 0.72', '0.350: 0.22']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0766
+train-drl-rpn: 1.1135
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 5350 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.217510, 0.010976)
+Mean reward (tot, MA):         (-15.329056, -14.405928)
+Mean rew-done (tot, MA):       (-15.518155, -14.452396)
+Mean traj-len (tot, MA):       (0.467852, 0.117002)
+Mean frac-area (tot, MA):      (0.025151, 0.006324)
+Mean gt >= 0.5 frac (tot, MA): (0.019978, 0.004899)
+Mean gt-IoU-frac (tot, MA):    (0.012613, 0.003088)
+Traj-len vs. # gt-instances:
+['0.00', '0.60', '0.00', '0.00', '0.00', '0.00', '0.00', '0.50', '0.42', '0.47']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.13', '0.00']
+Traj-len vs. betas:
+['0.050: 0.71', '0.350: 0.22']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0764
+train-drl-rpn: 1.1122
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 5400 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.215496, 0.010970)
+Mean reward (tot, MA):         (-15.331565, -14.435352)
+Mean rew-done (tot, MA):       (-15.518912, -14.480675)
+Mean traj-len (tot, MA):       (0.463520, 0.114112)
+Mean frac-area (tot, MA):      (0.024918, 0.006168)
+Mean gt >= 0.5 frac (tot, MA): (0.019793, 0.004778)
+Mean gt-IoU-frac (tot, MA):    (0.012497, 0.003012)
+Traj-len vs. # gt-instances:
+['0.00', '0.60', '0.00', '0.00', '0.00', '0.00', '0.00', '0.50', '0.41', '0.46']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.13', '0.00']
+Traj-len vs. betas:
+['0.050: 0.71', '0.350: 0.22']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0761
+train-drl-rpn: 1.1108
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 5450 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.213519, 0.010965)
+Mean reward (tot, MA):         (-15.337511, -14.473482)
+Mean rew-done (tot, MA):       (-15.523143, -14.517687)
+Mean traj-len (tot, MA):       (0.459267, 0.111294)
+Mean frac-area (tot, MA):      (0.024690, 0.006016)
+Mean gt >= 0.5 frac (tot, MA): (0.019612, 0.004660)
+Mean gt-IoU-frac (tot, MA):    (0.012382, 0.002938)
+Traj-len vs. # gt-instances:
+['0.00', '0.60', '0.00', '0.00', '0.00', '0.00', '0.00', '0.50', '0.41', '0.46']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.13', '0.00']
+Traj-len vs. betas:
+['0.050: 0.69', '0.350: 0.22']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0759
+train-drl-rpn: 1.1096
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 5500 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.211578, 0.010959)
+Mean reward (tot, MA):         (-15.345532, -14.516565)
+Mean rew-done (tot, MA):       (-15.529476, -14.559675)
+Mean traj-len (tot, MA):       (0.455092, 0.108546)
+Mean frac-area (tot, MA):      (0.024465, 0.005867)
+Mean gt >= 0.5 frac (tot, MA): (0.019433, 0.004545)
+Mean gt-IoU-frac (tot, MA):    (0.012269, 0.002865)
+Traj-len vs. # gt-instances:
+['0.00', '0.60', '0.00', '0.00', '0.00', '0.00', '0.00', '0.50', '0.41', '0.46']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.13', '0.00']
+Traj-len vs. betas:
+['0.050: 0.69', '0.350: 0.22']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0756
+train-drl-rpn: 1.1084
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 5550 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.202789, 0.010572)
+Mean reward (tot, MA):         (-15.339720, -14.521267)
+Mean rew-done (tot, MA):       (-15.522002, -14.563313)
+Mean traj-len (tot, MA):       (0.451172, 0.106355)
+Mean frac-area (tot, MA):      (0.024256, 0.005753)
+Mean gt >= 0.5 frac (tot, MA): (0.019258, 0.004433)
+Mean gt-IoU-frac (tot, MA):    (0.012159, 0.002794)
+Traj-len vs. # gt-instances:
+['0.00', '0.60', '0.00', '0.00', '0.00', '0.00', '0.00', '0.50', '0.40', '0.45']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.12', '0.01']
+Traj-len vs. betas:
+['0.050: 0.68', '0.350: 0.22']
+['0.050: 0.01', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0754
+train-drl-rpn: 1.1072
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 5600 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.200978, 0.010567)
+Mean reward (tot, MA):         (-15.344721, -14.555202)
+Mean rew-done (tot, MA):       (-15.525376, -14.596212)
+Mean traj-len (tot, MA):       (0.447144, 0.103728)
+Mean frac-area (tot, MA):      (0.024040, 0.005611)
+Mean gt >= 0.5 frac (tot, MA): (0.019086, 0.004323)
+Mean gt-IoU-frac (tot, MA):    (0.012050, 0.002725)
+Traj-len vs. # gt-instances:
+['0.00', '0.60', '0.00', '0.00', '0.00', '0.00', '0.00', '0.50', '0.40', '0.45']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.12', '0.00']
+Traj-len vs. betas:
+['0.050: 0.68', '0.350: 0.21']
+['0.050: 0.01', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0752
+train-drl-rpn: 1.1061
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 5650 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.199199, 0.010561)
+Mean reward (tot, MA):         (-15.348751, -14.586006)
+Mean rew-done (tot, MA):       (-15.527807, -14.626004)
+Mean traj-len (tot, MA):       (0.443187, 0.101166)
+Mean frac-area (tot, MA):      (0.023827, 0.005473)
+Mean gt >= 0.5 frac (tot, MA): (0.018917, 0.004216)
+Mean gt-IoU-frac (tot, MA):    (0.011944, 0.002658)
+Traj-len vs. # gt-instances:
+['0.00', '0.60', '0.00', '0.00', '0.00', '0.00', '0.00', '0.50', '0.39', '0.44']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.12', '0.00']
+Traj-len vs. betas:
+['0.050: 0.67', '0.350: 0.21']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0750
+train-drl-rpn: 1.1049
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 5700 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.197791, 0.010575)
+Mean reward (tot, MA):         (-15.345056, -14.594441)
+Mean rew-done (tot, MA):       (-15.522652, -14.633771)
+Mean traj-len (tot, MA):       (0.439475, 0.099168)
+Mean frac-area (tot, MA):      (0.023629, 0.005369)
+Mean gt >= 0.5 frac (tot, MA): (0.018761, 0.004140)
+Mean gt-IoU-frac (tot, MA):    (0.011845, 0.002610)
+Traj-len vs. # gt-instances:
+['0.00', '0.60', '0.00', '0.00', '0.00', '0.00', '0.00', '0.50', '0.38', '0.44']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.11', '0.02']
+Traj-len vs. betas:
+['0.050: 0.67', '0.350: 0.21']
+['0.050: 0.00', '0.350: 0.02']
+TIMINGS:
+runnn-drl-rpn: 0.0748
+train-drl-rpn: 1.1038
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 5750 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.196071, 0.010570)
+Mean reward (tot, MA):         (-15.340487, -14.600047)
+Mean rew-done (tot, MA):       (-15.516539, -14.638404)
+Mean traj-len (tot, MA):       (0.435653, 0.096719)
+Mean frac-area (tot, MA):      (0.023424, 0.005236)
+Mean gt >= 0.5 frac (tot, MA): (0.018598, 0.004038)
+Mean gt-IoU-frac (tot, MA):    (0.011742, 0.002546)
+Traj-len vs. # gt-instances:
+['0.00', '0.60', '0.00', '0.00', '0.00', '0.00', '0.00', '0.50', '0.38', '0.44']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.11', '0.01']
+Traj-len vs. betas:
+['0.050: 0.66', '0.350: 0.21']
+['0.050: 0.00', '0.350: 0.02']
+TIMINGS:
+runnn-drl-rpn: 0.0745
+train-drl-rpn: 1.1027
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 5800 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.194381, 0.010565)
+Mean reward (tot, MA):         (-15.340137, -14.617299)
+Mean rew-done (tot, MA):       (-15.514672, -14.654709)
+Mean traj-len (tot, MA):       (0.431898, 0.094330)
+Mean frac-area (tot, MA):      (0.023222, 0.005107)
+Mean gt >= 0.5 frac (tot, MA): (0.018438, 0.003938)
+Mean gt-IoU-frac (tot, MA):    (0.011641, 0.002483)
+Traj-len vs. # gt-instances:
+['0.00', '0.60', '0.00', '0.00', '0.00', '0.00', '0.00', '0.50', '0.38', '0.43']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.11', '0.00']
+Traj-len vs. betas:
+['0.050: 0.66', '0.350: 0.21']
+['0.050: 0.00', '0.350: 0.01']
+TIMINGS:
+runnn-drl-rpn: 0.0743
+train-drl-rpn: 1.1017
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 5850 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.192719, 0.010559)
+Mean reward (tot, MA):         (-15.346635, -14.653847)
+Mean rew-done (tot, MA):       (-15.519678, -14.690331)
+Mean traj-len (tot, MA):       (0.428206, 0.092001)
+Mean frac-area (tot, MA):      (0.023023, 0.004981)
+Mean gt >= 0.5 frac (tot, MA): (0.018280, 0.003841)
+Mean gt-IoU-frac (tot, MA):    (0.011541, 0.002421)
+Traj-len vs. # gt-instances:
+['0.00', '0.60', '0.00', '0.00', '0.00', '0.00', '0.00', '0.50', '0.38', '0.43']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.11', '0.00']
+Traj-len vs. betas:
+['0.050: 0.65', '0.350: 0.21']
+['0.050: 0.00', '0.350: 0.01']
+TIMINGS:
+runnn-drl-rpn: 0.0741
+train-drl-rpn: 1.1006
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 5900 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.191086, 0.010554)
+Mean reward (tot, MA):         (-15.348618, -14.676676)
+Mean rew-done (tot, MA):       (-15.520189, -14.712257)
+Mean traj-len (tot, MA):       (0.424577, 0.089728)
+Mean frac-area (tot, MA):      (0.022828, 0.004858)
+Mean gt >= 0.5 frac (tot, MA): (0.018125, 0.003746)
+Mean gt-IoU-frac (tot, MA):    (0.011444, 0.002362)
+Traj-len vs. # gt-instances:
+['0.00', '0.60', '0.00', '0.00', '0.00', '0.00', '0.00', '0.50', '0.38', '0.43']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.11', '0.00']
+Traj-len vs. betas:
+['0.050: 0.65', '0.350: 0.20']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0739
+train-drl-rpn: 1.0995
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 5950 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.189480, 0.010549)
+Mean reward (tot, MA):         (-15.358969, -14.723656)
+Mean rew-done (tot, MA):       (-15.529091, -14.758358)
+Mean traj-len (tot, MA):       (0.421010, 0.087512)
+Mean frac-area (tot, MA):      (0.022636, 0.004738)
+Mean gt >= 0.5 frac (tot, MA): (0.017973, 0.003654)
+Mean gt-IoU-frac (tot, MA):    (0.011347, 0.002303)
+Traj-len vs. # gt-instances:
+['0.00', '0.60', '0.00', '0.00', '0.00', '0.00', '0.00', '0.50', '0.38', '0.42']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.10', '0.00']
+Traj-len vs. betas:
+['0.050: 0.64', '0.350: 0.20']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0737
+train-drl-rpn: 1.0984
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 6000 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.187901, 0.010544)
+Mean reward (tot, MA):         (-15.359811, -14.741815)
+Mean rew-done (tot, MA):       (-15.528516, -14.775661)
+Mean traj-len (tot, MA):       (0.417501, 0.085351)
+Mean frac-area (tot, MA):      (0.022448, 0.004621)
+Mean gt >= 0.5 frac (tot, MA): (0.017823, 0.003563)
+Mean gt-IoU-frac (tot, MA):    (0.011253, 0.002246)
+Traj-len vs. # gt-instances:
+['0.00', '0.60', '0.00', '0.00', '0.00', '0.00', '0.00', '0.50', '0.37', '0.42']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.10', '0.00']
+Traj-len vs. betas:
+['0.050: 0.64', '0.350: 0.20']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0735
+train-drl-rpn: 1.0973
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 6050 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.186348, 0.010538)
+Mean reward (tot, MA):         (-15.358161, -14.752075)
+Mean rew-done (tot, MA):       (-15.525474, -14.785089)
+Mean traj-len (tot, MA):       (0.414051, 0.083243)
+Mean frac-area (tot, MA):      (0.022262, 0.004507)
+Mean gt >= 0.5 frac (tot, MA): (0.017676, 0.003475)
+Mean gt-IoU-frac (tot, MA):    (0.011160, 0.002191)
+Traj-len vs. # gt-instances:
+['0.00', '0.60', '0.00', '0.00', '0.00', '0.00', '0.00', '0.50', '0.37', '0.41']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.10', '0.00']
+Traj-len vs. betas:
+['0.050: 0.63', '0.350: 0.20']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0733
+train-drl-rpn: 1.0962
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 6100 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.184821, 0.010533)
+Mean reward (tot, MA):         (-15.350795, -14.744797)
+Mean rew-done (tot, MA):       (-15.516739, -14.776997)
+Mean traj-len (tot, MA):       (0.410657, 0.081188)
+Mean frac-area (tot, MA):      (0.022080, 0.004396)
+Mean gt >= 0.5 frac (tot, MA): (0.017531, 0.003389)
+Mean gt-IoU-frac (tot, MA):    (0.011068, 0.002137)
+Traj-len vs. # gt-instances:
+['0.00', '0.60', '0.00', '0.00', '0.00', '0.00', '0.00', '0.50', '0.36', '0.41']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.10', '0.00']
+Traj-len vs. betas:
+['0.050: 0.63', '0.350: 0.20']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0731
+train-drl-rpn: 1.0952
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 6150 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.183318, 0.010528)
+Mean reward (tot, MA):         (-15.355260, -14.773129)
+Mean rew-done (tot, MA):       (-15.519857, -14.804537)
+Mean traj-len (tot, MA):       (0.407318, 0.079183)
+Mean frac-area (tot, MA):      (0.021900, 0.004287)
+Mean gt >= 0.5 frac (tot, MA): (0.017388, 0.003306)
+Mean gt-IoU-frac (tot, MA):    (0.010978, 0.002084)
+Traj-len vs. # gt-instances:
+['0.00', '0.60', '0.00', '0.00', '0.00', '0.00', '0.00', '0.50', '0.36', '0.41']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.10', '0.00']
+Traj-len vs. betas:
+['0.050: 0.62', '0.350: 0.20']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0729
+train-drl-rpn: 1.0943
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 6200 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.175092, 0.010104)
+Mean reward (tot, MA):         (-15.348039, -14.765532)
+Mean rew-done (tot, MA):       (-15.511313, -14.796165)
+Mean traj-len (tot, MA):       (0.404195, 0.077724)
+Mean frac-area (tot, MA):      (0.021729, 0.004197)
+Mean gt >= 0.5 frac (tot, MA): (0.017248, 0.003224)
+Mean gt-IoU-frac (tot, MA):    (0.010890, 0.002033)
+Traj-len vs. # gt-instances:
+['0.00', '0.60', '0.00', '0.00', '0.00', '0.00', '0.00', '0.50', '0.36', '0.40']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.09', '0.02']
+Traj-len vs. betas:
+['0.050: 0.62', '0.350: 0.19']
+['0.050: 0.00', '0.350: 0.02']
+TIMINGS:
+runnn-drl-rpn: 0.0727
+train-drl-rpn: 1.0934
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 6250 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.173692, 0.010099)
+Mean reward (tot, MA):         (-15.351333, -14.790146)
+Mean rew-done (tot, MA):       (-15.513303, -14.820023)
+Mean traj-len (tot, MA):       (0.400961, 0.075805)
+Mean frac-area (tot, MA):      (0.021555, 0.004093)
+Mean gt >= 0.5 frac (tot, MA): (0.017110, 0.003145)
+Mean gt-IoU-frac (tot, MA):    (0.010803, 0.001982)
+Traj-len vs. # gt-instances:
+['0.00', '0.50', '0.00', '0.00', '0.00', '0.00', '0.00', '0.50', '0.36', '0.40']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.09', '0.01']
+Traj-len vs. betas:
+['0.050: 0.61', '0.350: 0.19']
+['0.050: 0.00', '0.350: 0.02']
+TIMINGS:
+runnn-drl-rpn: 0.0726
+train-drl-rpn: 1.0924
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 6300 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.172313, 0.010094)
+Mean reward (tot, MA):         (-15.352989, -14.809105)
+Mean rew-done (tot, MA):       (-15.513670, -14.838239)
+Mean traj-len (tot, MA):       (0.397779, 0.073933)
+Mean frac-area (tot, MA):      (0.021384, 0.003992)
+Mean gt >= 0.5 frac (tot, MA): (0.016974, 0.003067)
+Mean gt-IoU-frac (tot, MA):    (0.010717, 0.001933)
+Traj-len vs. # gt-instances:
+['0.00', '0.50', '0.00', '0.00', '0.00', '0.00', '0.00', '0.50', '0.35', '0.40']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.09', '0.00']
+Traj-len vs. betas:
+['0.050: 0.61', '0.350: 0.19']
+['0.050: 0.00', '0.350: 0.01']
+TIMINGS:
+runnn-drl-rpn: 0.0724
+train-drl-rpn: 1.0915
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 6350 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.170956, 0.010089)
+Mean reward (tot, MA):         (-15.347848, -14.806283)
+Mean rew-done (tot, MA):       (-15.507264, -14.834698)
+Mean traj-len (tot, MA):       (0.394647, 0.072107)
+Mean frac-area (tot, MA):      (0.021215, 0.003893)
+Mean gt >= 0.5 frac (tot, MA): (0.016841, 0.002991)
+Mean gt-IoU-frac (tot, MA):    (0.010633, 0.001886)
+Traj-len vs. # gt-instances:
+['0.00', '0.50', '0.00', '0.00', '0.00', '0.00', '0.00', '0.50', '0.35', '0.40']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.09', '0.00']
+Traj-len vs. betas:
+['0.050: 0.60', '0.350: 0.19']
+['0.050: 0.00', '0.350: 0.01']
+TIMINGS:
+runnn-drl-rpn: 0.0722
+train-drl-rpn: 1.0904
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 6400 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.163073, 0.009665)
+Mean reward (tot, MA):         (-15.348882, -14.822949)
+Mean rew-done (tot, MA):       (-15.507051, -14.850664)
+Mean traj-len (tot, MA):       (0.391720, 0.070817)
+Mean frac-area (tot, MA):      (0.021056, 0.003818)
+Mean gt >= 0.5 frac (tot, MA): (0.016709, 0.002917)
+Mean gt-IoU-frac (tot, MA):    (0.010550, 0.001839)
+Traj-len vs. # gt-instances:
+['0.00', '0.50', '0.00', '0.00', '0.00', '0.00', '0.00', '0.50', '0.34', '0.39']
+['0.00', '0.07', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.08', '0.01']
+Traj-len vs. betas:
+['0.050: 0.60', '0.350: 0.19']
+['0.050: 0.00', '0.350: 0.01']
+TIMINGS:
+runnn-drl-rpn: 0.0720
+train-drl-rpn: 1.0895
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 6450 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.155905, 0.009279)
+Mean reward (tot, MA):         (-15.351757, -14.845314)
+Mean rew-done (tot, MA):       (-15.508705, -14.872342)
+Mean traj-len (tot, MA):       (0.388838, 0.069563)
+Mean frac-area (tot, MA):      (0.020899, 0.003742)
+Mean gt >= 0.5 frac (tot, MA): (0.016580, 0.002845)
+Mean gt-IoU-frac (tot, MA):    (0.010468, 0.001794)
+Traj-len vs. # gt-instances:
+['0.00', '0.43', '0.00', '0.00', '0.00', '0.00', '0.00', '0.50', '0.34', '0.39']
+['0.00', '0.06', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.08', '0.02']
+Traj-len vs. betas:
+['0.050: 0.59', '0.350: 0.19']
+['0.050: 0.01', '0.350: 0.01']
+TIMINGS:
+runnn-drl-rpn: 0.0719
+train-drl-rpn: 1.0887
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 6500 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.154706, 0.009275)
+Mean reward (tot, MA):         (-15.359358, -14.882270)
+Mean rew-done (tot, MA):       (-15.515100, -14.908630)
+Mean traj-len (tot, MA):       (0.385847, 0.067845)
+Mean frac-area (tot, MA):      (0.020738, 0.003650)
+Mean gt >= 0.5 frac (tot, MA): (0.016452, 0.002775)
+Mean gt-IoU-frac (tot, MA):    (0.010387, 0.001749)
+Traj-len vs. # gt-instances:
+['0.00', '0.43', '0.00', '0.00', '0.00', '0.00', '0.00', '0.50', '0.34', '0.39']
+['0.00', '0.06', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.08', '0.01']
+Traj-len vs. betas:
+['0.050: 0.59', '0.350: 0.18']
+['0.050: 0.01', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0717
+train-drl-rpn: 1.0878
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 6550 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.153525, 0.009270)
+Mean reward (tot, MA):         (-15.350356, -14.865046)
+Mean rew-done (tot, MA):       (-15.504908, -14.890757)
+Mean traj-len (tot, MA):       (0.382902, 0.066170)
+Mean frac-area (tot, MA):      (0.020580, 0.003559)
+Mean gt >= 0.5 frac (tot, MA): (0.016326, 0.002706)
+Mean gt-IoU-frac (tot, MA):    (0.010308, 0.001706)
+Traj-len vs. # gt-instances:
+['0.00', '0.43', '0.00', '0.00', '0.00', '0.00', '0.00', '0.50', '0.32', '0.38']
+['0.00', '0.06', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.07', '0.00']
+Traj-len vs. betas:
+['0.050: 0.58', '0.350: 0.18']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0715
+train-drl-rpn: 1.0869
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 6600 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.152362, 0.009265)
+Mean reward (tot, MA):         (-15.348912, -14.872418)
+Mean rew-done (tot, MA):       (-15.502295, -14.897491)
+Mean traj-len (tot, MA):       (0.380001, 0.064535)
+Mean frac-area (tot, MA):      (0.020424, 0.003472)
+Mean gt >= 0.5 frac (tot, MA): (0.016203, 0.002640)
+Mean gt-IoU-frac (tot, MA):    (0.010230, 0.001664)
+Traj-len vs. # gt-instances:
+['0.00', '0.43', '0.00', '0.00', '0.00', '0.00', '0.00', '0.50', '0.32', '0.38']
+['0.00', '0.06', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.07', '0.00']
+Traj-len vs. betas:
+['0.050: 0.58', '0.350: 0.18']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0714
+train-drl-rpn: 1.0861
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 6650 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.145529, 0.008883)
+Mean reward (tot, MA):         (-15.355013, -14.904169)
+Mean rew-done (tot, MA):       (-15.507245, -14.928624)
+Mean traj-len (tot, MA):       (0.377294, 0.063437)
+Mean frac-area (tot, MA):      (0.020275, 0.003401)
+Mean gt >= 0.5 frac (tot, MA): (0.016081, 0.002574)
+Mean gt-IoU-frac (tot, MA):    (0.010153, 0.001623)
+Traj-len vs. # gt-instances:
+['0.00', '0.43', '0.00', '0.00', '0.00', '0.00', '0.00', '0.50', '0.32', '0.38']
+['0.00', '0.06', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.07', '0.02']
+Traj-len vs. betas:
+['0.050: 0.57', '0.350: 0.18']
+['0.050: 0.02', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0712
+train-drl-rpn: 1.0853
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 6700 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.144443, 0.008878)
+Mean reward (tot, MA):         (-15.358184, -14.925874)
+Mean rew-done (tot, MA):       (-15.509280, -14.949719)
+Mean traj-len (tot, MA):       (0.374479, 0.061870)
+Mean frac-area (tot, MA):      (0.020124, 0.003317)
+Mean gt >= 0.5 frac (tot, MA): (0.015961, 0.002511)
+Mean gt-IoU-frac (tot, MA):    (0.010077, 0.001583)
+Traj-len vs. # gt-instances:
+['0.00', '0.43', '0.00', '0.00', '0.00', '0.00', '0.00', '0.50', '0.32', '0.38']
+['0.00', '0.06', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.07', '0.00']
+Traj-len vs. betas:
+['0.050: 0.57', '0.350: 0.18']
+['0.050: 0.02', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0710
+train-drl-rpn: 1.0845
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 6750 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.143373, 0.008874)
+Mean reward (tot, MA):         (-15.355976, -14.929251)
+Mean rew-done (tot, MA):       (-15.505952, -14.952508)
+Mean traj-len (tot, MA):       (0.371705, 0.060342)
+Mean frac-area (tot, MA):      (0.019975, 0.003235)
+Mean gt >= 0.5 frac (tot, MA): (0.015843, 0.002449)
+Mean gt-IoU-frac (tot, MA):    (0.010003, 0.001544)
+Traj-len vs. # gt-instances:
+['0.00', '0.43', '0.00', '0.00', '0.00', '0.00', '0.00', '0.50', '0.32', '0.37']
+['0.00', '0.06', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.07', '0.00']
+Traj-len vs. betas:
+['0.050: 0.56', '0.350: 0.18']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0709
+train-drl-rpn: 1.0834
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 6800 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.142319, 0.008869)
+Mean reward (tot, MA):         (-15.358505, -14.948306)
+Mean rew-done (tot, MA):       (-15.507379, -14.970989)
+Mean traj-len (tot, MA):       (0.368972, 0.058852)
+Mean frac-area (tot, MA):      (0.019828, 0.003156)
+Mean gt >= 0.5 frac (tot, MA): (0.015726, 0.002388)
+Mean gt-IoU-frac (tot, MA):    (0.009929, 0.001506)
+Traj-len vs. # gt-instances:
+['0.00', '0.43', '0.00', '0.00', '0.00', '0.00', '0.00', '0.50', '0.32', '0.37']
+['0.00', '0.06', '0.00', '0.00', '0.00', '0.00', '0.00', '0.07', '0.07', '0.00']
+Traj-len vs. betas:
+['0.050: 0.56', '0.350: 0.18']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0707
+train-drl-rpn: 1.0827
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 6850 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.141280, 0.008865)
+Mean reward (tot, MA):         (-15.355161, -14.947182)
+Mean rew-done (tot, MA):       (-15.502946, -14.969301)
+Mean traj-len (tot, MA):       (0.366278, 0.057398)
+Mean frac-area (tot, MA):      (0.019683, 0.003078)
+Mean gt >= 0.5 frac (tot, MA): (0.015611, 0.002329)
+Mean gt-IoU-frac (tot, MA):    (0.009856, 0.001469)
+Traj-len vs. # gt-instances:
+['0.00', '0.43', '0.00', '0.00', '0.00', '0.00', '0.00', '0.43', '0.32', '0.37']
+['0.00', '0.06', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.07', '0.00']
+Traj-len vs. betas:
+['0.050: 0.55', '0.350: 0.18']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0706
+train-drl-rpn: 1.0819
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 6900 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.140257, 0.008860)
+Mean reward (tot, MA):         (-15.353456, -14.951370)
+Mean rew-done (tot, MA):       (-15.500175, -14.972936)
+Mean traj-len (tot, MA):       (0.363624, 0.055981)
+Mean frac-area (tot, MA):      (0.019540, 0.003002)
+Mean gt >= 0.5 frac (tot, MA): (0.015498, 0.002272)
+Mean gt-IoU-frac (tot, MA):    (0.009785, 0.001432)
+Traj-len vs. # gt-instances:
+['0.00', '0.38', '0.00', '0.00', '0.00', '0.00', '0.00', '0.43', '0.32', '0.36']
+['0.00', '0.06', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.07', '0.00']
+Traj-len vs. betas:
+['0.050: 0.55', '0.350: 0.17']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0704
+train-drl-rpn: 1.0810
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 6950 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.139248, 0.008856)
+Mean reward (tot, MA):         (-15.362998, -14.994084)
+Mean rew-done (tot, MA):       (-15.508661, -15.015120)
+Mean traj-len (tot, MA):       (0.361008, 0.054598)
+Mean frac-area (tot, MA):      (0.019400, 0.002928)
+Mean gt >= 0.5 frac (tot, MA): (0.015387, 0.002216)
+Mean gt-IoU-frac (tot, MA):    (0.009715, 0.001397)
+Traj-len vs. # gt-instances:
+['0.00', '0.38', '0.00', '0.00', '0.00', '0.00', '0.00', '0.43', '0.32', '0.36']
+['0.00', '0.06', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.07', '0.00']
+Traj-len vs. betas:
+['0.050: 0.55', '0.350: 0.17']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0703
+train-drl-rpn: 1.0801
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 7000 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.138418, 0.008863)
+Mean reward (tot, MA):         (-15.366577, -15.015478)
+Mean rew-done (tot, MA):       (-15.511600, -15.037366)
+Mean traj-len (tot, MA):       (0.358573, 0.053742)
+Mean frac-area (tot, MA):      (0.019270, 0.002886)
+Mean gt >= 0.5 frac (tot, MA): (0.015305, 0.002259)
+Mean gt-IoU-frac (tot, MA):    (0.009665, 0.001431)
+Traj-len vs. # gt-instances:
+['0.00', '0.38', '0.00', '0.00', '0.00', '0.00', '0.00', '0.43', '0.32', '0.36']
+['0.00', '0.06', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.07', '0.01']
+Traj-len vs. betas:
+['0.050: 0.55', '0.350: 0.17']
+['0.050: 0.00', '0.350: 0.01']
+TIMINGS:
+runnn-drl-rpn: 0.0701
+train-drl-rpn: 1.0792
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 7050 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.137437, 0.008859)
+Mean reward (tot, MA):         (-15.367663, -15.027913)
+Mean rew-done (tot, MA):       (-15.511661, -15.049254)
+Mean traj-len (tot, MA):       (0.356029, 0.052414)
+Mean frac-area (tot, MA):      (0.019133, 0.002815)
+Mean gt >= 0.5 frac (tot, MA): (0.015197, 0.002204)
+Mean gt-IoU-frac (tot, MA):    (0.009597, 0.001396)
+Traj-len vs. # gt-instances:
+['0.00', '0.38', '0.00', '0.00', '0.00', '0.00', '0.00', '0.43', '0.32', '0.36']
+['0.00', '0.06', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.07', '0.00']
+Traj-len vs. betas:
+['0.050: 0.54', '0.350: 0.17']
+['0.050: 0.00', '0.350: 0.01']
+TIMINGS:
+runnn-drl-rpn: 0.0700
+train-drl-rpn: 1.0784
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 7100 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.136469, 0.008854)
+Mean reward (tot, MA):         (-15.369156, -15.041495)
+Mean rew-done (tot, MA):       (-15.512139, -15.062309)
+Mean traj-len (tot, MA):       (0.353522, 0.051120)
+Mean frac-area (tot, MA):      (0.018999, 0.002745)
+Mean gt >= 0.5 frac (tot, MA): (0.015090, 0.002149)
+Mean gt-IoU-frac (tot, MA):    (0.009529, 0.001361)
+Traj-len vs. # gt-instances:
+['0.00', '0.38', '0.00', '0.00', '0.00', '0.00', '0.00', '0.43', '0.31', '0.35']
+['0.00', '0.06', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.06', '0.00']
+Traj-len vs. betas:
+['0.050: 0.54', '0.350: 0.17']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0698
+train-drl-rpn: 1.0776
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 7150 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.133968, 0.008739)
+Mean reward (tot, MA):         (-15.370842, -15.055642)
+Mean rew-done (tot, MA):       (-15.512898, -15.076192)
+Mean traj-len (tot, MA):       (0.351330, 0.050834)
+Mean frac-area (tot, MA):      (0.018881, 0.002730)
+Mean gt >= 0.5 frac (tot, MA): (0.014993, 0.002125)
+Mean gt-IoU-frac (tot, MA):    (0.009467, 0.001342)
+Traj-len vs. # gt-instances:
+['0.00', '0.38', '0.00', '0.00', '0.00', '0.00', '0.00', '0.43', '0.31', '0.35']
+['0.00', '0.06', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.06', '0.02']
+Traj-len vs. betas:
+['0.050: 0.53', '0.350: 0.17']
+['0.050: 0.02', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0697
+train-drl-rpn: 1.0770
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 7200 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.133038, 0.008735)
+Mean reward (tot, MA):         (-15.367568, -15.051798)
+Mean rew-done (tot, MA):       (-15.508644, -15.071842)
+Mean traj-len (tot, MA):       (0.348890, 0.049579)
+Mean frac-area (tot, MA):      (0.018750, 0.002663)
+Mean gt >= 0.5 frac (tot, MA): (0.014888, 0.002072)
+Mean gt-IoU-frac (tot, MA):    (0.009401, 0.001309)
+Traj-len vs. # gt-instances:
+['0.00', '0.38', '0.00', '0.00', '0.00', '0.00', '0.00', '0.43', '0.31', '0.35']
+['0.00', '0.06', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.06', '0.00']
+Traj-len vs. betas:
+['0.050: 0.53', '0.350: 0.17']
+['0.050: 0.02', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0696
+train-drl-rpn: 1.0761
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 7250 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.132577, 0.008764)
+Mean reward (tot, MA):         (-15.365716, -15.052764)
+Mean rew-done (tot, MA):       (-15.506101, -15.073329)
+Mean traj-len (tot, MA):       (0.346622, 0.048845)
+Mean frac-area (tot, MA):      (0.018629, 0.002628)
+Mean gt >= 0.5 frac (tot, MA): (0.014813, 0.002119)
+Mean gt-IoU-frac (tot, MA):    (0.009355, 0.001345)
+Traj-len vs. # gt-instances:
+['0.00', '0.38', '0.00', '0.00', '0.00', '0.00', '0.00', '0.43', '0.31', '0.35']
+['0.00', '0.06', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.06', '0.01']
+Traj-len vs. betas:
+['0.050: 0.52', '0.350: 0.17']
+['0.050: 0.01', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0695
+train-drl-rpn: 1.0754
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 7300 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.125856, 0.008335)
+Mean reward (tot, MA):         (-15.368417, -15.070205)
+Mean rew-done (tot, MA):       (-15.507841, -15.090262)
+Mean traj-len (tot, MA):       (0.344385, 0.048127)
+Mean frac-area (tot, MA):      (0.018509, 0.002591)
+Mean gt >= 0.5 frac (tot, MA): (0.014712, 0.002067)
+Mean gt-IoU-frac (tot, MA):    (0.009291, 0.001311)
+Traj-len vs. # gt-instances:
+['0.00', '0.38', '0.00', '0.00', '0.00', '0.00', '0.00', '0.43', '0.31', '0.34']
+['0.00', '0.06', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.06', '0.01']
+Traj-len vs. betas:
+['0.050: 0.52', '0.350: 0.16']
+['0.050: 0.01', '0.350: 0.01']
+TIMINGS:
+runnn-drl-rpn: 0.0693
+train-drl-rpn: 1.0746
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 7350 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.125925, 0.008399)
+Mean reward (tot, MA):         (-15.376889, -15.108521)
+Mean rew-done (tot, MA):       (-15.515547, -15.128740)
+Mean traj-len (tot, MA):       (0.342178, 0.047430)
+Mean frac-area (tot, MA):      (0.018392, 0.002558)
+Mean gt >= 0.5 frac (tot, MA): (0.014631, 0.002086)
+Mean gt-IoU-frac (tot, MA):    (0.009241, 0.001326)
+Traj-len vs. # gt-instances:
+['0.00', '0.38', '0.00', '0.00', '0.00', '0.00', '0.00', '0.43', '0.31', '0.34']
+['0.00', '0.06', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.06', '0.01']
+Traj-len vs. betas:
+['0.050: 0.52', '0.350: 0.16']
+['0.050: 0.01', '0.350: 0.01']
+TIMINGS:
+runnn-drl-rpn: 0.0692
+train-drl-rpn: 1.0740
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 7400 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.125075, 0.008395)
+Mean reward (tot, MA):         (-15.379881, -15.126077)
+Mean rew-done (tot, MA):       (-15.517604, -15.145798)
+Mean traj-len (tot, MA):       (0.339866, 0.046259)
+Mean frac-area (tot, MA):      (0.018268, 0.002495)
+Mean gt >= 0.5 frac (tot, MA): (0.014532, 0.002035)
+Mean gt-IoU-frac (tot, MA):    (0.009178, 0.001293)
+Traj-len vs. # gt-instances:
+['0.00', '0.38', '0.00', '0.00', '0.00', '0.00', '0.00', '0.43', '0.31', '0.34']
+['0.00', '0.06', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.06', '0.00']
+Traj-len vs. betas:
+['0.050: 0.52', '0.350: 0.16']
+['0.050: 0.01', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0691
+train-drl-rpn: 1.0734
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 7450 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.124235, 0.008390)
+Mean reward (tot, MA):         (-15.377998, -15.125286)
+Mean rew-done (tot, MA):       (-15.514803, -15.144517)
+Mean traj-len (tot, MA):       (0.337585, 0.045116)
+Mean frac-area (tot, MA):      (0.018145, 0.002433)
+Mean gt >= 0.5 frac (tot, MA): (0.014435, 0.001984)
+Mean gt-IoU-frac (tot, MA):    (0.009117, 0.001261)
+Traj-len vs. # gt-instances:
+['0.00', '0.38', '0.00', '0.00', '0.00', '0.00', '0.00', '0.43', '0.31', '0.34']
+['0.00', '0.06', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.06', '0.00']
+Traj-len vs. betas:
+['0.050: 0.51', '0.350: 0.16']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0689
+train-drl-rpn: 1.0726
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 7500 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.123407, 0.008386)
+Mean reward (tot, MA):         (-15.377079, -15.128121)
+Mean rew-done (tot, MA):       (-15.512968, -15.146878)
+Mean traj-len (tot, MA):       (0.335334, 0.044002)
+Mean frac-area (tot, MA):      (0.018024, 0.002373)
+Mean gt >= 0.5 frac (tot, MA): (0.014339, 0.001935)
+Mean gt-IoU-frac (tot, MA):    (0.009056, 0.001230)
+Traj-len vs. # gt-instances:
+['0.00', '0.38', '0.00', '0.00', '0.00', '0.00', '0.00', '0.43', '0.31', '0.34']
+['0.00', '0.06', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.06', '0.00']
+Traj-len vs. betas:
+['0.050: 0.51', '0.350: 0.16']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0688
+train-drl-rpn: 1.0720
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 7550 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.122590, 0.008382)
+Mean reward (tot, MA):         (-15.375508, -15.128331)
+Mean rew-done (tot, MA):       (-15.510496, -15.146624)
+Mean traj-len (tot, MA):       (0.333114, 0.042915)
+Mean frac-area (tot, MA):      (0.017905, 0.002314)
+Mean gt >= 0.5 frac (tot, MA): (0.014244, 0.001888)
+Mean gt-IoU-frac (tot, MA):    (0.008996, 0.001200)
+Traj-len vs. # gt-instances:
+['0.00', '0.38', '0.00', '0.00', '0.00', '0.00', '0.00', '0.43', '0.31', '0.33']
+['0.00', '0.06', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.06', '0.00']
+Traj-len vs. betas:
+['0.050: 0.50', '0.350: 0.16']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0687
+train-drl-rpn: 1.0713
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 7600 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.121783, 0.008378)
+Mean reward (tot, MA):         (-15.376592, -15.138485)
+Mean rew-done (tot, MA):       (-15.510692, -15.156324)
+Mean traj-len (tot, MA):       (0.330922, 0.041856)
+Mean frac-area (tot, MA):      (0.017787, 0.002257)
+Mean gt >= 0.5 frac (tot, MA): (0.014150, 0.001841)
+Mean gt-IoU-frac (tot, MA):    (0.008937, 0.001170)
+Traj-len vs. # gt-instances:
+['0.00', '0.38', '0.00', '0.00', '0.00', '0.00', '0.00', '0.43', '0.31', '0.33']
+['0.00', '0.06', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.06', '0.00']
+Traj-len vs. betas:
+['0.050: 0.50', '0.350: 0.16']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0686
+train-drl-rpn: 1.0707
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 7650 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.120987, 0.008374)
+Mean reward (tot, MA):         (-15.378184, -15.150389)
+Mean rew-done (tot, MA):       (-15.511405, -15.167782)
+Mean traj-len (tot, MA):       (0.328759, 0.040822)
+Mean frac-area (tot, MA):      (0.017671, 0.002201)
+Mean gt >= 0.5 frac (tot, MA): (0.014058, 0.001795)
+Mean gt-IoU-frac (tot, MA):    (0.008878, 0.001141)
+Traj-len vs. # gt-instances:
+['0.00', '0.38', '0.00', '0.00', '0.00', '0.00', '0.00', '0.38', '0.30', '0.33']
+['0.00', '0.06', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.06', '0.00']
+Traj-len vs. betas:
+['0.050: 0.50', '0.350: 0.16']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0684
+train-drl-rpn: 1.0700
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 7700 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.120201, 0.008369)
+Mean reward (tot, MA):         (-15.380532, -15.164977)
+Mean rew-done (tot, MA):       (-15.512890, -15.181939)
+Mean traj-len (tot, MA):       (0.326624, 0.039814)
+Mean frac-area (tot, MA):      (0.017556, 0.002147)
+Mean gt >= 0.5 frac (tot, MA): (0.013966, 0.001751)
+Mean gt-IoU-frac (tot, MA):    (0.008821, 0.001113)
+Traj-len vs. # gt-instances:
+['0.00', '0.38', '0.00', '0.00', '0.00', '0.00', '0.00', '0.38', '0.30', '0.33']
+['0.00', '0.06', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.06', '0.00']
+Traj-len vs. betas:
+['0.050: 0.50', '0.350: 0.16']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0683
+train-drl-rpn: 1.0694
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 7750 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.119426, 0.008365)
+Mean reward (tot, MA):         (-15.375623, -15.151484)
+Mean rew-done (tot, MA):       (-15.507128, -15.168022)
+Mean traj-len (tot, MA):       (0.324517, 0.038830)
+Mean frac-area (tot, MA):      (0.017443, 0.002094)
+Mean gt >= 0.5 frac (tot, MA): (0.013876, 0.001708)
+Mean gt-IoU-frac (tot, MA):    (0.008764, 0.001085)
+Traj-len vs. # gt-instances:
+['0.00', '0.38', '0.00', '0.00', '0.00', '0.00', '0.00', '0.38', '0.29', '0.33']
+['0.00', '0.06', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.05', '0.00']
+Traj-len vs. betas:
+['0.050: 0.49', '0.350: 0.16']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0682
+train-drl-rpn: 1.0687
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 7800 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.118660, 0.008361)
+Mean reward (tot, MA):         (-15.378088, -15.166536)
+Mean rew-done (tot, MA):       (-15.508745, -15.182666)
+Mean traj-len (tot, MA):       (0.322437, 0.037871)
+Mean frac-area (tot, MA):      (0.017331, 0.002042)
+Mean gt >= 0.5 frac (tot, MA): (0.013787, 0.001666)
+Mean gt-IoU-frac (tot, MA):    (0.008708, 0.001059)
+Traj-len vs. # gt-instances:
+['0.00', '0.38', '0.00', '0.00', '0.00', '0.00', '0.00', '0.38', '0.29', '0.32']
+['0.00', '0.06', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.05', '0.00']
+Traj-len vs. betas:
+['0.050: 0.49', '0.350: 0.15']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0681
+train-drl-rpn: 1.0679
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 7850 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.117905, 0.008357)
+Mean reward (tot, MA):         (-15.378101, -15.171926)
+Mean rew-done (tot, MA):       (-15.507922, -15.187655)
+Mean traj-len (tot, MA):       (0.320383, 0.036936)
+Mean frac-area (tot, MA):      (0.017221, 0.001992)
+Mean gt >= 0.5 frac (tot, MA): (0.013699, 0.001625)
+Mean gt-IoU-frac (tot, MA):    (0.008652, 0.001032)
+Traj-len vs. # gt-instances:
+['0.00', '0.38', '0.00', '0.00', '0.00', '0.00', '0.00', '0.38', '0.28', '0.32']
+['0.00', '0.06', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.05', '0.00']
+Traj-len vs. betas:
+['0.050: 0.48', '0.350: 0.15']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0680
+train-drl-rpn: 1.0673
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 7900 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.117158, 0.008353)
+Mean reward (tot, MA):         (-15.375583, -15.167044)
+Mean rew-done (tot, MA):       (-15.504579, -15.182387)
+Mean traj-len (tot, MA):       (0.318355, 0.036024)
+Mean frac-area (tot, MA):      (0.017112, 0.001943)
+Mean gt >= 0.5 frac (tot, MA): (0.013613, 0.001584)
+Mean gt-IoU-frac (tot, MA):    (0.008597, 0.001007)
+Traj-len vs. # gt-instances:
+['0.00', '0.38', '0.00', '0.00', '0.00', '0.00', '0.00', '0.38', '0.28', '0.32']
+['0.00', '0.06', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.04', '0.00']
+Traj-len vs. betas:
+['0.050: 0.48', '0.350: 0.15']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0678
+train-drl-rpn: 1.0666
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 7950 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.111442, 0.007953)
+Mean reward (tot, MA):         (-15.382026, -15.197414)
+Mean rew-done (tot, MA):       (-15.510210, -15.212380)
+Mean traj-len (tot, MA):       (0.316479, 0.035630)
+Mean frac-area (tot, MA):      (0.017011, 0.001923)
+Mean gt >= 0.5 frac (tot, MA): (0.013527, 0.001545)
+Mean gt-IoU-frac (tot, MA):    (0.008543, 0.000982)
+Traj-len vs. # gt-instances:
+['0.00', '0.38', '0.00', '0.00', '0.00', '0.00', '0.00', '0.38', '0.28', '0.32']
+['0.00', '0.06', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.04', '0.02']
+Traj-len vs. betas:
+['0.050: 0.48', '0.350: 0.15']
+['0.050: 0.02', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0677
+train-drl-rpn: 1.0661
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 8000 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.110745, 0.007949)
+Mean reward (tot, MA):         (-15.387390, -15.223236)
+Mean rew-done (tot, MA):       (-15.514771, -15.237832)
+Mean traj-len (tot, MA):       (0.314501, 0.034750)
+Mean frac-area (tot, MA):      (0.016905, 0.001875)
+Mean gt >= 0.5 frac (tot, MA): (0.013443, 0.001507)
+Mean gt-IoU-frac (tot, MA):    (0.008490, 0.000958)
+Traj-len vs. # gt-instances:
+['0.00', '0.38', '0.00', '0.00', '0.00', '0.00', '0.00', '0.38', '0.28', '0.31']
+['0.00', '0.06', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.04', '0.00']
+Traj-len vs. betas:
+['0.050: 0.48', '0.350: 0.15']
+['0.050: 0.02', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0676
+train-drl-rpn: 1.0655
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 8050 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.110520, 0.007982)
+Mean reward (tot, MA):         (-15.379912, -15.197623)
+Mean rew-done (tot, MA):       (-15.506853, -15.213257)
+Mean traj-len (tot, MA):       (0.312672, 0.034385)
+Mean frac-area (tot, MA):      (0.016808, 0.001860)
+Mean gt >= 0.5 frac (tot, MA): (0.013388, 0.001586)
+Mean gt-IoU-frac (tot, MA):    (0.008458, 0.001017)
+Traj-len vs. # gt-instances:
+['0.00', '0.38', '0.00', '0.00', '0.00', '0.00', '0.00', '0.38', '0.28', '0.31']
+['0.00', '0.06', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.04', '0.01']
+Traj-len vs. betas:
+['0.050: 0.47', '0.350: 0.15']
+['0.050: 0.02', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0675
+train-drl-rpn: 1.0650
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 8100 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.104538, 0.007549)
+Mean reward (tot, MA):         (-15.381643, -15.209130)
+Mean rew-done (tot, MA):       (-15.507798, -15.224379)
+Mean traj-len (tot, MA):       (0.310865, 0.034033)
+Mean frac-area (tot, MA):      (0.016711, 0.001843)
+Mean gt >= 0.5 frac (tot, MA): (0.013306, 0.001547)
+Mean gt-IoU-frac (tot, MA):    (0.008406, 0.000992)
+Traj-len vs. # gt-instances:
+['0.00', '0.38', '0.00', '0.00', '0.00', '0.00', '0.00', '0.38', '0.27', '0.31']
+['0.00', '0.06', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.04', '0.02']
+Traj-len vs. betas:
+['0.050: 0.47', '0.350: 0.15']
+['0.050: 0.02', '0.350: 0.02']
+TIMINGS:
+runnn-drl-rpn: 0.0674
+train-drl-rpn: 1.0645
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 8150 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.103897, 0.007545)
+Mean reward (tot, MA):         (-15.379548, -15.204988)
+Mean rew-done (tot, MA):       (-15.504933, -15.219857)
+Mean traj-len (tot, MA):       (0.308958, 0.033192)
+Mean frac-area (tot, MA):      (0.016608, 0.001797)
+Mean gt >= 0.5 frac (tot, MA): (0.013224, 0.001508)
+Mean gt-IoU-frac (tot, MA):    (0.008354, 0.000967)
+Traj-len vs. # gt-instances:
+['0.00', '0.38', '0.00', '0.00', '0.00', '0.00', '0.00', '0.38', '0.27', '0.31']
+['0.00', '0.06', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.04', '0.01']
+Traj-len vs. betas:
+['0.050: 0.47', '0.350: 0.15']
+['0.050: 0.00', '0.350: 0.02']
+TIMINGS:
+runnn-drl-rpn: 0.0673
+train-drl-rpn: 1.0639
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 8200 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.103263, 0.007541)
+Mean reward (tot, MA):         (-15.383822, -15.226585)
+Mean rew-done (tot, MA):       (-15.508442, -15.241091)
+Mean traj-len (tot, MA):       (0.307074, 0.032372)
+Mean frac-area (tot, MA):      (0.016507, 0.001753)
+Mean gt >= 0.5 frac (tot, MA): (0.013143, 0.001471)
+Mean gt-IoU-frac (tot, MA):    (0.008303, 0.000943)
+Traj-len vs. # gt-instances:
+['0.00', '0.38', '0.00', '0.00', '0.00', '0.00', '0.00', '0.38', '0.27', '0.31']
+['0.00', '0.06', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.04', '0.00']
+Traj-len vs. betas:
+['0.050: 0.47', '0.350: 0.15']
+['0.050: 0.00', '0.350: 0.01']
+TIMINGS:
+runnn-drl-rpn: 0.0672
+train-drl-rpn: 1.0633
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 8250 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.102637, 0.007537)
+Mean reward (tot, MA):         (-15.381375, -15.220580)
+Mean rew-done (tot, MA):       (-15.505238, -15.234730)
+Mean traj-len (tot, MA):       (0.305213, 0.031573)
+Mean frac-area (tot, MA):      (0.016407, 0.001709)
+Mean gt >= 0.5 frac (tot, MA): (0.013064, 0.001435)
+Mean gt-IoU-frac (tot, MA):    (0.008253, 0.000920)
+Traj-len vs. # gt-instances:
+['0.00', '0.38', '0.00', '0.00', '0.00', '0.00', '0.00', '0.38', '0.27', '0.31']
+['0.00', '0.06', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.04', '0.00']
+Traj-len vs. betas:
+['0.050: 0.46', '0.350: 0.15']
+['0.050: 0.00', '0.350: 0.01']
+TIMINGS:
+runnn-drl-rpn: 0.0671
+train-drl-rpn: 1.0626
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 8300 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.102019, 0.007534)
+Mean reward (tot, MA):         (-15.385705, -15.242411)
+Mean rew-done (tot, MA):       (-15.508821, -15.256209)
+Mean traj-len (tot, MA):       (0.303374, 0.030793)
+Mean frac-area (tot, MA):      (0.016308, 0.001667)
+Mean gt >= 0.5 frac (tot, MA): (0.012985, 0.001399)
+Mean gt-IoU-frac (tot, MA):    (0.008203, 0.000897)
+Traj-len vs. # gt-instances:
+['0.00', '0.38', '0.00', '0.00', '0.00', '0.00', '0.00', '0.38', '0.27', '0.30']
+['0.00', '0.06', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.04', '0.00']
+Traj-len vs. betas:
+['0.050: 0.46', '0.350: 0.15']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0670
+train-drl-rpn: 1.0621
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 8350 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.101408, 0.007530)
+Mean reward (tot, MA):         (-15.389383, -15.261036)
+Mean rew-done (tot, MA):       (-15.511763, -15.274497)
+Mean traj-len (tot, MA):       (0.301558, 0.030033)
+Mean frac-area (tot, MA):      (0.016211, 0.001626)
+Mean gt >= 0.5 frac (tot, MA): (0.012907, 0.001365)
+Mean gt-IoU-frac (tot, MA):    (0.008154, 0.000875)
+Traj-len vs. # gt-instances:
+['0.00', '0.38', '0.00', '0.00', '0.00', '0.00', '0.00', '0.38', '0.26', '0.30']
+['0.00', '0.06', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.04', '0.00']
+Traj-len vs. betas:
+['0.050: 0.46', '0.350: 0.15']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0669
+train-drl-rpn: 1.0614
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 8400 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.100805, 0.007526)
+Mean reward (tot, MA):         (-15.391945, -15.274943)
+Mean rew-done (tot, MA):       (-15.513598, -15.288071)
+Mean traj-len (tot, MA):       (0.299763, 0.029291)
+Mean frac-area (tot, MA):      (0.016114, 0.001586)
+Mean gt >= 0.5 frac (tot, MA): (0.012830, 0.001331)
+Mean gt-IoU-frac (tot, MA):    (0.008106, 0.000853)
+Traj-len vs. # gt-instances:
+['0.00', '0.38', '0.00', '0.00', '0.00', '0.00', '0.00', '0.38', '0.26', '0.30']
+['0.00', '0.06', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.04', '0.00']
+Traj-len vs. betas:
+['0.050: 0.46', '0.350: 0.14']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0668
+train-drl-rpn: 1.0611
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 8450 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.100208, 0.007522)
+Mean reward (tot, MA):         (-15.391283, -15.275022)
+Mean rew-done (tot, MA):       (-15.512216, -15.287826)
+Mean traj-len (tot, MA):       (0.297989, 0.028568)
+Mean frac-area (tot, MA):      (0.016019, 0.001547)
+Mean gt >= 0.5 frac (tot, MA): (0.012754, 0.001298)
+Mean gt-IoU-frac (tot, MA):    (0.008058, 0.000832)
+Traj-len vs. # gt-instances:
+['0.00', '0.38', '0.00', '0.00', '0.00', '0.00', '0.00', '0.38', '0.26', '0.30']
+['0.00', '0.06', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.04', '0.00']
+Traj-len vs. betas:
+['0.050: 0.45', '0.350: 0.14']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0667
+train-drl-rpn: 1.0605
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 8500 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.099619, 0.007519)
+Mean reward (tot, MA):         (-15.392391, -15.282546)
+Mean rew-done (tot, MA):       (-15.512614, -15.295033)
+Mean traj-len (tot, MA):       (0.296236, 0.027862)
+Mean frac-area (tot, MA):      (0.015925, 0.001508)
+Mean gt >= 0.5 frac (tot, MA): (0.012679, 0.001266)
+Mean gt-IoU-frac (tot, MA):    (0.008010, 0.000812)
+Traj-len vs. # gt-instances:
+['0.00', '0.38', '0.00', '0.00', '0.00', '0.00', '0.00', '0.38', '0.26', '0.30']
+['0.00', '0.06', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.04', '0.00']
+Traj-len vs. betas:
+['0.050: 0.45', '0.350: 0.14']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0666
+train-drl-rpn: 1.0600
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 8550 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.099036, 0.007515)
+Mean reward (tot, MA):         (-15.390219, -15.276045)
+Mean rew-done (tot, MA):       (-15.509734, -15.288221)
+Mean traj-len (tot, MA):       (0.294504, 0.027174)
+Mean frac-area (tot, MA):      (0.015831, 0.001471)
+Mean gt >= 0.5 frac (tot, MA): (0.012605, 0.001235)
+Mean gt-IoU-frac (tot, MA):    (0.007963, 0.000792)
+Traj-len vs. # gt-instances:
+['0.00', '0.38', '0.00', '0.00', '0.00', '0.00', '0.00', '0.38', '0.26', '0.29']
+['0.00', '0.06', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.04', '0.00']
+Traj-len vs. betas:
+['0.050: 0.45', '0.350: 0.14']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0665
+train-drl-rpn: 1.0595
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 8600 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.098460, 0.007511)
+Mean reward (tot, MA):         (-15.385859, -15.260206)
+Mean rew-done (tot, MA):       (-15.504678, -15.272082)
+Mean traj-len (tot, MA):       (0.292791, 0.026503)
+Mean frac-area (tot, MA):      (0.015739, 0.001435)
+Mean gt >= 0.5 frac (tot, MA): (0.012532, 0.001204)
+Mean gt-IoU-frac (tot, MA):    (0.007917, 0.000772)
+Traj-len vs. # gt-instances:
+['0.00', '0.38', '0.00', '0.00', '0.00', '0.00', '0.00', '0.38', '0.26', '0.29']
+['0.00', '0.06', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.03', '0.00']
+Traj-len vs. betas:
+['0.050: 0.45', '0.350: 0.14']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0664
+train-drl-rpn: 1.0591
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 8650 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.096218, 0.007363)
+Mean reward (tot, MA):         (-15.380954, -15.242373)
+Mean rew-done (tot, MA):       (-15.499215, -15.254532)
+Mean traj-len (tot, MA):       (0.291330, 0.026844)
+Mean frac-area (tot, MA):      (0.015663, 0.001462)
+Mean gt >= 0.5 frac (tot, MA): (0.012473, 0.001233)
+Mean gt-IoU-frac (tot, MA):    (0.007879, 0.000787)
+Traj-len vs. # gt-instances:
+['0.00', '0.33', '0.00', '0.00', '0.00', '0.00', '0.00', '0.38', '0.25', '0.29']
+['0.00', '0.06', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.03', '0.04']
+Traj-len vs. betas:
+['0.050: 0.44', '0.350: 0.14']
+['0.050: 0.04', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0663
+train-drl-rpn: 1.0587
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 8700 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.095665, 0.007359)
+Mean reward (tot, MA):         (-15.383248, -15.255709)
+Mean rew-done (tot, MA):       (-15.500833, -15.267570)
+Mean traj-len (tot, MA):       (0.289656, 0.026181)
+Mean frac-area (tot, MA):      (0.015573, 0.001426)
+Mean gt >= 0.5 frac (tot, MA): (0.012401, 0.001203)
+Mean gt-IoU-frac (tot, MA):    (0.007834, 0.000768)
+Traj-len vs. # gt-instances:
+['0.00', '0.33', '0.00', '0.00', '0.00', '0.00', '0.00', '0.38', '0.25', '0.29']
+['0.00', '0.06', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.03', '0.01']
+Traj-len vs. betas:
+['0.050: 0.44', '0.350: 0.14']
+['0.050: 0.04', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0662
+train-drl-rpn: 1.0582
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 8750 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.093698, 0.007231)
+Mean reward (tot, MA):         (-15.384394, -15.263713)
+Mean rew-done (tot, MA):       (-15.501403, -15.275684)
+Mean traj-len (tot, MA):       (0.288229, 0.026527)
+Mean frac-area (tot, MA):      (0.015498, 0.001451)
+Mean gt >= 0.5 frac (tot, MA): (0.012338, 0.001204)
+Mean gt-IoU-frac (tot, MA):    (0.007795, 0.000774)
+Traj-len vs. # gt-instances:
+['0.00', '0.33', '0.00', '0.00', '0.00', '0.00', '0.00', '0.38', '0.25', '0.29']
+['0.00', '0.06', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.03', '0.04']
+Traj-len vs. betas:
+['0.050: 0.44', '0.350: 0.14']
+['0.050: 0.05', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0661
+train-drl-rpn: 1.0577
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 8800 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.093165, 0.007227)
+Mean reward (tot, MA):         (-15.383458, -15.262815)
+Mean rew-done (tot, MA):       (-15.499804, -15.274491)
+Mean traj-len (tot, MA):       (0.286592, 0.025871)
+Mean frac-area (tot, MA):      (0.015410, 0.001415)
+Mean gt >= 0.5 frac (tot, MA): (0.012268, 0.001174)
+Mean gt-IoU-frac (tot, MA):    (0.007751, 0.000755)
+Traj-len vs. # gt-instances:
+['0.00', '0.33', '0.00', '0.00', '0.00', '0.00', '0.00', '0.38', '0.25', '0.29']
+['0.00', '0.06', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.03', '0.01']
+Traj-len vs. betas:
+['0.050: 0.44', '0.350: 0.14']
+['0.050: 0.05', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0660
+train-drl-rpn: 1.0572
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 8850 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.092639, 0.007224)
+Mean reward (tot, MA):         (-15.383888, -15.267593)
+Mean rew-done (tot, MA):       (-15.499579, -15.278983)
+Mean traj-len (tot, MA):       (0.284973, 0.025232)
+Mean frac-area (tot, MA):      (0.015323, 0.001380)
+Mean gt >= 0.5 frac (tot, MA): (0.012198, 0.001145)
+Mean gt-IoU-frac (tot, MA):    (0.007707, 0.000736)
+Traj-len vs. # gt-instances:
+['0.00', '0.33', '0.00', '0.00', '0.00', '0.00', '0.00', '0.38', '0.24', '0.29']
+['0.00', '0.06', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.03', '0.00']
+Traj-len vs. betas:
+['0.050: 0.43', '0.350: 0.14']
+['0.050: 0.01', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0660
+train-drl-rpn: 1.0567
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 8900 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.092118, 0.007220)
+Mean reward (tot, MA):         (-15.388361, -15.290053)
+Mean rew-done (tot, MA):       (-15.503405, -15.301163)
+Mean traj-len (tot, MA):       (0.283372, 0.024609)
+Mean frac-area (tot, MA):      (0.015236, 0.001346)
+Mean gt >= 0.5 frac (tot, MA): (0.012130, 0.001117)
+Mean gt-IoU-frac (tot, MA):    (0.007664, 0.000718)
+Traj-len vs. # gt-instances:
+['0.00', '0.33', '0.00', '0.00', '0.00', '0.00', '0.00', '0.38', '0.24', '0.28']
+['0.00', '0.06', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.03', '0.00']
+Traj-len vs. betas:
+['0.050: 0.43', '0.350: 0.14']
+['0.050: 0.01', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0659
+train-drl-rpn: 1.0561
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 8950 / 10000
+lr-rl: 0.000020
+Mean loss (tot, MA):      (0.087215, 0.006824)
+Mean reward (tot, MA):         (-15.389881, -15.299121)
+Mean rew-done (tot, MA):       (-15.504278, -15.309958)
+Mean traj-len (tot, MA):       (0.281900, 0.024499)
+Mean frac-area (tot, MA):      (0.015156, 0.001334)
+Mean gt >= 0.5 frac (tot, MA): (0.012062, 0.001089)
+Mean gt-IoU-frac (tot, MA):    (0.007621, 0.000700)
+Traj-len vs. # gt-instances:
+['0.00', '0.40', '0.00', '0.00', '0.00', '0.00', '0.00', '0.38', '0.24', '0.28']
+['0.00', '0.09', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.03', '0.00']
+Traj-len vs. betas:
+['0.050: 0.43', '0.350: 0.14']
+['0.050: 0.02', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0658
+train-drl-rpn: 1.0558
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 9000 / 10000
+lr-rl: 0.000004
+Mean loss (tot, MA):      (0.086731, 0.006820)
+Mean reward (tot, MA):         (-15.390053, -15.302330)
+Mean rew-done (tot, MA):       (-15.503806, -15.312901)
+Mean traj-len (tot, MA):       (0.280334, 0.023894)
+Mean frac-area (tot, MA):      (0.015072, 0.001301)
+Mean gt >= 0.5 frac (tot, MA): (0.011995, 0.001063)
+Mean gt-IoU-frac (tot, MA):    (0.007579, 0.000683)
+Traj-len vs. # gt-instances:
+['0.00', '0.40', '0.00', '0.00', '0.00', '0.00', '0.00', '0.38', '0.24', '0.28']
+['0.00', '0.09', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.03', '0.00']
+Traj-len vs. betas:
+['0.050: 0.43', '0.350: 0.13']
+['0.050: 0.02', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0657
+train-drl-rpn: 1.0553
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 9050 / 10000
+lr-rl: 0.000004
+Mean loss (tot, MA):      (0.086252, 0.006817)
+Mean reward (tot, MA):         (-15.391656, -15.311696)
+Mean rew-done (tot, MA):       (-15.504779, -15.322005)
+Mean traj-len (tot, MA):       (0.278785, 0.023303)
+Mean frac-area (tot, MA):      (0.014989, 0.001269)
+Mean gt >= 0.5 frac (tot, MA): (0.011929, 0.001036)
+Mean gt-IoU-frac (tot, MA):    (0.007537, 0.000666)
+Traj-len vs. # gt-instances:
+['0.00', '0.40', '0.00', '0.00', '0.00', '0.00', '0.00', '0.38', '0.24', '0.28']
+['0.00', '0.09', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.03', '0.00']
+Traj-len vs. betas:
+['0.050: 0.42', '0.350: 0.13']
+['0.050: 0.01', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0656
+train-drl-rpn: 1.0548
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 9100 / 10000
+lr-rl: 0.000004
+Mean loss (tot, MA):      (0.085778, 0.006813)
+Mean reward (tot, MA):         (-15.392802, -15.318832)
+Mean rew-done (tot, MA):       (-15.505301, -15.328891)
+Mean traj-len (tot, MA):       (0.277254, 0.022728)
+Mean frac-area (tot, MA):      (0.014906, 0.001238)
+Mean gt >= 0.5 frac (tot, MA): (0.011863, 0.001011)
+Mean gt-IoU-frac (tot, MA):    (0.007495, 0.000650)
+Traj-len vs. # gt-instances:
+['0.00', '0.40', '0.00', '0.00', '0.00', '0.00', '0.00', '0.38', '0.24', '0.28']
+['0.00', '0.09', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.03', '0.00']
+Traj-len vs. betas:
+['0.050: 0.42', '0.350: 0.13']
+['0.050: 0.01', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0655
+train-drl-rpn: 1.0543
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 9150 / 10000
+lr-rl: 0.000004
+Mean loss (tot, MA):      (0.085309, 0.006810)
+Mean reward (tot, MA):         (-15.393827, -15.325279)
+Mean rew-done (tot, MA):       (-15.505713, -15.335092)
+Mean traj-len (tot, MA):       (0.275738, 0.022167)
+Mean frac-area (tot, MA):      (0.014825, 0.001207)
+Mean gt >= 0.5 frac (tot, MA): (0.011798, 0.000986)
+Mean gt-IoU-frac (tot, MA):    (0.007454, 0.000634)
+Traj-len vs. # gt-instances:
+['0.00', '0.40', '0.00', '0.00', '0.00', '0.00', '0.00', '0.38', '0.24', '0.28']
+['0.00', '0.09', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.03', '0.00']
+Traj-len vs. betas:
+['0.050: 0.42', '0.350: 0.13']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0654
+train-drl-rpn: 1.0537
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 9200 / 10000
+lr-rl: 0.000004
+Mean loss (tot, MA):      (0.084845, 0.006807)
+Mean reward (tot, MA):         (-15.393313, -15.324707)
+Mean rew-done (tot, MA):       (-15.504599, -15.334278)
+Mean traj-len (tot, MA):       (0.274240, 0.021619)
+Mean frac-area (tot, MA):      (0.014744, 0.001178)
+Mean gt >= 0.5 frac (tot, MA): (0.011734, 0.000961)
+Mean gt-IoU-frac (tot, MA):    (0.007414, 0.000618)
+Traj-len vs. # gt-instances:
+['0.00', '0.40', '0.00', '0.00', '0.00', '0.00', '0.00', '0.38', '0.24', '0.27']
+['0.00', '0.09', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.03', '0.00']
+Traj-len vs. betas:
+['0.050: 0.42', '0.350: 0.13']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0654
+train-drl-rpn: 1.0532
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 9250 / 10000
+lr-rl: 0.000004
+Mean loss (tot, MA):      (0.084387, 0.006803)
+Mean reward (tot, MA):         (-15.395943, -15.338455)
+Mean rew-done (tot, MA):       (-15.506627, -15.347790)
+Mean traj-len (tot, MA):       (0.272757, 0.021085)
+Mean frac-area (tot, MA):      (0.014665, 0.001149)
+Mean gt >= 0.5 frac (tot, MA): (0.011671, 0.000938)
+Mean gt-IoU-frac (tot, MA):    (0.007374, 0.000603)
+Traj-len vs. # gt-instances:
+['0.00', '0.40', '0.00', '0.00', '0.00', '0.00', '0.00', '0.38', '0.24', '0.27']
+['0.00', '0.09', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.03', '0.00']
+Traj-len vs. betas:
+['0.050: 0.41', '0.350: 0.13']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0653
+train-drl-rpn: 1.0528
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 9300 / 10000
+lr-rl: 0.000004
+Mean loss (tot, MA):      (0.083933, 0.006800)
+Mean reward (tot, MA):         (-15.397471, -15.346973)
+Mean rew-done (tot, MA):       (-15.507557, -15.356074)
+Mean traj-len (tot, MA):       (0.271291, 0.020565)
+Mean frac-area (tot, MA):      (0.014586, 0.001120)
+Mean gt >= 0.5 frac (tot, MA): (0.011608, 0.000914)
+Mean gt-IoU-frac (tot, MA):    (0.007334, 0.000588)
+Traj-len vs. # gt-instances:
+['0.00', '0.40', '0.00', '0.00', '0.00', '0.00', '0.00', '0.38', '0.24', '0.27']
+['0.00', '0.09', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.03', '0.00']
+Traj-len vs. betas:
+['0.050: 0.41', '0.350: 0.13']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0652
+train-drl-rpn: 1.0523
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 9350 / 10000
+lr-rl: 0.000004
+Mean loss (tot, MA):      (0.083484, 0.006796)
+Mean reward (tot, MA):         (-15.399195, -15.356121)
+Mean rew-done (tot, MA):       (-15.508691, -15.364993)
+Mean traj-len (tot, MA):       (0.269840, 0.020057)
+Mean frac-area (tot, MA):      (0.014508, 0.001092)
+Mean gt >= 0.5 frac (tot, MA): (0.011546, 0.000892)
+Mean gt-IoU-frac (tot, MA):    (0.007295, 0.000573)
+Traj-len vs. # gt-instances:
+['0.00', '0.40', '0.00', '0.00', '0.00', '0.00', '0.00', '0.38', '0.24', '0.27']
+['0.00', '0.09', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.02', '0.00']
+Traj-len vs. betas:
+['0.050: 0.41', '0.350: 0.13']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0651
+train-drl-rpn: 1.0518
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 9400 / 10000
+lr-rl: 0.000004
+Mean loss (tot, MA):      (0.083040, 0.006793)
+Mean reward (tot, MA):         (-15.404305, -15.380896)
+Mean rew-done (tot, MA):       (-15.513220, -15.389545)
+Mean traj-len (tot, MA):       (0.268405, 0.019561)
+Mean frac-area (tot, MA):      (0.014431, 0.001065)
+Mean gt >= 0.5 frac (tot, MA): (0.011485, 0.000870)
+Mean gt-IoU-frac (tot, MA):    (0.007256, 0.000559)
+Traj-len vs. # gt-instances:
+['0.00', '0.40', '0.00', '0.00', '0.00', '0.00', '0.00', '0.38', '0.23', '0.27']
+['0.00', '0.09', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.02', '0.00']
+Traj-len vs. betas:
+['0.050: 0.41', '0.350: 0.13']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0650
+train-drl-rpn: 1.0514
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 9450 / 10000
+lr-rl: 0.000004
+Mean loss (tot, MA):      (0.082601, 0.006790)
+Mean reward (tot, MA):         (-15.403540, -15.377934)
+Mean rew-done (tot, MA):       (-15.511879, -15.386364)
+Mean traj-len (tot, MA):       (0.266985, 0.019078)
+Mean frac-area (tot, MA):      (0.014354, 0.001039)
+Mean gt >= 0.5 frac (tot, MA): (0.011424, 0.000848)
+Mean gt-IoU-frac (tot, MA):    (0.007218, 0.000545)
+Traj-len vs. # gt-instances:
+['0.00', '0.40', '0.00', '0.00', '0.00', '0.00', '0.00', '0.38', '0.23', '0.27']
+['0.00', '0.09', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.02', '0.00']
+Traj-len vs. betas:
+['0.050: 0.40', '0.350: 0.13']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0649
+train-drl-rpn: 1.0510
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 9500 / 10000
+lr-rl: 0.000004
+Mean loss (tot, MA):      (0.082166, 0.006786)
+Mean reward (tot, MA):         (-15.404149, -15.381463)
+Mean rew-done (tot, MA):       (-15.511918, -15.389680)
+Mean traj-len (tot, MA):       (0.265580, 0.018607)
+Mean frac-area (tot, MA):      (0.014279, 0.001014)
+Mean gt >= 0.5 frac (tot, MA): (0.011364, 0.000827)
+Mean gt-IoU-frac (tot, MA):    (0.007180, 0.000532)
+Traj-len vs. # gt-instances:
+['0.00', '0.40', '0.00', '0.00', '0.00', '0.00', '0.00', '0.38', '0.23', '0.27']
+['0.00', '0.09', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.02', '0.00']
+Traj-len vs. betas:
+['0.050: 0.40', '0.350: 0.13']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0649
+train-drl-rpn: 1.0505
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 9550 / 10000
+lr-rl: 0.000004
+Mean loss (tot, MA):      (0.081736, 0.006783)
+Mean reward (tot, MA):         (-15.405280, -15.387491)
+Mean rew-done (tot, MA):       (-15.512488, -15.395506)
+Mean traj-len (tot, MA):       (0.264189, 0.018148)
+Mean frac-area (tot, MA):      (0.014204, 0.000988)
+Mean gt >= 0.5 frac (tot, MA): (0.011304, 0.000807)
+Mean gt-IoU-frac (tot, MA):    (0.007142, 0.000519)
+Traj-len vs. # gt-instances:
+['0.00', '0.40', '0.00', '0.00', '0.00', '0.00', '0.00', '0.38', '0.23', '0.26']
+['0.00', '0.09', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.02', '0.00']
+Traj-len vs. betas:
+['0.050: 0.40', '0.350: 0.13']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0648
+train-drl-rpn: 1.0499
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 9600 / 10000
+lr-rl: 0.000004
+Mean loss (tot, MA):      (0.081310, 0.006779)
+Mean reward (tot, MA):         (-15.408795, -15.404705)
+Mean rew-done (tot, MA):       (-15.515447, -15.412524)
+Mean traj-len (tot, MA):       (0.262813, 0.017699)
+Mean frac-area (tot, MA):      (0.014130, 0.000964)
+Mean gt >= 0.5 frac (tot, MA): (0.011245, 0.000787)
+Mean gt-IoU-frac (tot, MA):    (0.007105, 0.000506)
+Traj-len vs. # gt-instances:
+['0.00', '0.40', '0.00', '0.00', '0.00', '0.00', '0.00', '0.38', '0.23', '0.26']
+['0.00', '0.09', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.02', '0.00']
+Traj-len vs. betas:
+['0.050: 0.40', '0.350: 0.13']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0647
+train-drl-rpn: 1.0495
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 9650 / 10000
+lr-rl: 0.000004
+Mean loss (tot, MA):      (0.080889, 0.006776)
+Mean reward (tot, MA):         (-15.407610, -15.399208)
+Mean rew-done (tot, MA):       (-15.513711, -15.406835)
+Mean traj-len (tot, MA):       (0.261451, 0.017262)
+Mean frac-area (tot, MA):      (0.014057, 0.000940)
+Mean gt >= 0.5 frac (tot, MA): (0.011187, 0.000768)
+Mean gt-IoU-frac (tot, MA):    (0.007068, 0.000494)
+Traj-len vs. # gt-instances:
+['0.00', '0.40', '0.00', '0.00', '0.00', '0.00', '0.00', '0.38', '0.22', '0.26']
+['0.00', '0.09', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.02', '0.00']
+Traj-len vs. betas:
+['0.050: 0.40', '0.350: 0.13']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0646
+train-drl-rpn: 1.0491
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 9700 / 10000
+lr-rl: 0.000004
+Mean loss (tot, MA):      (0.080472, 0.006773)
+Mean reward (tot, MA):         (-15.408703, -15.404657)
+Mean rew-done (tot, MA):       (-15.514261, -15.412098)
+Mean traj-len (tot, MA):       (0.260104, 0.016836)
+Mean frac-area (tot, MA):      (0.013984, 0.000917)
+Mean gt >= 0.5 frac (tot, MA): (0.011129, 0.000749)
+Mean gt-IoU-frac (tot, MA):    (0.007032, 0.000481)
+Traj-len vs. # gt-instances:
+['0.00', '0.40', '0.00', '0.00', '0.00', '0.00', '0.00', '0.38', '0.22', '0.26']
+['0.00', '0.09', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.02', '0.00']
+Traj-len vs. betas:
+['0.050: 0.40', '0.350: 0.12']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0646
+train-drl-rpn: 1.0487
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 9750 / 10000
+lr-rl: 0.000004
+Mean loss (tot, MA):      (0.080059, 0.006769)
+Mean reward (tot, MA):         (-15.409378, -15.408041)
+Mean rew-done (tot, MA):       (-15.514397, -15.415296)
+Mean traj-len (tot, MA):       (0.258770, 0.016420)
+Mean frac-area (tot, MA):      (0.013913, 0.000894)
+Mean gt >= 0.5 frac (tot, MA): (0.011072, 0.000730)
+Mean gt-IoU-frac (tot, MA):    (0.006996, 0.000469)
+Traj-len vs. # gt-instances:
+['0.00', '0.40', '0.00', '0.00', '0.00', '0.00', '0.00', '0.38', '0.22', '0.26']
+['0.00', '0.09', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.02', '0.00']
+Traj-len vs. betas:
+['0.050: 0.39', '0.350: 0.12']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0645
+train-drl-rpn: 1.0482
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 9800 / 10000
+lr-rl: 0.000004
+Mean loss (tot, MA):      (0.079613, 0.006762)
+Mean reward (tot, MA):         (-15.411903, -15.420298)
+Mean rew-done (tot, MA):       (-15.516470, -15.427744)
+Mean traj-len (tot, MA):       (0.257552, 0.016504)
+Mean frac-area (tot, MA):      (0.013848, 0.000903)
+Mean gt >= 0.5 frac (tot, MA): (0.011027, 0.000766)
+Mean gt-IoU-frac (tot, MA):    (0.006969, 0.000499)
+Traj-len vs. # gt-instances:
+['0.00', '0.40', '0.00', '0.00', '0.00', '0.00', '0.00', '0.38', '0.22', '0.26']
+['0.00', '0.09', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.02', '0.01']
+Traj-len vs. betas:
+['0.050: 0.39', '0.350: 0.12']
+['0.050: 0.00', '0.350: 0.01']
+TIMINGS:
+runnn-drl-rpn: 0.0644
+train-drl-rpn: 1.0478
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 9850 / 10000
+lr-rl: 0.000004
+Mean loss (tot, MA):      (0.079219, 0.006760)
+Mean reward (tot, MA):         (-15.411497, -15.418106)
+Mean rew-done (tot, MA):       (-15.515676, -15.426065)
+Mean traj-len (tot, MA):       (0.256346, 0.016584)
+Mean frac-area (tot, MA):      (0.013782, 0.000901)
+Mean gt >= 0.5 frac (tot, MA): (0.010984, 0.000809)
+Mean gt-IoU-frac (tot, MA):    (0.006942, 0.000530)
+Traj-len vs. # gt-instances:
+['0.00', '0.40', '0.00', '0.00', '0.00', '0.00', '0.00', '0.38', '0.22', '0.26']
+['0.00', '0.09', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.02', '0.01']
+Traj-len vs. betas:
+['0.050: 0.39', '0.350: 0.12']
+['0.050: 0.01', '0.350: 0.01']
+TIMINGS:
+runnn-drl-rpn: 0.0643
+train-drl-rpn: 1.0475
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 9900 / 10000
+lr-rl: 0.000004
+Mean loss (tot, MA):      (0.078819, 0.006756)
+Mean reward (tot, MA):         (-15.408612, -15.403857)
+Mean rew-done (tot, MA):       (-15.512266, -15.411621)
+Mean traj-len (tot, MA):       (0.255051, 0.016175)
+Mean frac-area (tot, MA):      (0.013713, 0.000879)
+Mean gt >= 0.5 frac (tot, MA): (0.010928, 0.000789)
+Mean gt-IoU-frac (tot, MA):    (0.006907, 0.000517)
+Traj-len vs. # gt-instances:
+['0.00', '0.40', '0.00', '0.00', '0.00', '0.00', '0.00', '0.38', '0.22', '0.26']
+['0.00', '0.09', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.02', '0.00']
+Traj-len vs. betas:
+['0.050: 0.39', '0.350: 0.12']
+['0.050: 0.01', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0643
+train-drl-rpn: 1.0470
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 9950 / 10000
+lr-rl: 0.000004
+Mean loss (tot, MA):      (0.078423, 0.006753)
+Mean reward (tot, MA):         (-15.410277, -15.412227)
+Mean rew-done (tot, MA):       (-15.513409, -15.419798)
+Mean traj-len (tot, MA):       (0.253769, 0.015775)
+Mean frac-area (tot, MA):      (0.013644, 0.000857)
+Mean gt >= 0.5 frac (tot, MA): (0.010874, 0.000769)
+Mean gt-IoU-frac (tot, MA):    (0.006872, 0.000504)
+Traj-len vs. # gt-instances:
+['0.00', '0.40', '0.00', '0.00', '0.00', '0.00', '0.00', '0.38', '0.22', '0.25']
+['0.00', '0.09', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.02', '0.00']
+Traj-len vs. betas:
+['0.050: 0.38', '0.350: 0.12']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0642
+train-drl-rpn: 1.0466
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+
+##### DRL-RPN BATCH GRADIENT UPDATE - START ##### 
+
+iter: 10000 / 10000
+lr-rl: 0.000004
+Mean loss (tot, MA):      (0.078030, 0.006750)
+Mean reward (tot, MA):         (-15.413427, -15.427729)
+Mean rew-done (tot, MA):       (-15.516040, -15.435111)
+Mean traj-len (tot, MA):       (0.252501, 0.015386)
+Mean frac-area (tot, MA):      (0.013575, 0.000836)
+Mean gt >= 0.5 frac (tot, MA): (0.010819, 0.000750)
+Mean gt-IoU-frac (tot, MA):    (0.006838, 0.000492)
+Traj-len vs. # gt-instances:
+['0.00', '0.40', '0.00', '0.00', '0.00', '0.00', '0.00', '0.38', '0.22', '0.25']
+['0.00', '0.09', '0.00', '0.00', '0.00', '0.00', '0.00', '0.06', '0.02', '0.00']
+Traj-len vs. betas:
+['0.050: 0.38', '0.350: 0.12']
+['0.050: 0.00', '0.350: 0.00']
+TIMINGS:
+runnn-drl-rpn: 0.0641
+train-drl-rpn: 1.0463
+
+##### DRL-RPN BATCH GRADIENT UPDATE - DONE ###### 
+
+Wrote snapshot to: /home/vador/Documents/project/AI/drl-rpn-tf/output-weights/drl-rpn-paris/output/vgg16_drl_rpn/paris_train/vgg16_drl_rpn_iter_10000.ckpt
+done solving
+757.58user 153.56system 18:14.57elapsed 83%CPU (0avgtext+0avgdata 8576408maxresident)k
+4997368inputs+11599184outputs (49major+4631579minor)pagefaults 0swaps

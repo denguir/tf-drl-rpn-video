@@ -118,6 +118,9 @@ if __name__ == '__main__':
 
   tfconfig = tf.ConfigProto(allow_soft_placement=True)
   tfconfig.gpu_options.allow_growth=True
+  # added because cudnn & cublas fail:
+  tfconfig.gpu_options.allocator_type = 'BFC'
+  tfconfig.gpu_options.per_process_gpu_memory_fraction = 0.9 
 
   # Set the random seed for tensorflow
   tf.set_random_seed(cfg.RNG_SEED)
