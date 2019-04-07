@@ -13,3 +13,4 @@ data/VOCdevkit2012_test
 **/img-out
 **/output
 **/output-weights
+**/logs
