@@ -73,6 +73,9 @@ __C.TRAIN.IMS_PER_BATCH = 1
 # Minibatch size (number of regions of interest [ROIs])
 __C.TRAIN.BATCH_SIZE = 128 
 
+# Length of a Video Sequence
+__C.TRAIN.SEQ_LENGTH = 4
+
 # Fraction of minibatch that is labeled foreground (i.e. class > 0)
 __C.TRAIN.FG_FRACTION = 0.25
 

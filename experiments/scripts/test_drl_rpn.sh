@@ -75,7 +75,7 @@ case ${DATASET} in
     ;;
   paris)
     #WEIGHTS_PATH=/home/vador/Documents/project/AI/drl-rpn-tf/data/pre-trained/drl-rpn-voc2007-2012-trainval/vgg16_drl_rpn_iter_110000.ckpt
-    WEIGHTS_PATH=/home/vador/Documents/project/AI/drl-rpn-tf/output-weights/drl-rpn-paris/output/vgg16_drl_rpn/paris_train/vgg16_drl_rpn_iter_10000.ckpt
+    WEIGHTS_PATH=/home/vador/Documents/project/AI/drl-rpn-tf/output-weights/drl-rpn-paris/output/vgg16_drl_rpn/paris_train/vgg16_drl_rpn_iter_400.ckpt
     ;;
   *)
     WEIGHTS_PATH=/home/vador/Documents/project/AI/drl-rpn-tf/data/pre-trained/drl-rpn-voc2007-2012-trainval/vgg16_drl_rpn_iter_110000.ckpt
