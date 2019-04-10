@@ -93,7 +93,7 @@ case ${DATASET} in
     SAVE_PATH=/home/vador/Documents/project/AI/drl-rpn-tf/output-weights/drl-rpn-paris-video/
     case ${USE_POST} in
       0)
-        WEIGHTS_PATH=/home/vador/Documents/project/AI/drl-rpn-tf/data/pre-trained/drl-rpn-voc2007-2012-trainval-video/vgg16_drl_rpn_iter_0.ckpt
+        WEIGHTS_PATH=/home/vador/Documents/project/AI/drl-rpn-tf/data/pre-trained/drl-rpn-voc2007-2012-trainval-plus-2007test-video/vgg16_drl_rpn_iter_0.ckpt
         ;;
       *)
         WEIGHTS_PATH=/home/vador/Documents/project/AI/drl-rpn-tf/data/pre-trained/drl-rpn-voc2007-2012-trainval-video/vgg16_drl_rpn_iter_0.ckpt
