@@ -41,8 +41,9 @@ if __name__ == '__main__':
               'im_info': seqBlobs['im_info']}
       blobs['data'] = np.expand_dims(blobs['data'], axis=0)
       print(blobs['data'].shape)
-      img = blobs['data'][0,:,:,:]
-      cv2.imwrite('img%d.jpg'%fnum, img)
-      cv2.imshow('img%d'%fnum, img)
-      cv2.waitKey(0)
+      print(blobs['gt_boxes'].shape)
+      #img = blobs['data'][0,:,:,:]
+      #cv2.imwrite('img%d.jpg'%fnum, img)
+      #cv2.imshow('img%d'%fnum, img)
+      #cv2.waitKey(0)
 

@@ -2,11 +2,11 @@ import tensorflow as tf
 import numpy as np 
 from tensorflow.python import pywrap_tensorflow
 
-weights_dir = '/home/vador/Documents/project/AI/drl-rpn-tf-video/data/pretrained/drl-rpn-voc2007-2012-trainval/'
-weights3d_dir = '/home/vador/Documents/project/AI/drl-rpn-tf-video/output-weights/drl-rpn-paris/output/vgg16_drl_rpn/paris_train/'
+weights_dir = '/home/vador/Documents/project/AI/drl-rpn-tf/data/pre-trained/drl-rpn-voc2007-2012-trainval-plus-2007test/'
+weights3d_dir = '/home/vador/Documents/project/AI/drl-rpn-tf/output-weights/drl-rpn-paris-video/output/vgg16_drl_rpn/paris_train/'
 
-meta = weights_dir + 'vgg16_drl_rpn_iter_110000.ckpt.meta'
-model = weights_dir + 'vgg16_drl_rpn_iter_110000.ckpt'
+model = weights_dir + 'vgg16_2012_drl_rpn_iter_110000.ckpt'
+meta = model + '.meta'
 
 model3d = weights3d_dir + 'vgg16_drl_rpn_iter_0.ckpt'
 meta3d = weights3d_dir + 'vgg16_drl_rpn_iter_0.ckpt.meta'

@@ -8,3 +8,4 @@
 **/output
 **/output-weights
 **experiments/logs
+**/lib/test_scripts
