@@ -12,7 +12,7 @@ DRL_RPN_TRAIN:
   POST_BETAS: [0.05, 0.35]
 DRL_RPN_TEST:
   # May be set at test-time (low --> more accurate, slower; high --> opposite)
-  BETA: 0.1
+  BETA: 0.05
   # Visualize drl-RPN search trajectories?
   DO_VISUALIZE: True
 TRAIN:

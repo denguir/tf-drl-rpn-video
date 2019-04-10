@@ -8,7 +8,7 @@ weights2d_dir = '/home/vador/Documents/project/AI/drl-rpn-tf/data/pre-trained/dr
 
 model2d = weights2d_dir + 'vgg16_drl_rpn_iter_110000.ckpt'
 meta2d = model2d + '.meta'
-model3d = weights3d_dir + 'vgg16_drl_rpn_iter_0.ckpt'
+model3d = weights3d_dir + 'vgg16_drl_rpn_iter_100.ckpt'
 meta3d = model3d + '.meta'
 
 v1 = tf.get_variable('hh_weights_video', shape=[2,3,3,300,300])
