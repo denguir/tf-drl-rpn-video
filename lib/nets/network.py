@@ -999,12 +999,10 @@ class Network(object):
               tf.cast(tf.round(w_scale * tf.cast(width, tf.float32)), tf.int32)]
 
     rl_in_init = tf.image.resize_images(rl_in_init, new_sz)
+    self._predictions['rl_in_init'] = rl_in_init
 
-    # Stack of previous frames to build video detector
-    time = cfg.DIMS_TIME # lenght of "time" dimension
-    # At t=0, simply copy the first frame
-    self._state_buffer = time * [rl_in_init]
-    self.update_rl_input(rl_in_init)
+    # initialize state buffer
+    self._state_buffer = []
 
     # Define first hidden state as 0
     # rl_hid_init = tf.zeros((batch_sz, time, height, width, 300), tf.float32)
@@ -1016,10 +1014,16 @@ class Network(object):
   def update_rl_input(self, rl_in_last):
     # rl_in_last is last frame of state rl_in
     # adds previous frame states to deal with video processing
-    self._state_buffer.pop(0)
-    self._state_buffer.append(rl_in_last)
-    rl_in = tf.stack(self._state_buffer, axis=1) # dim = [batch, time_depth, height, width, channel]
-    self._predictions['rl_in_init'] = rl_in
+    if len(self._state_buffer) >= cfg.DIMS_TIME:
+      self._state_buffer.pop(0)
+      self._state_buffer.append(rl_in_last)
+
+    if len(self._state_buffer) == 0:
+      # handles inital conditions
+      self._state_buffer = cfg.DIMS_TIME * [rl_in_last]
+    
+    buffered_rl_in = np.stack(self._state_buffer, axis=1) # dim = [batch, time_depth, height, width, channel]
+    return buffered_rl_in
 
   def get_init_rl(self, sess, image, im_info):
     feed_dict = {self._image: image, self._im_info: im_info, self._cond_switch:0,
@@ -1030,6 +1034,10 @@ class Network(object):
                   self._predictions['rois_all'],self._predictions['roi_obs_vol'],
                   self._predictions['rpn_cls_objness'],
                   self._predictions['not_keep_ids']], feed_dict=feed_dict)
+    
+    # update stacked rl_in with the new one:
+    rl_in = self.update_rl_input(rl_in)
+
     if not cfg.DRL_RPN.USE_HIST:
       rl_in = rl_in[:, :, :, :, :cfg.DIMS_NONHIST]
 

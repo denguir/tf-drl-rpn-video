@@ -404,9 +404,6 @@ def run_drl_rpn(sess, net, blob, timers, mode, beta, im_idx=None,
     im_shape = im_info[:2]
     im_scale = 1.0
     gt_boxes = blob['gt_boxes']
-
-  # Resize im_blob (necessary for video)
-  #im_blob = np.resize(im_blob, [1, int(im_info[0]), int(im_info[1]), 3])
   
   # Run initial drl-RPN processing (get base feature map etc)
   timers['init'].tic()
@@ -582,7 +579,7 @@ def run_drl_rpn(sess, net, blob, timers, mode, beta, im_idx=None,
 
   # Update rl_in before next frame
   rl_in_last = rl_in[:,-1,:,:,:] # last frame of rl_in
-  net.update_rl_input(rl_in_last)
+  net._state_buffer[-1] = rl_in_last
   
   # Save visualization (if desired)
   if im_idx is not None:
