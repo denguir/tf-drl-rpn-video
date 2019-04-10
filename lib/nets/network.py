@@ -21,8 +21,8 @@ from layer_utils.snippets import generate_anchors_pre
 from layer_utils.proposal_layer import proposal_layer, proposal_layer_all
 from layer_utils.proposal_top_layer import proposal_top_layer
 from layer_utils.anchor_target_layer import anchor_target_layer
-from layer_utils.proposal_target_layer import proposal_target_layer,\
-                                              proposal_target_layer_wo_scores
+from layer_utils.proposal_target_layer import proposal_target_layer_wo_scores, proposal_target_layer
+                                            
 from utils.visualization import draw_bounding_boxes
 
 from model.config import cfg
@@ -362,7 +362,6 @@ class Network(object):
 
 
   def train_drl_rpn(self, sess, lr_rl, sc, stats):
-
     # Compute baseline
     if cfg.DRL_RPN_TRAIN.USE_BL:
       bl_means_done = np.empty(cfg.DRL_RPN.MAX_ITER_TRAJ)
@@ -380,7 +379,6 @@ class Network(object):
 
     curr_batch_avg_loss = 0
     for idx in range(len(self._ep_batch['x'])):
-
       # Potentially normalize to mean 0, std 1
       ep_rew_done = self._ep_batch['rew_done'][idx]
       ep_rew_fix = self._ep_batch['rew_fix'][idx]
@@ -544,7 +542,7 @@ class Network(object):
 
     # Return RL-trainable variables (thus skip detector parameters here;
     # they are treated separately).
-    tvars = tf.trainable_variables()[-17:] # all weights of drl-rpn
+    tvars = tf.trainable_variables()[-17:]
     self._batch_grad = [tf.placeholder(tf.float32,
                                        name='drl_rpn_grad_' + str(idx))\
                                        for idx in range(len(tvars))]
@@ -751,9 +749,9 @@ class Network(object):
   def build_drl_rpn_network(self, is_training=True):
 
     # Initial processing
-    net_conv = self._predictions['net_conv']
-    rpn_cls_prob = self._predictions['rpn_cls_prob']
-    rpn_bbox_pred = self._predictions['rpn_bbox_pred']
+    net_conv = self._predictions['net_conv'] # output from _build_network
+    rpn_cls_prob = self._predictions['rpn_cls_prob'] # output from _region_proposal
+    rpn_bbox_pred = self._predictions['rpn_bbox_pred'] # output from _region_proposal
     self._initial_rl_input(net_conv, rpn_cls_prob, rpn_bbox_pred)
 
     # Convolutional GRU
@@ -773,35 +771,37 @@ class Network(object):
     dims_base = cfg.DIMS_BASE
     dims_aux = cfg.DIMS_AUX
     dims_tot = cfg.DIMS_TOT
+    dims_time = cfg.DIMS_TIME
 
     # Input placeholders
     # dims: batch-time-height-width-channel
-    self._rl_in = tf.placeholder(tf.float32, shape=[None, None, None, dims_tot])
-    self._rl_hid = tf.placeholder(tf.float32, shape=[None, None, None, 300])
+    self._rl_in = tf.placeholder(tf.float32, shape=[None, dims_time, None, None, dims_tot])
+    self._rl_hid = tf.placeholder(tf.float32, shape=[None, dims_time, None, None, 300])
 
     # Define convenience operator
     self.conv = lambda i, k: tf.nn.conv2d(i, k, [1, 1, 1, 1], padding='SAME')
-      
+    self.conv3d = lambda i, k: tf.nn.conv3d(i, k, [1, 1, 1, 1, 1], padding='SAME')
+
     # Create conv-GRU kernels
-    self.xr_kernel_base = self._make_var('xr_weights_base', [3, 3, dims_base, 240],
+    self.xr_kernel_base = self._make_var('xr_weights_base_video', [dims_time, 3, 3, dims_base, 240],
                                     initializer, is_training)
-    self.xr_kernel_aux = self._make_var('xr_weights_aux', [9, 9, dims_aux, 60],
+    self.xr_kernel_aux = self._make_var('xr_weights_aux_video', [dims_time, 9, 9, dims_aux, 60],
                                    initializer, is_training)
-    self.xh_kernel_base = self._make_var('xh_weights_base', [3, 3, dims_base, 240],
+    self.xh_kernel_base = self._make_var('xh_weights_base_video', [dims_time, 3, 3, dims_base, 240],
                                     initializer, is_training)
-    self.xh_kernel_aux = self._make_var('xh_weights_aux', [9, 9, dims_aux, 60],
+    self.xh_kernel_aux = self._make_var('xh_weights_aux_video', [dims_time, 9, 9, dims_aux, 60],
                                    initializer, is_training)
-    self.xz_kernel_base = self._make_var('xz_weights_base', [3, 3, dims_base, 240],
+    self.xz_kernel_base = self._make_var('xz_weights_base_video', [dims_time, 3, 3, dims_base, 240],
                                     initializer, is_training)
-    self.xz_kernel_aux = self._make_var('xz_weights_aux', [9, 9, dims_aux, 60],
+    self.xz_kernel_aux = self._make_var('xz_weights_aux_video', [dims_time, 9, 9, dims_aux, 60],
                                    initializer, is_training)
-    self.hr_kernel = self._make_var('hr_weights', [3, 3, 300, 300],
+    self.hr_kernel = self._make_var('hr_weights_video', [dims_time, 3, 3, 300, 300],
                                initializer, is_training)
-    self.hh_kernel = self._make_var('hh_weights', [3, 3, 300, 300],
+    self.hh_kernel = self._make_var('hh_weights_video', [dims_time, 3, 3, 300, 300],
                                initializer, is_training)
-    self.hz_kernel = self._make_var('hz_weights', [3, 3, 300, 300],
+    self.hz_kernel = self._make_var('hz_weights_video', [dims_time, 3, 3, 300, 300],
                                initializer, is_training)
-    self.h_relu_kernel = self._make_var('h_relu_weights', [3, 3, 300, 128],
+    self.h_relu_kernel = self._make_var('h_relu_weights_video', [dims_time, 3, 3, 300, 128],
                                    initializer, is_training)
 
     # Create Conv-GRU biases
@@ -813,12 +813,12 @@ class Network(object):
 
     # Used for some aux info (e.g. exploration penalty when used as feature)
     add_dim = 130
-    self.additional_kernel = self._make_var('additional_weights', [3, 3, add_dim, 2],
+    self.additional_kernel = self._make_var('additional_weights_video', [dims_time, 3, 3, add_dim, 2],
                                             initializer, is_training)
     self.additional_bias = self._make_var('additional_bias', [2], bias_init,
                                           is_training)
     self._aux_done_info = tf.placeholder(tf.float32,
-                                         shape=[None, None, None, 2])
+                                         shape=[None, None, None, None, 2])
 
     # Define weights for stopping condition (no bias here)
     self.done_weights = self._make_var('done_weights', [625, 1], initializer,
@@ -831,10 +831,10 @@ class Network(object):
     # First we need to set some init / dummy variables
     in_shape = tf.shape(self._rl_in)
     done_logits_all = tf.zeros([0, 1])
-    fix_logits_all = tf.zeros([0, in_shape[1] * in_shape[2]])
+    fix_logits_all = tf.zeros([0, in_shape[2] * in_shape[3]])
     done_prob = tf.zeros([0, 1])
     fix_prob_map = tf.zeros([0, 0, 0, 0])
-    h = tf.slice(self._rl_hid, [0, 0, 0, 0], [1, -1, -1, -1])
+    h = tf.slice(self._rl_hid, [0, 0, 0, 0, 0], [1, -1, -1, -1, -1])
     
     # Looping termination condition (TF syntax demands also the other variables
     # are sent as input, although not used for the condition check)
@@ -865,53 +865,57 @@ class Network(object):
     dims_base = cfg.DIMS_BASE
 
     # Split into base feature map and auxiliary input
-    rl_base = tf.slice(self._rl_in, [i, 0, 0, 0], [1, -1, -1, dims_base])
-    rl_aux = tf.slice(self._rl_in, [i, 0, 0, dims_base], [1, -1, -1, -1])
+    rl_base = tf.slice(self._rl_in, [i, 0, 0, 0, 0], [1, -1, -1, -1, dims_base])
+    rl_aux = tf.slice(self._rl_in, [i, 0, 0, 0, dims_base], [1, -1, -1, -1, -1])
 
     # eq. (1)
-    xr_conv = tf.concat([self.conv(rl_base, self.xr_kernel_base),
-                         self.conv(rl_aux, self.xr_kernel_aux)], 3)
-    hr_conv = self.conv(h, self.hr_kernel)
+    xr_conv = tf.concat([self.conv3d(rl_base, self.xr_kernel_base),
+                         self.conv3d(rl_aux, self.xr_kernel_aux)], 4)
+    hr_conv = self.conv3d(h, self.hr_kernel)
     r = tf.sigmoid(xr_conv + hr_conv + self.r_bias)
 
     # eq. (2)
-    xh_conv = tf.concat([self.conv(rl_base, self.xh_kernel_base),
-                         self.conv(rl_aux, self.xh_kernel_aux)], 3)
-    hh_conv = self.conv(r * h, self.hh_kernel)
+    xh_conv = tf.concat([self.conv3d(rl_base, self.xh_kernel_base),
+                         self.conv3d(rl_aux, self.xh_kernel_aux)], 4)
+    hh_conv = self.conv3d(r * h, self.hh_kernel)
     hbar = tf.tanh(xh_conv + hh_conv + self.h_bias)
 
     # eq. (3)
-    xz_conv = tf.concat([self.conv(rl_base, self.xz_kernel_base),
-                         self.conv(rl_aux, self.xz_kernel_aux)], 3)
-    hz_conv = self.conv(h, self.hz_kernel)
+    xz_conv = tf.concat([self.conv3d(rl_base, self.xz_kernel_base),
+                         self.conv3d(rl_aux, self.xz_kernel_aux)], 4)
+    hz_conv = self.conv3d(h, self.hz_kernel)
     z = tf.sigmoid(xz_conv + hz_conv + self.z_bias) 
 
     # eq. (4)
     h = (1 - z) * h + z * hbar
 
     # eq. (5)
-    conv_gru = tf.nn.relu(self.conv(h, self.h_relu_kernel) + self.relu_bias)
+    conv_gru = tf.nn.relu(self.conv3d(h, self.h_relu_kernel) + self.relu_bias)
 
     # HERE BEGINS THE CODE FOR TRANSFORMING INTO ACTION PROBABILITIES
-    aux_done_info = tf.slice(self._aux_done_info, [i, 0, 0, 0], [1, -1, -1, -1])
+    aux_done_info = tf.slice(self._aux_done_info, [i, 0, 0, 0, 0], [1, -1, -1, -1, -1])
 
     # Extract relevant stuff
     input_shape = tf.shape(conv_gru)
     batch_sz = 1 # must be 1
-    height = input_shape[1]
-    width = input_shape[2]
+    time = input_shape[1]
+    height = input_shape[2]
+    width = input_shape[3]
 
     # Append beta and time-info (auxiliary info)
     conv_gru \
       = tf.concat([conv_gru,
-                   tf.ones((batch_sz, height, width, 2)) * aux_done_info], 3)
+                   tf.ones((batch_sz, time, height, width, 2)) * aux_done_info], 4)
 
     # eq. (6)
-    conv_gru_processed = tf.nn.tanh(self.conv(conv_gru, self.additional_kernel) \
+    conv_gru_processed = tf.nn.tanh(self.conv3d(conv_gru, self.additional_kernel) \
                                     + self.additional_bias)
 
-    done_slice = tf.slice(conv_gru_processed, [0, 0, 0, 0], [1, -1, -1, 1])
-    fix_slice = tf.slice(conv_gru_processed, [0, 0, 0, 1], [1, -1, -1, 1])
+    done_slice = tf.slice(conv_gru_processed, [0, 0, 0, 0, 0], [1, -1, -1, -1, 1])
+    done_slice = tf.reduce_mean(done_slice, 1) # to get back a 2D action space
+    fix_slice = tf.slice(conv_gru_processed, [0, 0, 0, 0, 1], [1, -1, -1, -1, 1])
+    fix_slice = tf.reduce_mean(fix_slice, 1) # to get back a 2D probability map 
+
     done_slice_reshaped = tf.image.resize_images(done_slice, [25, 25])
     done_slice_vecd = tf.reshape(done_slice_reshaped, [batch_sz, 625])
     done_logits = tf.matmul(done_slice_vecd, self.done_weights) 
@@ -971,17 +975,20 @@ class Network(object):
                         name='rl_in_init'):
 
     # Compute [0,1]-normalized bbox pred norms
-    rpn_bbox_norm = self._compute_rpn_bbox_norm(rpn_bbox_pred)
+    rpn_bbox_norm = self._compute_rpn_bbox_norm(rpn_bbox_pred) # Volume Vt_3 (t=0)
 
     # Form initial input
     shape_info = tf.shape(rpn_bbox_norm)
     batch_sz = shape_info[0]
     height = shape_info[1]
     width = shape_info[2]
-    rpn_cls_objness = tf.slice(rpn_cls_prob, [0, 0, 0, cfg.NBR_ANCHORS],
+    rpn_cls_objness = tf.slice(rpn_cls_prob, [0, 0, 0, cfg.NBR_ANCHORS], # Volume Vt_2 (t=0)
                                [-1, -1, -1, -1])
     self._predictions['rpn_cls_objness'] = rpn_cls_objness
-    cls_probs_rl_input = tf.zeros((batch_sz, height, width, cfg.NBR_CLASSES))
+    cls_probs_rl_input = tf.zeros((batch_sz, height, width, cfg.NBR_CLASSES)) # Volume Vt_4 (t=0)
+    # net_conv = Volume Vt_1 (t=0)
+
+    # Here we build St (t=0)
     rl_in_init = tf.concat([net_conv / tf.reduce_max(net_conv), rpn_cls_objness,
                             rpn_bbox_norm, cls_probs_rl_input], 3)
 
@@ -990,27 +997,46 @@ class Network(object):
     w_scale = cfg.DRL_RPN.W_SCALE
     new_sz = [tf.cast(tf.round(h_scale * tf.cast(height, tf.float32)), tf.int32),
               tf.cast(tf.round(w_scale * tf.cast(width, tf.float32)), tf.int32)]
+
     rl_in_init = tf.image.resize_images(rl_in_init, new_sz)
-    self._predictions['rl_in_init'] = rl_in_init
+
+    # Stack of previous frames to build video detector
+    time = cfg.DIMS_TIME # lenght of "time" dimension
+    # At t=0, simply copy the first frame
+    self._state_buffer = time * [rl_in_init]
+    self.update_rl_input(rl_in_init)
+
+    # Define first hidden state as 0
+    # rl_hid_init = tf.zeros((batch_sz, time, height, width, 300), tf.float32)
+    # self._predictions['rl_hid'] = rl_hid_init
 
     # Also setup all RoIs and RoI observation volume
     self._proposal_layer_all(rpn_bbox_pred, rpn_cls_prob)
-
+  
+  def update_rl_input(self, rl_in_last):
+    # rl_in_last is last frame of state rl_in
+    # adds previous frame states to deal with video processing
+    self._state_buffer.pop(0)
+    self._state_buffer.append(rl_in_last)
+    rl_in = tf.stack(self._state_buffer, axis=1) # dim = [batch, time_depth, height, width, channel]
+    self._predictions['rl_in_init'] = rl_in
 
   def get_init_rl(self, sess, image, im_info):
     feed_dict = {self._image: image, self._im_info: im_info, self._cond_switch:0,
                  self._net_conv_in: np.zeros((1, 1, 1, cfg.DIMS_BASE))}
     net_conv, rl_in, rois_all, roi_obs_vol, rpn_cls_objness, not_keep_ids \
       = sess.run([self._predictions['net_conv'], self._predictions['rl_in_init'],
+                  #self._predictions['rl_hid'], # new
                   self._predictions['rois_all'],self._predictions['roi_obs_vol'],
                   self._predictions['rpn_cls_objness'],
                   self._predictions['not_keep_ids']], feed_dict=feed_dict)
     if not cfg.DRL_RPN.USE_HIST:
-      rl_in = rl_in[:, :, :, :cfg.DIMS_NONHIST]
+      rl_in = rl_in[:, :, :, :, :cfg.DIMS_NONHIST]
 
     # Create drl-RPN hidden state (conv-GRU hidden state)
-    batch_sz, height, width = rl_in.shape[:3]
-    rl_hid = np.zeros((batch_sz, height, width, 300))
+    batch_sz, time, height, width = rl_in.shape[:4]
+    # might want to use previous rl_hid in vid
+    rl_hid = np.zeros((batch_sz, time, height, width, 300)) 
 
     # Potentially we will want to use top-K within third axis (anchor dim)
     # when selecting RoIs at observation rectangles (using fewer per channel
@@ -1026,7 +1052,7 @@ class Network(object):
 
     # Get height, width of downsized feature map and orig. feature map, and also
     # calculate the fixation rectangle size used etcetera
-    height, width = rl_in.shape[1:3]
+    height, width = rl_in.shape[2:4]
     height_orig, width_orig = roi_obs_vol.shape[1:3]
     fix_rect_h = int(round(cfg.DRL_RPN.H_FIXRECT * height))
     fix_rect_w = int(round(cfg.DRL_RPN.W_FIXRECT * width))
@@ -1054,9 +1080,9 @@ class Network(object):
     else:
       beta /= max(cfg.DRL_RPN_TRAIN.BETAS)
 
-    aux_done = np.empty((1, 1, 1, 2))
-    aux_done[0, 0, 0, 0] = t / (cfg.DRL_RPN.MAX_ITER_TRAJ_FLT - 1)
-    aux_done[0, 0, 0, 1] = beta
+    aux_done = np.empty((1, 1, 1, 1, 2))
+    aux_done[0, 0, 0, 0, 0] = t / (cfg.DRL_RPN.MAX_ITER_TRAJ_FLT - 1)
+    aux_done[0, 0, 0, 0, 1] = beta
 
     if is_training:
       # Store in containers (used backpropagating gradients)

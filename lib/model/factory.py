@@ -223,7 +223,7 @@ def do_hist_update(rl_input, cls_probs_uptonow, pred_bboxes_uptonow, keeps,
       rl_hist_wend = int(min((ctr_width + 1) * rl_in_upsamp_width, width))
       curr_cls_prob_vec = cls_history[curr_bin_assignment, :]\
                             [np.newaxis, np.newaxis, np.newaxis, :]
-      rl_input_copy[:, rl_hist_hstart:rl_hist_hend,
+      rl_input_copy[:, -1, rl_hist_hstart:rl_hist_hend,
                     rl_hist_wstart:rl_hist_wend, -cfg.NBR_CLASSES:] = \
       np.tile(curr_cls_prob_vec, [1, rl_hist_hend - rl_hist_hstart,
                     rl_hist_wend - rl_hist_wstart, 1])
@@ -269,7 +269,7 @@ def update_rl(rl_in, h_start, w_start, h_end, w_end, t, rois_seq,
   keeps = _get_nms_keep(keeps, cls_probs_uptonow, pred_bboxes_uptonow, thresh)
 
   # Update non-history part of RL state
-  rl_in[:, h_start:h_end, w_start:w_end, :cfg.DIMS_NONHIST] = -1
+  rl_in[:, -1, h_start:h_end, w_start:w_end, :cfg.DIMS_NONHIST] = -1
 
   if rois_seq is not None:
     rl_in, _ = do_hist_update(rl_in, cls_probs_uptonow, pred_bboxes_uptonow,
@@ -405,6 +405,9 @@ def run_drl_rpn(sess, net, blob, timers, mode, beta, im_idx=None,
     im_scale = 1.0
     gt_boxes = blob['gt_boxes']
 
+  # Resize im_blob (necessary for video)
+  #im_blob = np.resize(im_blob, [1, int(im_info[0]), int(im_info[1]), 3])
+  
   # Run initial drl-RPN processing (get base feature map etc)
   timers['init'].tic()
   net_conv, rl_in, rl_hid, rois_all, roi_obs_vol, rpn_cls_objness_topK,\
@@ -512,7 +515,7 @@ def run_drl_rpn(sess, net, blob, timers, mode, beta, im_idx=None,
       else:
         # Update RL state (very simple when not using any history)
         timers['upd-rl'].tic()
-        rl_in[:, h_start:h_end, w_start:w_end, :] = -1
+        rl_in[:, -1, h_start:h_end, w_start:w_end, :] = -1
       timers['upd-rl'].toc()
 
       if mode == 'train':
@@ -554,6 +557,7 @@ def run_drl_rpn(sess, net, blob, timers, mode, beta, im_idx=None,
     fix_h, fix_w, fix_one_hot = sample_fix_loc(fix_prob, mode)
     if mode == 'train':
       net._ep['fix'].append(fix_one_hot)
+
   timers['fulltraj'].toc()
 
   # Potentially we need the cls-hist for posterior nudge
@@ -576,6 +580,10 @@ def run_drl_rpn(sess, net, blob, timers, mode, beta, im_idx=None,
                         roi_objnesses)
   timers['coll-traj'].toc()
 
+  # Update rl_in before next frame
+  rl_in_last = rl_in[:,-1,:,:,:] # last frame of rl_in
+  net.update_rl_input(rl_in_last)
+  
   # Save visualization (if desired)
   if im_idx is not None:
     save_visualization(im_blob, im_shape, im_idx, obs_canvas_all, scores,
@@ -737,7 +745,7 @@ def save_visualization(im_blob, im_shape, im_idx, obs_canvas, cls_probs,
   if show_all_steps:
     save_ctr = 0
     im_name = 'im' + str(im_idx + 1) + '_' + str(save_ctr) + '.jpg' 
-    plt.savefig('img-out/' + im_name)
+    plt.savefig(im_name)
 
   # Draw all fixation rectangles
   for i in range(obs_canvas.shape[2]):
@@ -769,7 +777,7 @@ def save_visualization(im_blob, im_shape, im_idx, obs_canvas, cls_probs,
     if show_all_steps:
       save_ctr += 1
       im_name = 'im' + str(im_idx + 1) + '_' + str(save_ctr) + '.jpg' 
-      plt.savefig('img-out/' + im_name)
+      plt.savefig(im_name)
 
     # Draw all detection boxes
     for j in range(len(names_and_coords)):
@@ -801,12 +809,12 @@ def save_visualization(im_blob, im_shape, im_idx, obs_canvas, cls_probs,
     if show_all_steps:
       save_ctr += 1
       im_name = 'im' + str(im_idx + 1) + '_' + str(save_ctr) + '.jpg' 
-      plt.savefig('img-out/' + im_name)
+      plt.savefig(im_name)
 
   # Final save / close of figure
   if ~show_all_steps:
     im_name = 'im' + str(im_idx + 1) + '.jpg' 
-    plt.savefig('img-out/' + im_name)
+    plt.savefig(im_name)
   plt.close()
 
   # Display success message
