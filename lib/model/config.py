@@ -74,7 +74,7 @@ __C.TRAIN.IMS_PER_BATCH = 1
 __C.TRAIN.BATCH_SIZE = 128 
 
 # Length of a Video Sequence
-__C.TRAIN.SEQ_LENGTH = 4
+__C.TRAIN.SEQ_LENGTH = 1
 
 # Fraction of minibatch that is labeled foreground (i.e. class > 0)
 __C.TRAIN.FG_FRACTION = 0.25
@@ -340,6 +340,9 @@ __C.POOLING_SIZE = 7
 
 # Base feature map dimensionality
 __C.DIMS_BASE = 512
+
+# Depth of convolution windows
+__C.DIMS_TIME = 2
 
 # Number of classes
 __C.NBR_CLASSES = 21

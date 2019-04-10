@@ -74,8 +74,9 @@ case ${DATASET} in
     WEIGHTS_PATH=/home/vador/Documents/project/AI/drl-rpn-tf/data/pre-trained/drl-rpn-voc2007-2012-trainval-plus-2007test/vgg16_2012_drl_rpn_iter_110000.ckpt
     ;;
   paris)
-    #WEIGHTS_PATH=/home/vador/Documents/project/AI/drl-rpn-tf/data/pre-trained/drl-rpn-voc2007-2012-trainval/vgg16_drl_rpn_iter_110000.ckpt
-    WEIGHTS_PATH=/home/vador/Documents/project/AI/drl-rpn-tf/output-weights/drl-rpn-paris/output/vgg16_drl_rpn/paris_train/vgg16_drl_rpn_iter_400.ckpt
+    #WEIGHTS_PATH=/home/vador/Documents/project/AI/drl-rpn-tf/data/pre-trained/drl-rpn-voc2007-2012-trainval-video/vgg16_drl_rpn_iter_0.ckpt
+    WEIGHTS_PATH=/home/vador/Documents/project/AI/drl-rpn-tf/output-weights/drl-rpn-paris/output/vgg16_drl_rpn/paris_train/vgg16_drl_rpn_iter_1000.ckpt
+    #WEIGHTS_PATH=/home/vador/Documents/project/AI/drl-rpn-tf/output-weights/drl-rpn-paris-video/output/vgg16_drl_rpn/paris_train/vgg16_drl_rpn_iter_100.ckpt
     ;;
   *)
     WEIGHTS_PATH=/home/vador/Documents/project/AI/drl-rpn-tf/data/pre-trained/drl-rpn-voc2007-2012-trainval/vgg16_drl_rpn_iter_110000.ckpt

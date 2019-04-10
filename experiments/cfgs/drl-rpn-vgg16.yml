@@ -8,13 +8,13 @@ DRL_RPN:
   TOPK_OBJNESS: 0
 DRL_RPN_TRAIN:
   # Exploration-accuracy trade-off parameters to sample in training
-  BETAS: [-1, 0.9]
+  BETAS: [0.05, 0.35]
   POST_BETAS: [0.05, 0.35]
 DRL_RPN_TEST:
   # May be set at test-time (low --> more accurate, slower; high --> opposite)
-  BETA: 0.05
+  BETA: 0.3
   # Visualize drl-RPN search trajectories?
-  DO_VISUALIZE: False
+  DO_VISUALIZE: True
 TRAIN:
   HAS_RPN: True
   IMS_PER_BATCH: 1
