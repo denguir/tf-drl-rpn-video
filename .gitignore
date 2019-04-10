@@ -9,3 +9,4 @@
 **/output-weights
 **experiments/logs
 **/lib/test_scripts
+lib/test_scripts/

@@ -8,8 +8,8 @@ weights3d_dir = '/home/vador/Documents/project/AI/drl-rpn-tf/output-weights/drl-
 model = weights_dir + 'vgg16_2012_drl_rpn_iter_110000.ckpt'
 meta = model + '.meta'
 
-model3d = weights3d_dir + 'vgg16_drl_rpn_iter_0.ckpt'
-meta3d = weights3d_dir + 'vgg16_drl_rpn_iter_0.ckpt.meta'
+model3d = weights3d_dir + 'vgg16_2012_drl_rpn_iter_0.ckpt'
+meta3d = model3d + '.meta'
 
 weight_names = ['xr_weights_base', 'xr_weights_aux', 
                 'xh_weights_base', 'xh_weights_aux',
