@@ -58,6 +58,14 @@ case ${DATASET} in
     ANCHORS="[4,8,16]"
     RATIOS="[0.5,1,2]"
     ;;
+  pennfudanped)
+    TRAIN_IMDB="voc_2007_trainval+voc_2012_trainval+voc_2007_test"
+    TEST_IMDB="pennfudanped_test"
+    ITERS=110000
+    NBR_CLASSES="21"
+    ANCHORS="[4,8,16]"
+    RATIOS="[0.5,1,2]"
+    ;;
   *)
     echo "No dataset given"
     exit
@@ -77,6 +85,11 @@ case ${DATASET} in
     #WEIGHTS_PATH=/home/vador/Documents/project/AI/drl-rpn-tf/data/pre-trained/drl-rpn-voc2007-2012-trainval-video/vgg16_drl_rpn_iter_0.ckpt
     WEIGHTS_PATH=/home/vador/Documents/project/AI/drl-rpn-tf/output-weights/drl-rpn-paris/output/vgg16_drl_rpn/paris_train/vgg16_drl_rpn_iter_1000.ckpt
     #WEIGHTS_PATH=/home/vador/Documents/project/AI/drl-rpn-tf/output-weights/drl-rpn-paris-video/output/vgg16_drl_rpn/paris_train/vgg16_drl_rpn_iter_100.ckpt
+    ;;
+  pennfudanped)
+    #WEIGHTS_PATH=/home/vador/Documents/project/AI/drl-rpn-tf/output-weights/drl-rpn-paris/output/vgg16_drl_rpn/paris_train/vgg16_drl_rpn_iter_1000.ckpt
+    #WEIGHTS_PATH=/home/vador/Documents/project/AI/drl-rpn-tf/data/pre-trained/drl-rpn-voc2007-2012-trainval/vgg16_drl_rpn_iter_110000.ckpt
+    WEIGHTS_PATH=/home/vador/Documents/project/AI/drl-rpn-tf/data/pre-trained/drl-rpn-voc2007-2012-trainval-plus-2007test/vgg16_2012_drl_rpn_iter_110000.ckpt
     ;;
   *)
     WEIGHTS_PATH=/home/vador/Documents/project/AI/drl-rpn-tf/data/pre-trained/drl-rpn-voc2007-2012-trainval/vgg16_drl_rpn_iter_110000.ckpt

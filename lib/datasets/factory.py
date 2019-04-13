@@ -48,7 +48,7 @@ for split in ['train', 'val', 'test']:
 
 # Set up pennfudanped (only for testing)
 for split in ['test']:
-  names = 'pennfudanped_{}'.format(split)
+  name = 'pennfudanped_{}'.format(split)
   __sets[name] = (lambda split=split: pennfudanped(split))
 
 

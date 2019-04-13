@@ -41,7 +41,7 @@ class pennfudanped(imdb):
                      'motorbike', 'person', 'pottedplant',
                      'sheep', 'sofa', 'train', 'tvmonitor')
     self._class_to_ind = dict(list(zip(self.classes, list(range(self.num_classes)))))
-    self._image_ext = '.jpg'
+    self._image_ext = '.png'
     self._image_index = self._load_image_set_index()
     # Default to roidb handler
     self._roidb_handler = self.gt_roidb
@@ -71,7 +71,7 @@ class pennfudanped(imdb):
     Construct an image path from the image's "index" identifier.
     """
     image_path = os.path.join(self._data_path, 'PNGImages',
-                              'FudanPed' + index + self._image_ext)
+                              index + self._image_ext)
     assert os.path.exists(image_path), \
       'Path does not exist: {}'.format(image_path)
     return image_path
@@ -279,7 +279,7 @@ class pennfudanped(imdb):
       for cls in self._classes:
         if cls == '__background__':
           continue
-        filename = self._get_penfudanped_results_file_template().format(cls)
+        filename = self._get_pennfudanped_results_file_template().format(cls)
         os.remove(filename)
 
   def competition_mode(self, on):
