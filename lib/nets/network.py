@@ -996,13 +996,12 @@ class Network(object):
     # Also setup all RoIs and RoI observation volume
     self._proposal_layer_all(rpn_bbox_pred, rpn_cls_prob)
 
-
-  def get_init_rl(self, sess, image, im_info):
+  def init_state_buffer(self, sess, image, im_info):
     feed_dict = {self._image: image, self._im_info: im_info, self._cond_switch:0,
                  self._net_conv_in: np.zeros((1, 1, 1, cfg.DIMS_BASE))}
     net_conv, rl_in, rois_all, roi_obs_vol, rpn_cls_objness, not_keep_ids \
       = sess.run([self._predictions['net_conv'], self._predictions['rl_in_init'],
-                  self._predictions['rois_all'],self._predictions['roi_obs_vol'],
+                  self._predictions['rois_all'], self._predictions['roi_obs_vol'],
                   self._predictions['rpn_cls_objness'],
                   self._predictions['not_keep_ids']], feed_dict=feed_dict)
     if not cfg.DRL_RPN.USE_HIST:
@@ -1010,7 +1009,53 @@ class Network(object):
 
     # Create drl-RPN hidden state (conv-GRU hidden state)
     batch_sz, height, width = rl_in.shape[:3]
-    rl_hid = np.zeros((batch_sz, height, width, 300))
+    self._rl_hid_buf = np.zeros((batch_sz, height, width, 300))
+    rl_hid = self._rl_hid_buf
+
+    # Potentially we will want to use top-K within third axis (anchor dim)
+    # when selecting RoIs at observation rectangles (using fewer per channel
+    # increases speed)
+    if cfg.DRL_RPN.TOPK_OBJNESS > 0:
+      rpn_cls_topK_objness_vals \
+        = -np.sort(-rpn_cls_objness, axis=3)[:,:,:, cfg.DRL_RPN.TOPK_OBJNESS-1]
+      rpn_cls_topK_objness = np.zeros(rpn_cls_objness.shape, dtype=np.bool)
+      rpn_cls_topK_objness[\
+        rpn_cls_objness >= rpn_cls_topK_objness_vals[:, :, :, np.newaxis]] = 1
+    else:
+      rpn_cls_topK_objness = None
+
+    # Get height, width of downsized feature map and orig. feature map, and also
+    # calculate the fixation rectangle size used etcetera
+    height, width = rl_in.shape[1:3]
+    height_orig, width_orig = roi_obs_vol.shape[1:3]
+    fix_rect_h = int(round(cfg.DRL_RPN.H_FIXRECT * height))
+    fix_rect_w = int(round(cfg.DRL_RPN.W_FIXRECT * width))
+    h_ratio_orig = float(height_orig) / height
+    w_ratio_orig = float(width_orig) / width
+    fix_rect_h_orig = int(round(fix_rect_h * h_ratio_orig))
+    fix_rect_w_orig = int(round(fix_rect_w * w_ratio_orig))
+
+    # Return
+    return net_conv, rl_in, rl_hid, rois_all, roi_obs_vol, \
+            rpn_cls_topK_objness, rpn_cls_objness.reshape(-1), \
+            height, width, height_orig, width_orig, \
+            fix_rect_h, fix_rect_w, h_ratio_orig, w_ratio_orig, \
+            fix_rect_h_orig, fix_rect_w_orig, not_keep_ids
+
+  def get_init_rl(self, sess, image, im_info):
+    feed_dict = {self._image: image, self._im_info: im_info, self._cond_switch:0,
+                 self._net_conv_in: np.zeros((1, 1, 1, cfg.DIMS_BASE))}
+    net_conv, rl_in, rois_all, roi_obs_vol, rpn_cls_objness, not_keep_ids \
+      = sess.run([self._predictions['net_conv'], self._predictions['rl_in_init'],
+                  self._predictions['rois_all'], self._predictions['roi_obs_vol'],
+                  self._predictions['rpn_cls_objness'],
+                  self._predictions['not_keep_ids']], feed_dict=feed_dict)
+    if not cfg.DRL_RPN.USE_HIST:
+      rl_in = rl_in[:, :, :, :cfg.DIMS_NONHIST]
+
+    # Create drl-RPN hidden state (conv-GRU hidden state)
+    batch_sz, height, width = rl_in.shape[:3]
+    rl_hid = self._rl_hid_buf
 
     # Potentially we will want to use top-K within third axis (anchor dim)
     # when selecting RoIs at observation rectangles (using fewer per channel

@@ -407,10 +407,17 @@ def run_drl_rpn(sess, net, blob, timers, mode, beta, im_idx=None,
 
   # Run initial drl-RPN processing (get base feature map etc)
   timers['init'].tic()
-  net_conv, rl_in, rl_hid, rois_all, roi_obs_vol, rpn_cls_objness_topK,\
-  rpn_cls_objness_vec, height, width, height_orig, width_orig, fix_rect_h,\
-  fix_rect_w, h_ratio_orig, w_ratio_orig, fix_rect_h_orig, fix_rect_w_orig,\
-  not_keep_ids_agno_nms = net.get_init_rl(sess, im_blob, im_info)
+  
+  if im_idx == 0:
+    net_conv, rl_in, rl_hid, rois_all, roi_obs_vol, rpn_cls_objness_topK,\
+    rpn_cls_objness_vec, height, width, height_orig, width_orig, fix_rect_h,\
+    fix_rect_w, h_ratio_orig, w_ratio_orig, fix_rect_h_orig, fix_rect_w_orig,\
+    not_keep_ids_agno_nms = net.init_state_buffer(sess, im_blob, im_info)
+  else:
+    net_conv, rl_in, rl_hid, rois_all, roi_obs_vol, rpn_cls_objness_topK,\
+    rpn_cls_objness_vec, height, width, height_orig, width_orig, fix_rect_h,\
+    fix_rect_w, h_ratio_orig, w_ratio_orig, fix_rect_h_orig, fix_rect_w_orig,\
+    not_keep_ids_agno_nms = net.get_init_rl(sess, im_blob, im_info)
 
   # Initialize class-specific history if used
   if cfg.DRL_RPN.USE_HIST:
@@ -534,6 +541,8 @@ def run_drl_rpn(sess, net, blob, timers, mode, beta, im_idx=None,
     timers['action-rl'].tic()
     rl_hid, done_prob, fix_prob = net.action_pass(sess, rl_in, rl_hid, t, beta,
                                                   mode=='train')
+    net._rl_hid_buf = rl_hid
+    
     timers['action-rl'].toc()
 
     # Check for termination
@@ -577,9 +586,12 @@ def run_drl_rpn(sess, net, blob, timers, mode, beta, im_idx=None,
   timers['coll-traj'].toc()
 
   # Save visualization (if desired)
-  if im_idx is not None:
-    save_visualization(im_blob, im_shape, im_idx, obs_canvas_all, scores,
-                       pred_bboxes, fix_tracker, 0, 1)
+  if im_idx is not None and mode=='test':
+    try:
+      save_visualization(im_blob, im_shape, im_idx, obs_canvas_all, scores,
+                        pred_bboxes, fix_tracker, 0, 1)
+    except:
+      print('No object detected for img%d' % im_idx)
 
   # Depending on what mode, return different things
   frac_area = float(np.count_nonzero(obs_canvas)) / np.prod(obs_canvas.shape)
@@ -717,7 +729,8 @@ def save_visualization(im_blob, im_shape, im_idx, obs_canvas, cls_probs,
   im -= np.min(im)
   im /= np.max(im)
   im = resize(im, (im_shape[0], im_shape[1]), order=1, mode='reflect')
-
+  print(type(im))
+  print(type(obs_canvas))
   # BGR --> RGB
   im = im[...,::-1]
 
@@ -737,7 +750,7 @@ def save_visualization(im_blob, im_shape, im_idx, obs_canvas, cls_probs,
   if show_all_steps:
     save_ctr = 0
     im_name = 'im' + str(im_idx + 1) + '_' + str(save_ctr) + '.jpg' 
-    plt.savefig('img-out/' + im_name)
+    plt.savefig('img-out-vid/' + im_name)
 
   # Draw all fixation rectangles
   for i in range(obs_canvas.shape[2]):
@@ -769,7 +782,7 @@ def save_visualization(im_blob, im_shape, im_idx, obs_canvas, cls_probs,
     if show_all_steps:
       save_ctr += 1
       im_name = 'im' + str(im_idx + 1) + '_' + str(save_ctr) + '.jpg' 
-      plt.savefig('img-out/' + im_name)
+      plt.savefig('img-out-vid/' + im_name)
 
     # Draw all detection boxes
     for j in range(len(names_and_coords)):
@@ -801,12 +814,12 @@ def save_visualization(im_blob, im_shape, im_idx, obs_canvas, cls_probs,
     if show_all_steps:
       save_ctr += 1
       im_name = 'im' + str(im_idx + 1) + '_' + str(save_ctr) + '.jpg' 
-      plt.savefig('img-out/' + im_name)
+      plt.savefig('img-out-vid/' + im_name)
 
   # Final save / close of figure
   if ~show_all_steps:
     im_name = 'im' + str(im_idx + 1) + '.jpg' 
-    plt.savefig('img-out/' + im_name)
+    plt.savefig('img-out-vid/' + im_name)
   plt.close()
 
   # Display success message

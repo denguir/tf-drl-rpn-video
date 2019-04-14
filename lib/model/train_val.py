@@ -341,9 +341,6 @@ class SolverWrapper(object):
               'gt_boxes': seqBlobs['gt_boxes'][frame_idx],
               'im_info': seqBlobs['im_info']}
       blobs['data'] = np.expand_dims(blobs['data'], axis=0) # dims = (1,h,w,3)
-      # increase frame idx
-      frame_idx += 1
-      frame_idx %= cfg.TRAIN.SEQ_LENGTH
 
       # Allows the possibility to start at arbitrary image, rather
       # than always starting from first image in dataset. Useful if
@@ -363,7 +360,7 @@ class SolverWrapper(object):
         # Run drl-RPN in training mode
         timers['run-drl-rpn'].tic()
         stats = run_drl_rpn(sess, self.net, blobs, timers, mode='train',
-                            beta=beta, im_idx=None, extra_args=lr_rl)
+                            beta=beta, im_idx=frame_idx, extra_args=lr_rl)
         timers['run-drl-rpn'].toc()
 
         if (iter + 1) % cfg.DRL_RPN_TRAIN.BATCH_SIZE == 0 and frame_idx == 0:
@@ -395,7 +392,7 @@ class SolverWrapper(object):
           # Run drl-RPN in deterministic mode
           net_conv, rois_drl_rpn, gt_boxes, im_info, timers, _ \
             = run_drl_rpn(sess, self.net, blobs, timers, mode='train_det',
-                          beta=beta, im_idx=None)
+                          beta=beta, im_idx=frame_idx)
 
           # Learning rate
           if (iter + 1) % cfg.TRAIN.STEPSIZE[0] == 0 and frame_idx == 0:
@@ -432,7 +429,7 @@ class SolverWrapper(object):
         # Run drl-RPN in deterministic mode
         net_conv, rois_drl_rpn, gt_boxes, im_info, timers, cls_hist \
           = run_drl_rpn(sess, self.net, blobs, timers, mode='train_det',
-                        beta=beta, im_idx=None)
+                        beta=beta, im_idx=frame_idx)
 
         # Learning rate (assume only one learning rate iter for now!)
         if (iter + 1) % cfg.DRL_RPN_TRAIN.POST_SS[0] == 0 and frame_idx == 0:
@@ -459,6 +456,9 @@ class SolverWrapper(object):
         if len(np_paths) > cfg.TRAIN.SNAPSHOT_KEPT:
           self.remove_snapshot(np_paths, ss_paths)
 
+      # increase frame idx
+      frame_idx += 1
+      frame_idx %= cfg.TRAIN.SEQ_LENGTH
       # Increase iteration counter
       iter += 1
 
