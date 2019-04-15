@@ -351,7 +351,7 @@ def _check_termination(t, done_prob, mode='train'):
 
 
 # Given spatially softmaxed where-to-fix layer, sample such a location to visit
-def sample_fix_loc(fix_prob, mode='train'):
+def sample_fix_loc(net, fix_prob, mode='train'):
 
   # Check whether to run in training / testing mode
   if mode == 'train':
@@ -366,11 +366,19 @@ def sample_fix_loc(fix_prob, mode='train'):
     while u > fix_layer_cumulative[-1]: # May be round-off errors
       u = np.random.rand()
     first_smaller_than_idx_linear = np.where(u <= fix_layer_cumulative)[0][0]
+    # Translate back to spatial indexing and form (h,w)-tuple
+    fix_loc = np.unravel_index(first_smaller_than_idx_linear, fix_prob.shape)
   else:
-    first_smaller_than_idx_linear = np.argmax(fix_prob)
-
-  # Translate back to spatial indexing and form (h,w)-tuple
-  fix_loc = np.unravel_index(first_smaller_than_idx_linear, fix_prob.shape)
+    if len(net.tracker_buffer) == 0:
+      first_smaller_than_idx_linear = np.argmax(fix_prob)
+      # Translate back to spatial indexing and form (h,w)-tuple
+      fix_loc = np.unravel_index(first_smaller_than_idx_linear, fix_prob.shape)
+    else:
+      fix_loc = net.tracker_buffer.pop(0)
+      first_smaller_than_idx_linear = np.ravel_multi_index(fix_loc, fix_prob.shape)
+    # first_smaller_than_idx_linear = np.argmax(fix_prob)
+    # # Translate back to spatial indexing and form (h,w)-tuple
+    # fix_loc = np.unravel_index(first_smaller_than_idx_linear, fix_prob.shape)
 
   # Return (h,w)-tuple
   return fix_loc[0], fix_loc[1], first_smaller_than_idx_linear
@@ -435,9 +443,8 @@ def run_drl_rpn(sess, net, blob, timers, mode, beta, im_idx=None,
 
   # Run search trajectory
   timers['fulltraj'].tic()
-  for t in range(cfg.DRL_RPN.MAX_ITER_TRAJ): 
+  for t in range(cfg.DRL_RPN.MAX_ITER_TRAJ):
 
-    # Update RL state
     if t > 0:
 
       # Update observation volume (used to keep track of where RoIs have been
@@ -467,7 +474,6 @@ def run_drl_rpn(sess, net, blob, timers, mode, beta, im_idx=None,
         cls_probs_seq, bbox_preds_seq = net.seq_rois_pass(sess, net_conv,
                                                           rois_seq,
                                                           mode == 'train_det')
-
         # Add to collection of all detections
         cls_probs_seqs.append(cls_probs_seq)
         bbox_preds_seqs.append(bbox_preds_seq)
@@ -551,7 +557,8 @@ def run_drl_rpn(sess, net, blob, timers, mode, beta, im_idx=None,
       break
 
     # If search has not terminated, sample next spatial location to fixate
-    fix_h, fix_w, fix_one_hot = sample_fix_loc(fix_prob, mode)
+    fix_h, fix_w, fix_one_hot = sample_fix_loc(net, fix_prob, mode)
+
     if mode == 'train':
       net._ep['fix'].append(fix_one_hot)
   timers['fulltraj'].toc()
@@ -578,8 +585,11 @@ def run_drl_rpn(sess, net, blob, timers, mode, beta, im_idx=None,
 
   # Save visualization (if desired)
   if im_idx is not None:
+    # net.tracker_buffer = track_detection(im_blob, im_shape, height, width, scores, pred_bboxes, fix_tracker)
     save_visualization(im_blob, im_shape, im_idx, obs_canvas_all, scores,
                        pred_bboxes, fix_tracker, 0, 1)
+  # else:
+  #   net.tracker_buffer = track_detection(im_blob, im_shape, height, width, scores, pred_bboxes, fix_tracker)
 
   # Depending on what mode, return different things
   frac_area = float(np.count_nonzero(obs_canvas)) / np.prod(obs_canvas.shape)
@@ -707,6 +717,33 @@ def produce_det_bboxes(im, scores, det_bboxes, fix_tracker, thresh_post=0.80,
       col_idx %= nbr_colors
   return cls_dets_all, names_and_coords
 
+def track_detection(im_blob, im_shape, height, width, cls_probs, det_bboxes, fix_tracker):
+  # Make sure image in right range
+  im = im_blob[0, :, :, :]
+  im -= np.min(im)
+  im /= np.max(im)
+  im = resize(im, (im_shape[0], im_shape[1]), order=1, mode='reflect')
+
+  # BGR --> RGB
+  im = im[...,::-1]
+
+  # Produce final detections post-NMS
+  cls_dets, names_and_coords = produce_det_bboxes(im, cls_probs,
+                                                  det_bboxes, fix_tracker)
+  fix_tracker = []
+  # for each detected objects, save center coordinate in (height,width) scale
+  for det in cls_dets:
+    x1 = (det[0]/im_shape[1]) * width
+    y1 = (det[1]/im_shape[0]) * height
+    x2 = (det[2]/im_shape[1]) * width
+    y2 = (det[3]/im_shape[0]) * height
+
+    fix_h = int(np.round(y1 + 0.5 * (y2 - y1)))
+    fix_w = int(np.round(x1 + 0.5 * (x2 - x1)))
+
+    fix_tracker.append((fix_h, fix_w))
+
+  return fix_tracker
 
 def save_visualization(im_blob, im_shape, im_idx, obs_canvas, cls_probs,
                        det_bboxes, fix_tracker, show_all_steps=False,

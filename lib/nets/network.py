@@ -993,6 +993,9 @@ class Network(object):
     rl_in_init = tf.image.resize_images(rl_in_init, new_sz)
     self._predictions['rl_in_init'] = rl_in_init
 
+    # set up the tracker buffer 
+    self.tracker_buffer = []
+
     # Also setup all RoIs and RoI observation volume
     self._proposal_layer_all(rpn_bbox_pred, rpn_cls_prob)
 
