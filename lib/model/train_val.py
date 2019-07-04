@@ -293,7 +293,7 @@ class SolverWrapper(object):
     # We will handle the snapshots ourselves
     self.saver = tf.train.Saver(max_to_keep=100000)
 
-    # Initialize optimizee, RL loss and gradients
+    # Initialize optimizer, RL loss and gradients
     self.net.init_rl_train(sess)
 
     # Setup initial learning rates

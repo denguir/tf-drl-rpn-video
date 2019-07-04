@@ -106,9 +106,22 @@ def test_net(sess, net, imdb, weights_filename, max_per_image=100, thresh=0.00):
     # Detect!
     im = cv2.imread(imdb.image_path_at(i))
     _t['im_detect'].tic()
+  
     scores, boxes, _t_drl_rpn, stats = im_detect(sess, net, im, _t_drl_rpn,
                                                  im_idx, nbr_gts)
     _t['im_detect'].toc()
+
+    print('######################')
+    print('Scores')
+    print('######################')
+    print(scores.shape)
+    print(scores)
+
+    print('######################')
+    print('Boxes')
+    print('######################')
+    print(boxes.shape)
+    print(boxes)
 
     # Update and print some stats
     sc.update(0, stats)

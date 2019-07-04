@@ -583,6 +583,30 @@ def run_drl_rpn(sess, net, blob, timers, mode, beta, im_idx=None,
                         roi_objnesses)
   timers['coll-traj'].toc()
 
+  # print('######################')
+  # print('Scores')
+  # print('######################')
+  # print(scores.shape)
+  # print(scores)
+
+  # print('######################')
+  # print('Pred bboxes')
+  # print('######################')
+  # print(pred_bboxes.shape)
+  # print(pred_bboxes)
+
+  # print('######################')
+  # print('RoIs')
+  # print('######################')
+  # print(rois.shape)
+  # print(rois)
+
+  # print('######################')
+  # print('Fix tracker')
+  # print('######################')
+  # print(fix_tracker.shape)
+  # print(fix_tracker)
+
   # Save visualization (if desired)
   if im_idx is not None:
     # net.tracker_buffer = track_detection(im_blob, im_shape, height, width, scores, pred_bboxes, fix_tracker)
