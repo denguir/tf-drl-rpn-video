@@ -16,6 +16,8 @@ from tensorflow.contrib.slim import arg_scope
 
 import numpy as np
 from time import sleep
+from model.sort import Sort
+from model.tracker import Tracker
 
 from layer_utils.snippets import generate_anchors_pre
 from layer_utils.proposal_layer import proposal_layer, proposal_layer_all
@@ -995,7 +997,10 @@ class Network(object):
 
     # set up the tracker buffer 
     self.tracker_buffer = []
-
+    # self.tracker = Sort() # create instance of the SORT tracker
+    self.tracker_memory = [] # keeps last detection in memory
+    self.prev_det_boxes = []
+    self.tracker = Tracker()
     # Also setup all RoIs and RoI observation volume
     self._proposal_layer_all(rpn_bbox_pred, rpn_cls_prob)
 

@@ -116,14 +116,15 @@ if __name__ == '__main__':
   # Specify if run drl-RPN in auto mode or a fix number of iterations
   cfg_from_list(['DRL_RPN_TEST.NBR_FIX', args.nbr_fix])
 
-  tfconfig = tf.ConfigProto(allow_soft_placement=True)
-  tfconfig.gpu_options.allow_growth=True
+  tfconfig = tf.ConfigProto(allow_soft_placement=True) #log_device_placement=True)
+  tfconfig.gpu_options.allow_growth = True
   # added because cudnn & cublas fail:
   tfconfig.gpu_options.allocator_type = 'BFC'
-  tfconfig.gpu_options.per_process_gpu_memory_fraction = 0.9 
+  tfconfig.gpu_options.per_process_gpu_memory_fraction = 0.8 
 
   # Set the random seed for tensorflow
   tf.set_random_seed(cfg.RNG_SEED)
+  
 
   # init session
   sess = tf.Session(config=tfconfig)

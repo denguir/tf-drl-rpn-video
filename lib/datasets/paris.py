@@ -192,6 +192,7 @@ class paris(imdb):
     return path
 
   def _write_paris_results_file(self, all_boxes):
+    """Write detection results in filename"""
     for cls_ind, cls in enumerate(self.classes):
       if cls == '__background__':
         continue

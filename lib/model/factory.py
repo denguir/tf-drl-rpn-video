@@ -12,8 +12,8 @@ from time import sleep
 
 from skimage.transform import resize as resize
 
-from scipy.misc import imsave as imsave
-from scipy.misc import imread as imread
+# from scipy.misc import imsave as imsave
+# from scipy.misc import imread as imread
 from scipy.spatial.distance import cdist as cdist
 
 import matplotlib.pyplot as plt
@@ -453,16 +453,16 @@ def run_drl_rpn(sess, net, blob, timers, mode, beta, im_idx=None,
       roi_obs_vol, h_start, w_start, h_end, w_end, h_start_orig, w_start_orig,\
           h_end_orig, w_end_orig \
         = update_obs_vol(roi_obs_vol, t, height, width, height_orig, width_orig,
-                         fix_h, fix_w, fix_rect_h, fix_rect_w, fix_rect_h_orig,
-                         fix_rect_w_orig, h_ratio_orig, w_ratio_orig)
+                        fix_h, fix_w, fix_rect_h, fix_rect_w, fix_rect_h_orig,
+                        fix_rect_w_orig, h_ratio_orig, w_ratio_orig)
       timers['upd-obs-vol'].toc()
 
       # Sequential RoI classification
       if cfg.DRL_RPN.TOPK_OBJNESS > 0 or cfg.DRL_RPN.USE_AGNO:
         roi_obs_vec_seq \
           = _extract_topK_objness_per_channel_rois(roi_obs_vol,
-                                                   rpn_cls_objness_topK, t,
-                                                   not_keep_ids_agno_nms)
+                                                  rpn_cls_objness_topK, t,
+                                                  not_keep_ids_agno_nms)
       else:
         roi_obs_vec_seq = (roi_obs_vol == t).reshape(-1)
       
@@ -498,7 +498,7 @@ def run_drl_rpn(sess, net, blob, timers, mode, beta, im_idx=None,
           curr_canvas = np.zeros_like(obs_canvas)
           curr_canvas[h_start_orig : h_end_orig, w_start_orig : w_end_orig] = 1
           obs_canvas_all = np.concatenate([obs_canvas_all,
-                                           curr_canvas[:, :, np.newaxis]], axis=2)
+                                          curr_canvas[:, :, np.newaxis]], axis=2)
 
       # Perform sequential pass of RoIs based on chosen regions at time t and
       # update RL state
@@ -533,7 +533,7 @@ def run_drl_rpn(sess, net, blob, timers, mode, beta, im_idx=None,
 
         # Fixation reward computation
         rew_fix, gt_max_ious = net.reward_fixate(pred_bboxes_fix, gt_boxes,
-                                                 gt_max_ious, t, beta)
+                                                gt_max_ious, t, beta)
         rews_traj.append(rew_fix)
 
     # Action selection (and update of conv-GRU hidden state)
@@ -570,8 +570,8 @@ def run_drl_rpn(sess, net, blob, timers, mode, beta, im_idx=None,
       cls_hist = np.zeros((1, cfg.NBR_CLASSES * cfg.NBR_ANCHORS))
     else:
       _, cls_hist = do_hist_update(rl_in, cls_probs_uptonow, pred_bboxes_uptonow,
-                                   keeps_nms, bin_ctrs, height, width,
-                                   rl_in_upsamp_height, rl_in_upsamp_width)
+                                  keeps_nms, bin_ctrs, height, width,
+                                  rl_in_upsamp_height, rl_in_upsamp_width)
   else:
     cls_hist = None
 
@@ -607,11 +607,25 @@ def run_drl_rpn(sess, net, blob, timers, mode, beta, im_idx=None,
   # print(fix_tracker.shape)
   # print(fix_tracker)
 
+  # cls_dets = filter_det_bboxes(scores, pred_bboxes) # Produce final detections post-NMS
+  # net.tracker_memory = track_objects(net, cls_dets)
+
+  all_boxes = keep_max_bboxes(scores, pred_bboxes)
+
+  #all_boxes = filter_det_bboxes(scores, pred_bboxes)
+  net.tracker.update(all_boxes)
+  net.tracker.det_bboxes = all_boxes
+  
+  # print(all_boxes[15])
+  # print(net.tracker.track_bboxes[15])
+  
+
   # Save visualization (if desired)
   if im_idx is not None:
+    print('visualize')
     # net.tracker_buffer = track_detection(im_blob, im_shape, height, width, scores, pred_bboxes, fix_tracker)
-    save_visualization(im_blob, im_shape, im_idx, obs_canvas_all, scores,
-                       pred_bboxes, fix_tracker, 0, 1)
+    # save_visualization(im_blob, im_shape, im_idx, obs_canvas_all, scores,
+    #                    pred_bboxes, fix_tracker, 0, 1)
   # else:
   #   net.tracker_buffer = track_detection(im_blob, im_shape, height, width, scores, pred_bboxes, fix_tracker)
 
@@ -619,14 +633,39 @@ def run_drl_rpn(sess, net, blob, timers, mode, beta, im_idx=None,
   frac_area = float(np.count_nonzero(obs_canvas)) / np.prod(obs_canvas.shape)
   if mode == 'test':
     if extra_args is not None:
-      return scores, pred_bboxes, timers, [t, frac_area, [extra_args, beta, t]]
+      return all_boxes, timers, [t, frac_area, [extra_args, beta, t]]
     else:
-      return scores, pred_bboxes, timers, [t, frac_area]
+      return all_boxes, timers, [t, frac_area]
   elif mode == 'train_det':
     return net_conv, rois, gt_boxes, im_info, timers, cls_hist
   else:
     return [rew_traj, rew_done, t, frac_area, frac_gt_covered, frac_gt,
             [gt_boxes.shape[0], beta, t]]
+
+# def track_objects(net, prev_cls_dets):
+#   '''Tracks the objects that have been detected in previous frame
+#   and predict their futur position using a Kalman Filter'''
+#   trackers = net.tracker.update(prev_cls_dets)
+#   pos = trackers[:, 0:4]
+#   # we hard-code the score to 0.8 because it is undefined when tracking
+#   score = 0.8 * np.ones((pos.shape[0], 1))
+#   track_cls_dets = np.hstack((pos, score))
+#   return track_cls_dets
+
+
+# def track_objects(net, prev_boxes):
+#   '''Tracks the objects that have been detected in previous frame
+#   and predict their futur position using a Kalman Filter'''
+#   print(prev_boxes)
+#   all_trackers = [[] for _ in range(cfg.NBR_CLASSES)]
+#   for j in range(1, cfg.NBR_CLASSES):
+#     all_trackers[j] = net.tracker.update(prev_boxes[j])
+#   print(all_trackers)
+#   return all_trackers
+
+def track_objects(net, prev_bboxes):
+  all_trackers = net.tracker.update(prev_bboxes)
+  return all_trackers
 
 
 def _collect_detections(rois_seqs, bbox_preds_seqs, cls_probs_seqs, im_shape,
@@ -694,6 +733,45 @@ def print_timings(timers):
      timers['coll-traj'].diff))
 
 
+def keep_max_bboxes(scores, boxes, max_per_image=100, thresh=0.0):
+  all_boxes = [[] for _ in range(cfg.NBR_CLASSES)]
+
+  for j in range(1, cfg.NBR_CLASSES):
+    inds = np.where(scores[:, j] > thresh)[0]
+    cls_scores = scores[inds, j]
+    cls_boxes = boxes[inds, j*4:(j+1)*4]
+    cls_dets = np.hstack((cls_boxes, cls_scores[:, np.newaxis]))
+    keep = nms(cls_dets, cfg.TEST.NMS)
+    cls_dets = cls_dets[keep, :]
+    all_boxes[j] = cls_dets
+
+  if max_per_image > 0:
+    image_scores = np.hstack([all_boxes[j][:, -1]
+                  for j in range(1, cfg.NBR_CLASSES)])
+    if len(image_scores) > max_per_image:
+      image_thresh = np.sort(image_scores)[-max_per_image]
+      for j in range(1, cfg.NBR_CLASSES):
+        keep = np.where(all_boxes[j][:, -1] >= image_thresh)[0]
+        all_boxes[j] = all_boxes[j][keep, :]
+  return all_boxes
+
+
+def filter_det_bboxes(scores, det_bboxes, thresh_post=0.80, thresh_pre=0.0):
+  all_boxes = [[] for _ in range(cfg.NBR_CLASSES)]
+
+  for j in range(1, cfg.NBR_CLASSES):
+    inds = np.where(scores[:, j] > thresh_pre)[0]
+    cls_scores = scores[inds, j]
+    cls_bboxes = det_bboxes[inds, j * 4:(j + 1) * 4]
+    cls_dets = np.hstack((cls_bboxes, cls_scores[:, np.newaxis]))
+    keep = nms(cls_dets, cfg.TEST.NMS)
+    cls_dets = cls_dets[keep, :]
+    keep = cls_scores[keep] > thresh_post
+    cls_dets = cls_dets[keep]
+    all_boxes[j] = cls_dets
+  return all_boxes
+
+ 
 def produce_det_bboxes(im, scores, det_bboxes, fix_tracker, thresh_post=0.80,
                        thresh_pre=0.0):
   """
