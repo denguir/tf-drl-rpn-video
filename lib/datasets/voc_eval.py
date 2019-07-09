@@ -177,6 +177,7 @@ def voc_eval(detpath,
     # go down dets and mark TPs and FPs
     for d in range(nd):
       R = class_recs[image_ids[d]]
+
       bb = BB[d, :].astype(float)
       ovmax = -np.inf
       BBGT = R['bbox'].astype(float)

@@ -120,7 +120,7 @@ def test_net(sess, net, imdb, weights_filename, max_per_image=100, thresh=0.00):
     im = cv2.imread(imdb.image_path_at(i))
     _t['im_detect'].tic()
 
-    if i < 5 or i % 3 == 0:
+    if True: #i < 5 or i % 3 == 0:
       # run drl rpn 
       all_boxes[i], _t_drl_rpn, stats = im_detect(sess, net, im, _t_drl_rpn,
                                                   im_idx, nbr_gts)

@@ -64,6 +64,15 @@ case ${DATASET} in
     ANCHORS="[4,8,16]"
     RATIOS="[0.5,1,2]"
     ;;
+  mot)
+    TRAIN_IMDB="mot_2015_train"
+    TEST_IMDB="mot_2015_test"
+    STEPSIZE="[1400]"
+    DRL_RPN_STEPSIZE="1600"
+    NBR_CLASSES="21"
+    ANCHORS="[4,8,16]"
+    RATIOS="[0.5,1,2]"
+    ;;
   *)
     echo "No dataset given"
     exit
@@ -91,6 +100,17 @@ case ${DATASET} in
     ;;
   paris)
     SAVE_PATH=/home/vador/Documents/project/AI/drl-rpn-tf/output-weights/drl-rpn-paris-video/
+    case ${USE_POST} in
+      0)
+        WEIGHTS_PATH=/home/vador/Documents/project/AI/drl-rpn-tf/data/pre-trained/drl-rpn-voc2007-2012-trainval-plus-2007test/vgg16_2012_drl_rpn_iter_110000.ckpt
+        ;;
+      *)
+        WEIGHTS_PATH=/home/vador/Documents/project/AI/drl-rpn-tf/data/pre-trained/drl-rpn-voc2007-2012-trainval/vgg16_drl_rpn_iter_110000.ckpt
+        ;;
+    esac
+    ;;
+  mot)
+    SAVE_PATH=/home/vador/Documents/project/AI/drl-rpn-tf/output-weights/drl-rpn-mot-video/
     case ${USE_POST} in
       0)
         WEIGHTS_PATH=/home/vador/Documents/project/AI/drl-rpn-tf/data/pre-trained/drl-rpn-voc2007-2012-trainval-plus-2007test/vgg16_2012_drl_rpn_iter_110000.ckpt

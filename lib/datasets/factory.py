@@ -15,6 +15,7 @@ from datasets.pascal_voc import pascal_voc
 from datasets.coco import coco
 from datasets.paris import paris
 from datasets.pennfudanped import pennfudanped
+from datasets.mot import mot
 
 import numpy as np
 
@@ -50,6 +51,12 @@ for split in ['train', 'val', 'test']:
 for split in ['test']:
   name = 'pennfudanped_{}'.format(split)
   __sets[name] = (lambda split=split: pennfudanped(split))
+
+# Set up MOT dataset (only for testing)
+for year in ['2015']:
+  for split in ['train', 'val', 'test']:
+    name = 'mot_{}_{}'.format(year, split)
+    __sets[name] = (lambda split=split, year=year: mot(split, year))
 
 
 def get_imdb(name):

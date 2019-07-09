@@ -27,7 +27,6 @@ class Tracker(object):
         """ bboxes is supposed to have shape (n_classes, n_objects, 5)
         5 being 4 coords + score"""
         for cls, tracker in enumerate(self.trackers):
-            scores = bboxes[cls][:,4]
             tracked_obj = tracker.update(bboxes[cls])
             self.track_bboxes[cls] = tracked_obj
             id_obj = tracked_obj[:,4]
