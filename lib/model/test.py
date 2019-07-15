@@ -151,7 +151,7 @@ def test_net(sess, net, imdb, weights_filename, max_per_image=100, thresh=0.00):
                                                   im_idx, nbr_gts)
       # print(pred_boxes)
       prev_pred = net.tracker.produce_prev_boxes()
-      track_boxes = net.tracker.clean(prev_pred)
+      track_boxes = net.tracker.clean(prev_pred) # impose a lower score to old boxes
       # prev_pred = flow_tracker.produce_prev_boxes()
       # track_boxes = flow_tracker.predict(im, prev_pred)
 

@@ -17,9 +17,10 @@ class Tracker(object):
         self.track_colors = [{} for _ in range(self.n_classes)]
         self.score = [{} for _ in range(self.n_classes)]
         self.track_memory = []
+        self.det_buffer = []
         self.trackers = self.init_trackers()
 
-    def init_trackers(self, max_age=4, min_hits=3):
+    def init_trackers(self, max_age=4, min_hits=1):
         trackers = []
         for _ in range(self.n_classes):
             tracker_cls = Sort(max_age=max_age, min_hits=min_hits)
@@ -36,6 +37,27 @@ class Tracker(object):
             for id in id_obj:
                 if id not in self.track_colors[cls].keys():
                     self.track_colors[cls][id] =  np.random.uniform(0, 1, size=(1,3))
+
+
+    def get_detection_buffer(self):
+        dets = [[] for _ in range(self.n_classes)]
+        if len(self.det_buffer) > 0:
+            for j in range(1, self.n_classes):
+                det_j = [self.det_buffer[k][j] for k in range(len(self.det_buffer))]
+                cls_dets = np.vstack(det_j)
+                # apply NMS to filter out redundant boxes
+                keep = nms(cls_dets, cfg.TEST.NMS)
+                cls_dets = cls_dets[keep, :]
+                dets[j] = cls_dets
+        return dets
+
+    def update_detection_buffer(self, det_boxes):
+        max_size = 3
+        if len(self.det_buffer) < max_size:
+            self.det_buffer.append(det_boxes)
+        else:
+            self.det_buffer.pop(0)
+            self.det_buffer.append(det_boxes)
 
     def clean(self, track_bboxes):
         all_boxes = np.copy(track_bboxes)
