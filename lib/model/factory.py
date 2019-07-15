@@ -8,7 +8,7 @@
 import cv2
 import numpy as np
 import tensorflow as tf
-from time import sleep
+from time import sleep, time
 
 from skimage.transform import resize as resize
 
@@ -444,9 +444,7 @@ def run_drl_rpn(sess, net, blob, timers, mode, beta, im_idx=None,
   # Run search trajectory
   timers['fulltraj'].tic()
   for t in range(cfg.DRL_RPN.MAX_ITER_TRAJ):
-
     if t > 0:
-
       # Update observation volume (used to keep track of where RoIs have been
       # forwarded for class-specific predictions)
       timers['upd-obs-vol'].tic()
@@ -557,10 +555,13 @@ def run_drl_rpn(sess, net, blob, timers, mode, beta, im_idx=None,
       break
 
     # If search has not terminated, sample next spatial location to fixate
+    #fix_prob[15][12] = 0.99
     fix_h, fix_w, fix_one_hot = sample_fix_loc(net, fix_prob, mode)
+    
 
     if mode == 'train':
       net._ep['fix'].append(fix_one_hot)
+
   timers['fulltraj'].toc()
 
   # Potentially we need the cls-hist for posterior nudge
@@ -610,9 +611,8 @@ def run_drl_rpn(sess, net, blob, timers, mode, beta, im_idx=None,
   # cls_dets = filter_det_bboxes(scores, pred_bboxes) # Produce final detections post-NMS
   # net.tracker_memory = track_objects(net, cls_dets)
 
-  all_boxes = keep_max_bboxes(scores, pred_bboxes)
-
-  #all_boxes = filter_det_bboxes(scores, pred_bboxes)
+  #all_boxes = keep_max_bboxes(scores, pred_bboxes)
+  all_boxes = filter_det_bboxes(scores, pred_bboxes, thresh_pre=0.0, thresh_post=0.70)
   net.tracker.update(all_boxes)
   net.tracker.det_bboxes = all_boxes
   
@@ -623,10 +623,13 @@ def run_drl_rpn(sess, net, blob, timers, mode, beta, im_idx=None,
   # Save visualization (if desired)
   if im_idx is not None:
     print('visualize')
+    # net.tracker_buffer = track_roi(net, im_blob, im_shape, im_idx, height, width, all_boxes)
     # net.tracker_buffer = track_detection(im_blob, im_shape, height, width, scores, pred_bboxes, fix_tracker)
-    # save_visualization(im_blob, im_shape, im_idx, obs_canvas_all, scores,
-    #                    pred_bboxes, fix_tracker, 0, 1)
-  # else:
+    save_visualization(im_blob, im_shape, im_idx, obs_canvas_all, scores,
+                       pred_bboxes, fix_tracker, 0, 1)
+  else:
+    print('no visualization')
+    # net.tracker_buffer = track_roi(net, im_blob, im_shape, im_idx, height, width, all_boxes)
   #   net.tracker_buffer = track_detection(im_blob, im_shape, height, width, scores, pred_bboxes, fix_tracker)
 
   # Depending on what mode, return different things
@@ -818,6 +821,37 @@ def produce_det_bboxes(im, scores, det_bboxes, fix_tracker, thresh_post=0.80,
       col_idx += 1
       col_idx %= nbr_colors
   return cls_dets_all, names_and_coords
+
+
+def track_roi(net, im_blob, im_shape, im_idx, height, width, all_boxes):
+  # Make sure image in right range
+  im = im_blob[0, :, :, :]
+  im -= np.min(im)
+  im /= np.max(im)
+  im = resize(im, (im_shape[0], im_shape[1]), order=1, mode='reflect')
+
+  # BGR --> RGB
+  im = im[...,::-1]
+  fix_tracker = []
+
+  if im_idx < 1:
+    net.flow_tracker.prev_frame = im.astype(float)/255.
+
+  else:
+    track_boxes = net.flow_tracker.predict(im, all_boxes)
+
+    for j in range(len(track_boxes)):
+      for bbox in track_boxes[j]:
+        x1 = (bbox[0]/im_shape[1]) * width
+        y1 = (bbox[1]/im_shape[0]) * height
+        x2 = (bbox[2]/im_shape[1]) * width
+        y2 = (bbox[3]/im_shape[0]) * height
+
+        fix_h = int(np.round(y1 + 0.5 * (y2 - y1)))
+        fix_w = int(np.round(x1 + 0.5 * (x2 - x1)))
+        fix_tracker.append((fix_h, fix_w))   
+  return fix_tracker
+
 
 def track_detection(im_blob, im_shape, height, width, cls_probs, det_bboxes, fix_tracker):
   # Make sure image in right range

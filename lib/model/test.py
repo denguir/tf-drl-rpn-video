@@ -26,6 +26,7 @@ from utils.statcoll import StatCollector
 from model.config import cfg, get_output_dir, cfg_from_list
 from model.nms_wrapper import nms
 from model.factory import run_drl_rpn, print_timings, get_image_blob, track_objects
+from model.tracker import FlowTracker
 
 from skimage.transform import resize as resize
 import matplotlib.pyplot as plt
@@ -47,14 +48,22 @@ def im_detect(sess, net, im, timers, im_idx=None, nbr_gts=None):
   return all_boxes, timers, stats
 
 def im_predict(net):
-  all_boxes = net.tracker.track_bboxes
+  track_boxes = net.tracker.track_bboxes
+  all_boxes = np.copy(track_boxes)
   # convert last column (id) into score
   for i in range(len(all_boxes)):
+    all_boxes[i] = np.float32(all_boxes[i])
     if len(all_boxes[i]) > 0:
-      all_boxes[i][:,4] = 1 # put score = 1 for tracked obj
-  net.tracker.update(all_boxes)
-  # apparently all_boxes is not updated in the for loop
-  #net.tracker_memory = track_objects(net, all_boxes)
+      all_boxes[i][:,4] = 0.71 # put score = 0.71 for tracked obj
+  return all_boxes
+
+def merge_detection(pred_boxes, track_boxes):
+  all_boxes = [[] for _ in range(cfg.NBR_CLASSES)]
+  for j in range(1, cfg.NBR_CLASSES):
+    cls_dets = np.vstack((pred_boxes[j], track_boxes[j]))
+    keep = nms(cls_dets, cfg.TEST.NMS)
+    cls_dets = cls_dets[keep, :]
+    all_boxes[j] = cls_dets
   return all_boxes
 
 def test_net(sess, net, imdb, weights_filename, max_per_image=100, thresh=0.00):
@@ -99,6 +108,7 @@ def test_net(sess, net, imdb, weights_filename, max_per_image=100, thresh=0.00):
   start_idx = 0 
   end_idx = start_idx + nbr_ims_eval
 
+  flow_tracker = FlowTracker(0)
   # Test drl-RPN on the test images
   for i in range(start_idx, end_idx):
 
@@ -118,18 +128,50 @@ def test_net(sess, net, imdb, weights_filename, max_per_image=100, thresh=0.00):
 
     # Detect!
     im = cv2.imread(imdb.image_path_at(i))
+    
     _t['im_detect'].tic()
 
-    if True: #i < 5 or i % 3 == 0:
-      # run drl rpn 
-      all_boxes[i], _t_drl_rpn, stats = im_detect(sess, net, im, _t_drl_rpn,
+    if i<3: #i < 5 or i % 3 == 0:
+      # run drl rpn
+       
+      prev_pred, _t_drl_rpn, stats = im_detect(sess, net, im, _t_drl_rpn,
                                                   im_idx, nbr_gts)
+      all_boxes[i] = prev_pred
+      # flow_tracker.prev_frame = im.astype(float)/255.
+      # flow_tracker.prev_frame = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)
+      # flow_tracker.track_memory.append(all_boxes[i])
+      net.tracker.update(all_boxes[i])
+      net.tracker.track_memory.append(all_boxes[i])
       # Update and print some stats
       sc.update(0, stats)
       sc.print_stats(False)
     else:
       # run object tracker
-      all_boxes[i] = im_predict(net)
+      det_boxes, _t_drl_rpn, stats = im_detect(sess, net, im, _t_drl_rpn,
+                                                  im_idx, nbr_gts)
+      # print(pred_boxes)
+      prev_pred = net.tracker.produce_prev_boxes()
+      track_boxes = net.tracker.clean(prev_pred)
+      # prev_pred = flow_tracker.produce_prev_boxes()
+      # track_boxes = flow_tracker.predict(im, prev_pred)
+
+      net.tracker.track_memory.pop(0)
+      net.tracker.track_memory.append(det_boxes)
+      # flow_tracker.track_memory.pop(0)
+      # flow_tracker.track_memory.append(det_boxes)
+
+
+      # track_boxes = im_predict(net)
+      # print(track_boxes)
+      all_boxes[i] = merge_detection(det_boxes, track_boxes)
+      # all_boxes[i] = merge_detection(det_boxes, track_boxes)
+
+      net.tracker.update(all_boxes[i])
+      # Update and print some stats
+      sc.update(0, stats)
+      sc.print_stats(False)
+      # all_boxes[i] = im_predict(net)
+      # net.tracker.update(all_boxes[i])
       #all_boxes[i] = [[] for _ in range(cfg.NBR_CLASSES)]
 
     _t['im_detect'].toc()
@@ -137,7 +179,9 @@ def test_net(sess, net, imdb, weights_filename, max_per_image=100, thresh=0.00):
     _t['misc'].tic()
 
     if do_visualize:
+      print('visualize_test')
       visualize(im, im_idx, all_boxes[i])
+      
 
     # skip j = 0, because it's the background class
     # cls_dets_all = []
@@ -206,7 +250,7 @@ def visualize(im, im_idx, boxes, show_text=True):
   im = im[...,::-1]
 
   # Produce final detections post-NMS
-  cls_dets, names_and_coords = produce_trusted_boxes(boxes)
+  cls_dets, names_and_coords = produce_trusted_boxes(boxes, thresh=0.70)
 
   # Show image
   fig, ax = plt.subplots(1)
@@ -236,7 +280,7 @@ def visualize(im, im_idx, boxes, show_text=True):
 
   # Final save / close of figure
   im_name = 'im' + str(im_idx + 1) + '.jpg' 
-  plt.savefig('img-out/' + im_name)
+  plt.savefig('img-out-test/' + im_name)
   plt.close()
 
   # Display success message

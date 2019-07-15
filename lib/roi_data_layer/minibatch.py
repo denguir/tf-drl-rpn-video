@@ -31,25 +31,23 @@ def get_minibatch(roidb, num_classes):
 
   blobs = {'data': im_blob}
 
-  assert len(im_scales) == cfg.TRAIN.SEQ_LENGTH, "Single sequence only"
-  assert len(roidb) == cfg.TRAIN.SEQ_LENGTH, "Single sequence only"
+  assert len(im_scales) == 1, "Single batch only"
+  assert len(roidb) == 1, "Single batch only"
   
-  blobs['gt_boxes'] = cfg.TRAIN.SEQ_LENGTH * [0]
-  for i in range(num_images):
-    # gt boxes: (x1, y1, x2, y2, cls)
-    if cfg.TRAIN.USE_ALL_GT:
-      # Include all ground truth boxes
-      gt_inds = np.where(roidb[i]['gt_classes'] != 0)[0]
-    else:
-      # For the COCO ground truth boxes, exclude the ones that are ''iscrowd'' 
-      gt_inds = np.where(roidb[i]['gt_classes'] != 0 & np.all(roidb[i]['gt_overlaps'].toarray() > -1.0, axis=1))[0]
-    gt_boxes = np.empty((len(gt_inds), 5), dtype=np.float32)
-    gt_boxes[:, 0:4] = roidb[i]['boxes'][gt_inds, :] * im_scales[0]
-    gt_boxes[:, 4] = roidb[i]['gt_classes'][gt_inds]
-    blobs['gt_boxes'][i] = gt_boxes
-    blobs['im_info'] = np.array(
-      [im_blob.shape[1], im_blob.shape[2], im_scales[0]],
-      dtype=np.float32) # assumes all frames of a sequence have same size
+  # gt boxes: (x1, y1, x2, y2, cls)
+  if cfg.TRAIN.USE_ALL_GT:
+    # Include all ground truth boxes
+    gt_inds = np.where(roidb[0]['gt_classes'] != 0)[0]
+  else:
+    # For the COCO ground truth boxes, exclude the ones that are ''iscrowd'' 
+    gt_inds = np.where(roidb[0]['gt_classes'] != 0 & np.all(roidb[0]['gt_overlaps'].toarray() > -1.0, axis=1))[0]
+  gt_boxes = np.empty((len(gt_inds), 5), dtype=np.float32)
+  gt_boxes[:, 0:4] = roidb[0]['boxes'][gt_inds, :] * im_scales[0]
+  gt_boxes[:, 4] = roidb[0]['gt_classes'][gt_inds]
+  blobs['gt_boxes'] = gt_boxes
+  blobs['im_info'] = np.array(
+    [im_blob.shape[1], im_blob.shape[2], im_scales[0]],
+    dtype=np.float32)
 
   return blobs
 

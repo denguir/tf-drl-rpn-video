@@ -16,8 +16,10 @@ from tensorflow.contrib.slim import arg_scope
 
 import numpy as np
 from time import sleep
+
 from model.sort import Sort
 from model.tracker import Tracker
+from model.tracker import FlowTracker
 
 from layer_utils.snippets import generate_anchors_pre
 from layer_utils.proposal_layer import proposal_layer, proposal_layer_all
@@ -1001,6 +1003,7 @@ class Network(object):
     self.tracker_memory = [] # keeps last detection in memory
     self.prev_det_boxes = []
     self.tracker = Tracker()
+    self.flow_tracker = FlowTracker(0)
     # Also setup all RoIs and RoI observation volume
     self._proposal_layer_all(rpn_bbox_pred, rpn_cls_prob)
 

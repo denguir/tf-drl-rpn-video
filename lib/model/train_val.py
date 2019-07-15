@@ -293,7 +293,7 @@ class SolverWrapper(object):
     # We will handle the snapshots ourselves
     self.saver = tf.train.Saver(max_to_keep=100000)
 
-    # Initialize optimizer, RL loss and gradients
+    # Initialize
     self.net.init_rl_train(sess)
 
     # Setup initial learning rates
@@ -321,29 +321,15 @@ class SolverWrapper(object):
     # Create StatCollector (tracks various RL training statistics)
     stat_strings = ['reward', 'rew-done', 'traj-len', 'frac-area',
                     'gt >= 0.5 frac', 'gt-IoU-frac']
-
-    # multiply max_iters by the length of a video Sequence to get total number of frames
-    # we make sure that the frames are coherent in time in minibatch.py and layer.py
-    max_iters = int(max_iters * cfg.TRAIN.SEQ_LENGTH)
     sc = StatCollector(max_iters, stat_strings)
 
     timer = Timer()
     iter = 0
-    frame_idx = 0 
     snapshot_add = 0
-
     while iter < max_iters:
+
       # Get training data, one batch at a time (assumes batch size 1)
-      if frame_idx == 0:
-        seqBlobs = self.data_layer.forward()
-      # extract one frame of the sequence at a time:
-      blobs = {'data': seqBlobs['data'][frame_idx,:,:,:],
-              'gt_boxes': seqBlobs['gt_boxes'][frame_idx],
-              'im_info': seqBlobs['im_info']}
-      blobs['data'] = np.expand_dims(blobs['data'], axis=0) # dims = (1,h,w,3)
-      # increase frame idx
-      frame_idx += 1
-      frame_idx %= cfg.TRAIN.SEQ_LENGTH
+      blobs = self.data_layer.forward()
 
       # Allows the possibility to start at arbitrary image, rather
       # than always starting from first image in dataset. Useful if
@@ -357,7 +343,7 @@ class SolverWrapper(object):
       if not cfg.DRL_RPN_TRAIN.USE_POST:
 
         # Potentially update drl-RPN learning rate
-        if (iter + 1) % cfg.DRL_RPN_TRAIN.STEPSIZE == 0 and frame_idx == 0:
+        if (iter + 1) % cfg.DRL_RPN_TRAIN.STEPSIZE == 0:
           lr_rl *= cfg.DRL_RPN_TRAIN.GAMMA
 
         # Run drl-RPN in training mode
@@ -366,12 +352,12 @@ class SolverWrapper(object):
                             beta=beta, im_idx=None, extra_args=lr_rl)
         timers['run-drl-rpn'].toc()
 
-        if (iter + 1) % cfg.DRL_RPN_TRAIN.BATCH_SIZE == 0 and frame_idx == 0:
+        if (iter + 1) % cfg.DRL_RPN_TRAIN.BATCH_SIZE == 0:
           print("\n##### DRL-RPN BATCH GRADIENT UPDATE - START ##### \n")
           print('iter: %d / %d' % (iter + 1, max_iters))
           print('lr-rl: %f' % lr_rl)
           timers['train-drl-rpn'].tic()
-          self.net.train_drl_rpn(sess, lr_rl, sc, stats) # apply grad
+          self.net.train_drl_rpn(sess, lr_rl, sc, stats)
           timers['train-drl-rpn'].toc()
           sc.print_stats()
           print('TIMINGS:')
@@ -390,7 +376,7 @@ class SolverWrapper(object):
         # We next train detector with drl-RPN running in deterministic mode.
         # Potentially train detector component of network
         if cfg.DRL_RPN_TRAIN.DET_START >= 0 and \
-          iter >= cfg.DRL_RPN_TRAIN.DET_START * cfg.TRAIN.SEQ_LENGTH:
+          iter >= cfg.DRL_RPN_TRAIN.DET_START:
 
           # Run drl-RPN in deterministic mode
           net_conv, rois_drl_rpn, gt_boxes, im_info, timers, _ \
@@ -398,7 +384,7 @@ class SolverWrapper(object):
                           beta=beta, im_idx=None)
 
           # Learning rate
-          if (iter + 1) % cfg.TRAIN.STEPSIZE[0] == 0 and frame_idx == 0:
+          if (iter + 1) % cfg.TRAIN.STEPSIZE[0] == 0:
             lr_det *= cfg.TRAIN.GAMMA
             sess.run(tf.assign(lr_det_op, lr_det))
 
@@ -421,7 +407,7 @@ class SolverWrapper(object):
 
         # The very first time we need to assign the ordinary detector weights
         # as starting point
-        if iter == 0 and frame_idx == 0:
+        if iter == 0:
           self.net.assign_post_hist_weights(sess)
 
         # Sample beta
@@ -435,7 +421,7 @@ class SolverWrapper(object):
                         beta=beta, im_idx=None)
 
         # Learning rate (assume only one learning rate iter for now!)
-        if (iter + 1) % cfg.DRL_RPN_TRAIN.POST_SS[0] == 0 and frame_idx == 0:
+        if (iter + 1) % cfg.DRL_RPN_TRAIN.POST_SS[0] == 0:
           lr_post *= cfg.TRAIN.GAMMA
           sess.run(tf.assign(lr_post_op, lr_post))
 
@@ -449,7 +435,7 @@ class SolverWrapper(object):
                              lr_post, timer, 'post-hist')
 
       # Snapshotting
-      if (iter + 1) % cfg.TRAIN.SNAPSHOT_ITERS == 0 and frame_idx == 0:
+      if (iter + 1) % cfg.TRAIN.SNAPSHOT_ITERS == 0:
         last_snapshot_iter = iter + 1
         ss_path, np_path = self.snapshot(sess, iter + 1 + snapshot_add)
         np_paths.append(np_path)
@@ -511,10 +497,7 @@ def train_net(network, imdb, roidb, valroidb, output_dir,
   valroidb = filter_roidb(valroidb)
 
   tfconfig = tf.ConfigProto(allow_soft_placement=True)
-  # added because cudnn & cublas fail:
   tfconfig.gpu_options.allow_growth = True
-  tfconfig.gpu_options.allocator_type = 'BFC'
-  tfconfig.gpu_options.per_process_gpu_memory_fraction = 0.8 
 
   with tf.Session(config=tfconfig) as sess:
     sw = SolverWrapper(sess, network, imdb, roidb, valroidb, output_dir,

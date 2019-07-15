@@ -68,7 +68,7 @@ case ${DATASET} in
     ;;
   mot)
     TRAIN_IMDB="voc_2007_trainval+voc_2012_trainval+voc_2007_test"
-    TEST_IMDB="mot_2015_test"
+    TEST_IMDB="mot_2015_val"
     ITERS=110000
     NBR_CLASSES="21"
     ANCHORS="[4,8,16]"

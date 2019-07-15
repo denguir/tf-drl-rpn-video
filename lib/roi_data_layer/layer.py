@@ -1,3 +1,4 @@
+
 # --------------------------------------------------------
 # Fast R-CNN
 # Copyright (c) 2015 Microsoft
@@ -6,7 +7,6 @@
 # --------------------------------------------------------
 
 """The data layer used during training to train a Fast R-CNN network.
-
 RoIDataLayer implements a Caffe Python layer.
 """
 from __future__ import absolute_import
@@ -54,7 +54,7 @@ class RoIDataLayer(object):
       inds = np.reshape(inds[row_perm, :], (-1,))
       self._perm = inds
     else:
-      self._perm = np.random.permutation(np.arange(len(self._roidb) - cfg.TRAIN.SEQ_LENGTH))
+      self._perm = np.random.permutation(np.arange(len(self._roidb)))
     # Restore the random state
     if self._random:
       np.random.set_state(st0)
@@ -69,15 +69,11 @@ class RoIDataLayer(object):
 
     db_inds = self._perm[self._cur:self._cur + cfg.TRAIN.IMS_PER_BATCH]
     self._cur += cfg.TRAIN.IMS_PER_BATCH
-    db_inds = [(db_inds[i] + j) % len(self._roidb)
-                    for i in range(len(db_inds))
-                    for j in range(cfg.TRAIN.SEQ_LENGTH)
-                    ]
+
     return db_inds
 
   def _get_next_minibatch(self):
     """Return the blobs to be used for the next minibatch.
-
     If cfg.TRAIN.USE_PREFETCH is True, then blobs will be computed in a
     separate process and made available through self._blob_queue.
     """
