@@ -54,7 +54,7 @@ for split in ['test']:
 
 # Set up MOT dataset (only for testing)
 for year in ['2015']:
-  for split in ['train', 'val', 'test']:
+  for split in ['train', 'val', 'test', 'val2', 'val6', 'val4', 'val5']:
     name = 'mot_{}_{}'.format(year, split)
     __sets[name] = (lambda split=split, year=year: mot(split, year))
 

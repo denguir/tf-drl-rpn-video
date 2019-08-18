@@ -74,6 +74,40 @@ case ${DATASET} in
     ANCHORS="[4,8,16]"
     RATIOS="[0.5,1,2]"
     ;;
+  mot2)
+    TRAIN_IMDB="voc_2007_trainval+voc_2012_trainval+voc_2007_test"
+    TEST_IMDB="mot_2015_val2"
+    ITERS=110000
+    NBR_CLASSES="21"
+    ANCHORS="[4,8,16]"
+    RATIOS="[0.5,1,2]"
+    ;;
+  mot3)
+    TRAIN_IMDB="voc_2007_trainval+voc_2012_trainval+voc_2007_test"
+    TEST_IMDB="mot_2015_val6"
+    ITERS=110000
+    NBR_CLASSES="21"
+    ANCHORS="[4,8,16]"
+    RATIOS="[0.5,1,2]"
+    ;;
+
+  mot4)
+    TRAIN_IMDB="voc_2007_trainval+voc_2012_trainval+voc_2007_test"
+    TEST_IMDB="mot_2015_val4"
+    ITERS=110000
+    NBR_CLASSES="21"
+    ANCHORS="[4,8,16]"
+    RATIOS="[0.5,1,2]"
+    ;;
+  
+  mot5)
+    TRAIN_IMDB="voc_2007_trainval+voc_2012_trainval+voc_2007_test"
+    TEST_IMDB="mot_2015_val5"
+    ITERS=110000
+    NBR_CLASSES="21"
+    ANCHORS="[4,8,16]"
+    RATIOS="[0.5,1,2]"
+    ;;
   *)
     echo "No dataset given"
     exit
