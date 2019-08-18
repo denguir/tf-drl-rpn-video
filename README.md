@@ -8,4 +8,4 @@ This work improves further the object detector accuracy by using deep-SORT objec
 
 ##How to use
 
-The usage of this script is described in https://github.com/aleksispi/drl-rpn-tf 
+The usage of this script is the same as in https://github.com/aleksispi/drl-rpn-tf 
