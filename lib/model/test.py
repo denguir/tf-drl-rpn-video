@@ -16,10 +16,8 @@ try:
 except ImportError:
   import pickle
 import os
-import os.path as osp
 import math
 from time import sleep
-import copy
 
 from utils.timer import Timer
 from utils.blob import im_list_to_blob
@@ -29,10 +27,6 @@ from model.config import cfg, get_output_dir, cfg_from_list
 from model.nms_wrapper import nms
 from model.factory import run_drl_rpn, print_timings, get_image_blob, track_objects
 from model.tracker import FlowTracker
-from model.tracker import DeepTracker
-
-from model.deep_sort.deep_sort.detection import Detection
-from model.deep_sort.tools.generate_detections import create_box_encoder
 
 from skimage.transform import resize as resize
 import matplotlib.pyplot as plt
@@ -53,79 +47,6 @@ def im_detect(sess, net, im, timers, im_idx=None, nbr_gts=None):
 
   return all_boxes, timers, stats
 
-  
-def produce_detections(all_features, min_height=0):
-  all_det = [[] for _ in range(cfg.NBR_CLASSES)]
-  for j in range(1, cfg.NBR_CLASSES):
-    all_det[j] = create_detections(all_features[j], min_height)
-  return all_det
-
-
-def create_detections(detection_mat, min_height=0):
-    """Create detections for given frame index from the raw detection matrix.
-    Parameters
-    ----------
-    detection_mat : ndarray
-        Matrix of detections. The first 10 columns of the detection matrix are
-        in the standard MOTChallenge detection format. In the remaining columns
-        store the feature vector associated with each detection.
-    frame_idx : int
-        The frame index.
-    min_height : Optional[int]
-        A minimum detection bounding box height. Detections that are smaller
-        than this value are disregarded.
-    Returns
-    -------
-    List[tracker.Detection]
-        Returns detection responses at given frame index.
-    """
-    detection_list = []
-    for row in detection_mat:
-        bbox, confidence, feature = row[0:4], row[4], row[10:]
-        if bbox[3] < min_height:
-            continue
-        detection_list.append(Detection(bbox, confidence, feature))
-    return detection_list
-
-def generate_detections_custom(encoder, detections_in, bgr_image):
-    """Generate detections with features.
-    Parameters
-    ----------
-    encoder : Callable[image, ndarray] -> ndarray
-        The encoder function takes as input a BGR color image and a matrix of
-        bounding boxes in format `(x, y, w, h)` and returns a matrix of
-        corresponding feature vectors.
-    detections_in: array like corresponding to the detection of one single frame
-    bgr_image: 3d array corresponding to the bgr image of the input frame
-    """
-    detections_out = []
-    rows = np.zeros((detections_in.shape[0], 10))
-    rows[:, 0:5] = detections_in
-    features = encoder(bgr_image, rows[:, 0:4].copy())
-    detections_out += [np.r_[(row, feature)] for row, feature
-                               in zip(rows, features)]
-
-    output = np.asarray(detections_out)
-    return output
-
-def process_detections(encoder, img, all_boxes):
-  all_det = [[] for _ in range(cfg.NBR_CLASSES)]
-  for j in range(1, cfg.NBR_CLASSES):
-    all_det[j] = generate_detections_custom(encoder, all_boxes[j], img)
-  return all_det
-
-def convert_bbox_to_w(det_boxes):
-  det_boxes_w = copy.deepcopy(det_boxes)
-  for j in range(1, cfg.NBR_CLASSES):
-    for k in range(len(det_boxes[j])):
-      det_boxes_w[j][k][0] = det_boxes[j][k][0]
-      det_boxes_w[j][k][1] = det_boxes[j][k][1]
-      det_boxes_w[j][k][2] = det_boxes[j][k][2] - det_boxes[j][k][0]
-      det_boxes_w[j][k][3] = det_boxes[j][k][3] - det_boxes[j][k][1]
-      det_boxes_w[j][k][4] = det_boxes[j][k][4]
-  return det_boxes_w
-
-
 def im_predict(net):
   track_boxes = net.tracker.track_bboxes
   all_boxes = np.copy(track_boxes)
@@ -139,13 +60,10 @@ def im_predict(net):
 def merge_detection(pred_boxes, track_boxes):
   all_boxes = [[] for _ in range(cfg.NBR_CLASSES)]
   for j in range(1, cfg.NBR_CLASSES):
-    if len(pred_boxes[j]) > 0 and len(track_boxes[j]) > 0:
-      cls_dets = np.vstack((pred_boxes[j], track_boxes[j]))
-      keep = nms(cls_dets, cfg.TEST.NMS)
-      cls_dets = cls_dets[keep, :]
-      all_boxes[j] = cls_dets
-    else:
-      all_boxes[j] = []
+    cls_dets = np.vstack((pred_boxes[j], track_boxes[j]))
+    keep = nms(cls_dets, cfg.TEST.NMS)
+    cls_dets = cls_dets[keep, :]
+    all_boxes[j] = cls_dets
   return all_boxes
 
 def test_net(sess, net, imdb, weights_filename, max_per_image=100, thresh=0.00):
@@ -188,15 +106,9 @@ def test_net(sess, net, imdb, weights_filename, max_per_image=100, thresh=0.00):
   # but having nbr_ims_eval = nbr_images and start_idx = 0 --> regular testing!
   nbr_ims_eval = nbr_images
   start_idx = 0 
-  end_idx = start_idx + nbr_ims_eval - 1
+  end_idx = start_idx + nbr_ims_eval
 
-  # init tracker
   flow_tracker = FlowTracker(0)
-  deep_tracker = DeepTracker()
-  BASE_PATH = osp.abspath(osp.join(osp.dirname(__file__)))
-  nn_model = osp.join(BASE_PATH, 'deep_sort','resources', 'networks', 'mars-small128.pb')
-  encoder = create_box_encoder(nn_model)
-
   # Test drl-RPN on the test images
   for i in range(start_idx, end_idx):
 
@@ -219,80 +131,48 @@ def test_net(sess, net, imdb, weights_filename, max_per_image=100, thresh=0.00):
     
     _t['im_detect'].tic()
 
-    if i==0:
-      # run drl rpn 
-      det_boxes, _t_drl_rpn, stats = im_detect(sess, net, im, _t_drl_rpn,
+    if i < 5 or i%3==0:
+      # run drl rpn
+       
+      prev_pred, _t_drl_rpn, stats = im_detect(sess, net, im, _t_drl_rpn,
                                                   im_idx, nbr_gts)
-      det_boxes_w = convert_bbox_to_w(det_boxes)
-      det_features = process_detections(encoder, im, det_boxes_w)
-      detections = produce_detections(det_features)
-
-      deep_tracker.predict()
-      deep_tracker.update(detections, 0.71)
-
-      all_boxes[i] = det_boxes
-
+      all_boxes[i] = prev_pred
       # flow_tracker.prev_frame = im.astype(float)/255.
       # flow_tracker.prev_frame = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)
       # flow_tracker.track_memory.append(all_boxes[i])
-      # net.tracker.update(all_boxes[i])
+      net.tracker.update(all_boxes[i])
       # net.tracker.track_memory.append(all_boxes[i])
       # Update and print some stats
       sc.update(0, stats)
       sc.print_stats(False)
     else:
-      # run drl rpn 
-      det_boxes, _t_drl_rpn, stats = im_detect(sess, net, im, _t_drl_rpn,
-                                                  im_idx, nbr_gts)
-      det_boxes_w = convert_bbox_to_w(det_boxes)
-      det_features = process_detections(encoder, im, det_boxes_w)
-      detections = produce_detections(det_features)
-
-      deep_tracker.predict()
-      deep_tracker.update(detections, 0.71)
-
-      track_boxes = deep_tracker.track_bboxes
-
-      all_boxes[i] = merge_detection(det_boxes, track_boxes)
-      sc.update(0, stats)
-      sc.print_stats(False)
-
-      # track_boxes_w = convert_bbox_to_w(det_boxes)
-      # track_features = process_detections(encoder, im, track_boxes_w)
-      # tracked = produce_detections(track_features)
-
-      # deep_tracker.predict()
-      # deep_tracker.update(tracked)
-
-      # all_boxes[i] = track_boxes
-
-      # # run object tracker
+      # run object tracker
       # det_boxes, _t_drl_rpn, stats = im_detect(sess, net, im, _t_drl_rpn,
       #                                             im_idx, nbr_gts)
-      # # print(pred_boxes)
+      # print(pred_boxes)
       # prev_pred = net.tracker.produce_prev_boxes()
       # track_boxes = net.tracker.clean(prev_pred) # impose a lower score to old boxes
-      # # prev_pred = flow_tracker.produce_prev_boxes()
-      # # track_boxes = flow_tracker.predict(im, prev_pred)
+      # prev_pred = flow_tracker.produce_prev_boxes()
+      # track_boxes = flow_tracker.predict(im, prev_pred)
 
       # net.tracker.track_memory.pop(0)
       # net.tracker.track_memory.append(det_boxes)
-      # # flow_tracker.track_memory.pop(0)
-      # # flow_tracker.track_memory.append(det_boxes)
+      # flow_tracker.track_memory.pop(0)
+      # flow_tracker.track_memory.append(det_boxes)
 
 
-      # # track_boxes = im_predict(net)
-      # # print(track_boxes)
+      # track_boxes = im_predict(net)
+      # print(track_boxes)
       # all_boxes[i] = merge_detection(det_boxes, track_boxes)
-      # # all_boxes[i] = merge_detection(det_boxes, track_boxes)
-
-      # net.tracker.update(all_boxes[i])
-      # # Update and print some stats
+      # all_boxes[i] = merge_detection(det_boxes, track_boxes)
+      all_boxes[i] = im_predict(net)
+      net.tracker.update(all_boxes[i])
+      # Update and print some stats
       # sc.update(0, stats)
       # sc.print_stats(False)
       # all_boxes[i] = im_predict(net)
       # net.tracker.update(all_boxes[i])
-      # #all_boxes[i] = [[] for _ in range(cfg.NBR_CLASSES)]
+      #all_boxes[i] = [[] for _ in range(cfg.NBR_CLASSES)]
 
     _t['im_detect'].toc()
 
@@ -416,7 +296,7 @@ def color_from_id(list_ids, seed=0):
   return colors
 
 
-def produce_trusted_boxes(boxes, thresh=0.70):
+def produce_trusted_boxes(boxes, thresh=0.80):
   class_names = ['bg',' aero', 'bike', 'bird', 'boat', 'bottle', 'bus', 'car',
                  'cat', 'chair', 'cow', 'table', 'dog', 'horse', 'moto', 'person',
                  'plant', 'sheep', 'sofa', 'train', 'tv']
@@ -425,20 +305,19 @@ def produce_trusted_boxes(boxes, thresh=0.70):
   names_and_coords = []
   for j in range(1, cfg.NBR_CLASSES):
     cls_dets = boxes[j]
-    if len(cls_dets) > 0:
-      cls_scores = boxes[j][:,4]
-      keep = cls_scores > thresh
-      cls_dets = cls_dets[keep]
-      name = class_names[j]
+    cls_scores = boxes[j][:,4]
+    keep = cls_scores > thresh
+    cls_dets = cls_dets[keep]
+    name = class_names[j]
 
-      n_objects = cls_dets.shape[0]
-      for jj in range(n_objects):
-        crop = np.squeeze(cls_dets[jj, :])
-        cls_dets_all.append(crop[:4])
-        coords = [crop[0], crop[1]]
-        names_and_coords.append({'coords': coords,
-                                'score': round(crop[4], 2),
-                                'class_name': name,
-                                'color': np.array([0,0,0]),
-                                })
+    n_objects = cls_dets.shape[0]
+    for jj in range(n_objects):
+      crop = np.squeeze(cls_dets[jj, :])
+      cls_dets_all.append(crop[:4])
+      coords = [crop[0], crop[1]]
+      names_and_coords.append({'coords': coords,
+                               'score': round(crop[4], 2),
+                               'class_name': name,
+                               'color': np.array([0,0,0]),
+                               })
   return cls_dets_all, names_and_coords
