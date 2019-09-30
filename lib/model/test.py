@@ -400,7 +400,7 @@ def visualize(im, im_idx, boxes, show_text=True):
 
   # Final save / close of figure
   im_name = 'im' + str(im_idx + 1) + '.jpg' 
-  plt.savefig('img-out-test/' + im_name)
+  plt.savefig('img-out-deepSORT/' + im_name)
   plt.close()
 
   # Display success message
